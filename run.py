@@ -92,7 +92,7 @@ def read_config():
         for label in settings.Labels:
             all_lables += label[1].strip()
 
-        if not settings.Labels or all_lables=="":  # Если не дали совсем никаких меток для загрузки
+        if not settings.Labels or all_lables == "":  # Если не дали совсем никаких меток для загрузки
             raise ValueError("NO LABELS defined in {}".format(inifilename))
 
         # проверка stsmd -----------------------------------
@@ -118,7 +118,7 @@ def read_config():
 
 def downloadStarteam(settings):
     errorheader = "Error when downloading from Starteam "
-    totalResult = -1;
+    totalResult = -1
     try:
         # starteamlogin = input("Enter Starteam login:")
         # TODO переделать запрос getpass - не скрывает вводимые символы, честно предупреждает об этом
@@ -135,7 +135,7 @@ def downloadStarteam(settings):
                     outdir = const_dir_AFTER
 
                 launchstring = quote(settings.stcmd)
-                launchstring += " co -nologo -stop -q -x -o -is -p {}:{}@{}:{}/{}/{}".format(
+                launchstring += " co -nologo -stop -q -x -o -is -p \"{}:{}@{}:{}/{}/{}\"".format(
                                     settings.StarteamLogin,
                                     settings.StarteamPassword,
                                     settings.StarteamServer,
@@ -145,6 +145,7 @@ def downloadStarteam(settings):
                 launchstring += " -rp " + quote(outdir)
                 launchstring += " -vl " + quote(label)
 
+                # print(launchstring)
                 result = subprocess.call(launchstring)
                 if result == 0:
                     print("\tFINISHED download for label \"{}\"".format(label))
