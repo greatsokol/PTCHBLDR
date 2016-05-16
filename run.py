@@ -69,24 +69,24 @@ def clean(directory):
 
 def read_config():
     settings = GlobalSettings()
-    inifilename = "settings.ini"
-    errorheader = "Error when reading settings from file {} ".format(inifilename)
-    sectionSPECIAL = "SPECIAL"
-    sectionCOMMON = "COMMON"
-    sectionLABELS = "LABELS"
+    ini_filename = "settings.ini"
+    error_header = "Error when reading settings from file {} ".format(ini_filename)
+    section_special = "SPECIAL"
+    section_common = "COMMON"
+    section_labels = "LABELS"
     try:
         parser = configparser.RawConfigParser()
-        res = parser.read(inifilename)
+        res = parser.read(ini_filename)
         if res.count == 0:  # если файл настроек не найден
-            raise FileNotFoundError("NOT FOUND {}".format(inifilename))
-        settings.stcmd = parser.get(sectionCOMMON, "stcmd")
-        settings.StarteamServer = parser.get(sectionCOMMON, "StarteamServer")
-        settings.StarteamPort = parser.get(sectionCOMMON, "StarteamPort")
-        settings.StarteamProject = parser.get(sectionSPECIAL, "StarteamProject")
-        settings.StarteamView = parser.get(sectionSPECIAL, "StarteamView")
-        settings.StarteamLogin = parser.get(sectionSPECIAL, "StarteamLogin")
-        settings.StarteamPassword = parser.get(sectionSPECIAL, "StarteamPassword")
-        settings.Labels = parser.items(sectionLABELS)
+            raise FileNotFoundError("NOT FOUND {}".format(ini_filename))
+        settings.stcmd = parser.get(section_common, "stcmd")
+        settings.StarteamServer = parser.get(section_common, "StarteamServer")
+        settings.StarteamPort = parser.get(section_common, "StarteamPort")
+        settings.StarteamProject = parser.get(section_special, "StarteamProject")
+        settings.StarteamView = parser.get(section_special, "StarteamView")
+        settings.StarteamLogin = parser.get(section_special, "StarteamLogin")
+        settings.StarteamPassword = parser.get(section_special, "StarteamPassword")
+        settings.Labels = parser.items(section_labels)
 
         # проверка Labels -----------------------------------
         all_lables = ''
@@ -94,7 +94,7 @@ def read_config():
             all_lables += label[1].strip()
 
         if not settings.Labels or all_lables == "":  # Если не дали совсем никаких меток для загрузки
-            raise ValueError("NO LABELS defined in {}".format(inifilename))
+            raise ValueError("NO LABELS defined in {}".format(ini_filename))
 
         # проверка stsmd -----------------------------------
         if settings.stcmd != "":  # если пусть к stcmd не задан
@@ -106,7 +106,7 @@ def read_config():
             raise FileNotFoundError("NOT DEFINED path to stcmd")
 
     except BaseException as e:
-        print(errorheader+"({})".format(e))
+        print(error_header+"({})".format(e))
         raise e
     else:
         print("GOT SETTINGS:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}".
@@ -117,9 +117,9 @@ def read_config():
 # -------------------------------------------------------------------------------------------------
 
 
-def downloadStarteam(settings):
+def download_starteam(settings):
     errorheader = "Error when downloading from Starteam "
-    totalResult = -1
+    total_result = -1
     try:
         # starteamlogin = input("Enter Starteam login:")
         # TODO переделать запрос getpass - не скрывает вводимые символы, честно предупреждает об этом
@@ -135,28 +135,28 @@ def downloadStarteam(settings):
                 else:
                     outdir = const_dir_AFTER
 
-                launchstring = quote(settings.stcmd)
-                launchstring += " co -nologo -stop -q -x -o -is -p \"{}:{}@{}:{}/{}/{}\"".format(
+                launch_string = quote(settings.stcmd)
+                launch_string += " co -nologo -stop -q -x -o -is -p \"{}:{}@{}:{}/{}/{}\"".format(
                                     settings.StarteamLogin,
                                     settings.StarteamPassword,
                                     settings.StarteamServer,
                                     settings.StarteamPort,
                                     settings.StarteamProject,
                                     settings.StarteamView)
-                launchstring += " -rp " + quote(outdir)
-                launchstring += " -vl " + quote(label)
+                launch_string += " -rp " + quote(outdir)
+                launch_string += " -vl " + quote(label)
 
-                # print(launchstring)
-                result = subprocess.call(launchstring)
+                # print(launch_string)
+                result = subprocess.call(launch_string)
                 if result == 0:
                     print("\tFINISHED download for label \"{}\"".format(label))
-                    totalResult = 0
+                    total_result = 0
                 else:
                     print("\tERROR when download label \"{}\"".format(label))
 
     except BaseException as e:
         print(errorheader + "({})".format(e))
-    return totalResult
+    return total_result
 
 
 # -------------------------------------------------------------------------------------------------
@@ -210,10 +210,11 @@ def comparedirs():
 
 
 def main():
-    globalSettings = read_config()
+    global_settings = read_config()
     clean(const_dir_TEMP)
-    if downloadStarteam(globalSettings) == 0:
+    if download_starteam(global_settings) == 0:
         comparedirs()
+
     print("DONE!!!")
 
 
