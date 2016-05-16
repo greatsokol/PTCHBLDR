@@ -6,10 +6,10 @@ import filecmp
 
 const_NOTPROVIDED_ERROR = "NOT PROVIDED: "
 const_dir_CURRENT = os.path.abspath("")
-const_dir_TEMP = os.path.join(const_dir_CURRENT,"TEMP")
-const_dir_BEFORE = os.path.join(const_dir_TEMP,"BEFORE")
-const_dir_AFTER = os.path.join(const_dir_TEMP,"AFTER")
-const_dir_COMPARED = os.path.join(const_dir_TEMP,"_COMPARE_RESULT")
+const_dir_TEMP = os.path.join(const_dir_CURRENT, "TEMP")
+const_dir_BEFORE = os.path.join(const_dir_TEMP, "BEFORE")
+const_dir_AFTER = os.path.join(const_dir_TEMP, "AFTER")
+const_dir_COMPARED = os.path.join(const_dir_TEMP, "_COMPARE_RESULT")
 
 # -------------------------------------------------------------------------------------------------
 
@@ -49,12 +49,13 @@ def __onerror_handler__(func, path, exc_info):
         os.chmod(path, stat.S_IWUSR)
         func(path)
     else:
-        raise
+        raise exc_info
 
-def clean(dir):
+
+def clean(directory):
     try:
         print("CLEANING {}. Please wait.".format(const_dir_TEMP))
-        shutil.rmtree(dir, onerror=__onerror_handler__)
+        shutil.rmtree(directory, onerror=__onerror_handler__)
         print("\tCLEANING done")
     except FileNotFoundError:
         pass  # если папка TEMP отсутствует, то продолжаем молча
@@ -164,8 +165,10 @@ def downloadStarteam(settings):
 def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
     dircmp = filecmp.dircmp(before, after)
     if dircmp.common_dirs:
-        for dir in dircmp.common_dirs:
-            __compare_and_copy_dirs_recursively__(os.path.join(before,dir), os.path.join(after,dir), os.path.join(wheretocopy,dir))
+        for directory in dircmp.common_dirs:
+            __compare_and_copy_dirs_recursively__(os.path.join(before, directory),
+                                                  os.path.join(after, directory),
+                                                  os.path.join(wheretocopy, directory))
 
     if dircmp.diff_files:
         for file in dircmp.diff_files:
@@ -174,9 +177,9 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
                 print("\t\tcopying {}".format(path))
                 if not os.path.exists(wheretocopy):
                     os.makedirs(wheretocopy)
-                shutil.copy2(path,wheretocopy)
+                shutil.copy2(path, wheretocopy)
             else:
-                print("\t\tsomething wrong {} -> {}".format(path,wheretocopy))
+                print("\t\tsomething wrong {} -> {}".format(path, wheretocopy))
 
     if dircmp.right_only:
         for file in dircmp.right_only:
@@ -188,8 +191,8 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
                 shutil.copy2(path, wheretocopy)
             else:
                 print("\t\tcopying DIR with contents {}".format(path))
-                clean(os.path.join(wheretocopy,file))
-                shutil.copytree(path, os.path.join(wheretocopy,file))
+                clean(os.path.join(wheretocopy, file))
+                shutil.copytree(path, os.path.join(wheretocopy, file))
 
 
 def comparedirs():
@@ -197,12 +200,13 @@ def comparedirs():
         print("BEGIN compare directories:\n\tBEFORE: {}\n\tAFTER:  {}".format(const_dir_BEFORE, const_dir_AFTER))
         __compare_and_copy_dirs_recursively__(const_dir_BEFORE, const_dir_AFTER, const_dir_COMPARED)
     else:
-        os.rename(const_dir_AFTER,const_dir_COMPARED)
-        print("USING folder 'AFTER' as compare result, because 'BEFORE' not exists:\n\tBEFORE (not exists): {}\n\tAFTER:  {}".format(const_dir_BEFORE, const_dir_AFTER))
+        os.rename(const_dir_AFTER, const_dir_COMPARED)
+        print("USING folder 'AFTER' as compare result, because 'BEFORE' not exists:"
+              "\n\tBEFORE (not exists): {}\n\tAFTER:  {}".format(const_dir_BEFORE, const_dir_AFTER))
 
     print("\tFINISHED compare directories. LOOK at {}".format(const_dir_COMPARED))
 
-        # -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
 
 
 def main():
