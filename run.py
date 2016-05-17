@@ -279,7 +279,7 @@ def download_starteam_by_label(settings):
 # -------------------------------------------------------------------------------------------------
 
 
-def download_starteam_by_file(settings, path, filename):
+def download_starteam_by_file(settings, path, filename, where_to_save):
     total_result = -1
     try:
         print("\tDOWNLOADING file \"{}\". Please wait...".format(path+filename))
@@ -292,7 +292,7 @@ def download_starteam_by_file(settings, path, filename):
                                     settings.StarteamProject,
                                     settings.StarteamView,
                                     path)
-        launch_string += " -rp " + quote(const_dir_AFTER)
+        launch_string += " -rp " + quote(where_to_save)
         launch_string += " " + filename
 
         #print(launch_string)
@@ -430,9 +430,9 @@ def search_for_DATA_FILES_without_10_FILES_and_download_them(settings, instance)
             eif10_file = str(eif_file).replace(structure_type_raw,"(10).eif")
             eif10_file = splitfilename(eif10_file)
             print(eif10_file)
-            download_starteam_by_file(settings, "BASE/"+instance+"/TABLES/", eif10_file)
-
+            download_starteam_by_file(settings, "BASE/"+instance+"/TABLES/", eif10_file, const_dir_COMPARED)
 # -------------------------------------------------------------------------------------------------
+
 
 def build_upgrade10_eif(instance):
     eif_list = list_files_of_given_type(get_dir_COMPARED_BASE(instance), ".eif")
@@ -462,7 +462,8 @@ def main():
     global_settings = read_config()
     clean(const_dir_TEMP)
     #clean(const_dir_PATCH)
-    global_settings.StarteamPassword = getpassword('BEGIN DOWNLOADING\n\tEnter StarTeam password: ')
+    global_settings.StarteamPassword = getpassword('ENTER StarTeam password:')
+    print('BEGIN DOWNLOADING')
     if download_starteam_by_label(global_settings) == 0:
         compare_directories_BEFORE_and_AFTER()
         search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_BANK)
