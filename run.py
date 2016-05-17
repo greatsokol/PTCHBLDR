@@ -3,15 +3,142 @@ import os
 import shutil
 import subprocess
 import filecmp
-import getpass
+import re
 
-const_NOTPROVIDED_ERROR = "NOT PROVIDED: "
 const_dir_CURRENT = os.path.abspath("")
 const_dir_TEMP = os.path.join(const_dir_CURRENT, "TEMP")
 const_dir_BEFORE = os.path.join(const_dir_TEMP, "BEFORE")
 const_dir_AFTER = os.path.join(const_dir_TEMP, "AFTER")
 const_dir_COMPARED = os.path.join(const_dir_TEMP, "_COMPARE_RESULT")
+const_dir_PATCH = os.path.join(const_dir_TEMP, "PATCH")
+get_dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, "BASE"), instance)
+get_dir_PATCH = lambda instance: os.path.join(const_dir_PATCH, instance)
+get_dir_PATCH_DATA = lambda instance: os.path.join(get_dir_PATCH(instance), "DATA")
+get_filename_UPGRADE10_eif = lambda instance: os.path.join(get_dir_PATCH(instance), "Upgrade(10).eif")
 
+const_UPGRADE10_HEADER = \
+                "[SECTION]\n" \
+                "Name = MAKEUPGRADE (10)\n" \
+                "Type = DSPStructure\n" \
+                "Version = {}\n" \
+                "ObjectType = 10\n" \
+                "ObjectName = MAKEUPGRADE\n" \
+                "TableName = MakeUpgrade\n" \
+                "ParentObject =\n" \
+                "RootNode =\n" \
+                "[DATA]\n" \
+                " [REMARKS]\n" \
+                "  V. Генератор апгрейдов\n" \
+                " [TREE]\n" \
+                "  Indexes\n" \
+                "    AKey\n" \
+                "      Fields\n" \
+                "        AutoKey:integer = 0\n" \
+                "      Unique:boolean = TRUE\n" \
+                "      Primary:boolean = TRUE\n" \
+                "    DSP\n" \
+                "      Fields\n" \
+                "        StructureType:integer = 0\n" \
+                "        StructureName:integer = 1\n" \
+                "  Fields\n" \
+                "    AutoKey\n" \
+                "      FieldType:integer = 14\n" \
+                "      Length:integer = 0\n" \
+                "      Remark:string = 'PK'\n" \
+                "    StructureType\n" \
+                "      FieldType:integer = 1\n" \
+                "      Length:integer = 0\n" \
+                "      Remark:string = 'Категория'\n" \
+                "    StructureName\n" \
+                "      FieldType:integer = 0\n" \
+                "      Length:integer = 255\n" \
+                "      Remark:string = 'Структура'\n" \
+                "    ImportStructure\n" \
+                "      FieldType:integer = 16\n" \
+                "      Length:integer = 0\n" \
+                "      Remark:string = 'Импортировать или удалять структуру'\n" \
+                "    BackupData\n" \
+                "      FieldType:integer = 16\n" \
+                "      Length:integer = 0\n" \
+                "      Remark:string = 'Сохранять резервную копию структуры'\n" \
+                "    ImportData\n" \
+                "      FieldType:integer = 16\n" \
+                "      Length:integer = 0\n" \
+                "      Remark:string = 'Имп. данные или Локал. ресрсы для форм.'\n" \
+                "    ReCreate\n" \
+                "      FieldType:integer = 16\n" \
+                "      Length:integer = 0\n" \
+                "      Remark:string = 'Пересоздавать ли таблицу'\n" \
+                "    NtClearRoot\n" \
+                "      FieldType:integer = 16\n" \
+                "      Length:integer = 0\n" \
+                "      Remark:string = 'Очищать ветку структуры (данные таблицы) перед импортом'\n" \
+                "    UpdateFound\n" \
+                "      FieldType:integer = 16\n" \
+                "      Length:integer = 0\n" \
+                "      Remark:string = 'Обновлять сопадающие записи'\n" \
+                "    IndexFields\n" \
+                "      FieldType:integer = 8\n" \
+                "      Length:integer = -1\n" \
+                "      Remark:string = 'Список индексов полей для сравнения при добавлении записей (UpdateFound)'\n" \
+                "    SubstFields\n" \
+                "      FieldType:integer = 8\n" \
+                "      Length:integer = -1\n" \
+                "      Remark:string = 'Правила заполнения полей. (переименование, добавление поля в ПК...)'\n" \
+                "    UseTransit\n" \
+                "      FieldType:integer = 0\n" \
+                "      Length:integer = 100\n" \
+                "      Remark:string = 'Промежуточная структура'\n" \
+                "    ParentFor\n" \
+                "      FieldType:integer = 0\n" \
+                "      Length:integer = 100\n" \
+                "      Remark:string = 'Установить предком для структуры'\n" \
+                "    OperationResult\n" \
+                "      FieldType:integer = 0\n" \
+                "      Length:integer = 255\n" \
+                "      Remark:string = 'Результат операции'\n" \
+                "    Description\n" \
+                "      FieldType:integer = 0\n" \
+                "      Length:integer = 255\n" \
+                "      Remark:string = 'Описание операции'\n" \
+                "[END]\n" \
+                "[SECTION]\n" \
+                "Name =  - Table data\n" \
+                "Type = TableData\n" \
+                "Version = {}\n" \
+                "TableName = MAKEUPGRADE\n" \
+                "[DATA]\n" \
+                " [FIELDS]\n" \
+                "  AutoKey\n" \
+                "  StructureType\n" \
+                "  StructureName\n" \
+                "  ImportStructure\n" \
+                "  BackupData\n" \
+                "  ImportData\n" \
+                "  ReCreate\n" \
+                "  NtClearRoot\n" \
+                "  UpdateFound\n" \
+                "  IndexFields\n" \
+                "  SubstFields\n" \
+                "  UseTransit\n" \
+                "  ParentFor\n" \
+                "  OperationResult\n" \
+                "  Description\n" \
+                "[RECORDS]\n".format("100", "100")
+
+const_UPGRADE10_FOOTER = "[END]\n"
+const_instance_BANK = "BANK"
+const_instance_CLIENT = "CLIENT"
+# -------------------------------------------------------------------------------------------------
+
+
+def getpassword(message):
+    import getpass
+    # running under PyCharm or not
+    if "PYCHARM_HOSTED" in os.environ:
+        return getpass.fallback_getpass(message)
+    else:
+        return getpass.getpass(message)
 # -------------------------------------------------------------------------------------------------
 
 
@@ -22,6 +149,7 @@ class GlobalSettings:
     StarteamLogin = ""
     StarteamProject = ""
     StarteamView = ""
+    StarteamPassword = ""
     Labels = []
 
 
@@ -62,8 +190,6 @@ def clean(directory):
     except BaseException as e:
         print("Error when cleaning directories ({})".format(e))
         raise
-
-
 # -------------------------------------------------------------------------------------------------
 
 
@@ -111,16 +237,12 @@ def read_config():
         print("GOT SETTINGS:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}".
               format(settings.StarteamProject, settings.StarteamView, settings.Labels, settings.stcmd))
         return settings
-
-
 # -------------------------------------------------------------------------------------------------
 
 
 def download_starteam(settings):
-    errorheader = "Error when downloading from Starteam "
     total_result = -1
     try:
-        password = getpass.getpass('BEGIN DOWNLOADING\n\tEnter StarTeam password: ')  # getpass.fallback_getpass("Enter Starteam password:")
         for key, label in settings.Labels:
             if label.strip() == "":
                 print("\tNOT DEFINED label \"{}\" (empty)".format(key))
@@ -134,7 +256,7 @@ def download_starteam(settings):
                 launch_string = quote(settings.stcmd)
                 launch_string += " co -nologo -stop -q -x -o -is -p \"{}:{}@{}:{}/{}/{}\"".format(
                                     settings.StarteamLogin,
-                                    password,
+                                    settings.StarteamPassword,
                                     settings.StarteamServer,
                                     settings.StarteamPort,
                                     settings.StarteamProject,
@@ -151,10 +273,8 @@ def download_starteam(settings):
                     print("\t\tERROR when download label \"{}\"".format(label))
 
     except BaseException as e:
-        print(errorheader + "({})".format(e))
+        print("Error when downloading from Starteam ({})".format(e))
     return total_result
-
-
 # -------------------------------------------------------------------------------------------------
 
 
@@ -189,6 +309,7 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
                 print("\t\tcopying DIR with contents {}".format(path))
                 clean(os.path.join(wheretocopy, file))
                 shutil.copytree(path, os.path.join(wheretocopy, file))
+# -------------------------------------------------------------------------------------------------
 
 
 def comparedirs():
@@ -201,8 +322,6 @@ def comparedirs():
               "\n\tBEFORE (not exists): {}\n\tAFTER:  {}".format(const_dir_BEFORE, const_dir_AFTER))
 
     print("\tFINISHED compare directories. LOOK at {}".format(const_dir_COMPARED))
-
-
 # -------------------------------------------------------------------------------------------------
 
 
@@ -216,29 +335,109 @@ def list_files_of_given_type(directory, extension):
         for name in dirs:
             result_list += list_files_of_given_type(name, extension)
     return result_list
-
-
 # -------------------------------------------------------------------------------------------------
 
 
-def build_upgrade_eif():
-    eif_list = list_files_of_given_type(const_dir_COMPARED, ".eif")
-    print(eif_list)
-    pass
+def make_upgrade10_eif_string_by_file_name(counter, file_name):
+    file_type_match = re.findall("\((?:\d+|data)\)\.eif", file_name, flags=re.IGNORECASE)
+    if len(file_type_match):
+        structure_type_raw = file_type_match[0]
+        structure_type = re.sub(r"\.eif", "", structure_type_raw, flags=re.IGNORECASE).replace("(", "").replace(")", "")
+        if structure_type.upper() == "DATA":
+            structure_type = "10"
+        file_name = file_name.replace(structure_type_raw, "")
+        if structure_type == "10" or structure_type == "data":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|FALSE|''|''|''|''|NULL|'Таблицы'>"  # TODO здесь все сложно
+        elif structure_type == "12":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Визуальные формы'>"
+        elif structure_type == "14":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|''|NULL|'Конфигурации'>"
+        elif structure_type == "16":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|''|NULL|'Автопроцедуры'>"
+        elif structure_type == "18":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Профили'>"
+        elif structure_type == "19":
+            result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Роли'>"
+        elif structure_type == "20":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Привелегии'>"
+        elif structure_type == "30":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Сценарии'>"
+        elif structure_type == "65":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|''|NULL|''>"
+        elif structure_type == "66":
+            result = "<352|66|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS Errors params'>"
+        elif structure_type == "71":
+            result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|''|NULL|'Генераторы'>"
+        elif structure_type == "72":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|''|NULL|'Структуры отображений'>"
+        elif structure_type == "73":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|''|NULL|'Хранимые процедуры'>"
+        elif structure_type == "81":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|''|NULL|'Простые операции'>"
+        elif structure_type == "82":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|''|NULL|'Табличные операции'>"
+        elif structure_type == "83":
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|''|NULL|'Документарные операции'>"
+        elif structure_type == "84":
+            result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|''|NULL|'Статусы'>"
+        else:
+            raise ValueError("ERROR unknown structure type {} for filename {}".format(structure_type, file_name))
+
+        return "  "+result.format(counter, structure_type, file_name)
+    else:
+        raise ValueError("ERROR can't detect structure type by filename ({})".format(file_name))
+# -------------------------------------------------------------------------------------------------
 
 
+def search_for_DATA_files(instance):
+    eif_list = list_files_of_given_type(get_dir_COMPARED_BASE(instance), ".eif")
+    for eif_file in eif_list:
+        file_type_match = re.findall("\(data\)\.eif", eif_file, flags=re.IGNORECASE)
+        if len(file_type_match):
+            structure_type_raw = file_type_match[0]
+            eif10_file = str(eif_file).replace(structure_type_raw,"(10).eif")
+            print(eif10_file)
+
+# -------------------------------------------------------------------------------------------------
+
+def build_upgrade10_eif(instance):
+    eif_list = list_files_of_given_type(get_dir_COMPARED_BASE(instance), ".eif")
+    if len(eif_list) > 0:
+        data_dir = get_dir_PATCH_DATA(instance)
+        os.makedirs(data_dir)
+        for eif_file in eif_list:
+            try:
+                # shutil.move(eif_file, data_dir)
+                shutil.copy2(eif_file, data_dir)
+            except EnvironmentError as e:
+                print("Unable to copy file. %s" % e)
+
+        eif_list = list_files_of_given_type(data_dir, ".eif")
+        if len(eif_list) > 0:
+            with open(get_filename_UPGRADE10_eif(instance), mode="w") as f:
+                f.writelines(const_UPGRADE10_HEADER)
+                counter = 1
+                for eif_file in eif_list:
+                    eif_file_name = os.path.split(eif_file)[1]
+                    f.writelines(make_upgrade10_eif_string_by_file_name(counter, eif_file_name)+"\n")
+                    counter += 1
+                f.writelines(const_UPGRADE10_FOOTER)
 # -------------------------------------------------------------------------------------------------
 
 
 def main():
     global_settings = read_config()
-    clean(const_dir_TEMP)
-    if download_starteam(global_settings) == 0:
-        comparedirs()
-    build_upgrade_eif()
+    #clean(const_dir_TEMP)
+    clean(const_dir_PATCH)
+    #global_settings.StarteamPassword = getpassword('BEGIN DOWNLOADING\n\tEnter StarTeam password: ')
+    #if download_starteam(global_settings) == 0:
+    #    comparedirs()
+    search_for_DATA_files(const_instance_BANK)
+    search_for_DATA_files(const_instance_CLIENT)
+
+    build_upgrade10_eif(const_instance_BANK)
+    build_upgrade10_eif(const_instance_CLIENT)
     print("DONE!!!")
-
-
 # ---- поехали ------------------------------------------------------------------------------------
 
 
