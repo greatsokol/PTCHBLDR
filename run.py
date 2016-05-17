@@ -15,6 +15,7 @@ get_dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COM
 get_dir_PATCH = lambda instance: os.path.join(const_dir_PATCH, instance)
 get_dir_PATCH_DATA = lambda instance: os.path.join(get_dir_PATCH(instance), "DATA")
 get_filename_UPGRADE10_eif = lambda instance: os.path.join(get_dir_PATCH(instance), "Upgrade(10).eif")
+splitfilename = lambda filename: os.path.split(filename)[1]
 
 const_UPGRADE10_HEADER = \
                 "[SECTION]\n" \
@@ -240,7 +241,7 @@ def read_config():
 # -------------------------------------------------------------------------------------------------
 
 
-def download_starteam(settings):
+def download_starteam_by_label(settings):
     total_result = -1
     try:
         for key, label in settings.Labels:
@@ -267,10 +268,40 @@ def download_starteam(settings):
                 # print(launch_string)
                 result = subprocess.call(launch_string)
                 if result == 0:
-                    print("\t\tFINISHED download for label \"{}\"".format(label))
+                    print("\t\tFINISHED downloading for label \"{}\"".format(label))
                     total_result = 0
                 else:
-                    print("\t\tERROR when download label \"{}\"".format(label))
+                    print("\t\tERROR when downloading label \"{}\"".format(label))
+
+    except BaseException as e:
+        print("Error when downloading from Starteam ({})".format(e))
+    return total_result
+# -------------------------------------------------------------------------------------------------
+
+
+def download_starteam_by_file(settings, path, filename):
+    total_result = -1
+    try:
+        print("\tDOWNLOADING file \"{}\". Please wait...".format(path+filename))
+        launch_string = quote(settings.stcmd)
+        launch_string += " co -nologo -stop -q -x -o -is -p \"{}:{}@{}:{}/{}/{}/{}\"".format(
+                                    settings.StarteamLogin,
+                                    settings.StarteamPassword,
+                                    settings.StarteamServer,
+                                    settings.StarteamPort,
+                                    settings.StarteamProject,
+                                    settings.StarteamView,
+                                    path)
+        launch_string += " -rp " + quote(const_dir_AFTER)
+        launch_string += " " + filename
+
+        #print(launch_string)
+        result = subprocess.call(launch_string)
+        if result == 0:
+            print("\t\tFINISHED downloading file \"{}\"".format(filename))
+            total_result = 0
+        else:
+            print("\t\tERROR when downloading file \"{}\"".format(filename))
 
     except BaseException as e:
         print("Error when downloading from Starteam ({})".format(e))
@@ -312,7 +343,7 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
 # -------------------------------------------------------------------------------------------------
 
 
-def comparedirs():
+def compare_directories_BEFORE_and_AFTER():
     if os.path.exists(const_dir_BEFORE):
         print("BEGIN compare directories:\n\tBEFORE: {}\n\tAFTER:  {}".format(const_dir_BEFORE, const_dir_AFTER))
         __compare_and_copy_dirs_recursively__(const_dir_BEFORE, const_dir_AFTER, const_dir_COMPARED)
@@ -389,14 +420,17 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
 # -------------------------------------------------------------------------------------------------
 
 
-def search_for_DATA_files(instance):
+def search_for_DATA_FILES_without_10_FILES_and_download_them(settings, instance):
     eif_list = list_files_of_given_type(get_dir_COMPARED_BASE(instance), ".eif")
     for eif_file in eif_list:
         file_type_match = re.findall("\(data\)\.eif", eif_file, flags=re.IGNORECASE)
         if len(file_type_match):
+            # TODO проверить - может быть файл имеется
             structure_type_raw = file_type_match[0]
             eif10_file = str(eif_file).replace(structure_type_raw,"(10).eif")
+            eif10_file = splitfilename(eif10_file)
             print(eif10_file)
+            download_starteam_by_file(settings, "BASE/"+instance+"/TABLES/", eif10_file)
 
 # -------------------------------------------------------------------------------------------------
 
@@ -407,7 +441,6 @@ def build_upgrade10_eif(instance):
         os.makedirs(data_dir)
         for eif_file in eif_list:
             try:
-                # shutil.move(eif_file, data_dir)
                 shutil.copy2(eif_file, data_dir)
             except EnvironmentError as e:
                 print("Unable to copy file. %s" % e)
@@ -418,7 +451,7 @@ def build_upgrade10_eif(instance):
                 f.writelines(const_UPGRADE10_HEADER)
                 counter = 1
                 for eif_file in eif_list:
-                    eif_file_name = os.path.split(eif_file)[1]
+                    eif_file_name = splitfilename(eif_file)
                     f.writelines(make_upgrade10_eif_string_by_file_name(counter, eif_file_name)+"\n")
                     counter += 1
                 f.writelines(const_UPGRADE10_FOOTER)
@@ -427,16 +460,15 @@ def build_upgrade10_eif(instance):
 
 def main():
     global_settings = read_config()
-    #clean(const_dir_TEMP)
-    clean(const_dir_PATCH)
-    #global_settings.StarteamPassword = getpassword('BEGIN DOWNLOADING\n\tEnter StarTeam password: ')
-    #if download_starteam(global_settings) == 0:
-    #    comparedirs()
-    search_for_DATA_files(const_instance_BANK)
-    search_for_DATA_files(const_instance_CLIENT)
-
-    build_upgrade10_eif(const_instance_BANK)
-    build_upgrade10_eif(const_instance_CLIENT)
+    clean(const_dir_TEMP)
+    #clean(const_dir_PATCH)
+    global_settings.StarteamPassword = getpassword('BEGIN DOWNLOADING\n\tEnter StarTeam password: ')
+    if download_starteam_by_label(global_settings) == 0:
+        compare_directories_BEFORE_and_AFTER()
+        search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_BANK)
+        search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT)
+        build_upgrade10_eif(const_instance_BANK)
+        build_upgrade10_eif(const_instance_CLIENT)
     print("DONE!!!")
 # ---- поехали ------------------------------------------------------------------------------------
 
