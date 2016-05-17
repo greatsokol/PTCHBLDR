@@ -3,6 +3,7 @@ import os
 import shutil
 import subprocess
 import filecmp
+import getpass
 
 const_NOTPROVIDED_ERROR = "NOT PROVIDED: "
 const_dir_CURRENT = os.path.abspath("")
@@ -19,7 +20,6 @@ class GlobalSettings:
     StarteamServer = ""
     StarteamPort = ""
     StarteamLogin = ""
-    StarteamPassword = ""
     StarteamProject = ""
     StarteamView = ""
     Labels = []
@@ -49,7 +49,7 @@ def __onerror_handler__(func, path, exc_info):
         os.chmod(path, stat.S_IWUSR)
         func(path)
     else:
-        raise exc_info
+        raise BaseException
 
 
 def clean(directory):
@@ -85,7 +85,6 @@ def read_config():
         settings.StarteamProject = parser.get(section_special, "StarteamProject")
         settings.StarteamView = parser.get(section_special, "StarteamView")
         settings.StarteamLogin = parser.get(section_special, "StarteamLogin")
-        settings.StarteamPassword = parser.get(section_special, "StarteamPassword")
         settings.Labels = parser.items(section_labels)
 
         # проверка Labels -----------------------------------
@@ -121,15 +120,12 @@ def download_starteam(settings):
     errorheader = "Error when downloading from Starteam "
     total_result = -1
     try:
-        # starteamlogin = input("Enter Starteam login:")
-        # TODO переделать запрос getpass - не скрывает вводимые символы, честно предупреждает об этом
-        # starteampass = getpass.fallback_getpass("Enter Starteam password:")
-
+        password = getpass.getpass('BEGIN DOWNLOADING\n\tEnter StarTeam password: ')  # getpass.fallback_getpass("Enter Starteam password:")
         for key, label in settings.Labels:
             if label.strip() == "":
-                print("NOT DEFINED label \"{}\" (empty)".format(key))
+                print("\tNOT DEFINED label \"{}\" (empty)".format(key))
             else:
-                print("DOWNLOADING for label \"{}\". Please wait...".format(label))
+                print("\tDOWNLOADING for label \"{}\". Please wait...".format(label))
                 if key == "labelbefore":
                     outdir = const_dir_BEFORE
                 else:
@@ -138,7 +134,7 @@ def download_starteam(settings):
                 launch_string = quote(settings.stcmd)
                 launch_string += " co -nologo -stop -q -x -o -is -p \"{}:{}@{}:{}/{}/{}\"".format(
                                     settings.StarteamLogin,
-                                    settings.StarteamPassword,
+                                    password,
                                     settings.StarteamServer,
                                     settings.StarteamPort,
                                     settings.StarteamProject,
@@ -149,10 +145,10 @@ def download_starteam(settings):
                 # print(launch_string)
                 result = subprocess.call(launch_string)
                 if result == 0:
-                    print("\tFINISHED download for label \"{}\"".format(label))
+                    print("\t\tFINISHED download for label \"{}\"".format(label))
                     total_result = 0
                 else:
-                    print("\tERROR when download label \"{}\"".format(label))
+                    print("\t\tERROR when download label \"{}\"".format(label))
 
     except BaseException as e:
         print(errorheader + "({})".format(e))
@@ -206,6 +202,31 @@ def comparedirs():
 
     print("\tFINISHED compare directories. LOOK at {}".format(const_dir_COMPARED))
 
+
+# -------------------------------------------------------------------------------------------------
+
+
+def list_files_of_given_type(directory, extension):
+    result_list = []
+    extension = extension.upper()
+    for root, dirs, files in os.walk(directory):
+        for name in files:
+            if os.path.splitext(name)[1].upper() == extension:
+                result_list.append(os.path.join(root, name))
+        for name in dirs:
+            result_list += list_files_of_given_type(name, extension)
+    return result_list
+
+
+# -------------------------------------------------------------------------------------------------
+
+
+def build_upgrade_eif():
+    eif_list = list_files_of_given_type(const_dir_COMPARED, ".eif")
+    print(eif_list)
+    pass
+
+
 # -------------------------------------------------------------------------------------------------
 
 
@@ -214,7 +235,7 @@ def main():
     clean(const_dir_TEMP)
     if download_starteam(global_settings) == 0:
         comparedirs()
-
+    build_upgrade_eif()
     print("DONE!!!")
 
 
