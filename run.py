@@ -295,7 +295,7 @@ def download_starteam_by_file(settings, path, filename, where_to_save):
         launch_string += " -rp " + quote(where_to_save)
         launch_string += " " + filename
 
-        #print(launch_string)
+        # print(launch_string)
         result = subprocess.call(launch_string)
         if result == 0:
             print("\t\tFINISHED downloading file \"{}\"".format(filename))
@@ -429,7 +429,6 @@ def search_for_DATA_FILES_without_10_FILES_and_download_them(settings, instance)
             structure_type_raw = file_type_match[0]
             eif10_file = str(eif_file).replace(structure_type_raw,"(10).eif")
             eif10_file = splitfilename(eif10_file)
-            print(eif10_file)
             download_starteam_by_file(settings, "BASE/"+instance+"/TABLES/", eif10_file, const_dir_COMPARED)
 # -------------------------------------------------------------------------------------------------
 
