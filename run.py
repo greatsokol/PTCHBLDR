@@ -36,7 +36,7 @@ get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc = lambda version='': os.path.join(g
 get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites(version), 'rt_wa')
 get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc(version), 'CODE')
 get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa(version), 'CODE')
-# TODO как то надо заменять BuildVersion:
+
 get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion = lambda build_version, version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE(version), build_version)
 get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion = lambda build_version, version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE(version), build_version)
 
