@@ -5,28 +5,60 @@ import subprocess
 import filecmp
 import re
 import glob
+import tempfile
+import zipfile
+import struct
 
-const_dir_CURRENT = os.path.abspath("")
-const_dir_TEMP = os.path.join(const_dir_CURRENT, "TEMP")
-const_dir_BEFORE = os.path.join(const_dir_TEMP, "BEFORE")
-const_dir_AFTER = os.path.join(const_dir_TEMP, "AFTER")
-const_dir_COMPARED = os.path.join(const_dir_TEMP, "_COMPARE_RESULT")
-const_dir_PATCH = os.path.join(const_dir_TEMP, "PATCH")
-get_dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, "BASE"), instance)
-get_dir_PATCH = lambda instance: os.path.join(const_dir_PATCH, instance)
-get_dir_PATCH_DATA = lambda instance: os.path.join(get_dir_PATCH(instance), "DATA")
-get_dir_PATCH_CBSTART = lambda instance, version='': os.path.join(get_dir_PATCH(instance), "CBSTART{}".format(version))
-get_dir_PATCH_LIBFILES = lambda instance, version='': os.path.join(get_dir_PATCH(instance), "LIBFILES{}".format(version))
-get_dir_PATCH_LIBFILES_BNK = lambda instance, version='': os.path.join(get_dir_PATCH(instance), "LIBFILES{}.BNK".format(version))
-get_dir_PATCH_LIBFILES_EXE = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES(instance, version), "EXE")
-get_dir_PATCH_LIBFILES_SUBSYS = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES(instance, version), "SUBSYS")
-get_dir_PATCH_LIBFILES_INSTCLNT = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES_SUBSYS(instance, version), "INSTCLNT")
-get_dir_PATCH_LIBFILES_INETTEMP = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES_INSTCLNT(instance, version), "INETTEMP")
-get_dir_PATCH_LIBFILES_SYSTEM = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES(instance, version), "SYSTEM")
-get_filename_UPGRADE10_eif = lambda instance: os.path.join(get_dir_PATCH(instance), "Upgrade(10).eif")
+
+const_instance_BANK = "BANK"
+const_instance_IC = "IC"
+const_instance_CLIENT = "CLIENT"
+const_dir_CURRENT = os.path.abspath('')
+const_dir_TEMP = os.path.join(const_dir_CURRENT, 'TEMP')
+const_dir_BEFORE = os.path.join(const_dir_TEMP, 'BEFORE')
+const_dir_AFTER = os.path.join(const_dir_TEMP, 'AFTER')
+const_dir_COMPARED = os.path.join(const_dir_TEMP, '_COMPARE_RESULT')
+const_dir_PATCH = os.path.join(const_dir_TEMP, 'PATCH')
+get_dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, 'BASE'), instance)
+get_dir_PATCH = lambda instance='': os.path.join(const_dir_PATCH, instance)
+get_dir_PATCH_DATA = lambda instance: os.path.join(get_dir_PATCH(instance), 'DATA')
+get_dir_PATCH_CBSTART = lambda instance, version='': os.path.join(get_dir_PATCH(instance), 'CBSTART{}'.format(version))
+get_dir_PATCH_LIBFILES = lambda instance, version='': os.path.join(get_dir_PATCH(instance), 'LIBFILES{}'.format(version))
+
+get_dir_PATCH_LIBFILES_BNK = lambda version='': os.path.join(get_dir_PATCH(const_instance_BANK), 'LIBFILES{}.BNK'.format(version))
+get_dir_PATCH_LIBFILES_BNK_WWW = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK(version), 'WWW')
+get_dir_PATCH_LIBFILES_BNK_WWW_EXE = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW(version), 'EXE')
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW(version), 'BSI_scripts')
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts(version), 'rt_ic')
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts(version), 'rt_wa')
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW(version), 'BSI_sites')
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites(version), 'rt_ic')
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites(version), 'rt_wa')
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc(version), 'CODE')
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa(version), 'CODE')
+# TODO как то надо заменять BuildVersion:
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion = lambda build_version, version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE(version), build_version)
+get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion = lambda build_version, version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE(version), build_version)
+
+get_dir_PATCH_LIBFILES_EXE = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES(instance, version), 'EXE')
+get_dir_PATCH_LIBFILES_SYSTEM = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES(instance, version), 'SYSTEM')
+get_dir_PATCH_LIBFILES_SUBSYS = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES(instance, version), 'SUBSYS')
+get_dir_PATCH_LIBFILES_INSTCLNT = lambda : os.path.join(get_dir_PATCH_LIBFILES_SUBSYS(const_instance_BANK), 'INSTCLNT')
+get_dir_PATCH_LIBFILES_INETTEMP = lambda : os.path.join(get_dir_PATCH_LIBFILES_INSTCLNT(), 'INETTEMP')
+get_dir_PATCH_LIBFILES_TEMPLATE = lambda : os.path.join(get_dir_PATCH_LIBFILES_SUBSYS(const_instance_BANK), 'TEMPLATE')
+
+get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE(), 'DISTRIB.X{}'.format(version))
+get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(version), 'CLIENT')
+get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT(version), 'EXE')
+get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT(version), 'SYSTEM')
+get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE(), 'Language.X{}'.format(version))
+get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX(version), 'ENGLISH')
+get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX(version), 'RUSSIAN')
+
+get_filename_UPGRADE10_eif = lambda instance: os.path.join(get_dir_PATCH(instance), 'Upgrade(10).eif')
 splitfilename = lambda filename: os.path.split(filename)[1]
-print1 = lambda message: print("\t"+message)
-print2 = lambda message: print("\t\t"+message)
+print1 = lambda message: print('\t'+message)
+print2 = lambda message: print('\t\t'+message)
 
 const_UPGRADE10_HEADER = \
                 "[SECTION]\n" \
@@ -139,10 +171,6 @@ const_UPGRADE10_HEADER = \
                 "[RECORDS]\n".format("100", "100")
 
 const_UPGRADE10_FOOTER = "[END]\n"
-const_instance_BANK = "BANK"
-const_instance_IC = "IC"
-const_instance_CLIENT = "CLIENT"
-
 const_excluded_build_for_BANK = ['BRHelper.exe',
                                  'BsDataPump.exe',
                                  'BSISet.exe',
@@ -226,27 +254,25 @@ const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['BSAuthServer
 # -------------------------------------------------------------------------------------------------
 
 
-
-
 class GlobalSettings:
-    stcmd = ""
-    StarteamServer = ""
-    StarteamPort = ""
-    StarteamLogin = ""
-    StarteamProject = ""
-    StarteamView = ""
-    StarteamPassword = ""
+    stcmd = ''
+    StarteamServer = ''
+    StarteamPort = ''
+    StarteamLogin = ''
+    StarteamProject = ''
+    StarteamView = ''
+    StarteamPassword = ''
     Labels = []
-    BuildBank = ""
-    BuildIC = ""
-    BuildClient = ""
+    BuildBank = ''
+    BuildIC = ''
+    BuildClient = ''
 # -------------------------------------------------------------------------------------------------
 
 
 def getpassword(message):
     import getpass
     # running under PyCharm or not
-    if "PYCHARM_HOSTED" in os.environ:
+    if 'PYCHARM_HOSTED' in os.environ:
         return getpass.fallback_getpass(message)
     else:
         return getpass.getpass(message)
@@ -254,17 +280,24 @@ def getpassword(message):
 
 
 def makedirs(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
+    try:
+        if not os.path.exists(path):
+            os.makedirs(path)
+    except:
+        print1('ERROR: can''t create directory "{}"'.format(path))
 # -------------------------------------------------------------------------------------------------
 
 
-def copyfiles(src_dir, dest_dir, wildcard='*.*', excluded_files=[]):
-    for filename_with_path in glob.glob(os.path.join(src_dir, wildcard)):
-        filename = splitfilename(filename_with_path)
-        if filename not in excluded_files:
-            makedirs(dest_dir)
-            shutil.copy2(filename_with_path, dest_dir)
+def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
+    for wildcard in wildcards:
+        for filename_with_path in glob.glob(os.path.join(src_dir, wildcard)):
+            filename = splitfilename(filename_with_path)
+            if filename not in excluded_files and filename != '.' and filename != '..':
+                makedirs(dest_dir)
+                try:
+                    shutil.copy2(filename_with_path, dest_dir)
+                except BaseException as e:
+                    print1('ERROR: can\'t copy file "{}" to "{}" ({})'.format(filename_with_path, dest_dir, e))
 
 # -------------------------------------------------------------------------------------------------
 
@@ -299,63 +332,63 @@ def __onerror_handler__(func, path, exc_info):
 
 def clean(directory):
     try:
-        print("CLEANING {}. Please wait.".format(const_dir_TEMP))
+        print('CLEANING {}. Please wait.'.format(const_dir_TEMP))
         shutil.rmtree(directory, onerror=__onerror_handler__)
-        print1("CLEANING done")
+        print1('CLEANING done')
     except FileNotFoundError:
         pass  # если папка TEMP отсутствует, то продолжаем молча
     except BaseException as e:
-        print1("Error when cleaning directories ({})".format(e))
+        print1('Error when cleaning directories ({})'.format(e))
         raise
 # -------------------------------------------------------------------------------------------------
 
 
 def read_config():
     settings = GlobalSettings()
-    ini_filename = "settings.ini"
-    error_header = "Error when reading settings from file {} ".format(ini_filename)
-    section_special = "SPECIAL"
-    section_common = "COMMON"
-    section_labels = "LABELS"
-    section_build = "BUILD"
+    ini_filename = 'settings.ini'
+    error_header = 'Error when reading settings from file {} '.format(ini_filename)
+    section_special = 'SPECIAL'
+    section_common = 'COMMON'
+    section_labels = 'LABELS'
+    section_build = 'BUILD'
     try:
         parser = configparser.RawConfigParser()
         res = parser.read(ini_filename)
         if res.count == 0:  # если файл настроек не найден
-            raise FileNotFoundError("NOT FOUND {}".format(ini_filename))
-        settings.stcmd = parser.get(section_common, "stcmd").strip()
-        settings.StarteamServer = parser.get(section_common, "StarteamServer").strip()
-        settings.StarteamPort = parser.get(section_common, "StarteamPort").strip()
-        settings.StarteamProject = parser.get(section_special, "StarteamProject").strip()
-        settings.StarteamView = parser.get(section_special, "StarteamView").strip()
-        settings.StarteamLogin = parser.get(section_special, "StarteamLogin").strip()
+            raise FileNotFoundError('NOT FOUND {}'.format(ini_filename))
+        settings.stcmd = parser.get(section_common, 'stcmd').strip()
+        settings.StarteamServer = parser.get(section_common, 'StarteamServer').strip()
+        settings.StarteamPort = parser.get(section_common, 'StarteamPort').strip()
+        settings.StarteamProject = parser.get(section_special, 'StarteamProject').strip()
+        settings.StarteamView = parser.get(section_special, 'StarteamView').strip()
+        settings.StarteamLogin = parser.get(section_special, 'StarteamLogin').strip()
         settings.Labels = parser.items(section_labels)
-        settings.BuildBank = parser.get(section_build, "Bank").strip()
-        settings.BuildClient = parser.get(section_build, "Client").strip()
-        settings.BuildIC = parser.get(section_build, "IC").strip()
+        settings.BuildBank = parser.get(section_build, 'Bank').strip()
+        settings.BuildClient = parser.get(section_build, 'Client').strip()
+        settings.BuildIC = parser.get(section_build, 'IC').strip()
 
         # проверка Labels -----------------------------------
         all_lables = ''
         for label in settings.Labels:
             all_lables += label[1].strip()
 
-        if not settings.Labels or all_lables == "":  # Если не дали совсем никаких меток для загрузки
-            raise ValueError("NO LABELS defined in {}".format(ini_filename))
+        if not settings.Labels or not all_lables:  # Если не дали совсем никаких меток для загрузки
+            raise ValueError('NO LABELS defined in {}'.format(ini_filename))
 
         # проверка stsmd -----------------------------------
-        if settings.stcmd != "":  # если пусть к stcmd не задан
+        if settings.stcmd:  # если пусть к stcmd не задан
             settings.stcmd = os.path.normpath(settings.stcmd)
-            settings.stcmd = settings.stcmd+os.sep+"stcmd.exe"
+            settings.stcmd = settings.stcmd+os.sep+'stcmd.exe'
             if not os.path.exists(settings.stcmd):
-                raise FileNotFoundError("NOT FOUND "+settings.stcmd)
+                raise FileNotFoundError('NOT FOUND '+settings.stcmd)
         else:
-            raise FileNotFoundError("NOT DEFINED path to stcmd")
+            raise FileNotFoundError('NOT DEFINED path to stcmd')
 
     except BaseException as e:
-        print(error_header+"({})".format(e))
+        print(error_header+'({})'.format(e))
         raise e
     else:
-        print("GOT SETTINGS:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}".
+        print('GOT SETTINGS:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}'.
               format(settings.StarteamProject, settings.StarteamView, settings.Labels, settings.stcmd))
         return settings
 # -------------------------------------------------------------------------------------------------
@@ -365,36 +398,36 @@ def download_starteam_by_label(settings):
     total_result = -1
     try:
         for key, label in settings.Labels:
-            if label == "":
-                print1("NOT DEFINED label \"{}\" (empty)".format(key))
+            if not label:
+                print1('NOT DEFINED label "{}" (empty)'.format(key))
             else:
-                print1("DOWNLOADING for label \"{}\". Please wait...".format(label))
-                if key == "labelbefore":
+                print1('DOWNLOADING for label "{}". Please wait...'.format(label))
+                if key == 'labelbefore':
                     outdir = const_dir_BEFORE
                 else:
                     outdir = const_dir_AFTER
 
                 launch_string = quote(settings.stcmd)
-                launch_string += " co -nologo -stop -q -x -o -is -p \"{}:{}@{}:{}/{}/{}\"".format(
+                launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}"'.format(
                                     settings.StarteamLogin,
                                     settings.StarteamPassword,
                                     settings.StarteamServer,
                                     settings.StarteamPort,
                                     settings.StarteamProject,
                                     settings.StarteamView)
-                launch_string += " -rp " + quote(outdir)
-                launch_string += " -vl " + quote(label)
+                launch_string += ' -rp ' + quote(outdir)
+                launch_string += ' -vl ' + quote(label)
 
                 # print(launch_string)
                 result = subprocess.call(launch_string)
                 if result == 0:
-                    print2("FINISHED downloading for label \"{}\"".format(label))
+                    print2('FINISHED downloading for label "{}"'.format(label))
                     total_result = 0
                 else:
-                    print2("ERROR when downloading label \"{}\"".format(label))
+                    print2('ERROR when downloading label "{}"'.format(label))
 
     except BaseException as e:
-        print2("Error when downloading from Starteam ({})".format(e))
+        print2('Error when downloading from Starteam ({})'.format(e))
     return total_result
 # -------------------------------------------------------------------------------------------------
 
@@ -402,9 +435,9 @@ def download_starteam_by_label(settings):
 def download_starteam_by_file(settings, path, filename, where_to_save):
     total_result = -1
     try:
-        print1("DOWNLOADING file \"{}\". Please wait...".format(path+filename))
+        print1('DOWNLOADING file "{}". Please wait...'.format(path+filename))
         launch_string = quote(settings.stcmd)
-        launch_string += " co -nologo -stop -q -x -o -is -p \"{}:{}@{}:{}/{}/{}/{}\"".format(
+        launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}/{}"'.format(
                                     settings.StarteamLogin,
                                     settings.StarteamPassword,
                                     settings.StarteamServer,
@@ -418,13 +451,13 @@ def download_starteam_by_file(settings, path, filename, where_to_save):
         # print(launch_string)
         result = subprocess.call(launch_string)
         if result == 0:
-            print2("FINISHED downloading file \"{}\"".format(filename))
+            print2('FINISHED downloading file "{}"'.format(filename))
             total_result = 0
         else:
-            print2("ERROR when downloading file \"{}\"".format(filename))
+            print2('ERROR when downloading file "{}"'.format(filename))
 
     except BaseException as e:
-        print2("Error when downloading from Starteam ({})".format(e))
+        print2('Error when downloading from Starteam ({})'.format(e))
     return total_result
 # -------------------------------------------------------------------------------------------------
 
@@ -441,23 +474,21 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
         for file in dircmp.diff_files:
             path = os.path.join(after, file)
             if os.path.isfile(path):
-                print2("copying {}".format(path))
-                if not os.path.exists(wheretocopy):
-                    os.makedirs(wheretocopy)
+                print2('copying {}'.format(path))
+                makedirs(wheretocopy)
                 shutil.copy2(path, wheretocopy)
             else:
-                print2("something wrong {} -> {}".format(path, wheretocopy))
+                print2('something wrong {} -> {}'.format(path, wheretocopy))
 
     if dircmp.right_only:
         for file in dircmp.right_only:
             path = os.path.join(after, file)
             if os.path.isfile(path):
-                print2("copying {}".format(path))
-                if not os.path.exists(wheretocopy):
-                    os.makedirs(wheretocopy)
+                print2('copying {}'.format(path))
+                makedirs(wheretocopy)
                 shutil.copy2(path, wheretocopy)
             else:
-                print2("copying DIR with contents {}".format(path))
+                print2('copying DIR with contents {}'.format(path))
                 clean(os.path.join(wheretocopy, file))
                 shutil.copytree(path, os.path.join(wheretocopy, file))
 # -------------------------------------------------------------------------------------------------
@@ -465,17 +496,17 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
 
 def compare_directories_BEFORE_and_AFTER():
     if os.path.exists(const_dir_BEFORE):
-        print("BEGIN compare directories:")
-        print1("BEFORE: {}".format(const_dir_BEFORE))
-        print1("AFTER:  {}".format(const_dir_AFTER))
+        print('BEGIN compare directories:')
+        print1('BEFORE: {}'.format(const_dir_BEFORE))
+        print1('AFTER:  {}'.format(const_dir_AFTER))
         __compare_and_copy_dirs_recursively__(const_dir_BEFORE, const_dir_AFTER, const_dir_COMPARED)
     else:
         os.rename(const_dir_AFTER, const_dir_COMPARED)
-        print1("USING folder 'AFTER' as compare result, because 'BEFORE' not exists:")
-        print2("BEFORE (not exists): {}".format(const_dir_BEFORE))
-        print2("AFTER              : {}".format(const_dir_AFTER))
+        print1('USING folder "AFTER" as compare result, because "BEFORE" not exists:')
+        print2('BEFORE (not exists): {}'.format(const_dir_BEFORE))
+        print2('AFTER              : {}'.format(const_dir_AFTER))
 
-    print("\tFINISHED compare directories. LOOK at {}".format(const_dir_COMPARED))
+    print('\tFINISHED compare directories. LOOK at {}'.format(const_dir_COMPARED))
 # -------------------------------------------------------------------------------------------------
 
 
@@ -493,55 +524,56 @@ def list_files_of_given_type(directory, extension):
 
 
 def make_upgrade10_eif_string_by_file_name(counter, file_name):
-    file_type_match = re.findall("\((?:\d+|data)\)\.eif", file_name, flags=re.IGNORECASE)
+    result = ''
+    file_type_match = re.findall('\((?:\d+|data)\)\.eif', file_name, flags=re.IGNORECASE)
     if len(file_type_match):
         structure_type_raw = file_type_match[0]
-        structure_type = re.sub(r"\.eif", "", structure_type_raw, flags=re.IGNORECASE).replace("(", "").replace(")", "")
-        if structure_type.upper() == "DATA":
-            structure_type = "10"
-        file_name = file_name.replace(structure_type_raw, "")
-        if structure_type == "10" or structure_type == "data":
+        structure_type = re.sub(r'\.eif', '', structure_type_raw, flags=re.IGNORECASE).replace('(', '').replace(')', '')
+        if structure_type.upper() == 'DATA':
+            return ''  # пропускаем data-файлы, за них ответят 10-файлы
+        file_name = file_name.replace(structure_type_raw, '')
+        if structure_type == '10':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"  # TODO здесь все сложно
-        elif structure_type == "12":
+        elif structure_type == '12':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Визуальные формы'>"
-        elif structure_type == "14":
+        elif structure_type == '14':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Конфигурации'>"
-        elif structure_type == "16":
+        elif structure_type == '16':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Автопроцедуры'>"
-        elif structure_type == "18":
+        elif structure_type == '18':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Профили'>"
-        elif structure_type == "19":
+        elif structure_type == '19':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Роли'>"
-        elif structure_type == "20":
+        elif structure_type == '20':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Привелегии'>"
-        elif structure_type == "21":
+        elif structure_type == '21':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Пользователи'>"
-        elif structure_type == "30":
+        elif structure_type == '30':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Сценарии'>"
-        elif structure_type == "65":
+        elif structure_type == '65':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS что-то'>"
-        elif structure_type == "66":
+        elif structure_type == '66':
             result = "<352|66|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS Errors params'>"
-        elif structure_type == "71":
+        elif structure_type == '71':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Генераторы'>"
-        elif structure_type == "72":
+        elif structure_type == '72':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Структуры отображений'>"
-        elif structure_type == "73":
+        elif structure_type == '73':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Хранимые процедуры'>"
-        elif structure_type == "81":
+        elif structure_type == '81':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Простые операции'>"
-        elif structure_type == "82":
+        elif structure_type == '82':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Табличные операции'>"
-        elif structure_type == "83":
+        elif structure_type == '83':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Документарные операции'>"
-        elif structure_type == "84":
+        elif structure_type == '84':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Статусы'>"
         else:
-            print2("ERROR unknown structure type {} for filename {}".format(structure_type, file_name))
+            print2('ERROR unknown structure type {} for filename {}'.format(structure_type, file_name))
 
-        return "  "+result.format(counter, structure_type, file_name)
+        return '  '+result.format(counter, structure_type, file_name)+'\n'
     else:
-        print2("ERROR can't detect structure type by filename ({})".format(file_name))
+        print2('ERROR can not detect structure type by filename ({})'.format(file_name))
 # -------------------------------------------------------------------------------------------------
 
 
@@ -549,16 +581,16 @@ def search_for_DATA_FILES_without_10_FILES_and_download_them(settings, instance)
     eif_list = list_files_of_given_type(get_dir_COMPARED_BASE(instance), ".eif")
     for eif_file in eif_list:
         # проверим соответствует ли название файла формату "*(data).eif"
-        file_type_match = re.findall("\(data\)\.eif", eif_file, flags=re.IGNORECASE)
+        file_type_match = re.findall('\(data\)\.eif', eif_file, flags=re.IGNORECASE)
         if len(file_type_match):
-            eif10_file = str(eif_file).replace(file_type_match[0],"(10).eif")
+            eif10_file = str(eif_file).replace(file_type_match[0], '(10).eif')
             # отрежем путь (splitfilename)
             eif10_file = splitfilename(eif10_file)
             # и проверим есть ли файл eif10_file в списке файлов eif_list
             exists = [file1 for file1 in eif_list if re.search(re.escape(eif10_file), file1)]
             if not exists:
                 # если файла eif10_file в списке загруженных файлов нет, то выгрузим его из стартима
-                download_starteam_by_file(settings, "BASE/"+instance+"/TABLES/", eif10_file, const_dir_COMPARED)
+                download_starteam_by_file(settings, 'BASE/'+instance+'/TABLES/', eif10_file, const_dir_COMPARED)
 # -------------------------------------------------------------------------------------------------
 
 
@@ -566,80 +598,155 @@ def generate_upgrade10_eif(instance):
     eif_list = list_files_of_given_type(get_dir_COMPARED_BASE(instance), ".eif")
     if len(eif_list) > 0:
         data_dir = get_dir_PATCH_DATA(instance)
-        os.makedirs(data_dir)
+        makedirs(data_dir)
         for eif_file in eif_list:
             try:
                 shutil.copy2(eif_file, data_dir)
             except EnvironmentError as e:
-                print1("Unable to copy file. %s" % e)
+                print1('Unable to copy file. %s' % e)
 
-        eif_list = list_files_of_given_type(data_dir, ".eif")
+        eif_list = list_files_of_given_type(data_dir, '.eif')
         if len(eif_list) > 0:
-            with open(get_filename_UPGRADE10_eif(instance), mode="w") as f:
+            with open(get_filename_UPGRADE10_eif(instance), mode='w') as f:
                 f.writelines(const_UPGRADE10_HEADER)
                 counter = 1
                 for eif_file in eif_list:
                     eif_file_name = splitfilename(eif_file)
-                    f.writelines(make_upgrade10_eif_string_by_file_name(counter, eif_file_name)+"\n")
-                    counter += 1
+                    line = make_upgrade10_eif_string_by_file_name(counter, eif_file_name)
+                    if line:
+                        f.writelines(line)
+                        counter += 1
                 f.writelines(const_UPGRADE10_FOOTER)
 # -------------------------------------------------------------------------------------------------
 
 
-def __download_build__(build_path, dest_path, version, file_type, excluded_files = []):
+def getFileVerInfo(fullFilePath):
+    # http://windowssdk.msdn.microsoft.com/en-us/library/ms646997.aspx
+    sig = struct.pack("32s", u"VS_VERSION_INFO".encode("utf-16-le"))
+    # This pulls the whole file into memory, so not very feasible for
+    # large binaries.
+    try:
+        with open(fullFilePath, 'rb') as f:
+            filedata = f.read()
+    except BaseException as E:
+        print(E)
+        return "Unknown"
+    offset = filedata.find(sig)
+    if offset == -1:
+        return "Unknown"
+
+    filedata = filedata[offset + 32: offset + 32 + (13*4)]
+    version_struct = struct.unpack("13I", filedata)
+    ver_ms, ver_ls = version_struct[4], version_struct[5]
+    return "%d.%d.%d.%d" % (ver_ls & 0x0000ffff, (ver_ms & 0xffff0000) >> 16,
+                            ver_ms & 0x0000ffff, (ver_ls & 0xffff0000) >> 16)
+
+# -------------------------------------------------------------------------------------------------
+
+
+def __download_build__(build_path, dest_path, version, file_type, excluded_files=[]):
     build_path = os.path.join(build_path, 'Win{}\\Release'.format(version))
     copyfiles(build_path, dest_path, file_type, excluded_files)
 # -------------------------------------------------------------------------------------------------
 
 
-def download_build(settings, instance):
-    if instance == '':
-        print("NOT DOWNLOADING build: no instance specified")
+def __prepare_build_path__(build_path):
+    # проверка наличия пути build_path
+    if not os.path.exists(build_path):
+        print1('PATH {} does not exists'.format(build_path))
         return
 
+    # если ссылка на билд указывает не на каталог, а на файл архива
+    # попробуем провести разархивацию во временный каталог
+    build_zip_file = splitfilename(build_path)
+    if build_zip_file:
+        build_tmp_dir = os.path.join(tempfile.gettempdir(), build_zip_file)
+        if os.path.exists(build_tmp_dir):
+            print1('BUILD already extracted in "{}"'.format(build_tmp_dir))
+            build_path = build_tmp_dir
+        else:
+            print1('EXTRACTING BUILD "{}" in "{}"'.format(build_path, build_tmp_dir))
+            try:
+                with zipfile.ZipFile(build_path) as z:
+                    z.extractall(os.path.join(tempfile.gettempdir(), build_zip_file))
+                    # запомним путь во временный каталог в качестве
+                    # нового пути к билду для последующего применения
+                    build_path = build_tmp_dir
+            except BaseException as e:
+                print1('ERROR EXTRACTING BUILD "{}"'.format(e))
+            # конец разархивации
+    return build_path
+
+# -------------------------------------------------------------------------------------------------
+
+
+def download_build(settings, instance):
+    if not instance:
+        print('NOT DOWNLOADING build: no instance specified')
+        return
+
+    build_path = ''
     if instance == const_instance_BANK:
         build_path = settings.BuildBank
+        excluded_files = const_excluded_build_for_BANK
     elif instance == const_instance_IC:
         build_path = settings.BuildIC
+        excluded_files = const_excluded_build_for_BANK
     elif instance == const_instance_CLIENT:
         build_path = settings.BuildClient
-
-    if build_path == '':
-        print("NOT DOWNLOADING build for {}: no build path specified".format(instance))
-        return
-
-    print("BEGIN DOWNLOADING build {} for {}".format(build_path, instance))
-    if not os.path.exists(build_path):
-        print1("PATH {} does not exists".format(build_path))
-        return
-
-    if instance == const_instance_BANK:
-        excluded_files = const_excluded_build_for_BANK
-    elif instance == const_instance_IC:
-        excluded_files = const_excluded_build_for_BANK
-    elif instance == const_instance_CLIENT:
         excluded_files = const_excluded_build_for_CLIENT
 
+    if not build_path:
+        print('NOT DOWNLOADING build for {}: no build path specified'.format(instance))
+        return
+
+    # если в пути присутствует "20.1" или "20.2", то раскладка билда будет производиться соотвественно
     is20 = ('20.1' in build_path) or ('20.2' in build_path)
+
+    print('BEGIN DOWNLOADING build {} for {}'.format(build_path, instance))
+    build_path = __prepare_build_path__(build_path)
 
     if is20: # для билда 20-ой версии
         if instance == const_instance_IC: # выкладываем билд плагина для ИК
-            __download_build__(settings.BuildBank, get_dir_PATCH_LIBFILES_INETTEMP(const_instance_BANK), '32', 'bssetup.msi', [])
-            __download_build__(settings.BuildBank, get_dir_PATCH_LIBFILES_INETTEMP(const_instance_BANK), '32', 'CalcCRC.exe', [])
-            __download_build__(build_path, get_dir_PATCH_LIBFILES_INETTEMP(const_instance_BANK), '32', 'BssPluginSetup.exe', [])
-            __download_build__(build_path, get_dir_PATCH_LIBFILES_INETTEMP(const_instance_BANK), '32', 'BssPluginWebKitSetup.exe', [])
-            __download_build__(build_path, get_dir_PATCH_LIBFILES_INETTEMP(const_instance_BANK), '32', 'BssPluginWebKitSetup.exe', [])
-            for version in ['32', '64']: # выкладываем билд в LIBFILES32(64).BNK
-                __download_build__(build_path, get_dir_PATCH_LIBFILES_BNK(instance, version), version, 'UpdateIc.exe', [])
-        else:
-            for version in ['32', '64']: # выкладываем остальной билд для Б и БК
-                __download_build__(build_path, get_dir_PATCH_LIBFILES_EXE(instance, version), version, '*.exe', excluded_files)
-                __download_build__(build_path, get_dir_PATCH_LIBFILES_EXE(instance, version), version, '*.ex', excluded_files)
-                __download_build__(build_path, get_dir_PATCH_LIBFILES_EXE(instance, version), version, '*.bpl', excluded_files)
-                __download_build__(build_path, get_dir_PATCH_CBSTART(instance, version), version, 'CBStart.exe', [])
-                __download_build__(build_path, get_dir_PATCH_LIBFILES_SYSTEM(instance, version), version, '*.dll', excluded_files)
+            build_path_bank = __prepare_build_path__(settings.BuildBank) # подготовим путь к билду банка
+            files_to_copy = ['bssetup.msi', 'CalcCRC.exe']
+            __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), '32', files_to_copy, [])
+            files_to_copy = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginWebKitSetup.exe']
+            __download_build__(build_path, get_dir_PATCH_LIBFILES_INETTEMP(), '32', files_to_copy, [])
 
-    print1("DONE DOWNLOADING build for {}".format(instance))
+            for version in ['32', '64']: # выкладываем билд в LIBFILES32(64).BNK
+                __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_BNK(version), version, ['UpdateIc.exe'], [])
+                __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_EXE(version), version, ['bsiset.exe'], [])
+                files_to_copy = ['bsi.dll', 'bsi.jar']
+                __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(version), version, files_to_copy, [])
+                __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(version), version, files_to_copy, [])
+
+                # определяем версию билда по Exe файлу
+                build_version = getFileVerInfo(os.path.join(build_path, 'Win{}\\Release\\BrHelper.exe'.format(version)))
+                files_to_copy = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
+                for subversion in ['64', '32']: # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
+                    __download_build__(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_version, version), subversion, files_to_copy, [])
+                    __download_build__(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(build_version, version), subversion, files_to_copy, [])
+
+        else:
+            if instance == const_instance_BANK:
+                __download_build__(build_path, get_dir_PATCH(), '32', ['CBStart.exe'], []) # один файл в корень
+            for version in ['32', '64']: # выкладываем остальной билд для Б и БК для версий 32 и 64
+                files_to_copy = ['*.exe', '*.ex', '*.bpl']
+                __download_build__(build_path, get_dir_PATCH_LIBFILES_EXE(instance, version), version, files_to_copy, excluded_files)
+                __download_build__(build_path, get_dir_PATCH_LIBFILES_SYSTEM(instance, version), version, ['*.dll'], excluded_files)
+                __download_build__(build_path, get_dir_PATCH_CBSTART(instance, version), version, ['CBStart.exe'], [])
+                if instance == const_instance_BANK:
+                    # заполняем TEMPLATE шаблон клиента в банковском патче
+                    files_to_copy = ['*.exe', '*.ex', '*.bpl']
+                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(version), version, files_to_copy, const_excluded_build_for_CLIENT)
+                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(version), version, ['*.dll'], const_excluded_build_for_CLIENT)
+                    files_to_copy = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
+                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(version), version, files_to_copy, [])
+                    files_to_copy = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
+                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(version), version, files_to_copy, [])
+                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(version), version, files_to_copy, [])
+    print1('DONE DOWNLOADING build for {}'.format(instance))
 
 
 # -------------------------------------------------------------------------------------------------
@@ -648,7 +755,7 @@ def main():
     global_settings = read_config()
     clean(const_dir_TEMP)
     # clean(const_dir_PATCH)
-    global_settings.StarteamPassword = getpassword('ENTER StarTeam password:')
+    global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
     print('BEGIN DOWNLOADING')
     if download_starteam_by_label(global_settings) == 0:
         compare_directories_BEFORE_and_AFTER()
@@ -659,7 +766,7 @@ def main():
         download_build(global_settings, const_instance_BANK)
         download_build(global_settings, const_instance_IC)
         download_build(global_settings, const_instance_CLIENT)
-    print("DONE!!!")
+    print('DONE!!!')
 # -------------------------------------------------------------------------------------------------
 
 
@@ -676,8 +783,9 @@ def main_debug_without_clean():
     download_build(global_settings, const_instance_BANK)
     download_build(global_settings, const_instance_IC)
     download_build(global_settings, const_instance_CLIENT)
-    print("DONE!!!")
+    print('DONE!!!')
 # -------------------------------------------------------------------------------------------------
 
 #main()
 main_debug_without_clean()
+
