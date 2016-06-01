@@ -4,7 +4,6 @@ import shutil
 import subprocess
 import filecmp
 import re
-import glob
 import tempfile
 import zipfile
 import struct
@@ -287,10 +286,16 @@ def makedirs(path):
         print1('ERROR: can''t create directory "{}"'.format(path))
 # -------------------------------------------------------------------------------------------------
 
+def list_files(path, mask):
+    import fnmatch
+    return [os.path.join(base, filename)
+                for base, _, files in os.walk(path)
+                    for filename in fnmatch.filter(files, mask)]
 
 def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
     for wildcard in wildcards:
-        for filename_with_path in glob.glob(os.path.join(src_dir, wildcard)):
+        files = list_files(src_dir, wildcard)
+        for filename_with_path in files:
             filename = splitfilename(filename_with_path)
             if filename not in excluded_files and filename != '.' and filename != '..':
                 makedirs(dest_dir)
@@ -787,5 +792,7 @@ def main_debug_without_clean():
 # -------------------------------------------------------------------------------------------------
 
 #main()
-main_debug_without_clean()
+#main_debug_without_clean()
+
+print(list_files('d:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD','*.bls'))
 
