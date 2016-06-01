@@ -286,11 +286,10 @@ def makedirs(path):
         print1('ERROR: can''t create directory "{}"'.format(path))
 # -------------------------------------------------------------------------------------------------
 
+
 def list_files(path, mask):
     import fnmatch
-    return [os.path.join(base, filename)
-                for base, _, files in os.walk(path)
-                    for filename in fnmatch.filter(files, mask)]
+    return [os.path.join(dir, filename) for dir, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
 
 def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
     for wildcard in wildcards:
@@ -303,7 +302,6 @@ def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
                     shutil.copy2(filename_with_path, dest_dir)
                 except BaseException as e:
                     print1('ERROR: can\'t copy file "{}" to "{}" ({})'.format(filename_with_path, dest_dir, e))
-
 # -------------------------------------------------------------------------------------------------
 
 
@@ -515,19 +513,6 @@ def compare_directories_BEFORE_and_AFTER():
 # -------------------------------------------------------------------------------------------------
 
 
-def list_files_of_given_type(directory, extension):
-    result_list = []
-    extension = extension.upper()
-    for root, dirs, files in os.walk(directory):
-        for name in files:
-            if os.path.splitext(name)[1].upper() == extension:
-                result_list.append(os.path.join(root, name))
-        for name in dirs:
-            result_list += list_files_of_given_type(name, extension)
-    return result_list
-# -------------------------------------------------------------------------------------------------
-
-
 def make_upgrade10_eif_string_by_file_name(counter, file_name):
     result = ''
     file_type_match = re.findall('\((?:\d+|data)\)\.eif', file_name, flags=re.IGNORECASE)
@@ -583,7 +568,7 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
 
 
 def search_for_DATA_FILES_without_10_FILES_and_download_them(settings, instance):
-    eif_list = list_files_of_given_type(get_dir_COMPARED_BASE(instance), ".eif")
+    eif_list = list_files(get_dir_COMPARED_BASE(instance), "*.eif")
     for eif_file in eif_list:
         # проверим соответствует ли название файла формату "*(data).eif"
         file_type_match = re.findall('\(data\)\.eif', eif_file, flags=re.IGNORECASE)
@@ -600,7 +585,7 @@ def search_for_DATA_FILES_without_10_FILES_and_download_them(settings, instance)
 
 
 def generate_upgrade10_eif(instance):
-    eif_list = list_files_of_given_type(get_dir_COMPARED_BASE(instance), ".eif")
+    eif_list = list_files(get_dir_COMPARED_BASE(instance), '*.eif')
     if len(eif_list) > 0:
         data_dir = get_dir_PATCH_DATA(instance)
         makedirs(data_dir)
@@ -610,7 +595,7 @@ def generate_upgrade10_eif(instance):
             except EnvironmentError as e:
                 print1('Unable to copy file. %s' % e)
 
-        eif_list = list_files_of_given_type(data_dir, '.eif')
+        eif_list = list_files(data_dir, '*.eif')
         if len(eif_list) > 0:
             with open(get_filename_UPGRADE10_eif(instance), mode='w') as f:
                 f.writelines(const_UPGRADE10_HEADER)
@@ -794,5 +779,32 @@ def main_debug_without_clean():
 #main()
 #main_debug_without_clean()
 
-print(list_files('d:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD','*.bls'))
 
+def __replace_unwanted__(pattern, str):
+    find_all = re.findall(pattern, str)
+    for find in find_all:
+        str = str.replace(find, '')
+    return str
+
+def get_bls_uses_graph(path):
+    bls_uses_graph = {}
+    files = list_files(path, '*.bls')
+    for file_name in files:
+        with open(file_name) as bls_file:
+            bls_lines = bls_file.readlines()
+            bls_line = ''
+            for line in bls_lines:
+                line = __replace_unwanted__(r'//.*', line)
+                line = line.strip()
+                if line:
+                    bls_line += (' ' + line)
+            bls_line = __replace_unwanted__('{.*?}', bls_line)
+            find = re.search('uses([\s\S]*);', bls_line, flags=re.IGNORECASE)
+            if find:
+                bls_line = find.group().replace(';', '').replace('uses', '')
+            uses_list = [line.strip() for line in bls_line.split(',')]
+            bls_uses_graph.update({splitfilename(file_name).lower() : [file_name, uses_list]})
+    return bls_uses_graph
+
+#print(list_files('D:\\Users\\eugn\\PycharmProjects\\TEMP','*.bls'))
+print(get_bls_uses_graph('D:\\Users\\eugn\\PycharmProjects\\TEMP'))
