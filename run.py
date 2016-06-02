@@ -56,9 +56,31 @@ get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN = lambda version: os.path.join(get_
 get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX(version), 'RUSSIAN')
 
 get_filename_UPGRADE10_eif = lambda instance: os.path.join(get_dir_PATCH(instance), 'Upgrade(10).eif')
-splitfilename = lambda filename: os.path.split(filename)[1]
+#splitfilename = lambda filename: os.path.split(filename)[1]
+#splitdirname = lambda filename: os.path.dirname(filename)
 print1 = lambda message: print('\t'+message)
 print2 = lambda message: print('\t\t'+message)
+
+def __splitpath__(path):
+    path = os.path.normpath(path)
+    names = path.split(os.path.sep)
+    return names
+
+def split_filename(path):
+    result = ''
+    if os.path.isfile(path):
+        names = __splitpath__(path)
+        if len(names):
+            result = names[len(names)-1]
+    return result
+
+def split_lastdirname(path):
+    result = ''
+    if os.path.isdir(path):
+        names = __splitpath__(path)
+        if len(names):
+            return names[len(names)-1]
+    return result
 
 const_UPGRADE10_HEADER = \
                 "[SECTION]\n" \
@@ -297,7 +319,7 @@ def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
     for wildcard in wildcards:
         files = list_files(src_dir, wildcard)
         for filename_with_path in files:
-            filename = splitfilename(filename_with_path)
+            filename = split_filename(filename_with_path)
             if filename not in excluded_files and filename != '.' and filename != '..':
                 makedirs(dest_dir)
                 try:
@@ -361,13 +383,12 @@ def clean(path, masks=[]):
             for mask in masks:
                 [os.remove(os.path.join(dir, filename)) for dir, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
         else:
-            print('CLEANING {}. Please wait.'.format(const_dir_TEMP))
+            print('CLEANING "{}". Please wait.'.format(path))
             shutil.rmtree(path, onerror=__onerror_handler__)
-            print1('CLEANING done')
     except FileNotFoundError:
         pass  # если папка TEMP отсутствует, то продолжаем молча
     except BaseException as e:
-        print1('Error when cleaning directories ({})'.format(e))
+        print1('ERROR when cleaning ({})'.format(e))
         return False
     return True
 # -------------------------------------------------------------------------------------------------
@@ -376,7 +397,6 @@ def clean(path, masks=[]):
 def read_config():
     settings = GlobalSettings()
     ini_filename = 'settings.ini'
-    error_header = 'Error when reading settings from file {} '.format(ini_filename)
     section_special = 'SPECIAL'
     section_common = 'COMMON'
     section_labels = 'LABELS'
@@ -423,7 +443,7 @@ def read_config():
             raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildIC))
 
     except BaseException as e:
-        print(error_header+'({})'.format(e))
+        print('ERROR when reading settings from file "{}":\n\t\t{}'.format(ini_filename, e))
         return None
     else:
         print('GOT SETTINGS:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}'.
@@ -610,7 +630,7 @@ def download_TABLE10_files_for_DATA_FILES(settings, instance):
         if len(file_type_match):
             eif10_file = str(eif_file).replace(file_type_match[0], '(10).eif')
             # отрежем путь (splitfilename)
-            eif10_file = splitfilename(eif10_file)
+            eif10_file = split_filename(eif10_file)
             # и проверим есть ли файл eif10_file в списке файлов eif_list
             exists = [file1 for file1 in eif_list if re.search(re.escape(eif10_file), file1)]
             if not exists:
@@ -636,7 +656,7 @@ def generate_upgrade10_eif(instance):
                 f.writelines(const_UPGRADE10_HEADER)
                 counter = 1
                 for eif_file in eif_list:
-                    eif_file_name = splitfilename(eif_file)
+                    eif_file_name = split_filename(eif_file)
                     line = make_upgrade10_eif_string_by_file_name(counter, eif_file_name)
                     if line:
                         f.writelines(line)
@@ -645,7 +665,7 @@ def generate_upgrade10_eif(instance):
 # -------------------------------------------------------------------------------------------------
 
 
-def getFileVerInfo(fullFilePath):
+def __get_exe_file_info__(fullFilePath):
     # http://windowssdk.msdn.microsoft.com/en-us/library/ms646997.aspx
     sig = struct.pack("32s", u"VS_VERSION_INFO".encode("utf-16-le"))
     # This pulls the whole file into memory, so not very feasible for
@@ -654,7 +674,6 @@ def getFileVerInfo(fullFilePath):
         with open(fullFilePath, 'rb') as f:
             filedata = f.read()
     except BaseException as E:
-        print(E)
         return None
     offset = filedata.find(sig)
     if offset == -1:
@@ -672,11 +691,11 @@ def get_build_version(build_path):
     result = 'unknown'
     try:
         if os.path.exists(build_path):
-            ver = getFileVerInfo(os.path.join(build_path, 'cbank.exe'))
+            ver = __get_exe_file_info__(os.path.join(build_path, 'cbank.exe'))
             if not ver is None:
                 result = ver
             else:
-                ver = getFileVerInfo(os.path.join(build_path, 'BRHelper.exe'))
+                ver = __get_exe_file_info__(os.path.join(build_path, 'BRHelper.exe'))
                 if not ver is None:
                     result = ver
     except:
@@ -686,22 +705,25 @@ def get_build_version(build_path):
 # -------------------------------------------------------------------------------------------------
 
 
-def __prepare_build_path__(build_path, version):  # TODO разобраться с версией
+def __prepare_build_path__(build_path, version, force_delete = False):  # TODO разобраться с версией
     # проверка наличия пути build_path
     if not os.path.exists(build_path):
         print1('PATH {} does not exists'.format(build_path))
         return
-
     # если ссылка на билд указывает не на каталог, а на файл архива
     # попробуем провести разархивацию во временный каталог
-    build_zip_file = splitfilename(build_path)
+    build_zip_file = split_filename(build_path)
     if '.zip' in build_zip_file.lower():
+        # TODO разобраться с путями после разархивации (win32/win64/etc)
         build_tmp_dir = os.path.join(tempfile.gettempdir(), build_zip_file)
-        if os.path.exists(build_tmp_dir):
-            print1('BUILD already extracted in "{}"'.format(build_tmp_dir))
+        if os.path.exists(build_tmp_dir) and not force_delete:
+            #print1('BUILD already extracted in "{}"'.format(build_tmp_dir))
+            pass
             build_path = build_tmp_dir
         else:
-            print1('EXTRACTING BUILD "{}" in "{}"'.format(build_path, build_tmp_dir))
+            if os.path.exists(build_tmp_dir):
+                clean(build_tmp_dir)
+            print('EXTRACTING BUILD "{}" in "{}"'.format(build_path, build_tmp_dir))
             try:
                 with zipfile.ZipFile(build_path) as z:
                     z.extractall(os.path.join(tempfile.gettempdir(), build_zip_file))
@@ -711,8 +733,29 @@ def __prepare_build_path__(build_path, version):  # TODO разобраться 
             except BaseException as e:
                 print1('ERROR EXTRACTING BUILD "{}"'.format(e))
             # конец разархивации
-    return os.path.join(build_path, 'Win{}\\Release'.format(version))
+    else:
+        build_path = os.path.join(build_path, 'Win{}\\Release'.format(version))
+        tmp_dir = os.path.join(tempfile.gettempdir(), build_path.replace(os.path.sep, '').replace('.',''))
+        if os.path.exists(tmp_dir) and not force_delete:
+            build_path = tmp_dir
+        else:
+            if os.path.exists(tmp_dir):
+                clean(tmp_dir)
+            print('COPYING BUILD "{}" in "{}"'.format(build_path, tmp_dir))
+            try:
+                shutil.copytree(build_path, tmp_dir)
+                build_path = tmp_dir
+            except BaseException as e:
+                print1('ERROR COPYING BUILD "{}"'.format(e))
+    return build_path
+# -------------------------------------------------------------------------------------------------
 
+
+def download_build_preparation(settings):
+    for build_type in [settings.BuildBank, settings.BuildIC, settings.BuildClient]:
+        if build_type:
+            for release in ['32', '64']:
+                __prepare_build_path__(build_type, release, True)
 # -------------------------------------------------------------------------------------------------
 
 
@@ -735,12 +778,12 @@ def download_build(settings, instance):
     if not build_path_const:
         print('NOT DOWNLOADING build for {}: no build path specified'.format(instance))
         return
+    print('BEGIN DOWNLOADING build {} for {}'.format(build_path_const, instance))
 
     # если в пути присутствует "20.1" или "20.2", то раскладка билда будет производиться соотвественно
-    is20 = ('20.1' in build_path_const) or ('20.2' in build_path_const)
-    #print(get_build_version(__prepare_build_path__(build_path_const,'32')))
-
-    print('BEGIN DOWNLOADING build {} for {}'.format(build_path_const, instance))
+    build_version = get_build_version(__prepare_build_path__(build_path_const,'32'))
+    is20 = ('20.1' in build_version) or ('20.2' in build_version)
+    print(build_version)
 
     if is20: # для билда 20-ой версии
         if instance == const_instance_IC: # выкладываем билд плагина для ИК
@@ -759,7 +802,6 @@ def download_build(settings, instance):
                 copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(version), mask, [])
 
                 # определяем версию билда по Exe файлу
-                build_version = getFileVerInfo(os.path.join(build_path, 'Win{}\\Release\\BrHelper.exe'.format(version)))
                 mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
                 for subversion in ['64', '32']: # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
                     copyfiles(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_version, version), mask, [])
@@ -805,6 +847,7 @@ def main():
         download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
+        download_build_preparation(global_settings)
         download_build(global_settings, const_instance_BANK)
         download_build(global_settings, const_instance_IC)
         download_build(global_settings, const_instance_CLIENT)
@@ -826,6 +869,7 @@ def main_debug_without_clean():
     #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT){[\S\s]*?}
     #generate_upgrade10_eif(const_instance_BANK)
     #generate_upgrade10_eif(const_instance_CLIENT)
+    download_build_preparation(global_settings)
     download_build(global_settings, const_instance_BANK)
     download_build(global_settings, const_instance_IC)
     download_build(global_settings, const_instance_CLIENT)
@@ -860,7 +904,7 @@ def bls_get_uses_graph(path):
             # разбиваем найденный текст на части между запятыми
             uses_list = [line.strip()+'.bls' for line in text.split(',') if line.strip()]
             # проверим, что такой файл еще не был обработан
-            file_name_without_path = splitfilename(file_name).lower()
+            file_name_without_path = split_filename(file_name).lower()
             item_already_in_list = bls_uses_graph.get(file_name_without_path)
             if item_already_in_list:
                 # если такой файл уже есть в списке, то выдаем ошибку
