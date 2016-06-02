@@ -567,7 +567,7 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
 # -------------------------------------------------------------------------------------------------
 
 
-def search_for_DATA_FILES_without_10_FILES_and_download_them(settings, instance):
+def download_TABLE10_files_for_DATA_FILES(settings, instance):
     eif_list = list_files(get_dir_COMPARED_BASE(instance), "*.eif")
     for eif_file in eif_list:
         # проверим соответствует ли название файла формату "*(data).eif"
@@ -630,17 +630,10 @@ def getFileVerInfo(fullFilePath):
     ver_ms, ver_ls = version_struct[4], version_struct[5]
     return "%d.%d.%d.%d" % (ver_ls & 0x0000ffff, (ver_ms & 0xffff0000) >> 16,
                             ver_ms & 0x0000ffff, (ver_ls & 0xffff0000) >> 16)
-
 # -------------------------------------------------------------------------------------------------
 
 
-def __download_build__(build_path, dest_path, version, file_type, excluded_files=[]):
-    build_path = os.path.join(build_path, 'Win{}\\Release'.format(version))
-    copyfiles(build_path, dest_path, file_type, excluded_files)
-# -------------------------------------------------------------------------------------------------
-
-
-def __prepare_build_path__(build_path):
+def __prepare_build_path__(build_path, version):  # TODO разобраться с версией
     # проверка наличия пути build_path
     if not os.path.exists(build_path):
         print1('PATH {} does not exists'.format(build_path))
@@ -665,7 +658,7 @@ def __prepare_build_path__(build_path):
             except BaseException as e:
                 print1('ERROR EXTRACTING BUILD "{}"'.format(e))
             # конец разархивации
-    return build_path
+    return os.path.join(build_path, 'Win{}\\Release'.format(version))
 
 # -------------------------------------------------------------------------------------------------
 
@@ -675,67 +668,69 @@ def download_build(settings, instance):
         print('NOT DOWNLOADING build: no instance specified')
         return
 
-    build_path = ''
+    build_path_const = ''
     if instance == const_instance_BANK:
-        build_path = settings.BuildBank
+        build_path_const = settings.BuildBank
         excluded_files = const_excluded_build_for_BANK
     elif instance == const_instance_IC:
-        build_path = settings.BuildIC
+        build_path_const = settings.BuildIC
         excluded_files = const_excluded_build_for_BANK
     elif instance == const_instance_CLIENT:
-        build_path = settings.BuildClient
+        build_path_const = settings.BuildClient
         excluded_files = const_excluded_build_for_CLIENT
 
-    if not build_path:
+    if not build_path_const:
         print('NOT DOWNLOADING build for {}: no build path specified'.format(instance))
         return
 
     # если в пути присутствует "20.1" или "20.2", то раскладка билда будет производиться соотвественно
-    is20 = ('20.1' in build_path) or ('20.2' in build_path)
+    is20 = ('20.1' in build_path_const) or ('20.2' in build_path_const)
 
-    print('BEGIN DOWNLOADING build {} for {}'.format(build_path, instance))
-    build_path = __prepare_build_path__(build_path)
+    print('BEGIN DOWNLOADING build {} for {}'.format(build_path_const, instance))
 
     if is20: # для билда 20-ой версии
         if instance == const_instance_IC: # выкладываем билд плагина для ИК
-            build_path_bank = __prepare_build_path__(settings.BuildBank) # подготовим путь к билду банка
-            files_to_copy = ['bssetup.msi', 'CalcCRC.exe']
-            __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), '32', files_to_copy, [])
-            files_to_copy = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginWebKitSetup.exe']
-            __download_build__(build_path, get_dir_PATCH_LIBFILES_INETTEMP(), '32', files_to_copy, [])
+            build_path_bank = __prepare_build_path__(settings.BuildBank, '32') # подготовим путь к билду банка
+            mask = ['bssetup.msi', 'CalcCRC.exe']
+            copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), mask, [])
+            mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginWebKitSetup.exe']
+            copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), mask, [])
 
             for version in ['32', '64']: # выкладываем билд в LIBFILES32(64).BNK
-                __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_BNK(version), version, ['UpdateIc.exe'], [])
-                __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_EXE(version), version, ['bsiset.exe'], [])
-                files_to_copy = ['bsi.dll', 'bsi.jar']
-                __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(version), version, files_to_copy, [])
-                __download_build__(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(version), version, files_to_copy, [])
+                build_path = __prepare_build_path__(build_path_const, version)
+                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK(version), ['UpdateIc.exe'], [])
+                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_EXE(version), ['bsiset.exe'], [])
+                mask = ['bsi.dll', 'bsi.jar']
+                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(version), mask, [])
+                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(version), mask, [])
 
                 # определяем версию билда по Exe файлу
                 build_version = getFileVerInfo(os.path.join(build_path, 'Win{}\\Release\\BrHelper.exe'.format(version)))
-                files_to_copy = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
+                mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
                 for subversion in ['64', '32']: # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
-                    __download_build__(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_version, version), subversion, files_to_copy, [])
-                    __download_build__(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(build_version, version), subversion, files_to_copy, [])
+                    copyfiles(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_version, version), mask, [])
+                    copyfiles(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(build_version, version), mask, [])
 
         else:
             if instance == const_instance_BANK:
-                __download_build__(build_path, get_dir_PATCH(), '32', ['CBStart.exe'], []) # один файл в корень
+                build_path = __prepare_build_path__(build_path_const, '32')
+                copyfiles(build_path, get_dir_PATCH(), ['CBStart.exe'], []) # один файл в корень
             for version in ['32', '64']: # выкладываем остальной билд для Б и БК для версий 32 и 64
-                files_to_copy = ['*.exe', '*.ex', '*.bpl']
-                __download_build__(build_path, get_dir_PATCH_LIBFILES_EXE(instance, version), version, files_to_copy, excluded_files)
-                __download_build__(build_path, get_dir_PATCH_LIBFILES_SYSTEM(instance, version), version, ['*.dll'], excluded_files)
-                __download_build__(build_path, get_dir_PATCH_CBSTART(instance, version), version, ['CBStart.exe'], [])
+                build_path = __prepare_build_path__(build_path_const, version)
+                mask = ['*.exe', '*.ex', '*.bpl']
+                copyfiles(build_path, get_dir_PATCH_LIBFILES_EXE(instance, version), mask, excluded_files)
+                copyfiles(build_path, get_dir_PATCH_LIBFILES_SYSTEM(instance, version), ['*.dll'], excluded_files)
+                copyfiles(build_path, get_dir_PATCH_CBSTART(instance, version), ['CBStart.exe'], [])
                 if instance == const_instance_BANK:
                     # заполняем TEMPLATE шаблон клиента в банковском патче
-                    files_to_copy = ['*.exe', '*.ex', '*.bpl']
-                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(version), version, files_to_copy, const_excluded_build_for_CLIENT)
-                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(version), version, ['*.dll'], const_excluded_build_for_CLIENT)
-                    files_to_copy = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
-                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(version), version, files_to_copy, [])
-                    files_to_copy = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
-                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(version), version, files_to_copy, [])
-                    __download_build__(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(version), version, files_to_copy, [])
+                    mask = ['*.exe', '*.ex', '*.bpl']
+                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(version), mask, const_excluded_build_for_CLIENT)
+                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(version), ['*.dll'], const_excluded_build_for_CLIENT)
+                    mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
+                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(version), mask, [])
+                    mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
+                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(version), mask, [])
+                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(version), mask, [])
     print1('DONE DOWNLOADING build for {}'.format(instance))
 
 
@@ -749,8 +744,8 @@ def main():
     print('BEGIN DOWNLOADING')
     if download_starteam_by_label(global_settings) == 0:
         compare_directories_BEFORE_and_AFTER()
-        search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_BANK)
-        search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT)
+        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_BANK)
+        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
         download_build(global_settings, const_instance_BANK)
@@ -780,13 +775,13 @@ def main_debug_without_clean():
 #main_debug_without_clean()
 
 
-def __replace_unwanted__(pattern, str):
+def __replace_unwanted_symbols__(pattern, str):
     find_all = re.findall(pattern, str)
     for find in find_all:
         str = str.replace(find, '')
     return str
 
-def get_bls_uses_graph(path):
+def bls_get_uses_graph(path):
     bls_uses_graph = {}
     files = list_files(path, '*.bls')
     for file_name in files:
@@ -794,21 +789,59 @@ def get_bls_uses_graph(path):
             bls_lines = bls_file.readlines()
             bls_line = ''
             for line in bls_lines:
-                line = __replace_unwanted__(r'//.*', line)
+                # удаляем однострочные комментарии, которые начинаются на "//"
+                line = __replace_unwanted_symbols__(r'//.*', line)
                 line = line.strip()
+                # склеиваем весь файл в одну строку
                 if line:
                     bls_line += (' ' + line)
-            bls_line = __replace_unwanted__(r'{[\S\s]*?}', bls_line)
-            find = re.search('uses\s+([\s\S][^;]*);', bls_line, flags=re.IGNORECASE)
+            # удаляем многострочные комментарии, которые распологаются между
+            # фигурными скобками "{ .. }"
+            bls_line = __replace_unwanted_symbols__(r'{[\S\s]*?}', bls_line)
+            # находим текст между словом "uses" и ближайшей точкой с запятой
+            find = re.search(r'\buses\b([\s\S][^;]*);', bls_line, flags=re.IGNORECASE)
             if find:
-                bls_line = find.group(1);#.replace(';', '').replace('uses', '')
+                bls_line = find.group(1)
             else:
                 bls_line = ''
+            # разбиваем найденный текст на части между запятыми
             uses_list = [line.strip() for line in bls_line.split(',')]
-            bls_uses_graph.update({splitfilename(file_name).lower(): [file_name, uses_list]})
+            # проверим, что такой файл еще не был обработан
+            file_name_without_path = splitfilename(file_name).lower()
+            item_already_in_list = bls_uses_graph.get(file_name_without_path)
+            if item_already_in_list:
+                # если такой файл уже есть в списке, то выдаем ошибку
+                print1('ERROR: duplicate files, remove one of "{}" or "{}"'.format(item_already_in_list, file_name_without_path))
+            else:
+                # если файла нет в списке зависимостей, то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
+                bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
     return bls_uses_graph
 
-bls_uses_graph = get_bls_uses_graph('d:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\')
-for item in bls_uses_graph:
-    print(item)
-    print(bls_uses_graph.get(item))
+
+def __bls_compile__(bls_uses_graph, bls_file_name, compiled=[]):
+    if not bls_file_name in compiled:  # если файл отсутствует в списке откомпилированных
+        bls_item_info = bls_uses_graph.get(bls_file_name)
+        if bls_item_info:
+            uses_list = bls_item_info[1]
+            if len(uses_list):  # если файл зависит от других файлов, то проведем
+                for bls_uses_file_name in uses_list:  # компиляцию каждого файла
+                    __bls_compile__(bls_uses_graph, bls_uses_file_name, compiled)
+            #компилируем и добавляем в список откомпилированных
+            compiled.append(bls_file_name)
+            print(bls_file_name)
+    pass
+
+
+def bls_compile_all(path):
+
+    copyfiles(path, 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD', ['*.bls'], [])
+    bls_uses_graph = bls_get_uses_graph(path)
+    for bls_file_name in bls_uses_graph:
+        __bls_compile__(bls_uses_graph, bls_file_name)
+
+
+
+bls_compile_all('d:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\')
+
+
+
