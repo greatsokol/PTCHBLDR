@@ -801,52 +801,35 @@ def main_debug_without_clean():
 #main_debug_without_clean()
 
 
-def __replace_unwanted_symbols__(pattern, str):
-    find_all = re.findall(pattern, str, flags=re.MULTILINE)
-    for find in find_all:
-        str = str.replace(find, '')
-    return str
+
 
 
 def bls_get_uses_graph(path):
+    def __replace_unwanted_symbols__(pattern, str):
+        find_all = re.findall(pattern, str, flags=re.MULTILINE)
+        for find in find_all:
+            str = str.replace(find, '')
+        return str
+
     bls_uses_graph = {}
     files = list_files(path, '*.bls')
     for file_name in files:
-        with open(file_name) as bls_file:
-            bls_lines = bls_file.readlines()
-            bls_line = ''
-            for line in bls_lines:
-                '''
-                # удаляем однострочные комментарии, которые располагаются между
-                # фигурными скобками "{ .. }"
-                line = __replace_unwanted_symbols__(r'{[\S\s]*?}', line)
-                # удаляем КРИВЫЕ однострочные комментарии, которые располагаются между
-                # фигурной скобкой и концом строки "{ .. "
-                line = __replace_unwanted_symbols__(r'{[\S\s]*?', line)
-                # удаляем однострочные комментарии, которые начинаются на "//"
-                line = __replace_unwanted_symbols__(r'//.*', line)
-                line = line.strip()
-                '''
-                #print(line)
-                # склеиваем весь файл в одну строку
-                if line:
-                    bls_line += ('\n' + line)
-            # удаляем многострочные комментарии, которые располагаются между
-            # фигурными скобками "{ .. }"
-            #print(bls_line)
-            bls_line = __replace_unwanted_symbols__(r'{[\S\s]*?}', bls_line)
-            #print(bls_line)
+        with open(file_name) as f:
+            text = f.read()
+            # удаляем комментарии, которые располагаются между фигурными скобками "{ .. }"
+            text = __replace_unwanted_symbols__(r'{[\S\s]*?}', text)
+            # удаляем комментарии, которые располагаются между скобками "(* .. *)"
+            text = __replace_unwanted_symbols__(r'(\*[\S\s]*?\*)', text)
             # удаляем однострочные комментарии, которые начинаются на "//"
-            bls_line = __replace_unwanted_symbols__(r'//.*', bls_line)
+            text = __replace_unwanted_symbols__(r'//.*', text)
             # находим текст между словом "uses" и ближайшей точкой с запятой
-            #print(bls_line)
-            find = re.search(r'\buses\b([\s\S][^;]*);', bls_line, flags=re.IGNORECASE)
+            find = re.search(r'\buses\b([\s\S][^;]*);', text, flags=re.IGNORECASE)
             if find:
-                bls_line = find.group(1)
+                text = find.group(1)
             else:
-                bls_line = ''
+                text = ''
             # разбиваем найденный текст на части между запятыми
-            uses_list = [line.strip()+'.bls' for line in bls_line.split(',') if line.strip()]
+            uses_list = [line.strip()+'.bls' for line in text.split(',') if line.strip()]
             # проверим, что такой файл еще не был обработан
             file_name_without_path = splitfilename(file_name).lower()
             item_already_in_list = bls_uses_graph.get(file_name_without_path)
@@ -859,8 +842,8 @@ def bls_get_uses_graph(path):
     return bls_uses_graph
 
 
-def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path):
-    run_str = os.path.join(build_path, 'bscc.exe {} -M0 -O0 -SVM-MSK01LS03 -Aotd-2ps'.format(bls_file_name_with_path))
+def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, lic_server, lic_profile):
+    run_str = os.path.join(build_path, 'bscc.exe {} -M0 -O0 -S{} -A{}'.format(bls_file_name_with_path, lic_server, lic_profile))
     process = subprocess.Popen(run_str, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     process.wait()
     out, err = process.communicate()
@@ -869,11 +852,11 @@ def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path):
         print1('ERROR: {} {}'.format(bls_file_name, str_res))
         return False
     else:
-        #print1('Compiled "{}"'.format(bls_file_name))
+        # print1('Compiled "{}"'.format(bls_file_name))
         return True
 
 
-def __bls_compile_all__(build_path, bls_uses_graph, bls_file_name, observed_list, compiled_successfully):
+def __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph, bls_file_name, observed_list, compiled_successfully):
     bls_file_name = bls_file_name.lower()
     if bls_file_name not in observed_list:  # если файл отсутствует в списке откомпилированных
         bls_item_info = bls_uses_graph.get(bls_file_name)
@@ -881,34 +864,31 @@ def __bls_compile_all__(build_path, bls_uses_graph, bls_file_name, observed_list
         bls_file_name_with_path = bls_item_info[0]
         if len(uses_list):  # если файл зависит от других файлов, то проведем
             for bls_uses_file_name in uses_list:  # компиляцию каждого файла
-                __bls_compile_all__(build_path, bls_uses_graph, bls_uses_file_name, observed_list, compiled_successfully)
-        # добавляем в список просмотренных файлов
+                __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph,
+                                    bls_uses_file_name, observed_list, compiled_successfully)
+        # добавляем в список учтенных файлов
         observed_list.append(bls_file_name)
-        if __bls_compile__(build_path, bls_file_name, bls_file_name_with_path):
+        if __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, lic_server, lic_profile):
             # компилируем и добавляем в список успешно откомпилированных
             compiled_successfully.append(bls_file_name)
 
 
-def bls_compile_all(build_path, source_path):
-    print('BEGIN COMPILATION. Please wait...')
-    clean(build_path, ['*.bls', '*.bll'])
-    copyfiles(source_path, build_path, ['*.bls'], [])
-    bls_uses_graph = bls_get_uses_graph(build_path)
+def bls_compile_all(lic_server, lic_profile, build_path, source_path):
+    print('BEGIN BLS COMPILATION. Please wait...')
+    clean(build_path, ['*.bls', '*.bll'])               # очищаем каталог билда от bls и bll
+    copyfiles(source_path, build_path, ['*.bls'], [])   # копируем в каталог билда все bls
+    bls_uses_graph = bls_get_uses_graph(build_path)     # строим граф зависимостей по строкам uses
     observed_list = []
     compiled_successfully = []
-    for bls_file_name in bls_uses_graph:
-        __bls_compile_all__(build_path, bls_uses_graph, bls_file_name, observed_list, compiled_successfully)
+    for bls_file_name in bls_uses_graph:                # компилируем все bls
+        __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph,
+                            bls_file_name, observed_list, compiled_successfully)
     print1("COMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
 
+# VM-MSK01LS03
+# otd-2ps
+lic_server1 = 'LGServer'
+lic_profile1 = 'otd-2ps'
 build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB17_BUILDER\\BUILD'
-source_path1 = 'd:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\'
-bls_compile_all(build_path1, source_path1)
-
-#uses_graph = bls_get_uses_graph(build_path1)
-#for item in uses_graph:
-#    print('{}\n{}\n'.format(item, uses_graph.get(item)[1]))
-
-
-#bls_uses_graph = bls_get_uses_graph('d:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\TEMP')
-#print(bls_uses_graph)
-
+source_path1 = 'D:\\DBO\\Release_17\\VIP\\GPB\\GPB 017.3\\BLS'
+bls_compile_all(lic_server1, lic_profile1, build_path1, source_path1)
