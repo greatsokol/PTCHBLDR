@@ -7,6 +7,7 @@ import re
 import tempfile
 import zipfile
 import struct
+import fnmatch
 
 
 const_instance_BANK = "BANK"
@@ -288,8 +289,9 @@ def makedirs(path):
 
 
 def list_files(path, mask):
-    import fnmatch
     return [os.path.join(dir, filename) for dir, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
+# -------------------------------------------------------------------------------------------------
+
 
 def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
     for wildcard in wildcards:
@@ -333,11 +335,15 @@ def __onerror_handler__(func, path, exc_info):
         raise BaseException
 
 
-def clean(directory):
+def clean(path, masks=[]):
     try:
-        print('CLEANING {}. Please wait.'.format(const_dir_TEMP))
-        shutil.rmtree(directory, onerror=__onerror_handler__)
-        print1('CLEANING done')
+        if masks:
+            for mask in masks:
+                [os.remove(os.path.join(dir, filename)) for dir, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
+        else:
+            print('CLEANING {}. Please wait.'.format(const_dir_TEMP))
+            shutil.rmtree(path, onerror=__onerror_handler__)
+            print1('CLEANING done')
     except FileNotFoundError:
         pass  # если папка TEMP отсутствует, то продолжаем молча
     except BaseException as e:
@@ -371,11 +377,11 @@ def read_config():
         settings.BuildIC = parser.get(section_build, 'IC').strip()
 
         # проверка Labels -----------------------------------
-        all_lables = ''
+        all_labels = ''
         for label in settings.Labels:
-            all_lables += label[1].strip()
+            all_labels += label[1].strip()
 
-        if not settings.Labels or not all_lables:  # Если не дали совсем никаких меток для загрузки
+        if not settings.Labels or not all_labels:  # Если не дали совсем никаких меток для загрузки
             raise ValueError('NO LABELS defined in {}'.format(ini_filename))
 
         # проверка stsmd -----------------------------------
@@ -833,9 +839,10 @@ def __bls_compile__(bls_uses_graph, bls_file_name, compiled=[]):
 
 
 def bls_compile_all(path):
-
-    copyfiles(path, 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD', ['*.bls'], [])
-    bls_uses_graph = bls_get_uses_graph(path)
+    build_path = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD'
+    clean(build_path, ['*.bls', '*.bll'])
+    copyfiles(path, build_path, ['*.bls'], [])
+    bls_uses_graph = bls_get_uses_graph(build_path)
     for bls_file_name in bls_uses_graph:
         __bls_compile__(bls_uses_graph, bls_file_name)
 
