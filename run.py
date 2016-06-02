@@ -859,40 +859,50 @@ def bls_get_uses_graph(path):
     return bls_uses_graph
 
 
-def __bls_compile__(build_path, bls_uses_graph, bls_file_name, compiled=[]):
+def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path):
+    run_str = os.path.join(build_path, 'bscc.exe {} -M0 -O0 -SVM-MSK01LS03 -Aotd-2ps'.format(bls_file_name_with_path))
+    process = subprocess.Popen(
+        run_str,
+        shell=False,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process.wait()
+    out, err = process.communicate()
+    # print1(str(res[1]))
+    str_res = str(out)
+    if 'Compiled succesfully' not in str_res:
+        print1('ERROR: compilation error {}'.format(str_res))
+        return False
+    else:
+        print1('Compiled "{}"'.format(bls_file_name))
+        return True
+
+
+def __bls_compile_all__(build_path, bls_uses_graph, bls_file_name, observed_list = [], compiled_successfully=[]):
     bls_file_name = bls_file_name.lower()
-    if bls_file_name not in compiled:  # если файл отсутствует в списке откомпилированных
+    if bls_file_name not in observed_list:  # если файл отсутствует в списке откомпилированных
         bls_item_info = bls_uses_graph.get(bls_file_name)
         #print(bls_file_name)
         uses_list = bls_item_info[1]
-        bls_path = bls_item_info[0]
+        bls_file_name_with_path = bls_item_info[0]
         if len(uses_list):  # если файл зависит от других файлов, то проведем
             for bls_uses_file_name in uses_list:  # компиляцию каждого файла
-                #print(uses_list)
-                __bls_compile__(build_path, bls_uses_graph, bls_uses_file_name, compiled)
-        #компилируем и добавляем в список откомпилированных
-        compiled.append(bls_file_name)
-        run_str = os.path.join(build_path, 'bscc.exe {} -M0 -O0 -SVM-MSK01LS03 -Aotd-2ps'.format(bls_path))
-        proc = subprocess.Popen(
-                        run_str,
-                        shell=False,
-                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        proc.wait()
-        res = proc.communicate()
-        if 'Compiled successfully' not in res[1]:
-            print1('ERROR: compilation error {}'.format(res[1]))
-        #print1(run_str)
-        subprocess.call(run_str)
+                __bls_compile_all__(build_path, bls_uses_graph, bls_uses_file_name, observed_list, compiled_successfully)
+        # добавляем в список просмотренных файлов
+        observed_list.append(bls_file_name)
+        if __bls_compile__(build_path, bls_file_name, bls_file_name_with_path):
+            # компилируем и добавляем в список успешно откомпилированных
+            compiled_successfully.append(bls_file_name)
 
 
 def bls_compile_all(build_path, source_path):
-
     clean(build_path, ['*.bls', '*.bll'])
     copyfiles(source_path, build_path, ['*.bls'], [])
     bls_uses_graph = bls_get_uses_graph(build_path)
+    observed_list = []
+    compiled_successfully = []
     for bls_file_name in bls_uses_graph:
-        __bls_compile__(build_path, bls_uses_graph, bls_file_name)
-
+        __bls_compile_all__(build_path, bls_uses_graph, bls_file_name, observed_list, compiled_successfully)
+    print1("COMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
 
 build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD'
 source_path1 = 'd:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\'
