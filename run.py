@@ -824,31 +824,34 @@ def bls_get_uses_graph(path):
     return bls_uses_graph
 
 
-def __bls_compile__(bls_uses_graph, bls_file_name, compiled=[]):
+def __bls_compile__(build_path, bls_uses_graph, bls_file_name, compiled=[]):
     if not bls_file_name in compiled:  # если файл отсутствует в списке откомпилированных
         bls_item_info = bls_uses_graph.get(bls_file_name)
         if bls_item_info:
             uses_list = bls_item_info[1]
+            #bls_path = bls_item_info[0]
             if len(uses_list):  # если файл зависит от других файлов, то проведем
                 for bls_uses_file_name in uses_list:  # компиляцию каждого файла
                     __bls_compile__(bls_uses_graph, bls_uses_file_name, compiled)
             #компилируем и добавляем в список откомпилированных
             compiled.append(bls_file_name)
-            print(bls_file_name)
+            subprocess.call(os.path.join(build_path,'bscc.exe {} -M1 -O0 -E0 -SVM-MSK01LS03 -Aotd-2ps'.format(bls_file_name)))
+            print1('compiling '+bls_file_name)
     pass
 
 
-def bls_compile_all(path):
-    build_path = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD'
+def bls_compile_all(build_path, source_path):
+
     clean(build_path, ['*.bls', '*.bll'])
-    copyfiles(path, build_path, ['*.bls'], [])
+    copyfiles(source_path, build_path, ['*.bls'], [])
     bls_uses_graph = bls_get_uses_graph(build_path)
     for bls_file_name in bls_uses_graph:
-        __bls_compile__(bls_uses_graph, bls_file_name)
+        __bls_compile__(build_path, bls_uses_graph, bls_file_name)
 
 
-
-bls_compile_all('d:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\')
+build_path = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD'
+source_path = 'd:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\'
+bls_compile_all(build_path, source_path)
 
 
 
