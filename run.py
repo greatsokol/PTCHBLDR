@@ -861,27 +861,22 @@ def bls_get_uses_graph(path):
 
 def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path):
     run_str = os.path.join(build_path, 'bscc.exe {} -M0 -O0 -SVM-MSK01LS03 -Aotd-2ps'.format(bls_file_name_with_path))
-    process = subprocess.Popen(
-        run_str,
-        shell=False,
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process = subprocess.Popen(run_str, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     process.wait()
     out, err = process.communicate()
-    # print1(str(res[1]))
-    str_res = str(out)
+    str_res = '\n\t\t\t'+out.decode('windows-1251').replace('\n', '\n\t\t\t')
     if 'Compiled succesfully' not in str_res:
-        print1('ERROR: compilation error {}'.format(str_res))
+        print1('ERROR: {} {}'.format(bls_file_name, str_res))
         return False
     else:
-        print1('Compiled "{}"'.format(bls_file_name))
+        #print1('Compiled "{}"'.format(bls_file_name))
         return True
 
 
-def __bls_compile_all__(build_path, bls_uses_graph, bls_file_name, observed_list = [], compiled_successfully=[]):
+def __bls_compile_all__(build_path, bls_uses_graph, bls_file_name, observed_list, compiled_successfully):
     bls_file_name = bls_file_name.lower()
     if bls_file_name not in observed_list:  # если файл отсутствует в списке откомпилированных
         bls_item_info = bls_uses_graph.get(bls_file_name)
-        #print(bls_file_name)
         uses_list = bls_item_info[1]
         bls_file_name_with_path = bls_item_info[0]
         if len(uses_list):  # если файл зависит от других файлов, то проведем
@@ -895,6 +890,7 @@ def __bls_compile_all__(build_path, bls_uses_graph, bls_file_name, observed_list
 
 
 def bls_compile_all(build_path, source_path):
+    print('BEGIN COMPILATION. Please wait...')
     clean(build_path, ['*.bls', '*.bll'])
     copyfiles(source_path, build_path, ['*.bls'], [])
     bls_uses_graph = bls_get_uses_graph(build_path)
@@ -904,7 +900,7 @@ def bls_compile_all(build_path, source_path):
         __bls_compile_all__(build_path, bls_uses_graph, bls_file_name, observed_list, compiled_successfully)
     print1("COMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
 
-build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD'
+build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB17_BUILDER\\BUILD'
 source_path1 = 'd:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\'
 bls_compile_all(build_path1, source_path1)
 
