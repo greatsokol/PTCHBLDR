@@ -767,7 +767,7 @@ def main_debug_without_clean():
     #if download_starteam_by_label(global_settings) == 0:
     #    compare_directories_BEFORE_and_AFTER()
     #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_BANK)
-    #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT)
+    #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT){[\S\s]*?}
     #generate_upgrade10_eif(const_instance_BANK)
     #generate_upgrade10_eif(const_instance_CLIENT)
     download_build(global_settings, const_instance_BANK)
@@ -798,13 +798,17 @@ def get_bls_uses_graph(path):
                 line = line.strip()
                 if line:
                     bls_line += (' ' + line)
-            bls_line = __replace_unwanted__('{.*?}', bls_line)
-            find = re.search('uses([\s\S]*);', bls_line, flags=re.IGNORECASE)
+            bls_line = __replace_unwanted__(r'{[\S\s]*?}', bls_line)
+            find = re.search('uses\s+([\s\S][^;]*);', bls_line, flags=re.IGNORECASE)
             if find:
-                bls_line = find.group().replace(';', '').replace('uses', '')
+                bls_line = find.group(1);#.replace(';', '').replace('uses', '')
+            else:
+                bls_line = ''
             uses_list = [line.strip() for line in bls_line.split(',')]
-            bls_uses_graph.update({splitfilename(file_name).lower() : [file_name, uses_list]})
+            bls_uses_graph.update({splitfilename(file_name).lower(): [file_name, uses_list]})
     return bls_uses_graph
 
-#print(list_files('D:\\Users\\eugn\\PycharmProjects\\TEMP','*.bls'))
-print(get_bls_uses_graph('D:\\Users\\eugn\\PycharmProjects\\TEMP'))
+bls_uses_graph = get_bls_uses_graph('d:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\')
+for item in bls_uses_graph:
+    print(item)
+    print(bls_uses_graph.get(item))
