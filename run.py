@@ -352,7 +352,7 @@ def __onerror_handler__(func, path, exc_info):
         os.chmod(path, stat.S_IWUSR)
         func(path)
     else:
-        raise BaseException
+        raise BaseException(exc_info)
 
 
 def clean(path, masks=[]):
@@ -368,7 +368,8 @@ def clean(path, masks=[]):
         pass  # если папка TEMP отсутствует, то продолжаем молча
     except BaseException as e:
         print1('Error when cleaning directories ({})'.format(e))
-        raise
+        return False
+    return True
 # -------------------------------------------------------------------------------------------------
 
 
@@ -382,7 +383,7 @@ def read_config():
     section_build = 'BUILD'
     try:
         parser = configparser.RawConfigParser()
-        res = parser.read(ini_filename)
+        res = parser.read(ini_filename, encoding="UTF-8")
         if res.count == 0:  # если файл настроек не найден
             raise FileNotFoundError('NOT FOUND {}'.format(ini_filename))
         settings.stcmd = parser.get(section_common, 'stcmd').strip()
@@ -413,9 +414,17 @@ def read_config():
         else:
             raise FileNotFoundError('NOT DEFINED path to stcmd')
 
+        # проверка путей к билду
+        if not os.path.exists(settings.BuildBank):
+            raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildBank))
+        if not os.path.exists(settings.BuildClient):
+            raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildClient))
+        if not os.path.exists(settings.BuildIC):
+            raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildIC))
+
     except BaseException as e:
         print(error_header+'({})'.format(e))
-        raise e
+        return None
     else:
         print('GOT SETTINGS:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}'.
               format(settings.StarteamProject, settings.StarteamView, settings.Labels, settings.stcmd))
@@ -646,16 +655,34 @@ def getFileVerInfo(fullFilePath):
             filedata = f.read()
     except BaseException as E:
         print(E)
-        return "Unknown"
+        return None
     offset = filedata.find(sig)
     if offset == -1:
-        return "Unknown"
+        return None
 
     filedata = filedata[offset + 32: offset + 32 + (13*4)]
     version_struct = struct.unpack("13I", filedata)
     ver_ms, ver_ls = version_struct[4], version_struct[5]
     return "%d.%d.%d.%d" % (ver_ls & 0x0000ffff, (ver_ms & 0xffff0000) >> 16,
                             ver_ms & 0x0000ffff, (ver_ls & 0xffff0000) >> 16)
+# -------------------------------------------------------------------------------------------------
+
+
+def get_build_version(build_path):
+    result = 'unknown'
+    try:
+        if os.path.exists(build_path):
+            ver = getFileVerInfo(os.path.join(build_path, 'cbank.exe'))
+            if not ver is None:
+                result = ver
+            else:
+                ver = getFileVerInfo(os.path.join(build_path, 'BRHelper.exe'))
+                if not ver is None:
+                    result = ver
+    except:
+        pass
+    return result
+
 # -------------------------------------------------------------------------------------------------
 
 
@@ -668,7 +695,7 @@ def __prepare_build_path__(build_path, version):  # TODO разобраться 
     # если ссылка на билд указывает не на каталог, а на файл архива
     # попробуем провести разархивацию во временный каталог
     build_zip_file = splitfilename(build_path)
-    if build_zip_file:
+    if '.zip' in build_zip_file.lower():
         build_tmp_dir = os.path.join(tempfile.gettempdir(), build_zip_file)
         if os.path.exists(build_tmp_dir):
             print1('BUILD already extracted in "{}"'.format(build_tmp_dir))
@@ -711,6 +738,7 @@ def download_build(settings, instance):
 
     # если в пути присутствует "20.1" или "20.2", то раскладка билда будет производиться соотвественно
     is20 = ('20.1' in build_path_const) or ('20.2' in build_path_const)
+    #print(get_build_version(__prepare_build_path__(build_path_const,'32')))
 
     print('BEGIN DOWNLOADING build {} for {}'.format(build_path_const, instance))
 
@@ -764,7 +792,10 @@ def download_build(settings, instance):
 
 def main():
     global_settings = read_config()
-    clean(const_dir_TEMP)
+    if global_settings is None:
+        return
+    if not clean(const_dir_TEMP):
+        return
     # clean(const_dir_PATCH)
     global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
     print('BEGIN DOWNLOADING')
@@ -783,6 +814,10 @@ def main():
 
 def main_debug_without_clean():
     global_settings = read_config()
+    if global_settings is None:
+        return
+    if not clean(const_dir_TEMP):
+        return
     #global_settings.StarteamPassword = getpassword('ENTER StarTeam password:')
     #print('BEGIN DOWNLOADING')
     #if download_starteam_by_label(global_settings) == 0:
