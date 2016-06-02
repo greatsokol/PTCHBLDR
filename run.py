@@ -802,7 +802,7 @@ def main_debug_without_clean():
 
 
 def __replace_unwanted_symbols__(pattern, str):
-    find_all = re.findall(pattern, str)
+    find_all = re.findall(pattern, str, flags=re.MULTILINE)
     for find in find_all:
         str = str.replace(find, '')
     return str
@@ -816,20 +816,28 @@ def bls_get_uses_graph(path):
             bls_lines = bls_file.readlines()
             bls_line = ''
             for line in bls_lines:
+                '''
                 # удаляем однострочные комментарии, которые располагаются между
                 # фигурными скобками "{ .. }"
                 line = __replace_unwanted_symbols__(r'{[\S\s]*?}', line)
+                # удаляем КРИВЫЕ однострочные комментарии, которые располагаются между
+                # фигурной скобкой и концом строки "{ .. "
+                line = __replace_unwanted_symbols__(r'{[\S\s]*?', line)
                 # удаляем однострочные комментарии, которые начинаются на "//"
                 line = __replace_unwanted_symbols__(r'//.*', line)
                 line = line.strip()
+                '''
                 #print(line)
                 # склеиваем весь файл в одну строку
                 if line:
-                    bls_line += (' ' + line)
+                    bls_line += ('\n' + line)
             # удаляем многострочные комментарии, которые располагаются между
             # фигурными скобками "{ .. }"
             #print(bls_line)
             bls_line = __replace_unwanted_symbols__(r'{[\S\s]*?}', bls_line)
+            #print(bls_line)
+            # удаляем однострочные комментарии, которые начинаются на "//"
+            bls_line = __replace_unwanted_symbols__(r'//.*', bls_line)
             # находим текст между словом "uses" и ближайшей точкой с запятой
             #print(bls_line)
             find = re.search(r'\buses\b([\s\S][^;]*);', bls_line, flags=re.IGNORECASE)
@@ -860,6 +868,7 @@ def __bls_compile__(build_path, bls_uses_graph, bls_file_name, compiled=[]):
         bls_path = bls_item_info[0]
         if len(uses_list):  # если файл зависит от других файлов, то проведем
             for bls_uses_file_name in uses_list:  # компиляцию каждого файла
+                print(uses_list)
                 __bls_compile__(build_path, bls_uses_graph, bls_uses_file_name, compiled)
         #компилируем и добавляем в список откомпилированных
         compiled.append(bls_file_name)
@@ -880,6 +889,10 @@ def bls_compile_all(build_path, source_path):
 build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD'
 source_path1 = 'd:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\'
 bls_compile_all(build_path1, source_path1)
+
+#uses_graph = bls_get_uses_graph(build_path1)
+#for item in uses_graph:
+#    print('{}\n{}\n'.format(item, uses_graph.get(item)[1]))
 
 
 #bls_uses_graph = bls_get_uses_graph('d:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\TEMP')
