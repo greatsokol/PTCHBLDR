@@ -787,6 +787,7 @@ def __replace_unwanted_symbols__(pattern, str):
         str = str.replace(find, '')
     return str
 
+
 def bls_get_uses_graph(path):
     bls_uses_graph = {}
     files = list_files(path, '*.bls')
@@ -795,23 +796,29 @@ def bls_get_uses_graph(path):
             bls_lines = bls_file.readlines()
             bls_line = ''
             for line in bls_lines:
+                # удаляем однострочные комментарии, которые располагаются между
+                # фигурными скобками "{ .. }"
+                line = __replace_unwanted_symbols__(r'{[\S\s]*?}', line)
                 # удаляем однострочные комментарии, которые начинаются на "//"
                 line = __replace_unwanted_symbols__(r'//.*', line)
                 line = line.strip()
+                #print(line)
                 # склеиваем весь файл в одну строку
                 if line:
                     bls_line += (' ' + line)
-            # удаляем многострочные комментарии, которые распологаются между
+            # удаляем многострочные комментарии, которые располагаются между
             # фигурными скобками "{ .. }"
+            #print(bls_line)
             bls_line = __replace_unwanted_symbols__(r'{[\S\s]*?}', bls_line)
             # находим текст между словом "uses" и ближайшей точкой с запятой
+            #print(bls_line)
             find = re.search(r'\buses\b([\s\S][^;]*);', bls_line, flags=re.IGNORECASE)
             if find:
                 bls_line = find.group(1)
             else:
                 bls_line = ''
             # разбиваем найденный текст на части между запятыми
-            uses_list = [line.strip() for line in bls_line.split(',')]
+            uses_list = [line.strip()+'.bls' for line in bls_line.split(',') if line.strip()]
             # проверим, что такой файл еще не был обработан
             file_name_without_path = splitfilename(file_name).lower()
             item_already_in_list = bls_uses_graph.get(file_name_without_path)
@@ -825,19 +832,19 @@ def bls_get_uses_graph(path):
 
 
 def __bls_compile__(build_path, bls_uses_graph, bls_file_name, compiled=[]):
-    if not bls_file_name in compiled:  # если файл отсутствует в списке откомпилированных
+    bls_file_name = bls_file_name.lower()
+    if bls_file_name not in compiled:  # если файл отсутствует в списке откомпилированных
         bls_item_info = bls_uses_graph.get(bls_file_name)
-        if bls_item_info:
-            uses_list = bls_item_info[1]
-            #bls_path = bls_item_info[0]
-            if len(uses_list):  # если файл зависит от других файлов, то проведем
-                for bls_uses_file_name in uses_list:  # компиляцию каждого файла
-                    __bls_compile__(bls_uses_graph, bls_uses_file_name, compiled)
-            #компилируем и добавляем в список откомпилированных
-            compiled.append(bls_file_name)
-            subprocess.call(os.path.join(build_path,'bscc.exe {} -M1 -O0 -E0 -SVM-MSK01LS03 -Aotd-2ps'.format(bls_file_name)))
-            print1('compiling '+bls_file_name)
-    pass
+        uses_list = bls_item_info[1]
+        bls_path = bls_item_info[0]
+        if len(uses_list):  # если файл зависит от других файлов, то проведем
+            for bls_uses_file_name in uses_list:  # компиляцию каждого файла
+                __bls_compile__(build_path, bls_uses_graph, bls_uses_file_name, compiled)
+        #компилируем и добавляем в список откомпилированных
+        compiled.append(bls_file_name)
+        run_str = os.path.join(build_path, 'bscc.exe {} -M0 -O0 -SVM-MSK01LS03 -Aotd-2ps'.format(bls_path))
+        #print1(run_str)
+        subprocess.call(run_str)
 
 
 def bls_compile_all(build_path, source_path):
@@ -849,9 +856,11 @@ def bls_compile_all(build_path, source_path):
         __bls_compile__(build_path, bls_uses_graph, bls_file_name)
 
 
-build_path = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD'
-source_path = 'd:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\'
-bls_compile_all(build_path, source_path)
+build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB15_BUILDER\\BUILD'
+source_path1 = 'd:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\'
+bls_compile_all(build_path1, source_path1)
 
 
+#bls_uses_graph = bls_get_uses_graph('d:\\_Stands\\~GAZPROM\\GPB15\\bank\\SOURCE\\TEMP')
+#print(bls_uses_graph)
 
