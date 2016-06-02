@@ -797,12 +797,6 @@ def main_debug_without_clean():
     print('DONE!!!')
 # -------------------------------------------------------------------------------------------------
 
-#main()
-#main_debug_without_clean()
-
-
-
-
 
 def bls_get_uses_graph(path):
     def __replace_unwanted_symbols__(pattern, str):
@@ -887,8 +881,11 @@ def bls_compile_all(lic_server, lic_profile, build_path, source_path):
 
 # VM-MSK01LS03
 # otd-2ps
-lic_server1 = 'LGServer'
-lic_profile1 = 'otd-2ps'
-build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB17_BUILDER\\BUILD'
-source_path1 = 'D:\\DBO\\Release_17\\VIP\\GPB\\GPB 017.3\\BLS'
-bls_compile_all(lic_server1, lic_profile1, build_path1, source_path1)
+#lic_server1 = 'LGServer'
+#lic_profile1 = 'otd-2ps'
+#build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB17_BUILDER\\BUILD'
+#source_path1 = 'D:\\DBO\\Release_17\\VIP\\GPB\\GPB 017.3\\BLS'
+#bls_compile_all(lic_server1, lic_profile1, build_path1, source_path1)
+
+#main()
+main_debug_without_clean()
