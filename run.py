@@ -15,6 +15,8 @@ const_instance_IC = "IC"
 const_instance_CLIENT = "CLIENT"
 const_dir_CURRENT = os.path.abspath('')
 const_dir_TEMP = os.path.join(const_dir_CURRENT, 'TEMP')
+const_dir_TEMP_BUILD_BK = os.path.join(const_dir_TEMP, 'BUILD', 'BK')
+const_dir_TEMP_BUILD_IC = os.path.join(const_dir_TEMP, 'BUILD', 'IC')
 const_dir_BEFORE = os.path.join(const_dir_TEMP, 'BEFORE')
 const_dir_AFTER = os.path.join(const_dir_TEMP, 'AFTER')
 const_dir_COMPARED = os.path.join(const_dir_TEMP, '_COMPARE_RESULT')
@@ -228,10 +230,7 @@ const_excluded_build_for_BANK = ['BRHelper.exe',
                                  'UpdateIc.exe',
                                  'VirtualTreesD.bpl',
                                  'eif2base64_srv.exe',
-                                 'eif2base64_cli.dll',
-                                 'LocProt.dll',
-                                 'PerfControl.dll',
-                                 'upgr20.dll']
+                                 'eif2base64_cli.dll']
 const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['BSAuthServer.exe',
                                                                    'BSAuthService.exe',
                                                                    'bscc.exe',
@@ -267,10 +266,8 @@ const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['BSAuthServer
                                                                    'llAzkLnk.dll',
                                                                    'llExCtrl.dll',
                                                                    'llRpJet2.dll',
-                                                                   'LocProt.dll',
                                                                    'npBSSPlugin.dll',
-                                                                   'PerfControl.dll',
-                                                                   'upgr20.dll']
+                                                                   'PerfControl.dll']
 
 
 # -------------------------------------------------------------------------------------------------
@@ -383,7 +380,7 @@ def clean(path, masks=[]):
             for mask in masks:
                 [os.remove(os.path.join(dir, filename)) for dir, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
         else:
-            print('CLEANING "{}". Please wait.'.format(path))
+            print('CLEANING "{}"'.format(path))
             shutil.rmtree(path, onerror=__onerror_handler__)
     except FileNotFoundError:
         pass  # если папка TEMP отсутствует, то продолжаем молча
@@ -435,11 +432,11 @@ def read_config():
             raise FileNotFoundError('NOT DEFINED path to stcmd')
 
         # проверка путей к билду
-        if not os.path.exists(settings.BuildBank):
+        if settings.BuildBank and not os.path.exists(settings.BuildBank):
             raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildBank))
-        if not os.path.exists(settings.BuildClient):
+        if settings.BuildClient and not os.path.exists(settings.BuildClient):
             raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildClient))
-        if not os.path.exists(settings.BuildIC):
+        if settings.BuildIC and not os.path.exists(settings.BuildIC):
             raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildIC))
 
     except BaseException as e:
@@ -691,21 +688,29 @@ def get_build_version(build_path):
     result = 'unknown'
     try:
         if os.path.exists(build_path):
-            ver = __get_exe_file_info__(os.path.join(build_path, 'cbank.exe'))
-            if not ver is None:
-                result = ver
-            else:
-                ver = __get_exe_file_info__(os.path.join(build_path, 'BRHelper.exe'))
+            files = list_files(build_path, 'cbank.exe')
+            files += list_files(build_path, 'BRHelper.exe')
+            files += list_files(build_path, 'cryptlib2x.dll')
+            files += list_files(build_path, 'npBSSPlugin.dll')
+            for f in files:
+                ver = None
+                try:
+                    ver = __get_exe_file_info__(f)
+                except FileNotFoundError as e:
+                    pass
                 if not ver is None:
                     result = ver
-    except:
-        pass
+                    break
+
+    except BaseException as e:
+        print('ERROR: can not detect version of build ({})'.format(e))
+        raise e
     return result
 
 # -------------------------------------------------------------------------------------------------
 
 
-def __prepare_build_path__(build_path, version, force_delete = False):  # TODO разобраться с версией
+def __prepare_build_path__tokill(build_path, version, force_delete = False):  # TODO удалить nahuy
     # проверка наличия пути build_path
     if not os.path.exists(build_path):
         print1('PATH {} does not exists'.format(build_path))
@@ -735,7 +740,7 @@ def __prepare_build_path__(build_path, version, force_delete = False):  # TODO �
             # конец разархивации
     else:
         build_path = os.path.join(build_path, 'Win{}\\Release'.format(version))
-        tmp_dir = os.path.join(tempfile.gettempdir(), build_path.replace(os.path.sep, '').replace('.',''))
+        tmp_dir = os.path.join(tempfile.gettempdir(), build_path.replace(os.path.sep, '').replace('.', ''))
         if os.path.exists(tmp_dir) and not force_delete:
             build_path = tmp_dir
         else:
@@ -810,8 +815,8 @@ def download_build(settings, instance):
         else:
             if instance == const_instance_BANK:
                 build_path = __prepare_build_path__(build_path_const, '32')
-                copyfiles(build_path, get_dir_PATCH(), ['CBStart.exe'], []) # один файл в корень
-            for version in ['32', '64']: # выкладываем остальной билд для Б и БК для версий 32 и 64
+                copyfiles(build_path, get_dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
+            for version in ['32', '64']:  # выкладываем остальной билд для Б и БК для версий 32 и 64
                 build_path = __prepare_build_path__(build_path_const, version)
                 mask = ['*.exe', '*.ex', '*.bpl']
                 copyfiles(build_path, get_dir_PATCH_LIBFILES_EXE(instance, version), mask, excluded_files)
@@ -828,52 +833,6 @@ def download_build(settings, instance):
                     copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(version), mask, [])
                     copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(version), mask, [])
     print1('DONE DOWNLOADING build for {}'.format(instance))
-
-
-# -------------------------------------------------------------------------------------------------
-
-def main():
-    global_settings = read_config()
-    if global_settings is None:
-        return
-    if not clean(const_dir_TEMP):
-        return
-    # clean(const_dir_PATCH)
-    global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
-    print('BEGIN DOWNLOADING')
-    if download_starteam_by_label(global_settings) == 0:
-        compare_directories_BEFORE_and_AFTER()
-        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_BANK)
-        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
-        generate_upgrade10_eif(const_instance_BANK)
-        generate_upgrade10_eif(const_instance_CLIENT)
-        download_build_preparation(global_settings)
-        download_build(global_settings, const_instance_BANK)
-        download_build(global_settings, const_instance_IC)
-        download_build(global_settings, const_instance_CLIENT)
-    print('DONE!!!')
-# -------------------------------------------------------------------------------------------------
-
-
-def main_debug_without_clean():
-    global_settings = read_config()
-    if global_settings is None:
-        return
-    if not clean(const_dir_TEMP):
-        return
-    #global_settings.StarteamPassword = getpassword('ENTER StarTeam password:')
-    #print('BEGIN DOWNLOADING')
-    #if download_starteam_by_label(global_settings) == 0:
-    #    compare_directories_BEFORE_and_AFTER()
-    #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_BANK)
-    #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT){[\S\s]*?}
-    #generate_upgrade10_eif(const_instance_BANK)
-    #generate_upgrade10_eif(const_instance_CLIENT)
-    download_build_preparation(global_settings)
-    download_build(global_settings, const_instance_BANK)
-    download_build(global_settings, const_instance_IC)
-    download_build(global_settings, const_instance_CLIENT)
-    print('DONE!!!')
 # -------------------------------------------------------------------------------------------------
 
 
@@ -967,4 +926,156 @@ def bls_compile_all(lic_server, lic_profile, build_path, source_path):
 #bls_compile_all(lic_server1, lic_profile1, build_path1, source_path1)
 
 #main()
+
+
+def __copy_build__(build_path, dest_path):
+    # проверка наличия пути build_path
+    if not build_path:
+        return
+    if not os.path.exists(build_path):
+        print1('PATH {} does not exists'.format(build_path))
+        return
+    # если ссылка на билд указывает не на каталог, а на файл архива
+    # попробуем провести разархивацию во временный каталог
+    build_zip_file = split_filename(build_path)
+    if '.zip' in build_zip_file.lower():
+        build_tmp_dir = os.path.join(tempfile.gettempdir(), build_zip_file)
+        if os.path.exists(build_tmp_dir):
+            clean(build_tmp_dir)
+        print('EXTRACTING BUILD "{}" in "{}"'.format(build_path, build_tmp_dir))
+        try:
+            with zipfile.ZipFile(build_path) as z:
+                z.extractall(os.path.join(tempfile.gettempdir(), build_zip_file))
+                # запомним путь во временный каталог в качестве
+                # нового пути к билду для последующего применения
+                build_path = build_tmp_dir
+        except BaseException as e:
+            print1('ERROR EXTRACTING BUILD "{}"'.format(e))
+        # конец разархивации
+
+    # определяем версию билда
+    version = get_build_version(build_path)
+    if ('20.1' in version) or ('20.2' in version):
+        for release in ['32', '64']:
+            win_rel = 'Win{}\\Release'.format(release)
+            src = os.path.join(build_path, win_rel)
+            dst = os.path.join(dest_path, win_rel)
+            if os.path.exists(dst):
+                clean(dst)
+            print('COPYING BUILD {} from "{}" in "{}"'.format(version, src, dst))
+            copyfiles(src, dst, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
+    else:
+        if os.path.exists(dest_path):
+            clean(dest_path)
+        print('COPYING BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
+        copyfiles(build_path, dest_path, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
+    return version
+
+
+# -------------------------------------------------------------------------------------------------
+def download_build2(settings):
+    build = settings.BuildBank
+    buildIC = settings.BuildIC
+    build_version = __copy_build__(build, const_dir_TEMP_BUILD_BK)
+    buildIC_version = __copy_build__(buildIC, const_dir_TEMP_BUILD_IC)
+
+    for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_IC]:
+        is20 = ('20.1' in build_version) or ('20.2' in build_version)  # todo здесь надо определять в зависимости от instance
+        if instance == const_instance_BANK:
+            excluded_files = const_excluded_build_for_BANK
+        elif instance == const_instance_IC:
+            excluded_files = const_excluded_build_for_BANK
+        elif instance == const_instance_CLIENT:
+            excluded_files = const_excluded_build_for_CLIENT
+
+        if is20:  # для билда 20-ой версии
+            if instance == const_instance_IC:  # выкладываем билд плагина для ИК
+                build_path_bank = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')  # подготовим путь к билду банка
+                mask = ['bssetup.msi', 'CalcCRC.exe']
+                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), mask, [])
+                mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginWebKitSetup.exe']
+                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), mask, [])
+
+                for release in ['32', '64']:  # выкладываем билд в LIBFILES32(64).BNK
+                    copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK(release), ['UpdateIc.exe'], [])
+                    copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_EXE(release), ['bsiset.exe'], [])
+                    mask = ['bsi.dll', 'bsi.jar']
+                    copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(release), mask, [])
+                    copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(release), mask, [])
+
+                    build_path = os.path.join(const_dir_TEMP_BUILD_IC, 'Win{}\\Release'.format(release))
+                    mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
+                    for subversion in ['64', '32']:  # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
+                        copyfiles(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_version, release), mask, [])
+                        copyfiles(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(build_version, release), mask, [])
+
+            else:
+                if instance == const_instance_BANK:
+                    build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
+                    copyfiles(build_path, get_dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
+                for release in ['32', '64']:  # выкладываем остальной билд для Б и БК для версий 32 и 64
+                    build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win{}\\Release'.format(release))
+                    mask = ['*.exe', '*.ex', '*.bpl']
+                    copyfiles(build_path, get_dir_PATCH_LIBFILES_EXE(instance, release), mask, excluded_files)
+                    copyfiles(build_path, get_dir_PATCH_LIBFILES_SYSTEM(instance, release), ['*.dll'], excluded_files)
+                    copyfiles(build_path, get_dir_PATCH_CBSTART(instance, release), ['CBStart.exe'], [])
+                    if instance == const_instance_BANK:
+                        # заполняем TEMPLATE шаблон клиента в банковском патче
+                        mask = ['*.exe', '*.ex', '*.bpl']
+                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(release), mask, const_excluded_build_for_CLIENT)
+                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(release), ['*.dll'], const_excluded_build_for_CLIENT)
+                        mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
+                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(release), mask, [])
+                        mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
+                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(release), mask, [])
+                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
+
+# -------------------------------------------------------------------------------------------------
+
+def main():
+    global_settings = read_config()
+    if global_settings is None:
+        return
+    if not clean(const_dir_TEMP):
+        return
+    # clean(const_dir_PATCH)
+    global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
+    print('BEGIN DOWNLOADING')
+    if download_starteam_by_label(global_settings) == 0:
+        compare_directories_BEFORE_and_AFTER()
+        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_BANK)
+        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
+        generate_upgrade10_eif(const_instance_BANK)
+        generate_upgrade10_eif(const_instance_CLIENT)
+        download_build_preparation(global_settings)
+        download_build(global_settings, const_instance_BANK)
+        download_build(global_settings, const_instance_IC)
+        download_build(global_settings, const_instance_CLIENT)
+    print('DONE!!!')
+# -------------------------------------------------------------------------------------------------
+
+
+def main_debug_without_clean():
+    global_settings = read_config()
+    if global_settings is None:
+        return
+    if not clean(const_dir_TEMP):
+        return
+    #global_settings.StarteamPassword = getpassword('ENTER StarTeam password:')
+    #print('BEGIN DOWNLOADING')
+    #if download_starteam_by_label(global_settings) == 0:
+    #    compare_directories_BEFORE_and_AFTER()
+    #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_BANK)
+    #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT){[\S\s]*?}
+    #generate_upgrade10_eif(const_instance_BANK)
+    #generate_upgrade10_eif(const_instance_CLIENT)
+
+    #download_build_preparation(global_settings)
+    #download_build(global_settings, const_instance_BANK)
+    #download_build(global_settings, const_instance_IC)
+    #download_build(global_settings, const_instance_CLIENT)
+
+    download_build2(global_settings)
+    print('DONE!!!')
+
 main_debug_without_clean()
