@@ -64,17 +64,19 @@ dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM = lambda: os.path.join(dir_PAT
 dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE(), 'Language')
 dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'ENGLISH')
 dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'RUSSIAN')
+dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN_CLIENT_SYSTEM = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'ENGLISH', 'CLIENT', 'SYSTEM')
+dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU_CLIENT_SYSTEM = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'RUSSIAN', 'CLIENT', 'SYSTEM')
 
 get_filename_UPGRADE10_eif = lambda instance: os.path.join(dir_PATCH(instance), 'Upgrade(10).eif')
-#splitfilename = lambda filename: os.path.split(filename)[1]
-#splitdirname = lambda filename: os.path.dirname(filename)
 print1 = lambda message: print('\t'+message)
 print2 = lambda message: print('\t\t'+message)
+
 
 def __splitpath__(path):
     path = os.path.normpath(path)
     names = path.split(os.path.sep)
     return names
+
 
 def split_filename(path):
     result = ''
@@ -203,79 +205,89 @@ const_UPGRADE10_HEADER = \
                 "[RECORDS]\n".format("100", "100")
 
 const_UPGRADE10_FOOTER = "[END]\n"
-const_excluded_build_for_BANK = ['BRHelper.exe',
-                                 'BsDataPump.exe',
-                                 'BSISet.exe',
-                                 'BSLEdit.exe',
-                                 'BSSICLogParser.exe',
-                                 'BSSOAPServer.exe',
-                                 'bssPluginHost.exe',
-                                 'BSSPluginManager.exe',
-                                 'BssPluginSetup.exe',
-                                 'BssPluginSetupNoHost.exe',
-                                 'BssPluginWebKitSetup.exe',
-                                 'bssuinst.exe',
-                                 'BuildUp.exe',
-                                 'CalcCRC.exe',
-                                 'CBStart.exe',
-                                 'CliEx.exe',
-                                 'ConvertAttaches.exe',
-                                 'Copier.exe',
-                                 'ECtrlsD.bpl',
-                                 'Eif2Base.exe',
-                                 'EXECBLL.exe',
-                                 'Install.exe',
-                                 'LResCmp.exe',
-                                 'LResEIF.exe',
-                                 'LResExpt.bpl',
-                                 'ODBCMon.exe',
-                                 'PBLS.exe',
-                                 'PrintServer.exe',
-                                 'RBTreeD.bpl',
-                                 'RToolsDT.bpl',
-                                 'Setup.exe',
-                                 'SynEditD.bpl',
-                                 'UpdateIc.exe',
-                                 'VirtualTreesD.bpl',
-                                 'eif2base64_srv.exe',
-                                 'eif2base64_cli.dll']
-const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['BSAuthServer.exe',
-                                                                   'BSAuthService.exe',
-                                                                   'bscc.exe',
-                                                                   'BSEM.exe',
-                                                                   'BSMonitorServer.exe',
-                                                                   'BSMonitorService.exe',
+const_excluded_build_for_BANK = ['autoupgr.exe', 'operedit.exe',
+                                 'crccons.exe', 'crprotst.exe',
+                                 'mbank.exe', 'memleak.exe',
+                                 'msysleak.exe', 'nsfilead.exe',
+                                 'nsservis.exe', 'nssrv.exe',
+                                 'nstcpad.exe', 'compiler.exe',
+                                 'brhelper.exe', 'ctunnel.exe',
+                                 'defstart.exe', 'defupdt.exe',
+                                 'inetcfg.exe', 'dosprot.exe',
+                                 'iniconf.exe', 'lang2htm.exe',
+                                 'licjoin.exe', 'lresedit.exe',
+                                 'bsdatapump.exe', 'bsiset.exe',
+                                 'bsledit.exe', 'bssiclogparser.exe',
+                                 'bssoapserver.exe', 'bsspluginhost.exe',
+                                 'bsspluginmanager.exe', 'bsspluginsetup.exe',
+                                 'bsspluginsetupnohost.exe', 'bsspluginwebkitsetup.exe',
+                                 'bssuinst.exe', 'buildup.exe', 'cliex.exe',
+                                 'convertattaches.exe', 'copier.exe',
+                                 'ectrlsd.bpl', 'eif2base.exe',
+                                 'install.exe', 'lrescmp.exe',
+                                 'lreseif.exe', 'odbcmon.exe',
+                                 'abank.exe', 'alphalgn.exe',
+                                 'pbls.exe', 'printserver.exe', 'phoneserver.exe',
+                                 'rbtreed.bpl', 'rtoolsdt.bpl',
+                                 'pmonitor.bpl', 'pmonitor.exe',
+                                 'syneditd.bpl', 'updateic.exe',
+                                 'virtualtreesd.bpl', 'eif2base64_srv.exe',
+                                 'eif2base64_cli.dll', 'odbclog.dll',
+                                 'olha.dll', 'olha10.dll',
+                                 'olha9.dll', 'phemng.dll',
+                                 'pika.dll', 'admin.exe',
+                                 'authserv.exe', 'infoserv.exe',
+                                 'bsroute.exe', 'bssaxset.exe',
+                                 'bsdebug.exe', 'chngtree.exe',
+                                 'bscc.exe', 'blstest.exe',
+                                 'ptchglue.exe', 'ptchhelp.exe',
+                                 'repcmd.exe', 'reqexec.exe',
+                                 'rts.exe', 'rtsconst.exe',
+                                 'rtsinfo.exe', 'stunnel.exe',
+                                 'sysupgr.exe', 'testconn.exe',
+                                 'testodbc.exe', 'testsign.exe',
+                                 'textrepl.exe', 'transtbl.exe',
+                                 'treeedit.exe', 'vbank.exe',
+                                 'verifyer.exe']
+
+
+
+const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['bsrdrct.exe',
+                                                                   'bsauthserver.exe',
+                                                                   'bsauthservice.exe',
+                                                                   'bsem.exe',
+                                                                   'bsmonitorserver.exe',
+                                                                   'bsmonitorservice.exe',
                                                                    'btrdict.exe',
-                                                                   'CBServ.exe',
-                                                                   'ComBuff.exe',
-                                                                   'Compiler.exe',
-                                                                   'Dictman.exe',
-                                                                   'Protcore.exe',
-                                                                   'RTS.exe',
-                                                                   'RTSAdmin.exe',
-                                                                   'RTSInfo.exe',
-                                                                   'RTSMBC.exe',
-                                                                   'RTSServ.exe',
-                                                                   'TCPAgent.exe',
-                                                                   'TRedir.exe',
+                                                                   'cbserv.exe',
+                                                                   'combuff.exe',
+                                                                   'dictman.exe',
+                                                                   'protcore.exe',
+                                                                   'rts.exe',
+                                                                   'rtsadmin.exe',
+                                                                   'rtsinfo.exe',
+                                                                   'rtsmbc.exe',
+                                                                   'rtsserv.exe',
+                                                                   'tcpagent.exe',
+                                                                   'tredir.exe',
                                                                    'upgr20i.exe',
                                                                    'bsi.dll',
-                                                                   'CalcCRC.dll',
                                                                    'cr_altok2x.dll',
                                                                    'cr_ccm3x2x.dll',
                                                                    'cr_epass2x.dll',
                                                                    'cr_pass2x.dll',
                                                                    'cr_sms2x.dll',
-                                                                   'dboBlobTbl.dll',
-                                                                   'dboFileAttach.dll',
+                                                                   'dboblobtbl.dll',
+                                                                   'dbofileattach.dll',
                                                                    'eif2base64_cli.dll',
-                                                                   'ILShield.dll',
-                                                                   'ILTMail.dll',
-                                                                   'llAzkLnk.dll',
-                                                                   'llExCtrl.dll',
-                                                                   'llRpJet2.dll',
-                                                                   'npBSSPlugin.dll',
-                                                                   'PerfControl.dll']
+                                                                   'ilshield.dll',
+                                                                   'iltmail.dll',
+                                                                   'llazklnk.dll',
+                                                                   'llexctrl.dll',
+                                                                   'llrpjet2.dll',
+                                                                   'npbssplugin.dll',
+                                                                   'perfcontrol.dll',
+                                                                   'ptchmake.exe']
 
 
 # -------------------------------------------------------------------------------------------------
@@ -293,6 +305,7 @@ class GlobalSettings:
     BuildBank = ''
     BuildIC = ''
     BuildClient = ''
+    ClientEverythingInEXE = False
 # -------------------------------------------------------------------------------------------------
 
 
@@ -310,13 +323,13 @@ def makedirs(path):
     try:
         if not os.path.exists(path):
             os.makedirs(path)
-    except:
-        print1('ERROR: can''t create directory "{}"'.format(path))
+    except BaseException as e:
+        print1('ERROR: can''t create directory "{}" ({})'.format(path, e))
 # -------------------------------------------------------------------------------------------------
 
 
 def list_files(path, mask):
-    return [os.path.join(dir, filename) for dir, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
+    return [os.path.join(directory, filename) for directory, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
 # -------------------------------------------------------------------------------------------------
 
 
@@ -325,7 +338,7 @@ def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
         files = list_files(src_dir, wildcard)
         for filename_with_path in files:
             filename = split_filename(filename_with_path)
-            if filename not in excluded_files and filename != '.' and filename != '..':
+            if filename.lower() not in excluded_files and filename != '.' and filename != '..':
                 makedirs(dest_dir)
                 try:
                     shutil.copy2(filename_with_path, dest_dir)
@@ -421,6 +434,7 @@ def read_config():
         settings.BuildBank = parser.get(section_build, 'Bank').strip()
         settings.BuildClient = parser.get(section_build, 'Client').strip()
         settings.BuildIC = parser.get(section_build, 'IC').strip()
+        settings.ClientEverythingInEXE = parser.get(section_special, 'ClientEverythingInEXE')
 
         # проверка Labels -----------------------------------
         all_labels = ''
@@ -868,7 +882,7 @@ def download_build2(settings):
         buildIC_version = __copy_build__(buildIC, const_dir_TEMP_BUILD_IC)
 
     for instance in instances:
-        print('BEGIN COPYING build into patch for {}'.format(instance))
+        print('COPYING build into patch for {}'.format(instance))
         if instance in [const_instance_BANK, const_instance_CLIENT]:
             is20 = ('20.1' in build_version) or ('20.2' in build_version)
         else:
@@ -928,19 +942,28 @@ def download_build2(settings):
                 copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
             # выкладываем остальной билд для Б и БК
             build_path = const_dir_TEMP_BUILD_BK
-            mask = ['*.exe', '*.ex', '*.bpl']
+            mask = ['*.exe', '*.ex', '*.bpl'] # todo bpl-ки в SYSTEM или в EXE?
             copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), mask, excluded_files)
-            copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
+            if settings.ClientEverythingInEXE and instance==const_instance_CLIENT:
+                copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_files)
+            else:
+                copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
             if instance == const_instance_BANK:
                 # заполняем TEMPLATE шаблон клиента в банковском патче
                 mask = ['*.exe', '*.ex', '*.bpl']
                 copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), mask, const_excluded_build_for_CLIENT)
-                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM(), ['*.dll'], const_excluded_build_for_CLIENT)
+                if settings.ClientEverythingInEXE:
+                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), ['*.dll'], const_excluded_build_for_CLIENT)
+                else:
+                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM(), ['*.dll'], const_excluded_build_for_CLIENT)
                 mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
                 copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), mask, [])
                 mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
                 copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN(), mask, [])
                 copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU(), mask, [])
+                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN_CLIENT_SYSTEM(), mask, [])
+                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU_CLIENT_SYSTEM(), mask, [])
+
 # -------------------------------------------------------------------------------------------------
 
 
