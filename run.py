@@ -21,43 +21,51 @@ const_dir_BEFORE = os.path.join(const_dir_TEMP, 'BEFORE')
 const_dir_AFTER = os.path.join(const_dir_TEMP, 'AFTER')
 const_dir_COMPARED = os.path.join(const_dir_TEMP, '_COMPARE_RESULT')
 const_dir_PATCH = os.path.join(const_dir_TEMP, 'PATCH')
-get_dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, 'BASE'), instance)
-get_dir_PATCH = lambda instance='': os.path.join(const_dir_PATCH, instance)
-get_dir_PATCH_DATA = lambda instance: os.path.join(get_dir_PATCH(instance), 'DATA')
-get_dir_PATCH_CBSTART = lambda instance, version='': os.path.join(get_dir_PATCH(instance), 'CBSTART{}'.format(version))
-get_dir_PATCH_LIBFILES = lambda instance, version='': os.path.join(get_dir_PATCH(instance), 'LIBFILES{}'.format(version))
+dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, 'BASE'), instance)
+dir_PATCH = lambda instance='': os.path.join(const_dir_PATCH, instance)
+dir_PATCH_DATA = lambda instance: os.path.join(dir_PATCH(instance), 'DATA')
+dir_PATCH_CBSTART = lambda instance, version='': os.path.join(dir_PATCH(instance), 'CBSTART{}'.format(version))
+dir_PATCH_LIBFILES = lambda instance, version='': os.path.join(dir_PATCH(instance), 'LIBFILES{}'.format(version))
 
-get_dir_PATCH_LIBFILES_BNK = lambda version='': os.path.join(get_dir_PATCH(const_instance_BANK), 'LIBFILES{}.BNK'.format(version))
-get_dir_PATCH_LIBFILES_BNK_WWW = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK(version), 'WWW')
-get_dir_PATCH_LIBFILES_BNK_WWW_EXE = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW(version), 'EXE')
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW(version), 'BSI_scripts')
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts(version), 'rt_ic')
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts(version), 'rt_wa')
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW(version), 'BSI_sites')
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites(version), 'rt_ic')
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites(version), 'rt_wa')
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc(version), 'CODE')
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE = lambda version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa(version), 'CODE')
+dir_PATCH_LIBFILES_BNK = lambda version='': os.path.join(dir_PATCH(const_instance_BANK), 'LIBFILES{}.BNK'.format(version))
+dir_PATCH_LIBFILES_BNK_WWW = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'WWW')
+dir_PATCH_LIBFILES_BNK_WWW_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW(version), 'EXE')
+dir_PATCH_LIBFILES_BNK_WWW_BSIscripts = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW(version), 'BSI_scripts')
+dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIscripts(version), 'rt_ic')
+dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIscripts(version), 'rt_wa')
+dir_PATCH_LIBFILES_BNK_WWW_BSIsites = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW(version), 'BSI_sites')
+dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIsites(version), 'rt_ic')
+dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIsites(version), 'rt_wa')
+dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc(version), 'CODE')
+dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa(version), 'CODE')
 
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion = lambda build_version, version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE(version), build_version)
-get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion = lambda build_version, version='': os.path.join(get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE(version), build_version)
+dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion = lambda build_version, version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE(version), build_version)
+dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion = lambda build_version, version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE(version), build_version)
 
-get_dir_PATCH_LIBFILES_EXE = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES(instance, version), 'EXE')
-get_dir_PATCH_LIBFILES_SYSTEM = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES(instance, version), 'SYSTEM')
-get_dir_PATCH_LIBFILES_SUBSYS = lambda instance, version='': os.path.join(get_dir_PATCH_LIBFILES(instance, version), 'SUBSYS')
-get_dir_PATCH_LIBFILES_INSTCLNT = lambda : os.path.join(get_dir_PATCH_LIBFILES_SUBSYS(const_instance_BANK), 'INSTCLNT')
-get_dir_PATCH_LIBFILES_INETTEMP = lambda : os.path.join(get_dir_PATCH_LIBFILES_INSTCLNT(), 'INETTEMP')
-get_dir_PATCH_LIBFILES_TEMPLATE = lambda : os.path.join(get_dir_PATCH_LIBFILES_SUBSYS(const_instance_BANK), 'TEMPLATE')
+dir_PATCH_LIBFILES_EXE = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES(instance, version), 'EXE')
+dir_PATCH_LIBFILES_SYSTEM = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES(instance, version), 'SYSTEM')
+dir_PATCH_LIBFILES_SUBSYS = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES(instance, version), 'SUBSYS')
+dir_PATCH_LIBFILES_INSTCLNT = lambda : os.path.join(dir_PATCH_LIBFILES_SUBSYS(const_instance_BANK), 'INSTCLNT')
+dir_PATCH_LIBFILES_INETTEMP = lambda : os.path.join(dir_PATCH_LIBFILES_INSTCLNT(), 'INETTEMP')
+dir_PATCH_LIBFILES_TEMPLATE = lambda : os.path.join(dir_PATCH_LIBFILES_INSTCLNT(), 'TEMPLATE')
 
-get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE(), 'DISTRIB.X{}'.format(version))
-get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(version), 'CLIENT')
-get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT(version), 'EXE')
-get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT(version), 'SYSTEM')
-get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE(), 'Language.X{}'.format(version))
-get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX(version), 'ENGLISH')
-get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU = lambda version: os.path.join(get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX(version), 'RUSSIAN')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX = lambda version: os.path.join(dir_PATCH_LIBFILES_TEMPLATE(), 'DISTRIB.X{}'.format(version))
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT = lambda version: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(version), 'CLIENT')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE = lambda version: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT(version), 'EXE')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM = lambda version: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT(version), 'SYSTEM')
+dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX = lambda version: os.path.join(dir_PATCH_LIBFILES_TEMPLATE(), 'Language.X{}'.format(version))
+dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN = lambda version: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX(version), 'ENGLISH')
+dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU = lambda version: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX(version), 'RUSSIAN')
 
-get_filename_UPGRADE10_eif = lambda instance: os.path.join(get_dir_PATCH(instance), 'Upgrade(10).eif')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIB = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE(), 'DISTRIB')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), 'CLIENT')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT(), 'EXE')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT(), 'SYSTEM')
+dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE(), 'Language')
+dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'ENGLISH')
+dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'RUSSIAN')
+
+get_filename_UPGRADE10_eif = lambda instance: os.path.join(dir_PATCH(instance), 'Upgrade(10).eif')
 #splitfilename = lambda filename: os.path.split(filename)[1]
 #splitdirname = lambda filename: os.path.dirname(filename)
 print1 = lambda message: print('\t'+message)
@@ -620,7 +628,7 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
 
 
 def download_TABLE10_files_for_DATA_FILES(settings, instance):
-    eif_list = list_files(get_dir_COMPARED_BASE(instance), "*.eif")
+    eif_list = list_files(dir_COMPARED_BASE(instance), "*.eif")
     for eif_file in eif_list:
         # проверим соответствует ли название файла формату "*(data).eif"
         file_type_match = re.findall('\(data\)\.eif', eif_file, flags=re.IGNORECASE)
@@ -637,9 +645,9 @@ def download_TABLE10_files_for_DATA_FILES(settings, instance):
 
 
 def generate_upgrade10_eif(instance):
-    eif_list = list_files(get_dir_COMPARED_BASE(instance), '*.eif')
+    eif_list = list_files(dir_COMPARED_BASE(instance), '*.eif')
     if len(eif_list) > 0:
-        data_dir = get_dir_PATCH_DATA(instance)
+        data_dir = dir_PATCH_DATA(instance)
         makedirs(data_dir)
         for eif_file in eif_list:
             try:
@@ -698,7 +706,7 @@ def get_build_version(build_path):
                     ver = __get_exe_file_info__(f)
                 except FileNotFoundError as e:
                     pass
-                if not ver is None:
+                if ver is not None:
                     result = ver
                     break
 
@@ -706,133 +714,6 @@ def get_build_version(build_path):
         print('ERROR: can not detect version of build ({})'.format(e))
         raise e
     return result
-
-# -------------------------------------------------------------------------------------------------
-
-
-def __prepare_build_path__tokill(build_path, version, force_delete = False):  # TODO удалить nahuy
-    # проверка наличия пути build_path
-    if not os.path.exists(build_path):
-        print1('PATH {} does not exists'.format(build_path))
-        return
-    # если ссылка на билд указывает не на каталог, а на файл архива
-    # попробуем провести разархивацию во временный каталог
-    build_zip_file = split_filename(build_path)
-    if '.zip' in build_zip_file.lower():
-        # TODO разобраться с путями после разархивации (win32/win64/etc)
-        build_tmp_dir = os.path.join(tempfile.gettempdir(), build_zip_file)
-        if os.path.exists(build_tmp_dir) and not force_delete:
-            #print1('BUILD already extracted in "{}"'.format(build_tmp_dir))
-            pass
-            build_path = build_tmp_dir
-        else:
-            if os.path.exists(build_tmp_dir):
-                clean(build_tmp_dir)
-            print('EXTRACTING BUILD "{}" in "{}"'.format(build_path, build_tmp_dir))
-            try:
-                with zipfile.ZipFile(build_path) as z:
-                    z.extractall(os.path.join(tempfile.gettempdir(), build_zip_file))
-                    # запомним путь во временный каталог в качестве
-                    # нового пути к билду для последующего применения
-                    build_path = build_tmp_dir
-            except BaseException as e:
-                print1('ERROR EXTRACTING BUILD "{}"'.format(e))
-            # конец разархивации
-    else:
-        build_path = os.path.join(build_path, 'Win{}\\Release'.format(version))
-        tmp_dir = os.path.join(tempfile.gettempdir(), build_path.replace(os.path.sep, '').replace('.', ''))
-        if os.path.exists(tmp_dir) and not force_delete:
-            build_path = tmp_dir
-        else:
-            if os.path.exists(tmp_dir):
-                clean(tmp_dir)
-            print('COPYING BUILD "{}" in "{}"'.format(build_path, tmp_dir))
-            try:
-                shutil.copytree(build_path, tmp_dir)
-                build_path = tmp_dir
-            except BaseException as e:
-                print1('ERROR COPYING BUILD "{}"'.format(e))
-    return build_path
-# -------------------------------------------------------------------------------------------------
-
-
-def download_build_preparation(settings):
-    for build_type in [settings.BuildBank, settings.BuildIC, settings.BuildClient]:
-        if build_type:
-            for release in ['32', '64']:
-                __prepare_build_path__(build_type, release, True)
-# -------------------------------------------------------------------------------------------------
-
-
-def download_build(settings, instance):
-    if not instance:
-        print('NOT DOWNLOADING build: no instance specified')
-        return
-
-    build_path_const = ''
-    if instance == const_instance_BANK:
-        build_path_const = settings.BuildBank
-        excluded_files = const_excluded_build_for_BANK
-    elif instance == const_instance_IC:
-        build_path_const = settings.BuildIC
-        excluded_files = const_excluded_build_for_BANK
-    elif instance == const_instance_CLIENT:
-        build_path_const = settings.BuildClient
-        excluded_files = const_excluded_build_for_CLIENT
-
-    if not build_path_const:
-        print('NOT DOWNLOADING build for {}: no build path specified'.format(instance))
-        return
-    print('BEGIN DOWNLOADING build {} for {}'.format(build_path_const, instance))
-
-    # если в пути присутствует "20.1" или "20.2", то раскладка билда будет производиться соотвественно
-    build_version = get_build_version(__prepare_build_path__(build_path_const,'32'))
-    is20 = ('20.1' in build_version) or ('20.2' in build_version)
-    print(build_version)
-
-    if is20: # для билда 20-ой версии
-        if instance == const_instance_IC: # выкладываем билд плагина для ИК
-            build_path_bank = __prepare_build_path__(settings.BuildBank, '32') # подготовим путь к билду банка
-            mask = ['bssetup.msi', 'CalcCRC.exe']
-            copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), mask, [])
-            mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginWebKitSetup.exe']
-            copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), mask, [])
-
-            for version in ['32', '64']: # выкладываем билд в LIBFILES32(64).BNK
-                build_path = __prepare_build_path__(build_path_const, version)
-                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK(version), ['UpdateIc.exe'], [])
-                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_EXE(version), ['bsiset.exe'], [])
-                mask = ['bsi.dll', 'bsi.jar']
-                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(version), mask, [])
-                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(version), mask, [])
-
-                # определяем версию билда по Exe файлу
-                mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
-                for subversion in ['64', '32']: # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
-                    copyfiles(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_version, version), mask, [])
-                    copyfiles(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(build_version, version), mask, [])
-
-        else:
-            if instance == const_instance_BANK:
-                build_path = __prepare_build_path__(build_path_const, '32')
-                copyfiles(build_path, get_dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
-            for version in ['32', '64']:  # выкладываем остальной билд для Б и БК для версий 32 и 64
-                build_path = __prepare_build_path__(build_path_const, version)
-                mask = ['*.exe', '*.ex', '*.bpl']
-                copyfiles(build_path, get_dir_PATCH_LIBFILES_EXE(instance, version), mask, excluded_files)
-                copyfiles(build_path, get_dir_PATCH_LIBFILES_SYSTEM(instance, version), ['*.dll'], excluded_files)
-                copyfiles(build_path, get_dir_PATCH_CBSTART(instance, version), ['CBStart.exe'], [])
-                if instance == const_instance_BANK:
-                    # заполняем TEMPLATE шаблон клиента в банковском патче
-                    mask = ['*.exe', '*.ex', '*.bpl']
-                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(version), mask, const_excluded_build_for_CLIENT)
-                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(version), ['*.dll'], const_excluded_build_for_CLIENT)
-                    mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
-                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(version), mask, [])
-                    mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
-                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(version), mask, [])
-                    copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(version), mask, [])
-    print1('DONE DOWNLOADING build for {}'.format(instance))
 # -------------------------------------------------------------------------------------------------
 
 
@@ -976,11 +857,23 @@ def __copy_build__(build_path, dest_path):
 def download_build2(settings):
     build = settings.BuildBank
     buildIC = settings.BuildIC
-    build_version = __copy_build__(build, const_dir_TEMP_BUILD_BK)
-    buildIC_version = __copy_build__(buildIC, const_dir_TEMP_BUILD_IC)
 
-    for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_IC]:
-        is20 = ('20.1' in build_version) or ('20.2' in build_version)  # todo здесь надо определять в зависимости от instance
+    instances = []
+    if build:
+        instances.append(const_instance_BANK)
+        instances.append(const_instance_CLIENT)
+        build_version = __copy_build__(build, const_dir_TEMP_BUILD_BK)
+    if buildIC:
+        instances.append(const_instance_IC)
+        buildIC_version = __copy_build__(buildIC, const_dir_TEMP_BUILD_IC)
+
+    for instance in instances:
+        print('BEGIN COPYING build into patch for {}'.format(instance))
+        if instance in [const_instance_BANK, const_instance_CLIENT]:
+            is20 = ('20.1' in build_version) or ('20.2' in build_version)
+        else:
+            is20 = ('20.1' in buildIC_version) or ('20.2' in buildIC_version)
+
         if instance == const_instance_BANK:
             excluded_files = const_excluded_build_for_BANK
         elif instance == const_instance_IC:
@@ -992,45 +885,64 @@ def download_build2(settings):
             if instance == const_instance_IC:  # выкладываем билд плагина для ИК
                 build_path_bank = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')  # подготовим путь к билду банка
                 mask = ['bssetup.msi', 'CalcCRC.exe']
-                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), mask, [])
+                copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
                 mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginWebKitSetup.exe']
-                copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_INETTEMP(), mask, [])
+                copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
 
                 for release in ['32', '64']:  # выкладываем билд в LIBFILES32(64).BNK
-                    copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK(release), ['UpdateIc.exe'], [])
-                    copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_EXE(release), ['bsiset.exe'], [])
+                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK(release), ['UpdateIc.exe'], [])
+                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_EXE(release), ['bsiset.exe'], [])
                     mask = ['bsi.dll', 'bsi.jar']
-                    copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(release), mask, [])
-                    copyfiles(build_path_bank, get_dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(release), mask, [])
+                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(release), mask, [])
+                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(release), mask, [])
 
                     build_path = os.path.join(const_dir_TEMP_BUILD_IC, 'Win{}\\Release'.format(release))
                     mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
                     for subversion in ['64', '32']:  # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
-                        copyfiles(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_version, release), mask, [])
-                        copyfiles(build_path, get_dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(build_version, release), mask, [])
+                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_version, release), mask, [])
+                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(build_version, release), mask, [])
 
             else:
                 if instance == const_instance_BANK:
                     build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
-                    copyfiles(build_path, get_dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
+                    copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
                 for release in ['32', '64']:  # выкладываем остальной билд для Б и БК для версий 32 и 64
                     build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win{}\\Release'.format(release))
                     mask = ['*.exe', '*.ex', '*.bpl']
-                    copyfiles(build_path, get_dir_PATCH_LIBFILES_EXE(instance, release), mask, excluded_files)
-                    copyfiles(build_path, get_dir_PATCH_LIBFILES_SYSTEM(instance, release), ['*.dll'], excluded_files)
-                    copyfiles(build_path, get_dir_PATCH_CBSTART(instance, release), ['CBStart.exe'], [])
+                    copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance, release), mask, excluded_files)
+                    copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance, release), ['*.dll'], excluded_files)
+                    copyfiles(build_path, dir_PATCH_CBSTART(instance, release), ['CBStart.exe'], [])
                     if instance == const_instance_BANK:
                         # заполняем TEMPLATE шаблон клиента в банковском патче
                         mask = ['*.exe', '*.ex', '*.bpl']
-                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(release), mask, const_excluded_build_for_CLIENT)
-                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(release), ['*.dll'], const_excluded_build_for_CLIENT)
+                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(release), mask, const_excluded_build_for_CLIENT)
+                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(release), ['*.dll'], const_excluded_build_for_CLIENT)
                         mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
-                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(release), mask, [])
+                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(release), mask, [])
                         mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
-                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(release), mask, [])
-                        copyfiles(build_path, get_dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
-
+                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(release), mask, [])
+                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
+        else:
+            if instance == const_instance_BANK:
+                build_path = const_dir_TEMP_BUILD_BK
+                copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
+            # выкладываем остальной билд для Б и БК
+            build_path = const_dir_TEMP_BUILD_BK
+            mask = ['*.exe', '*.ex', '*.bpl']
+            copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), mask, excluded_files)
+            copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
+            if instance == const_instance_BANK:
+                # заполняем TEMPLATE шаблон клиента в банковском патче
+                mask = ['*.exe', '*.ex', '*.bpl']
+                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), mask, const_excluded_build_for_CLIENT)
+                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM(), ['*.dll'], const_excluded_build_for_CLIENT)
+                mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
+                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), mask, [])
+                mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
+                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN(), mask, [])
+                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU(), mask, [])
 # -------------------------------------------------------------------------------------------------
+
 
 def main():
     global_settings = read_config()
@@ -1047,10 +959,7 @@ def main():
         download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
-        download_build_preparation(global_settings)
-        download_build(global_settings, const_instance_BANK)
-        download_build(global_settings, const_instance_IC)
-        download_build(global_settings, const_instance_CLIENT)
+        download_build2(global_settings)
     print('DONE!!!')
 # -------------------------------------------------------------------------------------------------
 
@@ -1076,6 +985,7 @@ def main_debug_without_clean():
     #download_build(global_settings, const_instance_CLIENT)
 
     download_build2(global_settings)
+
     print('DONE!!!')
 
 main_debug_without_clean()
