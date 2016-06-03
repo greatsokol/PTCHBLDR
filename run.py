@@ -21,6 +21,7 @@ const_dir_BEFORE = os.path.join(const_dir_TEMP, 'BEFORE')
 const_dir_AFTER = os.path.join(const_dir_TEMP, 'AFTER')
 const_dir_COMPARED = os.path.join(const_dir_TEMP, '_COMPARE_RESULT')
 const_dir_PATCH = os.path.join(const_dir_TEMP, 'PATCH')
+
 dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, 'BASE'), instance)
 dir_PATCH = lambda instance='': os.path.join(const_dir_PATCH, instance)
 dir_PATCH_DATA = lambda instance: os.path.join(dir_PATCH(instance), 'DATA')
@@ -28,10 +29,18 @@ dir_PATCH_CBSTART = lambda instance, version='': os.path.join(dir_PATCH(instance
 dir_PATCH_LIBFILES = lambda instance, version='': os.path.join(dir_PATCH(instance), 'LIBFILES{}'.format(version))
 
 dir_PATCH_LIBFILES_BNK = lambda version='': os.path.join(dir_PATCH(const_instance_BANK), 'LIBFILES{}.BNK'.format(version))
+dir_PATCH_LIBFILES_BNK_ADD = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'add')
+dir_PATCH_LIBFILES_BNK_BSISET_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'bsiset', 'EXE')
+dir_PATCH_LIBFILES_BNK_LICENSE_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'license', 'EXE')
+dir_PATCH_LIBFILES_BNK_RTS = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'rts')
+dir_PATCH_LIBFILES_BNK_RTS_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK_RTS(), 'EXE')
+dir_PATCH_LIBFILES_BNK_RTS_SYSTEM = lambda: os.path.join(dir_PATCH_LIBFILES_BNK_RTS(), 'SYSTEM')
+
 dir_PATCH_LIBFILES_BNK_WWW = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'WWW')
 dir_PATCH_LIBFILES_BNK_WWW_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW(version), 'EXE')
 dir_PATCH_LIBFILES_BNK_WWW_BSIscripts = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW(version), 'BSI_scripts')
 dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIscripts(version), 'rt_ic')
+dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTAdmin = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIscripts(version), 'rt_Admin')
 dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIscripts(version), 'rt_wa')
 dir_PATCH_LIBFILES_BNK_WWW_BSIsites = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW(version), 'BSI_sites')
 dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW_BSIsites(version), 'rt_ic')
@@ -210,24 +219,24 @@ const_excluded_build_for_BANK = ['autoupgr.exe', 'operedit.exe',
                                  'mbank.exe', 'memleak.exe',
                                  'msysleak.exe', 'nsfilead.exe',
                                  'nsservis.exe', 'nssrv.exe',
-                                 'nstcpad.exe', 'compiler.exe',
+                                 'nstcpad.exe',
                                  'brhelper.exe', 'ctunnel.exe',
                                  'defstart.exe', 'defupdt.exe',
-                                 'inetcfg.exe', 'dosprot.exe',
-                                 'iniconf.exe', 'lang2htm.exe',
+                                 'dosprot.exe',
+                                 'lang2htm.exe',
                                  'licjoin.exe', 'lresedit.exe',
-                                 'bsdatapump.exe', 'bsiset.exe',
+                                 'bsiset.exe',
                                  'bsledit.exe', 'bssiclogparser.exe',
                                  'bssoapserver.exe', 'bsspluginhost.exe',
                                  'bsspluginmanager.exe', 'bsspluginsetup.exe',
                                  'bsspluginsetupnohost.exe', 'bsspluginwebkitsetup.exe',
-                                 'bssuinst.exe', 'buildup.exe', 'cliex.exe',
+                                 'bssuinst.exe', 'cliex.exe',
                                  'convertattaches.exe', 'copier.exe',
                                  'ectrlsd.bpl', 'eif2base.exe',
                                  'install.exe', 'lrescmp.exe',
                                  'lreseif.exe', 'odbcmon.exe',
                                  'abank.exe', 'alphalgn.exe',
-                                 'pbls.exe', 'printserver.exe', 'phoneserver.exe',
+                                 'pbls.exe',
                                  'rbtreed.bpl', 'rtoolsdt.bpl',
                                  'pmonitor.bpl', 'pmonitor.exe',
                                  'syneditd.bpl', 'updateic.exe',
@@ -235,16 +244,16 @@ const_excluded_build_for_BANK = ['autoupgr.exe', 'operedit.exe',
                                  'eif2base64_cli.dll', 'odbclog.dll',
                                  'olha.dll', 'olha10.dll',
                                  'olha9.dll', 'phemng.dll',
-                                 'pika.dll', 'admin.exe',
-                                 'authserv.exe', 'infoserv.exe',
+                                 'pika.dll',
+                                 'authserv.exe',
                                  'bsroute.exe', 'bssaxset.exe',
                                  'bsdebug.exe', 'chngtree.exe',
-                                 'bscc.exe', 'blstest.exe',
+                                  'blstest.exe',
                                  'ptchglue.exe', 'ptchhelp.exe',
                                  'repcmd.exe', 'reqexec.exe',
-                                 'rts.exe', 'rtsconst.exe',
-                                 'rtsinfo.exe', 'stunnel.exe',
-                                 'sysupgr.exe', 'testconn.exe',
+
+
+                                 'sysupgr.exe',
                                  'testodbc.exe', 'testsign.exe',
                                  'textrepl.exe', 'transtbl.exe',
                                  'treeedit.exe', 'vbank.exe',
@@ -288,6 +297,8 @@ const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['bsrdrct.exe'
                                                                    'npbssplugin.dll',
                                                                    'perfcontrol.dll',
                                                                    'ptchmake.exe']
+                                                # todo убрать из клиента rg_*
+
 
 
 # -------------------------------------------------------------------------------------------------
@@ -302,9 +313,8 @@ class GlobalSettings:
     StarteamView = ''
     StarteamPassword = ''
     Labels = []
-    BuildBank = ''
+    BuildBK = ''
     BuildIC = ''
-    BuildClient = ''
     ClientEverythingInEXE = False
 # -------------------------------------------------------------------------------------------------
 
@@ -431,10 +441,9 @@ def read_config():
         settings.StarteamView = parser.get(section_special, 'StarteamView').strip()
         settings.StarteamLogin = parser.get(section_special, 'StarteamLogin').strip()
         settings.Labels = parser.items(section_labels)
-        settings.BuildBank = parser.get(section_build, 'Bank').strip()
-        settings.BuildClient = parser.get(section_build, 'Client').strip()
+        settings.BuildBK = parser.get(section_build, 'BK').strip()
         settings.BuildIC = parser.get(section_build, 'IC').strip()
-        settings.ClientEverythingInEXE = parser.get(section_special, 'ClientEverythingInEXE')
+        settings.ClientEverythingInEXE = parser.get(section_special, 'ClientEverythingInEXE').lower() == 'true'
 
         # проверка Labels -----------------------------------
         all_labels = ''
@@ -454,10 +463,8 @@ def read_config():
             raise FileNotFoundError('NOT DEFINED path to stcmd')
 
         # проверка путей к билду
-        if settings.BuildBank and not os.path.exists(settings.BuildBank):
-            raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildBank))
-        if settings.BuildClient and not os.path.exists(settings.BuildClient):
-            raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildClient))
+        if settings.BuildBK and not os.path.exists(settings.BuildBK):
+            raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildBK))
         if settings.BuildIC and not os.path.exists(settings.BuildIC):
             raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildIC))
 
@@ -868,8 +875,8 @@ def __copy_build__(build_path, dest_path):
 
 
 # -------------------------------------------------------------------------------------------------
-def download_build2(settings):
-    build = settings.BuildBank
+def download_build(settings):
+    build = settings.BuildBK
     buildIC = settings.BuildIC
 
     instances = []
@@ -936,20 +943,21 @@ def download_build2(settings):
                         mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
                         copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(release), mask, [])
                         copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
-        else:
-            if instance == const_instance_BANK:
+
+        else:  # для билдов 15 и 17
+            if instance in [const_instance_BANK, const_instance_CLIENT]:
+                # выкладываем билд для Б и БК
                 build_path = const_dir_TEMP_BUILD_BK
-                copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
-            # выкладываем остальной билд для Б и БК
-            build_path = const_dir_TEMP_BUILD_BK
-            mask = ['*.exe', '*.ex', '*.bpl'] # todo bpl-ки в SYSTEM или в EXE?
-            copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), mask, excluded_files)
-            if settings.ClientEverythingInEXE and instance==const_instance_CLIENT:
-                copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_files)
-            else:
-                copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
+                mask = ['*.exe', '*.ex', '*.bpl'] # todo bpl-ки в SYSTEM или в EXE?
+                copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), mask, excluded_files)
+                if settings.ClientEverythingInEXE and instance==const_instance_CLIENT:
+                    copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_files)
+                else:
+                    copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
+
             if instance == const_instance_BANK:
-                # заполняем TEMPLATE шаблон клиента в банковском патче
+                copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
+                # заполняем билдом TEMPLATE шаблон клиента в банковском патче
                 mask = ['*.exe', '*.ex', '*.bpl']
                 copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), mask, const_excluded_build_for_CLIENT)
                 if settings.ClientEverythingInEXE:
@@ -963,6 +971,23 @@ def download_build2(settings):
                 copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU(), mask, [])
                 copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN_CLIENT_SYSTEM(), mask, [])
                 copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU_CLIENT_SYSTEM(), mask, [])
+                # заполняем LIBFILES.BNK в банковском патче билдом для БК
+                mask = ['autoupgr.exe', 'bscc.exe', 'compiler.exe', 'operedit.exe', 'testconn.exe', 'treeedit.exe']
+                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_ADD(), mask, [])
+                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_BSISET_EXE(), ['bsiset.exe'], [])
+                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_LICENSE_EXE(), ['protcore.exe'], [])
+
+            if instance == const_instance_IC:
+                # заполняем LIBFILES.BNK в банковском патче билдом для ИК
+                build_path = const_dir_TEMP_BUILD_IC
+                mask = ['bssaxset.exe', 'inetcfg.exe', 'rts.exe', 'rtsconst.exe', 'rtsinfo.exe']
+                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_EXE(), mask, [])
+                mask = ['llComDat.dll', 'llrtscfg.dll', 'llxmlman.dll', 'msxml2.bpl']
+                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_SYSTEM(), mask, [])
+                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(), ['bsi.dll'], [])
+                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTAdmin(), ['bsi.dll'], [])
+                # todo INETTEMP
+
 
 # -------------------------------------------------------------------------------------------------
 
@@ -982,7 +1007,7 @@ def main():
         download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
-        download_build2(global_settings)
+        download_build(global_settings)
     print('DONE!!!')
 # -------------------------------------------------------------------------------------------------
 
@@ -1007,7 +1032,7 @@ def main_debug_without_clean():
     #download_build(global_settings, const_instance_IC)
     #download_build(global_settings, const_instance_CLIENT)
 
-    download_build2(global_settings)
+    download_build(global_settings)
 
     print('DONE!!!')
 
