@@ -95,6 +95,7 @@ def split_filename(path):
             result = names[len(names)-1]
     return result
 
+
 def split_lastdirname(path):
     result = ''
     if os.path.isdir(path):
@@ -248,11 +249,8 @@ const_excluded_build_for_BANK = ['autoupgr.exe', 'operedit.exe',
                                  'authserv.exe',
                                  'bsroute.exe', 'bssaxset.exe',
                                  'bsdebug.exe', 'chngtree.exe',
-                                  'blstest.exe',
-                                 'ptchglue.exe', 'ptchhelp.exe',
+                                 'blstest.exe', 'ptchglue.exe', 'ptchhelp.exe',
                                  'repcmd.exe', 'reqexec.exe',
-
-
                                  'sysupgr.exe',
                                  'testodbc.exe', 'testsign.exe',
                                  'textrepl.exe', 'transtbl.exe',
@@ -260,7 +258,7 @@ const_excluded_build_for_BANK = ['autoupgr.exe', 'operedit.exe',
                                  'verifyer.exe']
 
 
-
+# todo убрать из клиента rg_*
 const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['bsrdrct.exe',
                                                                    'bsauthserver.exe',
                                                                    'bsauthservice.exe',
@@ -297,10 +295,6 @@ const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['bsrdrct.exe'
                                                                    'npbssplugin.dll',
                                                                    'perfcontrol.dll',
                                                                    'ptchmake.exe']
-                                                # todo убрать из клиента rg_*
-
-
-
 # -------------------------------------------------------------------------------------------------
 
 
@@ -339,7 +333,7 @@ def makedirs(path):
 
 
 def list_files(path, mask):
-    return [os.path.join(directory, filename) for directory, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
+    return [os.path.join(d, filename) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
 # -------------------------------------------------------------------------------------------------
 
 
@@ -374,7 +368,7 @@ def get_version_from_win32_pe(file):
     if offset == -1:
         return "Unknown"
 
-    filedata = filedata[offset + 32 : offset + 32 + (13*4)]
+    filedata = filedata[offset + 32: offset + 32 + (13*4)]
     version_struct = struct.unpack("13I", filedata)
     ver_ms, ver_ls = version_struct[4], version_struct[5]
     return "%d.%d.%d.%d" % (ver_ls & 0x0000ffff, (ver_ms & 0xffff0000) >> 16,
@@ -406,18 +400,19 @@ def __onerror_handler__(func, path, exc_info):
 
 
 def clean(path, masks=[]):
-    try:
-        if masks:
-            for mask in masks:
-                [os.remove(os.path.join(dir, filename)) for dir, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
-        else:
-            print('CLEANING "{}"'.format(path))
-            shutil.rmtree(path, onerror=__onerror_handler__)
-    except FileNotFoundError:
-        pass  # если папка TEMP отсутствует, то продолжаем молча
-    except BaseException as e:
-        print1('ERROR when cleaning ({})'.format(e))
-        return False
+    if os.path.exists(path):
+        try:
+            if masks:
+                for mask in masks:
+                    [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
+            else:
+                print('CLEANING "{}"'.format(path))
+                shutil.rmtree(path, onerror=__onerror_handler__)
+        except FileNotFoundError:
+            pass  # если папка отсутствует, то продолжаем молча
+        except BaseException as e:
+            print1('ERROR when cleaning ({})'.format(e))
+            return False
     return True
 # -------------------------------------------------------------------------------------------------
 
@@ -699,7 +694,7 @@ def __get_exe_file_info__(fullFilePath):
     try:
         with open(fullFilePath, 'rb') as f:
             filedata = f.read()
-    except BaseException as E:
+    except BaseException:
         return None
     offset = filedata.find(sig)
     if offset == -1:
@@ -725,7 +720,7 @@ def get_build_version(build_path):
                 ver = None
                 try:
                     ver = __get_exe_file_info__(f)
-                except FileNotFoundError as e:
+                except FileNotFoundError:
                     pass
                 if ver is not None:
                     result = ver
@@ -739,11 +734,11 @@ def get_build_version(build_path):
 
 
 def bls_get_uses_graph(path):
-    def __replace_unwanted_symbols__(pattern, str):
-        find_all = re.findall(pattern, str, flags=re.MULTILINE)
-        for find in find_all:
-            str = str.replace(find, '')
-        return str
+    def __replace_unwanted_symbols__(pattern, string):
+        find_all = re.findall(pattern, string, flags=re.MULTILINE)
+        for find_here in find_all:
+            string = string.replace(find_here, '')
+        return string
 
     bls_uses_graph = {}
     files = list_files(path, '*.bls')
@@ -821,13 +816,13 @@ def bls_compile_all(lic_server, lic_profile, build_path, source_path):
 
 # VM-MSK01LS03
 # otd-2ps
-#lic_server1 = 'LGServer'
-#lic_profile1 = 'otd-2ps'
-#build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB17_BUILDER\\BUILD'
-#source_path1 = 'D:\\DBO\\Release_17\\VIP\\GPB\\GPB 017.3\\BLS'
-#bls_compile_all(lic_server1, lic_profile1, build_path1, source_path1)
+# lic_server1 = 'LGServer'
+# lic_profile1 = 'otd-2ps'
+# build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB17_BUILDER\\BUILD'
+# source_path1 = 'D:\\DBO\\Release_17\\VIP\\GPB\\GPB 017.3\\BLS'
+# bls_compile_all(lic_server1, lic_profile1, build_path1, source_path1)
 
-#main()
+# main()
 
 
 def __copy_build__(build_path, dest_path):
@@ -842,8 +837,7 @@ def __copy_build__(build_path, dest_path):
     build_zip_file = split_filename(build_path)
     if '.zip' in build_zip_file.lower():
         build_tmp_dir = os.path.join(tempfile.gettempdir(), build_zip_file)
-        if os.path.exists(build_tmp_dir):
-            clean(build_tmp_dir)
+        clean(build_tmp_dir)
         print('EXTRACTING BUILD "{}" in "{}"'.format(build_path, build_tmp_dir))
         try:
             with zipfile.ZipFile(build_path) as z:
@@ -862,13 +856,11 @@ def __copy_build__(build_path, dest_path):
             win_rel = 'Win{}\\Release'.format(release)
             src = os.path.join(build_path, win_rel)
             dst = os.path.join(dest_path, win_rel)
-            if os.path.exists(dst):
-                clean(dst)
+            clean(dst)
             print('COPYING BUILD {} from "{}" in "{}"'.format(version, src, dst))
             copyfiles(src, dst, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
     else:
-        if os.path.exists(dest_path):
-            clean(dest_path)
+        clean(dest_path)
         print('COPYING BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
         copyfiles(build_path, dest_path, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
     return version
@@ -948,9 +940,9 @@ def download_build(settings):
             if instance in [const_instance_BANK, const_instance_CLIENT]:
                 # выкладываем билд для Б и БК
                 build_path = const_dir_TEMP_BUILD_BK
-                mask = ['*.exe', '*.ex', '*.bpl'] # todo bpl-ки в SYSTEM или в EXE?
+                mask = ['*.exe', '*.ex', '*.bpl']  # todo bpl-ки в SYSTEM или в EXE?
                 copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), mask, excluded_files)
-                if settings.ClientEverythingInEXE and instance==const_instance_CLIENT:
+                if settings.ClientEverythingInEXE and instance == const_instance_CLIENT:
                     copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_files)
                 else:
                     copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
@@ -1018,19 +1010,19 @@ def main_debug_without_clean():
         return
     if not clean(const_dir_TEMP):
         return
-    #global_settings.StarteamPassword = getpassword('ENTER StarTeam password:')
-    #print('BEGIN DOWNLOADING')
-    #if download_starteam_by_label(global_settings) == 0:
+    # global_settings.StarteamPassword = getpassword('ENTER StarTeam password:')
+    # print('BEGIN DOWNLOADING')
+    # if download_starteam_by_label(global_settings) == 0:
     #    compare_directories_BEFORE_and_AFTER()
-    #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_BANK)
-    #search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT){[\S\s]*?}
-    #generate_upgrade10_eif(const_instance_BANK)
-    #generate_upgrade10_eif(const_instance_CLIENT)
+    # search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_BANK)
+    # search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT){[\S\s]*?}
+    # generate_upgrade10_eif(const_instance_BANK)
+    # generate_upgrade10_eif(const_instance_CLIENT)
 
-    #download_build_preparation(global_settings)
-    #download_build(global_settings, const_instance_BANK)
-    #download_build(global_settings, const_instance_IC)
-    #download_build(global_settings, const_instance_CLIENT)
+    # download_build_preparation(global_settings)
+    # download_build(global_settings, const_instance_BANK)
+    # download_build(global_settings, const_instance_IC)
+    # download_build(global_settings, const_instance_CLIENT)
 
     download_build(global_settings)
 
