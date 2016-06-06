@@ -346,6 +346,12 @@ def list_files_by_list(path, mask_list):
         res_list += [os.path.join(d, filename) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
     return res_list
 
+
+# -------------------------------------------------------------------------------------------------
+def list_files_remove_paths_and_change_extension(path, newext, mask_list):
+    return [os.path.splitext(bls_file)[0] + newext for bls_file in
+                  [split_filename(bls_file) for bls_file in list_files_by_list(path, mask_list)]]
+
 # -------------------------------------------------------------------------------------------------
 def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
     for wildcard in wildcards:
@@ -768,14 +774,15 @@ def bls_get_uses_graph(path):
 
 
 # -------------------------------------------------------------------------------------------------
-def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, lic_server, lic_profile):
+def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, uses_list_for_file, lic_server, lic_profile):
     run_str = os.path.join(build_path, 'bscc.exe {} -M0 -O0 -S{} -A{}'.format(bls_file_name_with_path, lic_server, lic_profile))
     process = subprocess.Popen(run_str, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     process.wait()
     out, err = process.communicate()
     str_res = '\n\t\t\t'+out.decode('windows-1251').replace('\n', '\n\t\t\t')
-    if 'Compiled succesfully' not in str_res:
-        print1('ERROR: {} {}'.format(bls_file_name, str_res))
+    if 'Compiled succesfully' not in str_res:  # succesfully с ошибкой. так и должно быть
+        print1('ERROR: File "{}", Uses list "{}"{}'.format(bls_file_name, uses_list_for_file, str_res))
+        print1('COMPILATION continues. Please wait...')
         return False
     else:
         # print1('Compiled "{}"'.format(bls_file_name))
@@ -796,7 +803,7 @@ def __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph, bls
                                         bls_uses_file_name, observed_list, compiled_successfully)
             # добавляем в список учтенных файлов
             observed_list.append(bls_file_name)
-            if __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, lic_server, lic_profile):
+            if __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, uses_list, lic_server, lic_profile):
                 # компилируем и добавляем в список успешно откомпилированных
                 compiled_successfully.append(bls_file_name)
         else:
@@ -986,16 +993,13 @@ def download_build(settings):
 # -------------------------------------------------------------------------------------------------
 def copy_bll(ClientEverythingInEXE):
     print('COPYING BLL files to patch')
-    bll_files1 = [os.path.splitext(bls_file)[0]+'.bll' for bls_file in [split_filename(bls_file) for bls_file in list_files(const_dir_COMPARED, '*.bls')]]
-    bll_files2 = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files1)
-    if len(bll_files1) != len(bll_files2):
-        print1('ERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files1) - set(bll_files2))))
+    bll_files_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['*.bls'])
+    bll_files_tmp = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files_bank)
+    if len(bll_files_tmp) != len(bll_files_bank):
+        print1('ERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files_bank) - set(bll_files_tmp))))
         return False
-    bll_files_client = list_files_by_list(const_dir_TEMP_BUILD_BK, ['?a*.bll', '?c*.bll'])
-    print(bll_files1)
-    print(bll_files2)
-    print(bll_files_client)
-    copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files2, [])
+    bll_files_client = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?a*.bls', '?c*.bls'])
+    copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files_bank, [])
     if ClientEverythingInEXE:
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT), bll_files_client, [])
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), bll_files_client, [])
@@ -1066,3 +1070,5 @@ def main_debug_without_clean():
 
 # main_debug_without_clean()
 main()
+
+
