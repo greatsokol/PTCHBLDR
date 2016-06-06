@@ -14,11 +14,12 @@ const_instance_BANK = "BANK"
 const_instance_IC = "IC"
 const_instance_CLIENT = "CLIENT"
 const_dir_CURRENT = os.path.abspath('')
-const_dir_TEMP = os.path.join(const_dir_CURRENT, 'TEMP')
-const_dir_TEMP_BUILD_BK = os.path.join(const_dir_TEMP, 'BUILD', 'BK')
-const_dir_TEMP_BUILD_IC = os.path.join(const_dir_TEMP, 'BUILD', 'IC')
-const_dir_BEFORE = os.path.join(const_dir_TEMP, 'BEFORE')
-const_dir_AFTER = os.path.join(const_dir_TEMP, 'AFTER')
+const_dir_TEMP = os.path.join(const_dir_CURRENT, '_TEMP')
+const_dir_TEMP_BUILD_BK = os.path.join(const_dir_TEMP, '_BUILD', 'BK')
+const_dir_TEMP_BUILD_IC = os.path.join(const_dir_TEMP, '_BUILD', 'IC')
+const_dir_TEMP_SOURCE = os.path.join(const_dir_TEMP, '_SOURCE')
+const_dir_BEFORE = os.path.join(const_dir_TEMP, '_BEFORE')
+const_dir_AFTER = os.path.join(const_dir_TEMP, '_AFTER')
 const_dir_COMPARED = os.path.join(const_dir_TEMP, '_COMPARE_RESULT')
 const_dir_PATCH = os.path.join(const_dir_TEMP, 'PATCH')
 
@@ -78,30 +79,29 @@ dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU_CLIENT_SYSTEM = lambda: os.path.join(dir
 
 get_filename_UPGRADE10_eif = lambda instance: os.path.join(dir_PATCH(instance), 'Upgrade(10).eif')
 print1 = lambda message: print('\t'+message)
-print2 = lambda message: print('\t\t'+message)
+#print2 = lambda message: print('\t\t'+message)
 
 
-def __splitpath__(path):
+def getLastElementOfPath(path):
+    result = ''
     path = os.path.normpath(path)
     names = path.split(os.path.sep)
-    return names
+    if len(names):
+        result = names[len(names) - 1]
+    return result
 
 
 def split_filename(path):
     result = ''
     if os.path.isfile(path):
-        names = __splitpath__(path)
-        if len(names):
-            result = names[len(names)-1]
+        result = getLastElementOfPath(path)
     return result
 
 
 def split_lastdirname(path):
     result = ''
     if os.path.isdir(path):
-        names = __splitpath__(path)
-        if len(names):
-            return names[len(names)-1]
+        result = getLastElementOfPath(path)
     return result
 
 const_UPGRADE10_HEADER = \
@@ -310,6 +310,8 @@ class GlobalSettings:
     BuildBK = ''
     BuildIC = ''
     ClientEverythingInEXE = False
+    LicenseServer = ''
+    LicenseProfile = ''
 # -------------------------------------------------------------------------------------------------
 
 
@@ -435,6 +437,8 @@ def read_config():
         settings.StarteamProject = parser.get(section_special, 'StarteamProject').strip()
         settings.StarteamView = parser.get(section_special, 'StarteamView').strip()
         settings.StarteamLogin = parser.get(section_special, 'StarteamLogin').strip()
+        settings.LicenseServer = parser.get(section_special, 'LicenseServer').strip()
+        settings.LicenseProfile = parser.get(section_special, 'LicenseProfile').strip()
         settings.Labels = parser.items(section_labels)
         settings.BuildBK = parser.get(section_build, 'BK').strip()
         settings.BuildIC = parser.get(section_build, 'IC').strip()
@@ -473,70 +477,53 @@ def read_config():
 # -------------------------------------------------------------------------------------------------
 
 
-def download_starteam_by_label(settings):
-    total_result = -1
+def download_starteam(settings, labels_list, path_for_after, path_for_before, st_path_to_download='', st_file_to_download=''):
+    total_result = False
     try:
-        for key, label in settings.Labels:
-            if not label:
-                print1('NOT DEFINED label "{}" (empty)'.format(key))
+        if labels_list is None:
+            labels_list = [('any','')]
+        for key, label in labels_list:
+            if not label and not st_file_to_download:
+                raise ValueError('No label or file to download specified')
+            message = 'DOWNLOADING'
+            if st_file_to_download:
+                message += ' file "{}"'.format(st_file_to_download)
+            if label:
+                message += ' for label "{}"'.format(label)
+            print(message + '. Please wait...')
+
+            if key == 'labelbefore':
+                outdir = path_for_before
             else:
-                print1('DOWNLOADING for label "{}". Please wait...'.format(label))
-                if key == 'labelbefore':
-                    outdir = const_dir_BEFORE
-                else:
-                    outdir = const_dir_AFTER
+                outdir = path_for_after
 
-                launch_string = quote(settings.stcmd)
-                launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}"'.format(
-                                    settings.StarteamLogin,
-                                    settings.StarteamPassword,
-                                    settings.StarteamServer,
-                                    settings.StarteamPort,
-                                    settings.StarteamProject,
-                                    settings.StarteamView)
-                launch_string += ' -rp ' + quote(outdir)
+            launch_string = quote(settings.stcmd)
+            launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}"'.format(
+                                settings.StarteamLogin,
+                                settings.StarteamPassword,
+                                settings.StarteamServer,
+                                settings.StarteamPort,
+                                settings.StarteamProject,
+                                settings.StarteamView)
+            if st_path_to_download:
+                launch_string += '/"{}"'.format(st_path_to_download)
+            launch_string += ' -rp ' + quote(outdir)
+            if label:
                 launch_string += ' -vl ' + quote(label)
+            if st_file_to_download:
+                launch_string += " "+st_file_to_download
 
-                # print(launch_string)
-                result = subprocess.call(launch_string)
-                if result == 0:
-                    print2('FINISHED downloading for label "{}"'.format(label))
-                    total_result = 0
-                else:
-                    print2('ERROR when downloading label "{}"'.format(label))
-
-    except BaseException as e:
-        print2('Error when downloading from Starteam ({})'.format(e))
-    return total_result
-# -------------------------------------------------------------------------------------------------
-
-
-def download_starteam_by_file(settings, path, filename, where_to_save):
-    total_result = -1
-    try:
-        print1('DOWNLOADING file "{}". Please wait...'.format(path+filename))
-        launch_string = quote(settings.stcmd)
-        launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}/{}"'.format(
-                                    settings.StarteamLogin,
-                                    settings.StarteamPassword,
-                                    settings.StarteamServer,
-                                    settings.StarteamPort,
-                                    settings.StarteamProject,
-                                    settings.StarteamView,
-                                    path)
-        launch_string += " -rp " + quote(where_to_save)
-        launch_string += " " + filename
-
-        # print(launch_string)
-        result = subprocess.call(launch_string)
-        if result == 0:
-            print2('FINISHED downloading file "{}"'.format(filename))
-            total_result = 0
-        else:
-            print2('ERROR when downloading file "{}"'.format(filename))
+            # print(launch_string)
+            result = subprocess.call(launch_string)
+            if result == 0:
+                # print1('FINISHED '+message)
+                total_result += True
+            else:
+                print1('ERROR '+message)
+                total_result += False
 
     except BaseException as e:
-        print2('Error when downloading from Starteam ({})'.format(e))
+        print1('ERROR when downloading from Starteam ({})'.format(e))
     return total_result
 # -------------------------------------------------------------------------------------------------
 
@@ -553,21 +540,21 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
         for file in dircmp.diff_files:
             path = os.path.join(after, file)
             if os.path.isfile(path):
-                print2('copying {}'.format(path))
+                print1('copying {}'.format(path))
                 makedirs(wheretocopy)
                 shutil.copy2(path, wheretocopy)
             else:
-                print2('something wrong {} -> {}'.format(path, wheretocopy))
+                print1('something wrong {} -> {}'.format(path, wheretocopy))
 
     if dircmp.right_only:
         for file in dircmp.right_only:
             path = os.path.join(after, file)
             if os.path.isfile(path):
-                print2('copying {}'.format(path))
+                print1('copying {}'.format(path))
                 makedirs(wheretocopy)
                 shutil.copy2(path, wheretocopy)
             else:
-                print2('copying DIR with contents {}'.format(path))
+                print1('copying DIR with contents {}'.format(path))
                 clean(os.path.join(wheretocopy, file))
                 shutil.copytree(path, os.path.join(wheretocopy, file))
 # -------------------------------------------------------------------------------------------------
@@ -581,9 +568,9 @@ def compare_directories_BEFORE_and_AFTER():
         __compare_and_copy_dirs_recursively__(const_dir_BEFORE, const_dir_AFTER, const_dir_COMPARED)
     else:
         os.rename(const_dir_AFTER, const_dir_COMPARED)
-        print1('USING folder "AFTER" as compare result, because "BEFORE" not exists:')
-        print2('BEFORE (not exists): {}'.format(const_dir_BEFORE))
-        print2('AFTER              : {}'.format(const_dir_AFTER))
+        print('USING folder "AFTER" as compare result, because "BEFORE" not exists:')
+        print1('BEFORE (not exists): {}'.format(const_dir_BEFORE))
+        print1('AFTER              : {}'.format(const_dir_AFTER))
 
     print('\tFINISHED compare directories. LOOK at {}'.format(const_dir_COMPARED))
 # -------------------------------------------------------------------------------------------------
@@ -635,11 +622,11 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
         elif structure_type == '84':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Статусы'>"
         else:
-            print2('ERROR unknown structure type {} for filename {}'.format(structure_type, file_name))
+            print1('ERROR unknown structure type {} for filename {}'.format(structure_type, file_name))
 
         return '  '+result.format(counter, structure_type, file_name)+'\n'
     else:
-        print2('ERROR can not detect structure type by filename ({})'.format(file_name))
+        print1('ERROR can not detect structure type by filename ({})'.format(file_name))
 # -------------------------------------------------------------------------------------------------
 
 
@@ -647,16 +634,17 @@ def download_TABLE10_files_for_DATA_FILES(settings, instance):
     eif_list = list_files(dir_COMPARED_BASE(instance), "*.eif")
     for eif_file in eif_list:
         # проверим соответствует ли название файла формату "*(data).eif"
-        file_type_match = re.findall('\(data\)\.eif', eif_file, flags=re.IGNORECASE)
+        file_type_match = re.findall(r'\(data\)\.eif', eif_file, flags=re.IGNORECASE)
         if len(file_type_match):
             eif10_file = str(eif_file).replace(file_type_match[0], '(10).eif')
-            # отрежем путь (splitfilename)
-            eif10_file = split_filename(eif10_file)
+            # отрежем путь (splitfilename не пашет, если файла нет)
+            eif10_file = getLastElementOfPath(eif10_file)
             # и проверим есть ли файл eif10_file в списке файлов eif_list
             exists = [file1 for file1 in eif_list if re.search(re.escape(eif10_file), file1)]
             if not exists:
                 # если файла eif10_file в списке загруженных файлов нет, то выгрузим его из стартима
-                download_starteam_by_file(settings, 'BASE/'+instance+'/TABLES/', eif10_file, const_dir_COMPARED)
+                #download_starteam_by_file(settings, 'BASE/'+instance+'/TABLES/', eif10_file, '', const_dir_COMPARED)
+                download_starteam(settings, None, const_dir_COMPARED, '', 'BASE/'+instance+'/TABLES/', eif10_file)
 # -------------------------------------------------------------------------------------------------
 
 
@@ -727,7 +715,7 @@ def get_build_version(build_path):
                     break
 
     except BaseException as e:
-        print('ERROR: can not detect version of build ({})'.format(e))
+        print1('ERROR: can not detect version of build ({})'.format(e))
         raise e
     return result
 # -------------------------------------------------------------------------------------------------
@@ -789,17 +777,20 @@ def __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph, bls
     bls_file_name = bls_file_name.lower()
     if bls_file_name not in observed_list:  # если файл отсутствует в списке откомпилированных
         bls_item_info = bls_uses_graph.get(bls_file_name)
-        uses_list = bls_item_info[1]
-        bls_file_name_with_path = bls_item_info[0]
-        if len(uses_list):  # если файл зависит от других файлов, то проведем
-            for bls_uses_file_name in uses_list:  # компиляцию каждого файла
-                __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph,
-                                    bls_uses_file_name, observed_list, compiled_successfully)
-        # добавляем в список учтенных файлов
-        observed_list.append(bls_file_name)
-        if __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, lic_server, lic_profile):
-            # компилируем и добавляем в список успешно откомпилированных
-            compiled_successfully.append(bls_file_name)
+        if bls_item_info:
+            uses_list = bls_item_info[1]
+            bls_file_name_with_path = bls_item_info[0]
+            if len(uses_list):  # если файл зависит от других файлов, то проведем
+                for bls_uses_file_name in uses_list:  # компиляцию каждого файла
+                    __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph,
+                                        bls_uses_file_name, observed_list, compiled_successfully)
+            # добавляем в список учтенных файлов
+            observed_list.append(bls_file_name)
+            if __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, lic_server, lic_profile):
+                # компилируем и добавляем в список успешно откомпилированных
+                compiled_successfully.append(bls_file_name)
+        else:
+            raise FileNotFoundError('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(bls_file_name))
 
 
 def bls_compile_all(lic_server, lic_profile, build_path, source_path):
@@ -809,10 +800,13 @@ def bls_compile_all(lic_server, lic_profile, build_path, source_path):
     bls_uses_graph = bls_get_uses_graph(build_path)     # строим граф зависимостей по строкам uses
     observed_list = []
     compiled_successfully = []
-    for bls_file_name in bls_uses_graph:                # компилируем все bls
-        __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph,
-                            bls_file_name, observed_list, compiled_successfully)
-    print1("COMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
+    try:
+        for bls_file_name in bls_uses_graph:                # компилируем все bls
+            __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph,
+                                bls_file_name, observed_list, compiled_successfully)
+        print1("COMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
+    except FileNotFoundError as e:
+        print1('ERROR: {}'.format(e))
 
 # VM-MSK01LS03
 # otd-2ps
@@ -879,6 +873,9 @@ def download_build(settings):
     if buildIC:
         instances.append(const_instance_IC)
         buildIC_version = __copy_build__(buildIC, const_dir_TEMP_BUILD_IC)
+
+    if not len(instances):
+        return False
 
     for instance in instances:
         print('COPYING build into patch for {}'.format(instance))
@@ -979,7 +976,7 @@ def download_build(settings):
                 copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(), ['bsi.dll'], [])
                 copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTAdmin(), ['bsi.dll'], [])
                 # todo INETTEMP
-
+    return True
 
 # -------------------------------------------------------------------------------------------------
 
@@ -992,15 +989,22 @@ def main():
         return
     # clean(const_dir_PATCH)
     global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
-    print('BEGIN DOWNLOADING')
-    if download_starteam_by_label(global_settings) == 0:
+    print('BEGIN')
+    if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
         compare_directories_BEFORE_and_AFTER()
         download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_BANK)
         download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
-        download_build(global_settings)
-    print('DONE!!!')
+    if download_build(global_settings):  # если завершена загрузка билда
+        # загрузим все исходники текущей ревизии
+        if download_starteam(global_settings, None, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
+            # загрузим поверх ревизии исходников, помеченные метками
+            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
+                # запустим компиляцию этой каши
+                bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE)
+
+    print('DONE!!!\a')
 # -------------------------------------------------------------------------------------------------
 
 
@@ -1008,24 +1012,27 @@ def main_debug_without_clean():
     global_settings = read_config()
     if global_settings is None:
         return
-    if not clean(const_dir_TEMP):
-        return
-    # global_settings.StarteamPassword = getpassword('ENTER StarTeam password:')
-    # print('BEGIN DOWNLOADING')
-    # if download_starteam_by_label(global_settings) == 0:
-    #    compare_directories_BEFORE_and_AFTER()
-    # search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_BANK)
-    # search_for_DATA_FILES_without_10_FILES_and_download_them(global_settings, const_instance_CLIENT){[\S\s]*?}
-    # generate_upgrade10_eif(const_instance_BANK)
-    # generate_upgrade10_eif(const_instance_CLIENT)
+    # if not clean(const_dir_TEMP):
+    #    return
+    # clean(const_dir_PATCH)
+    global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
+    print('BEGIN')
+    '''
+    if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
+        compare_directories_BEFORE_and_AFTER()
+        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_BANK)
+        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
+        generate_upgrade10_eif(const_instance_BANK)
+        generate_upgrade10_eif(const_instance_CLIENT)
+    '''
+    if download_build(global_settings):  # если завершена загрузка билда
+        # загрузим все исходники текущей ревизии
+        if download_starteam(global_settings, None, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
+            # загрузим поверх ревизии исходников, помеченные метками
+            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
+                # запустим компиляцию этой каши
+                bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE)
+    print('DONE!!!\a')
 
-    # download_build_preparation(global_settings)
-    # download_build(global_settings, const_instance_BANK)
-    # download_build(global_settings, const_instance_IC)
-    # download_build(global_settings, const_instance_CLIENT)
-
-    download_build(global_settings)
-
-    print('DONE!!!')
-
-main_debug_without_clean()
+# main_debug_without_clean()
+main()
