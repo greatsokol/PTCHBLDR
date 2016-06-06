@@ -13,8 +13,7 @@ import fnmatch
 const_instance_BANK = "BANK"
 const_instance_IC = "IC"
 const_instance_CLIENT = "CLIENT"
-const_dir_CURRENT = os.path.abspath('')
-const_dir_TEMP = os.path.join(const_dir_CURRENT, '_TEMP')
+const_dir_TEMP = os.path.join(os.path.abspath(''), '_TEMP')
 const_dir_TEMP_BUILD_BK = os.path.join(const_dir_TEMP, '_BUILD', 'BK')
 const_dir_TEMP_BUILD_IC = os.path.join(const_dir_TEMP, '_BUILD', 'IC')
 const_dir_TEMP_SOURCE = os.path.join(const_dir_TEMP, '_SOURCE')
@@ -28,6 +27,7 @@ dir_PATCH = lambda instance='': os.path.join(const_dir_PATCH, instance)
 dir_PATCH_DATA = lambda instance: os.path.join(dir_PATCH(instance), 'DATA')
 dir_PATCH_CBSTART = lambda instance, version='': os.path.join(dir_PATCH(instance), 'CBSTART{}'.format(version))
 dir_PATCH_LIBFILES = lambda instance, version='': os.path.join(dir_PATCH(instance), 'LIBFILES{}'.format(version))
+dir_PATCH_LIBFILES_USER = lambda instance: os.path.join(dir_PATCH_LIBFILES(instance), 'USER')
 
 dir_PATCH_LIBFILES_BNK = lambda version='': os.path.join(dir_PATCH(const_instance_BANK), 'LIBFILES{}.BNK'.format(version))
 dir_PATCH_LIBFILES_BNK_ADD = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'add')
@@ -71,6 +71,7 @@ dir_PATCH_LIBFILES_TEMPLATE_DISTRIB = lambda: os.path.join(dir_PATCH_LIBFILES_TE
 dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), 'CLIENT')
 dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT(), 'EXE')
 dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT(), 'SYSTEM')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_USER = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT(), 'USER')
 dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE(), 'Language')
 dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'ENGLISH')
 dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'RUSSIAN')
@@ -336,9 +337,16 @@ def makedirs(path):
 
 def list_files(path, mask):
     return [os.path.join(d, filename) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
+
+
 # -------------------------------------------------------------------------------------------------
+def list_files_by_list(path, mask_list):
+    res_list = []
+    for mask in mask_list:
+        res_list += [os.path.join(d, filename) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
+    return res_list
 
-
+# -------------------------------------------------------------------------------------------------
 def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
     for wildcard in wildcards:
         files = list_files(src_dir, wildcard)
@@ -487,9 +495,9 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                 raise ValueError('No label or file to download specified')
             message = 'DOWNLOADING'
             if st_file_to_download:
-                message += ' file "{}"'.format(st_file_to_download)
+                message += ' file(s) "{}{}"'.format(st_path_to_download, st_file_to_download)
             if label:
-                message += ' for label "{}"'.format(label)
+                message += ' file(s) for label "{}"'.format(label)
             print(message + '. Please wait...')
 
             if key == 'labelbefore':
@@ -718,9 +726,9 @@ def get_build_version(build_path):
         print1('ERROR: can not detect version of build ({})'.format(e))
         raise e
     return result
+
+
 # -------------------------------------------------------------------------------------------------
-
-
 def bls_get_uses_graph(path):
     def __replace_unwanted_symbols__(pattern, string):
         find_all = re.findall(pattern, string, flags=re.MULTILINE)
@@ -759,6 +767,7 @@ def bls_get_uses_graph(path):
     return bls_uses_graph
 
 
+# -------------------------------------------------------------------------------------------------
 def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, lic_server, lic_profile):
     run_str = os.path.join(build_path, 'bscc.exe {} -M0 -O0 -S{} -A{}'.format(bls_file_name_with_path, lic_server, lic_profile))
     process = subprocess.Popen(run_str, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -773,6 +782,7 @@ def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, lic_serv
         return True
 
 
+# -------------------------------------------------------------------------------------------------
 def __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph, bls_file_name, observed_list, compiled_successfully):
     bls_file_name = bls_file_name.lower()
     if bls_file_name not in observed_list:  # если файл отсутствует в списке откомпилированных
@@ -793,6 +803,7 @@ def __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph, bls
             raise FileNotFoundError('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(bls_file_name))
 
 
+# -------------------------------------------------------------------------------------------------
 def bls_compile_all(lic_server, lic_profile, build_path, source_path):
     print('BEGIN BLS COMPILATION. Please wait...')
     clean(build_path, ['*.bls', '*.bll'])               # очищаем каталог билда от bls и bll
@@ -805,18 +816,11 @@ def bls_compile_all(lic_server, lic_profile, build_path, source_path):
             __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph,
                                 bls_file_name, observed_list, compiled_successfully)
         print1("COMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
+        return True
     except FileNotFoundError as e:
         print1('ERROR: {}'.format(e))
-
-# VM-MSK01LS03
-# otd-2ps
-# lic_server1 = 'LGServer'
-# lic_profile1 = 'otd-2ps'
-# build_path1 = 'd:\\Users\\greatsokol\\Desktop\\BLL_GPB17_BUILDER\\BUILD'
-# source_path1 = 'D:\\DBO\\Release_17\\VIP\\GPB\\GPB 017.3\\BLS'
-# bls_compile_all(lic_server1, lic_profile1, build_path1, source_path1)
-
-# main()
+        return False
+# -------------------------------------------------------------------------------------------------
 
 
 def __copy_build__(build_path, dest_path):
@@ -978,9 +982,29 @@ def download_build(settings):
                 # todo INETTEMP
     return True
 
+
 # -------------------------------------------------------------------------------------------------
+def copy_bll(ClientEverythingInEXE):
+    print('COPYING BLL files to patch')
+    bll_files1 = [os.path.splitext(bls_file)[0]+'.bll' for bls_file in [split_filename(bls_file) for bls_file in list_files(const_dir_COMPARED, '*.bls')]]
+    bll_files2 = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files1)
+    if len(bll_files1) != len(bll_files2):
+        print1('ERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files1) - set(bll_files2))))
+        return False
+    bll_files_client = list_files_by_list(const_dir_TEMP_BUILD_BK, ['?a*.bll', '?c*.bll'])
+    print(bll_files1)
+    print(bll_files2)
+    print(bll_files_client)
+    copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files2, [])
+    if ClientEverythingInEXE:
+        copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT), bll_files_client, [])
+        copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), bll_files_client, [])
+    else:
+        copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_CLIENT), bll_files_client, [])
+        copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_USER(), bll_files_client, [])
+    return True
 
-
+# -------------------------------------------------------------------------------------------------
 def main():
     global_settings = read_config()
     if global_settings is None:
@@ -997,17 +1021,21 @@ def main():
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
     if download_build(global_settings):  # если завершена загрузка билда
+        # загрузим дополнительный билд (если есть)
+        if download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll'):
+            copyfiles(os.path.join(const_dir_TEMP_BUILD_BK,'DLL'), const_dir_TEMP_BUILD_BK, ['*.dll'], [])
         # загрузим все исходники текущей ревизии
         if download_starteam(global_settings, None, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
             # загрузим поверх ревизии исходников, помеченные метками
             if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
                 # запустим компиляцию этой каши
-                bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE)
-
+                if bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE):
+                    # копируем готовые BLL в патч
+                    copy_bll(global_settings.ClientEverythingInEXE)
     print('DONE!!!\a')
+
+
 # -------------------------------------------------------------------------------------------------
-
-
 def main_debug_without_clean():
     global_settings = read_config()
     if global_settings is None:
@@ -1026,6 +1054,8 @@ def main_debug_without_clean():
         generate_upgrade10_eif(const_instance_CLIENT)
     '''
     if download_build(global_settings):  # если завершена загрузка билда
+        # загрузим дополнительный билд
+        download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll')
         # загрузим все исходники текущей ревизии
         if download_starteam(global_settings, None, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
             # загрузим поверх ревизии исходников, помеченные метками
