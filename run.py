@@ -804,6 +804,7 @@ def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, uses_lis
     out, err = process.communicate()
     str_res = '\n\t\t\t'+out.decode('windows-1251').replace('\n', '\n\t\t\t')
     if 'Compiled succesfully' not in str_res:  # succesfully с ошибкой. так и должно быть
+        sys.stdout.flush()
         print1('ERROR: File "{}", Uses list "{}"{}'.format(bls_file_name, uses_list_for_file, str_res))
         print1('COMPILATION continues. Please wait...')
         return False
@@ -1049,6 +1050,7 @@ def main():
         download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
+    # todo скопировать исходники
     if download_build(global_settings):  # если завершена загрузка билда
         # загрузим дополнительный билд (если есть)
         if download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll'):
