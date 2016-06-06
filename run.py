@@ -8,6 +8,7 @@ import tempfile
 import zipfile
 import struct
 import fnmatch
+import sys
 
 
 const_instance_BANK = "BANK"
@@ -351,6 +352,28 @@ def list_files_by_list(path, mask_list):
 def list_files_remove_paths_and_change_extension(path, newext, mask_list):
     return [os.path.splitext(bls_file)[0] + newext for bls_file in
                   [split_filename(bls_file) for bls_file in list_files_by_list(path, mask_list)]]
+
+
+# Print iterations progress
+def printProgress (iteration, total, prefix = '', suffix = '', decimals = 2, barLength = 100):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : number of decimals in percent complete (Int)
+        barLength   - Optional  : character length of bar (Int)
+    """
+    filledLength    = int(round(barLength * iteration / float(total)))
+    percents        = round(100.00 * (iteration / float(total)), decimals)
+    bar             = '#' * filledLength + '-' * (barLength - filledLength)
+    sys.stdout.write('%s [%s] %s%s %s\r' % (prefix, bar, percents, '%', suffix)),
+    sys.stdout.flush()
+    if iteration == total:
+        print("\n")
+
 
 # -------------------------------------------------------------------------------------------------
 def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
@@ -806,7 +829,9 @@ def __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph, bls
             if __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, uses_list, lic_server, lic_profile):
                 # компилируем и добавляем в список успешно откомпилированных
                 compiled_successfully.append(bls_file_name)
+                printProgress(len(compiled_successfully), len(bls_uses_graph))
         else:
+            sys.stdout.flush()
             raise FileNotFoundError('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(bls_file_name))
 
 
@@ -1065,10 +1090,16 @@ def main_debug_without_clean():
             # загрузим поверх ревизии исходников, помеченные метками
             if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
                 # запустим компиляцию этой каши
-                bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE)
+                if bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE):
+                    # копируем готовые BLL в патч
+                    copy_bll(global_settings.ClientEverythingInEXE)
     print('DONE!!!\a')
 
 # main_debug_without_clean()
 main()
+
+
+
+
 
 
