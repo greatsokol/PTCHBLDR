@@ -797,15 +797,14 @@ def bls_get_uses_graph(path):
 
 
 # -------------------------------------------------------------------------------------------------
-def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, uses_list_for_file, lic_server, lic_profile):
-    run_str = os.path.join(build_path, 'bscc.exe {} -M0 -O0 -S{} -A{}'.format(bls_file_name_with_path, lic_server, lic_profile))
+def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProfile):
+    run_str = os.path.join(BuildPath, 'bscc.exe {} -M0 -O0 -S{} -A{}'.format(BlsPath, LicServer, LicProfile))
     process = subprocess.Popen(run_str, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     process.wait()
     out, err = process.communicate()
     str_res = '\n\t\t\t'+out.decode('windows-1251').replace('\n', '\n\t\t\t')
     if 'Compiled succesfully' not in str_res:  # succesfully с ошибкой. так и должно быть
-        sys.stdout.flush()
-        print1('ERROR: File "{}", Uses list "{}"{}'.format(bls_file_name, uses_list_for_file, str_res))
+        print1('ERROR: File "{}", Uses list "{}"{}'.format(BlsFileName, UsesList, str_res))
         print1('COMPILATION continues. Please wait...')
         return False
     else:
@@ -814,30 +813,29 @@ def __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, uses_lis
 
 
 # -------------------------------------------------------------------------------------------------
-def __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph, bls_file_name, observed_list, compiled_successfully):
-    bls_file_name = bls_file_name.lower()
-    if bls_file_name not in observed_list:  # если файл отсутствует в списке откомпилированных
-        bls_item_info = bls_uses_graph.get(bls_file_name)
-        if bls_item_info:
-            uses_list = bls_item_info[1]
-            bls_file_name_with_path = bls_item_info[0]
-            if len(uses_list):  # если файл зависит от других файлов, то проведем
-                for bls_uses_file_name in uses_list:  # компиляцию каждого файла
-                    __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph,
-                                        bls_uses_file_name, observed_list, compiled_successfully)
+def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileName, ObservedList, SuccessList):
+    BlsFileName = BlsFileName.lower()
+    if BlsFileName not in ObservedList:  # если файл отсутствует в списке обработанных
+        BlsItemInfo = BlsUsesGraph.get(BlsFileName)
+        #print(BlsItemInfo)
+        if BlsItemInfo:
+            UsesList = BlsItemInfo[1]
+            BlsFilePath = BlsItemInfo[0]
+            if len(UsesList):  # если файл зависит от других файлов, то проведем
+                for UsesFileName in UsesList:  # компиляцию каждого файла
+                    __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList)
             # добавляем в список учтенных файлов
-            observed_list.append(bls_file_name)
-            if __bls_compile__(build_path, bls_file_name, bls_file_name_with_path, uses_list, lic_server, lic_profile):
+            ObservedList.append(BlsFileName)
+            if __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile):
                 # компилируем и добавляем в список успешно откомпилированных
-                compiled_successfully.append(bls_file_name)
-                printProgress(len(compiled_successfully), len(bls_uses_graph))
+                SuccessList.append(BlsFileName)
+                printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
         else:
-            sys.stdout.flush()
-            raise FileNotFoundError('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(bls_file_name))
+            raise FileNotFoundError('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
 
 
 # -------------------------------------------------------------------------------------------------
-def bls_compile_all(lic_server, lic_profile, build_path, source_path):
+def BlsCompileAll(lic_server, lic_profile, build_path, source_path):
     print('BEGIN BLS COMPILATION. Please wait...')
     clean(build_path, ['*.bls', '*.bll'])               # очищаем каталог билда от bls и bll
     copyfiles(source_path, build_path, ['*.bls'], [])   # копируем в каталог билда все bls
@@ -846,16 +844,16 @@ def bls_compile_all(lic_server, lic_profile, build_path, source_path):
     compiled_successfully = []
     try:
         for bls_file_name in bls_uses_graph:                # компилируем все bls
-            __bls_compile_all__(lic_server, lic_profile, build_path, bls_uses_graph,
+            __BlsCompileAll__(lic_server, lic_profile, build_path, bls_uses_graph,
                                 bls_file_name, observed_list, compiled_successfully)
         print1("COMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
         return True
     except FileNotFoundError as e:
         print1('ERROR: {}'.format(e))
         return False
+
+
 # -------------------------------------------------------------------------------------------------
-
-
 def __copy_build__(build_path, dest_path):
     # проверка наличия пути build_path
     if not build_path:
@@ -1060,7 +1058,7 @@ def main():
             # загрузим поверх ревизии исходников, помеченные метками
             if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
                 # запустим компиляцию этой каши
-                if bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE):
+                if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE):
                     # копируем готовые BLL в патч
                     copy_bll(global_settings.ClientEverythingInEXE)
     print('DONE!!!\a')
@@ -1074,7 +1072,7 @@ def main_debug_without_clean():
     # if not clean(const_dir_TEMP):
     #    return
     # clean(const_dir_PATCH)
-    global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
+    #global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
     print('BEGIN')
     '''
     if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
@@ -1084,20 +1082,20 @@ def main_debug_without_clean():
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
     '''
-    if download_build(global_settings):  # если завершена загрузка билда
+    #if download_build(global_settings):  # если завершена загрузка билда
         # загрузим дополнительный билд
-        download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll')
+        #download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll')
         # загрузим все исходники текущей ревизии
-        if download_starteam(global_settings, None, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
+        #if download_starteam(global_settings, None, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
             # загрузим поверх ревизии исходников, помеченные метками
-            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
+            #if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
                 # запустим компиляцию этой каши
-                if bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE):
-                    # копируем готовые BLL в патч
-                    copy_bll(global_settings.ClientEverythingInEXE)
+    if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE):
+        # копируем готовые BLL в патч
+        copy_bll(global_settings.ClientEverythingInEXE)
     print('DONE!!!\a')
 
-# main_debug_without_clean()
+#main_debug_without_clean()
 main()
 
 
