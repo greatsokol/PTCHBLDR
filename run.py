@@ -228,7 +228,6 @@ const_excluded_build_for_BANK = ['autoupgr.exe', 'operedit.exe',
                                  'dosprot.exe',
                                  'lang2htm.exe',
                                  'licjoin.exe', 'lresedit.exe',
-                                 'bsiset.exe',
                                  'bsledit.exe', 'bssiclogparser.exe',
                                  'bssoapserver.exe', 'bsspluginhost.exe',
                                  'bsspluginmanager.exe', 'bsspluginsetup.exe',
@@ -265,19 +264,34 @@ const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['bsrdrct.exe'
                                                                    'bsauthserver.exe',
                                                                    'bsauthservice.exe',
                                                                    'bsem.exe',
+                                                                   'cbank500.exe',
+                                                                   'gbank.exe',
+                                                                   'bsiset.exe',
+                                                                   'inetcfg.exe',
                                                                    'bsmonitorserver.exe',
                                                                    'bsmonitorservice.exe',
                                                                    'btrdict.exe',
                                                                    'cbserv.exe',
                                                                    'combuff.exe',
-                                                                   'dictman.exe',
+                                                                   'alphamon.exe',
+                                                                   'admin.exe',
+                                                                   'phoneserver.exe',
+                                                                   'phoneservice.exe',
+                                                                   'iniconf.exe',
+                                                                   'bsphone.bpl',
+                                                                   'phetools.bpl',
+                                                                   'infoserv.exe',
+                                                                   'infoservice.exe',
+                                                                   'bscc.exe',
                                                                    'protcore.exe',
                                                                    'rts.exe',
                                                                    'rtsadmin.exe',
                                                                    'rtsinfo.exe',
                                                                    'rtsmbc.exe',
                                                                    'rtsserv.exe',
+                                                                   'bsdatapump.exe',
                                                                    'tcpagent.exe',
+                                                                   'BSSAxInf.exe',
                                                                    'tredir.exe',
                                                                    'upgr20i.exe',
                                                                    'bsi.dll',
@@ -311,6 +325,7 @@ class GlobalSettings:
     Labels = []
     BuildBK = ''
     BuildIC = ''
+    BuildCrypto = ''
     ClientEverythingInEXE = False
     LicenseServer = ''
     LicenseProfile = ''
@@ -479,6 +494,7 @@ def read_config():
         settings.Labels = parser.items(section_labels)
         settings.BuildBK = parser.get(section_build, 'BK').strip()
         settings.BuildIC = parser.get(section_build, 'IC').strip()
+        settings.BuildCrypto = parser.get(section_build, 'Crypto').strip()
         settings.ClientEverythingInEXE = parser.get(section_special, 'ClientEverythingInEXE').lower() == 'true'
 
         # проверка Labels -----------------------------------
@@ -741,6 +757,7 @@ def get_build_version(build_path):
             files += list_files(build_path, 'BRHelper.exe')
             files += list_files(build_path, 'cryptlib2x.dll')
             files += list_files(build_path, 'npBSSPlugin.dll')
+            files += list_files(build_path, 'CryptLib.dll')
             for f in files:
                 ver = None
                 try:
@@ -854,7 +871,7 @@ def BlsCompileAll(lic_server, lic_profile, build_path, source_path):
 
 
 # -------------------------------------------------------------------------------------------------
-def __copy_build__(build_path, dest_path):
+def __copy_build__(build_path, dest_path, crypto=False):
     # проверка наличия пути build_path
     if not build_path:
         return
@@ -888,10 +905,16 @@ def __copy_build__(build_path, dest_path):
             clean(dst)
             print('COPYING BUILD {} from "{}" in "{}"'.format(version, src, dst))
             copyfiles(src, dst, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
+            if crypto:
+                print('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, src, dst))
+                copyfiles(src, dst, ['CryptLib.dll', 'cr_*.dll'], [])
     else:
         clean(dest_path)
         print('COPYING BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
         copyfiles(build_path, dest_path, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
+        if crypto:
+            print('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
+            copyfiles(build_path, dest_path, ['CryptLib.dll', 'cr_*.dll'], [])
     return version
 
 
@@ -899,12 +922,18 @@ def __copy_build__(build_path, dest_path):
 def download_build(settings):
     build = settings.BuildBK
     buildIC = settings.BuildIC
+    buildCrypto = settings.BuildCrypto
 
     instances = []
     if build:
         instances.append(const_instance_BANK)
         instances.append(const_instance_CLIENT)
         build_version = __copy_build__(build, const_dir_TEMP_BUILD_BK)
+        buildCry_version = build_version
+    if buildCrypto:
+        buildCry_version = __copy_build__(buildCrypto, const_dir_TEMP_BUILD_BK, True)
+        instances.append(const_instance_BANK)
+        instances.append(const_instance_CLIENT)
     if buildIC:
         instances.append(const_instance_IC)
         buildIC_version = __copy_build__(buildIC, const_dir_TEMP_BUILD_IC)
@@ -944,8 +973,8 @@ def download_build(settings):
                     build_path = os.path.join(const_dir_TEMP_BUILD_IC, 'Win{}\\Release'.format(release))
                     mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
                     for subversion in ['64', '32']:  # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
-                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_version, release), mask, [])
-                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(build_version, release), mask, [])
+                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(buildIC_version, release), mask, [])
+                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(buildIC_version, release), mask, [])
 
             else:
                 if instance == const_instance_BANK:
