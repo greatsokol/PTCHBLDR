@@ -1060,7 +1060,7 @@ def copy_bls():
         clean(dest_dir)
         print('COPYING BLS ("{}" version style) from "{}" to {}'.format(bls_version, source_dir, dest_dir))
         try:
-            shutil.copytree(source_dir, dest_dir)  # todo скопировать исходники
+            shutil.copytree(source_dir, dest_dir)
         except BaseException as e:
             print1('ERROR when copying ({})'.format(e))
         return True
