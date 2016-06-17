@@ -17,10 +17,12 @@ const_instance_CLIENT = "CLIENT"
 const_dir_TEMP = os.path.join(os.path.abspath(''), '_TEMP')
 const_dir_TEMP_BUILD_BK = os.path.join(const_dir_TEMP, '_BUILD', 'BK')
 const_dir_TEMP_BUILD_IC = os.path.join(const_dir_TEMP, '_BUILD', 'IC')
-const_dir_TEMP_SOURCE = os.path.join(const_dir_TEMP, '_SOURCE')
+const_dir_TEMP_TEMPSOURCE = os.path.join(const_dir_TEMP, '_TEMP_SOURCE')
 const_dir_BEFORE = os.path.join(const_dir_TEMP, '_BEFORE')
 const_dir_AFTER = os.path.join(const_dir_TEMP, '_AFTER')
 const_dir_COMPARED = os.path.join(const_dir_TEMP, '_COMPARE_RESULT')
+const_dir_COMPARED_BLS = os.path.join(const_dir_COMPARED, 'BLS')
+const_dir_COMPARED_BLS_SOURCE = os.path.join(const_dir_COMPARED_BLS, 'SOURCE')
 const_dir_PATCH = os.path.join(const_dir_TEMP, 'PATCH')
 
 dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, 'BASE'), instance)
@@ -29,6 +31,7 @@ dir_PATCH_DATA = lambda instance: os.path.join(dir_PATCH(instance), 'DATA')
 dir_PATCH_CBSTART = lambda instance, version='': os.path.join(dir_PATCH(instance), 'CBSTART{}'.format(version))
 dir_PATCH_LIBFILES = lambda instance, version='': os.path.join(dir_PATCH(instance), 'LIBFILES{}'.format(version))
 dir_PATCH_LIBFILES_USER = lambda instance: os.path.join(dir_PATCH_LIBFILES(instance), 'USER')
+dir_PATCH_LIBFILES_SOURCE = os.path.join(dir_PATCH_LIBFILES(const_instance_BANK), 'SOURCE')
 
 dir_PATCH_LIBFILES_BNK = lambda version='': os.path.join(dir_PATCH(const_instance_BANK), 'LIBFILES{}.BNK'.format(version))
 dir_PATCH_LIBFILES_BNK_ADD = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'add')
@@ -1044,6 +1047,28 @@ def download_build(settings):
 
 
 # -------------------------------------------------------------------------------------------------
+def copy_bls():
+    bls_version = '15'
+    if os.path.exists(const_dir_COMPARED_BLS):
+        source_dir = const_dir_COMPARED_BLS
+        dest_dir = dir_PATCH_LIBFILES_SOURCE
+        if os.path.exists(const_dir_COMPARED_BLS_SOURCE):
+            # если такой путь существует, значит BLS выложены как для 17/20 версии
+            source_dir = const_dir_COMPARED_BLS_SOURCE
+            dest_dir = os.path.join(dest_dir,'BLS')
+            bls_version = '17/20'
+        clean(dest_dir)
+        print('COPYING BLS ("{}" version style) from "{}" to {}'.format(bls_version, source_dir, dest_dir))
+        try:
+            shutil.copytree(source_dir, dest_dir)  # todo скопировать исходники
+        except BaseException as e:
+            print1('ERROR when copying ({})'.format(e))
+        return True
+    else:
+        print('NOT COPYING BLS. Path {} not exists'.format(const_dir_COMPARED_BLS))
+        return False
+
+        # -------------------------------------------------------------------------------------------------
 def copy_bll(ClientEverythingInEXE):
     print('COPYING BLL files to patch')
     bll_files_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['*.bls'])
@@ -1070,27 +1095,28 @@ def main():
         return
     # clean(const_dir_PATCH)
     global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
-    print('BEGIN')
+    print('BEGIN ----------------')
     if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
         compare_directories_BEFORE_and_AFTER()
         download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_BANK)
         download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
-    # todo скопировать исходники
+    ShouldCompileBLS = copy_bls()
     if download_build(global_settings):  # если завершена загрузка билда
         # загрузим дополнительный билд (если есть)
-        if download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll'):
-            copyfiles(os.path.join(const_dir_TEMP_BUILD_BK,'DLL'), const_dir_TEMP_BUILD_BK, ['*.dll'], [])
-        # загрузим все исходники текущей ревизии
-        if download_starteam(global_settings, None, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
-            # загрузим поверх ревизии исходников, помеченные метками
-            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
-                # запустим компиляцию этой каши
-                if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE):
-                    # копируем готовые BLL в патч
-                    copy_bll(global_settings.ClientEverythingInEXE)
-    print('DONE!!!\a')
+        if ShouldCompileBLS:
+            if download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll'):
+                copyfiles(os.path.join(const_dir_TEMP_BUILD_BK,'DLL'), const_dir_TEMP_BUILD_BK, ['*.dll'], [])
+            # загрузим все исходники текущей ревизии
+            if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
+                # загрузим поверх ревизии исходников, помеченные метками
+                if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
+                    # запустим компиляцию этой каши
+                    if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
+                        # копируем готовые BLL в патч
+                        copy_bll(global_settings.ClientEverythingInEXE)
+    print('DONE -----------------')
 
 
 # -------------------------------------------------------------------------------------------------
@@ -1119,14 +1145,13 @@ def main_debug_without_clean():
             # загрузим поверх ревизии исходников, помеченные метками
             #if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
                 # запустим компиляцию этой каши
-    if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_SOURCE):
+    if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
         # копируем готовые BLL в патч
         copy_bll(global_settings.ClientEverythingInEXE)
     print('DONE!!!\a')
 
 #main_debug_without_clean()
 main()
-
 
 
 
