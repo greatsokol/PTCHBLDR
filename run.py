@@ -795,7 +795,7 @@ def bls_get_uses_graph(path):
                 # удаляем комментарии, которые располагаются между фигурными скобками "{ .. }"
                 text = __replace_unwanted_symbols__(r'{[\S\s]*?}', text)
                 # удаляем комментарии, которые располагаются между скобками "(* .. *)"
-                text = __replace_unwanted_symbols__(r'(\*[\S\s]*?\*)', text)
+                text = __replace_unwanted_symbols__(r'\(\*[\S\s]*?\*\)', text)
                 # удаляем однострочные комментарии, которые начинаются на "//"
                 text = __replace_unwanted_symbols__(r'//.*', text)
                 # находим текст между словом "uses" и ближайшей точкой с запятой
@@ -827,7 +827,9 @@ def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProf
     process.wait()
     out, err = process.communicate()
     str_res = '\n\t\t\t'+out.decode('windows-1251').replace('\n', '\n\t\t\t')
-    if 'Compiled succesfully' not in str_res:  # succesfully с ошибкой. так и должно быть
+    # succesfully с ошибкой. так и должно быть
+    if 'Compiled succesfully' not in str_res and \
+       'Compiled with warnings' not in str_res:
         print1('ERROR: File "{}", Uses list "{}"{}'.format(BlsFileName, UsesList, str_res))
         print1('COMPILATION continues. Please wait...')
         return False
@@ -855,7 +857,7 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
                 SuccessList.append(BlsFileName)
                 printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
         else:
-            raise FileNotFoundError('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
+            print1('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
 
 
 # -------------------------------------------------------------------------------------------------
@@ -1161,7 +1163,10 @@ def main_debug_without_clean():
     print('DONE!!!\a')
 
 #main_debug_without_clean()
+#bls_get_uses_graph('D:\\tokill2')
 main()
+
+
 
 
 
