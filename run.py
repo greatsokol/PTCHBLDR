@@ -460,6 +460,7 @@ def clean(path, masks=[]):
     if os.path.exists(path):
         try:
             if masks:
+                print('CLEANING "{}" files from "{}"'.format(path, masks))
                 for mask in masks:
                     [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
             else:
@@ -789,30 +790,33 @@ def bls_get_uses_graph(path):
     files = list_files(path, '*.bls')
     for file_name in files:
         with open(file_name) as f:
-            text = f.read()
-            # удаляем комментарии, которые располагаются между фигурными скобками "{ .. }"
-            text = __replace_unwanted_symbols__(r'{[\S\s]*?}', text)
-            # удаляем комментарии, которые располагаются между скобками "(* .. *)"
-            text = __replace_unwanted_symbols__(r'(\*[\S\s]*?\*)', text)
-            # удаляем однострочные комментарии, которые начинаются на "//"
-            text = __replace_unwanted_symbols__(r'//.*', text)
-            # находим текст между словом "uses" и ближайшей точкой с запятой
-            find = re.search(r'\buses\b([\s\S][^;]*);', text, flags=re.IGNORECASE)
-            if find:
-                text = find.group(1)
-            else:
-                text = ''
-            # разбиваем найденный текст на части между запятыми
-            uses_list = [line.strip()+'.bls' for line in text.split(',') if line.strip()]
-            # проверим, что такой файл еще не был обработан
-            file_name_without_path = split_filename(file_name).lower()
-            item_already_in_list = bls_uses_graph.get(file_name_without_path)
-            if item_already_in_list:
-                # если такой файл уже есть в списке, то выдаем ошибку
-                print1('ERROR: duplicate files, remove one of "{}" or "{}"'.format(item_already_in_list, file_name_without_path))
-            else:
-                # если файла нет в списке зависимостей, то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
-                bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
+            try:
+                text = f.read()
+                # удаляем комментарии, которые располагаются между фигурными скобками "{ .. }"
+                text = __replace_unwanted_symbols__(r'{[\S\s]*?}', text)
+                # удаляем комментарии, которые располагаются между скобками "(* .. *)"
+                text = __replace_unwanted_symbols__(r'(\*[\S\s]*?\*)', text)
+                # удаляем однострочные комментарии, которые начинаются на "//"
+                text = __replace_unwanted_symbols__(r'//.*', text)
+                # находим текст между словом "uses" и ближайшей точкой с запятой
+                find = re.search(r'\buses\b([\s\S][^;]*);', text, flags=re.IGNORECASE)
+                if find:
+                    text = find.group(1)
+                else:
+                    text = ''
+                # разбиваем найденный текст на части между запятыми
+                uses_list = [line.strip()+'.bls' for line in text.split(',') if line.strip()]
+                # проверим, что такой файл еще не был обработан
+                file_name_without_path = split_filename(file_name).lower()
+                item_already_in_list = bls_uses_graph.get(file_name_without_path)
+                if item_already_in_list:
+                    # если такой файл уже есть в списке, то выдаем ошибку
+                    print1('ERROR: duplicate files, remove one of "{}" or "{}"'.format(item_already_in_list, file_name_without_path))
+                else:
+                    # если файла нет в списке зависимостей, то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
+                    bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
+            except ValueError as e:
+                print1('Error when open file "{}" ({})'.format(file_name, e))
     return bls_uses_graph
 
 
@@ -856,8 +860,8 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
 
 # -------------------------------------------------------------------------------------------------
 def BlsCompileAll(lic_server, lic_profile, build_path, source_path):
+    clean(build_path, ['*.bls', '*.bll'])  # очищаем каталог билда от bls и bll
     print('BEGIN BLS COMPILATION. Please wait...')
-    clean(build_path, ['*.bls', '*.bll'])               # очищаем каталог билда от bls и bll
     copyfiles(source_path, build_path, ['*.bls'], [])   # копируем в каталог билда все bls
     bls_uses_graph = bls_get_uses_graph(build_path)     # строим граф зависимостей по строкам uses
     observed_list = []
@@ -874,15 +878,7 @@ def BlsCompileAll(lic_server, lic_profile, build_path, source_path):
 
 
 # -------------------------------------------------------------------------------------------------
-def __copy_build__(build_path, dest_path, crypto=False):
-    # проверка наличия пути build_path
-    if not build_path:
-        return
-    if not os.path.exists(build_path):
-        print1('PATH {} does not exists'.format(build_path))
-        return
-    # если ссылка на билд указывает не на каталог, а на файл архива
-    # попробуем провести разархивацию во временный каталог
+def __extract_build__(build_path):
     build_zip_file = split_filename(build_path)
     if '.zip' in build_zip_file.lower():
         build_tmp_dir = os.path.join(tempfile.gettempdir(), build_zip_file)
@@ -897,7 +893,21 @@ def __copy_build__(build_path, dest_path, crypto=False):
         except BaseException as e:
             print1('ERROR EXTRACTING BUILD "{}"'.format(e))
         # конец разархивации
+    return build_path
 
+# -------------------------------------------------------------------------------------------------
+def __copy_build__(build_path, build_path_crypto, dest_path):
+    # проверка наличия пути build_path
+    if not build_path:
+        return
+    if not os.path.exists(build_path):
+        print1('PATH {} does not exists'.format(build_path))
+        return
+    # если ссылка на билд указывает не на каталог, а на файл архива
+    # попробуем провести разархивацию во временный каталог
+    build_path = __extract_build__(build_path)
+    if build_path_crypto:
+        build_path_crypto = __extract_build__(build_path_crypto)
     # определяем версию билда
     version = get_build_version(build_path)
     if ('20.1' in version) or ('20.2' in version):
@@ -908,16 +918,17 @@ def __copy_build__(build_path, dest_path, crypto=False):
             clean(dst)
             print('COPYING BUILD {} from "{}" in "{}"'.format(version, src, dst))
             copyfiles(src, dst, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
-            if crypto:
+            if build_path_crypto:
+                src = os.path.join(build_path_crypto, win_rel)
                 print('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, src, dst))
                 copyfiles(src, dst, ['CryptLib.dll', 'cr_*.dll'], [])
     else:
         clean(dest_path)
         print('COPYING BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
         copyfiles(build_path, dest_path, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
-        if crypto:
+        if build_path_crypto:
             print('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
-            copyfiles(build_path, dest_path, ['CryptLib.dll', 'cr_*.dll'], [])
+            copyfiles(build_path_crypto, dest_path, ['CryptLib.dll', 'cr_*.dll'], [])
     return version
 
 
@@ -931,15 +942,10 @@ def download_build(settings):
     if build:
         instances.append(const_instance_BANK)
         instances.append(const_instance_CLIENT)
-        build_version = __copy_build__(build, const_dir_TEMP_BUILD_BK)
-        buildCry_version = build_version
-    if buildCrypto:
-        buildCry_version = __copy_build__(buildCrypto, const_dir_TEMP_BUILD_BK, True)
-        instances.append(const_instance_BANK)
-        instances.append(const_instance_CLIENT)
+        build_version = __copy_build__(build, buildCrypto, const_dir_TEMP_BUILD_BK)
     if buildIC:
         instances.append(const_instance_IC)
-        buildIC_version = __copy_build__(buildIC, const_dir_TEMP_BUILD_IC)
+        buildIC_version = __copy_build__(buildIC, buildCrypto, const_dir_TEMP_BUILD_IC)
 
     if not len(instances):
         return False
@@ -1071,13 +1077,17 @@ def copy_bls():
         # -------------------------------------------------------------------------------------------------
 def copy_bll(ClientEverythingInEXE):
     print('COPYING BLL files to patch')
-    bll_files_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['*.bls'])
-    bll_files_tmp = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files_bank)
-    if len(bll_files_tmp) != len(bll_files_bank):
-        print1('ERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files_bank) - set(bll_files_tmp))))
+    bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?b*.bls'])
+    bll_files_all = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['*.bls'])
+    bll_files_tmp = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files_all)
+    if len(bll_files_tmp) != len(bll_files_all):
+        print1('ERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files_all) - set(bll_files_tmp))))
         return False
-    bll_files_client = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?a*.bls', '?c*.bls'])
-    copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files_bank, [])
+    bll_files_client = list(set(bll_files_all) - set(bll_files_only_bank))  # list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?a*.bls', '?c*.bls'])
+    # копируем bll для банка по списку bll_files_all
+    copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files_all, [])
+
+    # копируем bll для клиента по разнице списков  bll_files_all-bll_files_only_bank
     if ClientEverythingInEXE:
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT), bll_files_client, [])
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), bll_files_client, [])
