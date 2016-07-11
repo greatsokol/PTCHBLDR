@@ -460,7 +460,7 @@ def clean(path, masks=[]):
     if os.path.exists(path):
         try:
             if masks:
-                print('CLEANING "{}" files from "{}"'.format(path, masks))
+                print('CLEANING "{}" files for "{}"'.format(path, masks))
                 for mask in masks:
                     [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
             else:
@@ -528,7 +528,7 @@ def read_config():
         print('ERROR when reading settings from file "{}":\n\t\t{}'.format(ini_filename, e))
         return None
     else:
-        print('GOT SETTINGS:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}'.
+        print('SETTINGS LOADED:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}'.
               format(settings.StarteamProject, settings.StarteamView, settings.Labels, settings.stcmd))
         return settings
 # -------------------------------------------------------------------------------------------------
@@ -670,11 +670,11 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Структуры отображений'>"
         elif structure_type == '73':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Хранимые процедуры'>"
-        elif structure_type == '81':
+        elif structure_type in ['50', '81']:
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Простые операции'>"
-        elif structure_type == '82':
+        elif structure_type in ['51', '82']:
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Табличные операции'>"
-        elif structure_type == '83':
+        elif structure_type in ['52', '83'] :
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Документарные операции'>"
         elif structure_type == '84':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Статусы'>"
@@ -779,6 +779,22 @@ def get_build_version(build_path):
 
 
 # -------------------------------------------------------------------------------------------------
+def open_encoding_aware(path):
+    encodings = ['windows-1251', 'utf-8']
+    for e in encodings:
+        try:
+            fh = open(path, 'r', encoding=e)
+            fh.readlines()
+            fh.seek(0)
+        except ValueError:
+            print1('Got error "{}" with {} , trying different encoding'.format(path, e))
+        else:
+            # print1('opening the file with encoding:  %s ' % e)
+            return fh
+    return None
+
+
+# -------------------------------------------------------------------------------------------------
 def bls_get_uses_graph(path):
     def __replace_unwanted_symbols__(pattern, string):
         find_all = re.findall(pattern, string, flags=re.MULTILINE)
@@ -789,8 +805,8 @@ def bls_get_uses_graph(path):
     bls_uses_graph = {}
     files = list_files(path, '*.bls')
     for file_name in files:
-        with open(file_name) as f:
-            try:
+        with open_encoding_aware(file_name) as f:
+            if f:
                 text = f.read()
                 # удаляем комментарии, которые располагаются между фигурными скобками "{ .. }"
                 text = __replace_unwanted_symbols__(r'{[\S\s]*?}', text)
@@ -815,17 +831,19 @@ def bls_get_uses_graph(path):
                 else:
                     # если файла нет в списке зависимостей, то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
                     bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
-            except ValueError as e:
-                print1('Error when open file "{}" ({})'.format(file_name, e))
     return bls_uses_graph
 
 
 # -------------------------------------------------------------------------------------------------
 def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProfile):
     run_str = os.path.join(BuildPath, 'bscc.exe {} -M0 -O0 -S{} -A{}'.format(BlsPath, LicServer, LicProfile))
-    process = subprocess.Popen(run_str, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    process.wait()
+    '''
+    subprocess.call(run_str)
+    return True
+    '''
+    process = subprocess.Popen(run_str, shell=False, stdout=subprocess.PIPE)  # , stderr=subprocess.PIPE
     out, err = process.communicate()
+    process.stdout.close()
     str_res = '\n\t\t\t'+out.decode('windows-1251').replace('\n', '\n\t\t\t')
     # succesfully с ошибкой. так и должно быть
     if 'Compiled succesfully' not in str_res and \
