@@ -329,6 +329,7 @@ class GlobalSettings:
     BuildBK = ''
     BuildIC = ''
     BuildCrypto = ''
+    PlaceBuildIntoPatch = False
     ClientEverythingInEXE = False
     LicenseServer = ''
     LicenseProfile = ''
@@ -499,6 +500,7 @@ def read_config():
         settings.BuildBK = parser.get(section_build, 'BK').strip()
         settings.BuildIC = parser.get(section_build, 'IC').strip()
         settings.BuildCrypto = parser.get(section_build, 'Crypto').strip()
+        settings.PlaceBuildIntoPatch = parser.get(section_build, 'PlaceBuildIntoPatch').lower() == 'true'
         settings.ClientEverythingInEXE = parser.get(section_special, 'ClientEverythingInEXE').lower() == 'true'
 
         # проверка Labels -----------------------------------
@@ -786,10 +788,11 @@ def open_encoding_aware(path):
             fh = open(path, 'r', encoding=e)
             fh.readlines()
             fh.seek(0)
-        except ValueError:
-            print1('Got error "{}" with {} , trying different encoding'.format(path, e))
+        except ValueError as err:
+            pass
+            #print1('Got error "{}" with {} , trying different encoding ({} was used)'.format(err, path, e))
         else:
-            # print1('opening the file with encoding:  %s ' % e)
+            #print1('opening the file {} with encoding:  {}'.format(path, e))
             return fh
     return None
 
@@ -836,7 +839,13 @@ def bls_get_uses_graph(path):
 
 # -------------------------------------------------------------------------------------------------
 def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProfile):
-    run_str = os.path.join(BuildPath, 'bscc.exe {} -M0 -O0 -S{} -A{}'.format(BlsPath, LicServer, LicProfile))
+    # print(BlsPath)
+    # проверим, есть ли компилятор
+    bscc_path = os.path.join(BuildPath, 'bscc.exe')
+    if not os.path.exists(bscc_path):
+        # компилятора нет, ошибка
+        raise FileNotFoundError('Compiler {} not found'.format(bscc_path))
+    run_str = bscc_path+' {} -M0 -O0 -S{} -A{}'.format(BlsPath, LicServer, LicProfile)
     '''
     subprocess.call(run_str)
     return True
@@ -971,104 +980,113 @@ def download_build(settings):
         return False
 
     for instance in instances:
-        print('COPYING build into patch for {}'.format(instance))
         if instance in [const_instance_BANK, const_instance_CLIENT]:
             is20 = ('20.1' in build_version) or ('20.2' in build_version)
+            if is20 and instance == const_instance_BANK:
+                build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
+                # это копируются все файлы, которые будут участвовать в компиляции BLS на следующем шаге
+                # т.к. в результате __copy_build__ весь билд оказывается разделен на Win32 и Win64
+                copyfiles(build_path, const_dir_TEMP_BUILD_BK, ['*.*'], [])
         else:
             is20 = ('20.1' in buildIC_version) or ('20.2' in buildIC_version)
 
-        if instance == const_instance_BANK:
-            excluded_files = const_excluded_build_for_BANK
-        elif instance == const_instance_IC:
-            excluded_files = const_excluded_build_for_BANK
-        elif instance == const_instance_CLIENT:
-            excluded_files = const_excluded_build_for_CLIENT
-
-        if is20:  # для билда 20-ой версии
-            if instance == const_instance_IC:  # выкладываем билд плагина для ИК
-                build_path_bank = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')  # подготовим путь к билду банка
-                mask = ['bssetup.msi', 'CalcCRC.exe']
-                copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
-                mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginWebKitSetup.exe']
-                copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
-
-                for release in ['32', '64']:  # выкладываем билд в LIBFILES32(64).BNK
-                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK(release), ['UpdateIc.exe'], [])
-                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_EXE(release), ['bsiset.exe'], [])
-                    mask = ['bsi.dll', 'bsi.jar']
-                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(release), mask, [])
-                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(release), mask, [])
-
-                    build_path = os.path.join(const_dir_TEMP_BUILD_IC, 'Win{}\\Release'.format(release))
-                    mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
-                    for subversion in ['64', '32']:  # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
-                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(buildIC_version, release), mask, [])
-                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(buildIC_version, release), mask, [])
-
-            else:
-                if instance == const_instance_BANK:
-                    build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
-                    copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
-                for release in ['32', '64']:  # выкладываем остальной билд для Б и БК для версий 32 и 64
-                    build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win{}\\Release'.format(release))
-                    mask = ['*.exe', '*.ex', '*.bpl']
-                    copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance, release), mask, excluded_files)
-                    copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance, release), ['*.dll'], excluded_files)
-                    copyfiles(build_path, dir_PATCH_CBSTART(instance, release), ['CBStart.exe'], [])
-                    if instance == const_instance_BANK:
-                        # заполняем TEMPLATE шаблон клиента в банковском патче
-                        mask = ['*.exe', '*.ex', '*.bpl']
-                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(release), mask, const_excluded_build_for_CLIENT)
-                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(release), ['*.dll'], const_excluded_build_for_CLIENT)
-                        mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
-                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(release), mask, [])
-                        mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
-                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(release), mask, [])
-                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
-
-        else:  # для билдов 15 и 17
-            if instance in [const_instance_BANK, const_instance_CLIENT]:
-                # выкладываем билд для Б и БК
-                build_path = const_dir_TEMP_BUILD_BK
-                mask = ['*.exe', '*.ex', '*.bpl']  # todo bpl-ки в SYSTEM или в EXE?
-                copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), mask, excluded_files)
-                if settings.ClientEverythingInEXE and instance == const_instance_CLIENT:
-                    copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_files)
-                else:
-                    copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
-
+        #  Если в настройках включено копирование билда в патч
+        if settings.PlaceBuildIntoPatch:
+            print('COPYING build into patch for {}'.format(instance))
             if instance == const_instance_BANK:
-                copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
-                # заполняем билдом TEMPLATE шаблон клиента в банковском патче
-                mask = ['*.exe', '*.ex', '*.bpl']
-                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), mask, const_excluded_build_for_CLIENT)
-                if settings.ClientEverythingInEXE:
-                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), ['*.dll'], const_excluded_build_for_CLIENT)
-                else:
-                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM(), ['*.dll'], const_excluded_build_for_CLIENT)
-                mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
-                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), mask, [])
-                mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
-                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN(), mask, [])
-                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU(), mask, [])
-                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN_CLIENT_SYSTEM(), mask, [])
-                copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU_CLIENT_SYSTEM(), mask, [])
-                # заполняем LIBFILES.BNK в банковском патче билдом для БК
-                mask = ['autoupgr.exe', 'bscc.exe', 'compiler.exe', 'operedit.exe', 'testconn.exe', 'treeedit.exe']
-                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_ADD(), mask, [])
-                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_BSISET_EXE(), ['bsiset.exe'], [])
-                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_LICENSE_EXE(), ['protcore.exe'], [])
+                excluded_files = const_excluded_build_for_BANK
+            elif instance == const_instance_IC:
+                excluded_files = const_excluded_build_for_BANK
+            elif instance == const_instance_CLIENT:
+                excluded_files = const_excluded_build_for_CLIENT
+            if is20:  # для билда 20-ой версии
+                if instance == const_instance_IC:  # выкладываем билд плагина для ИК
+                    build_path_bank = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')  # подготовим путь к билду банка
+                    mask = ['bssetup.msi', 'CalcCRC.exe']
+                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
+                    mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginWebKitSetup.exe']
+                    copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
 
-            if instance == const_instance_IC:
-                # заполняем LIBFILES.BNK в банковском патче билдом для ИК
-                build_path = const_dir_TEMP_BUILD_IC
-                mask = ['bssaxset.exe', 'inetcfg.exe', 'rts.exe', 'rtsconst.exe', 'rtsinfo.exe']
-                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_EXE(), mask, [])
-                mask = ['llComDat.dll', 'llrtscfg.dll', 'llxmlman.dll', 'msxml2.bpl']
-                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_SYSTEM(), mask, [])
-                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(), ['bsi.dll'], [])
-                copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTAdmin(), ['bsi.dll'], [])
-                # todo INETTEMP
+                    for release in ['32', '64']:  # выкладываем билд в LIBFILES32(64).BNK
+                        copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK(release), ['UpdateIc.exe'], [])
+                        copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_EXE(release), ['bsiset.exe'], [])
+                        mask = ['bsi.dll', 'bsi.jar']
+                        copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(release), mask, [])
+                        copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(release), mask, [])
+
+                        build_path = os.path.join(const_dir_TEMP_BUILD_IC, 'Win{}\\Release'.format(release))
+                        mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
+                        for subversion in ['64', '32']:  # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
+                            copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(buildIC_version, release), mask, [])
+                            copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(buildIC_version, release), mask, [])
+
+                else:
+                    if instance == const_instance_BANK:
+                        build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
+                        # это копируются все файлы, которые будут участвовать в компиляции BLS на следующем шаге
+                        # т.к. в результате __copy_build__ весь билд оказывается разделен на Win32 и Win64
+                        copyfiles(build_path, const_dir_TEMP_BUILD_BK, ['*.*'], [])
+                        copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл CBStart.exe в корень патча
+                    for release in ['32', '64']:  # выкладываем остальной билд для Б и БК для версий 32 и 64
+                        build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win{}\\Release'.format(release))
+                        mask = ['*.exe', '*.ex', '*.bpl']
+                        copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance, release), mask, excluded_files)
+                        copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance, release), ['*.dll'], excluded_files)
+                        copyfiles(build_path, dir_PATCH_CBSTART(instance, release), ['CBStart.exe'], [])
+                        if instance == const_instance_BANK:
+                            # заполняем TEMPLATE шаблон клиента в банковском патче
+                            mask = ['*.exe', '*.ex', '*.bpl']
+                            copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(release), mask, const_excluded_build_for_CLIENT)
+                            copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(release), ['*.dll'], const_excluded_build_for_CLIENT)
+                            mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
+                            copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(release), mask, [])
+                            mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
+                            copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(release), mask, [])
+                            copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
+
+            else:  # для билдов 15 и 17
+                if instance in [const_instance_BANK, const_instance_CLIENT]:
+                    # выкладываем билд для Б и БК
+                    build_path = const_dir_TEMP_BUILD_BK
+                    mask = ['*.exe', '*.ex', '*.bpl']  # todo bpl-ки в SYSTEM или в EXE?
+                    copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), mask, excluded_files)
+                    if settings.ClientEverythingInEXE and instance == const_instance_CLIENT:
+                        copyfiles(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_files)
+                    else:
+                        copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
+
+                if instance == const_instance_BANK:
+                    copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
+                    # заполняем билдом TEMPLATE шаблон клиента в банковском патче
+                    mask = ['*.exe', '*.ex', '*.bpl']
+                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), mask, const_excluded_build_for_CLIENT)
+                    if settings.ClientEverythingInEXE:
+                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), ['*.dll'], const_excluded_build_for_CLIENT)
+                    else:
+                        copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM(), ['*.dll'], const_excluded_build_for_CLIENT)
+                    mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
+                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), mask, [])
+                    mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
+                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN(), mask, [])
+                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU(), mask, [])
+                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN_CLIENT_SYSTEM(), mask, [])
+                    copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU_CLIENT_SYSTEM(), mask, [])
+                    # заполняем LIBFILES.BNK в банковском патче билдом для БК
+                    mask = ['autoupgr.exe', 'bscc.exe', 'compiler.exe', 'operedit.exe', 'testconn.exe', 'treeedit.exe']
+                    copyfiles(build_path, dir_PATCH_LIBFILES_BNK_ADD(), mask, [])
+                    copyfiles(build_path, dir_PATCH_LIBFILES_BNK_BSISET_EXE(), ['bsiset.exe'], [])
+                    copyfiles(build_path, dir_PATCH_LIBFILES_BNK_LICENSE_EXE(), ['protcore.exe'], [])
+
+                if instance == const_instance_IC:
+                    # заполняем LIBFILES.BNK в банковском патче билдом для ИК
+                    build_path = const_dir_TEMP_BUILD_IC
+                    mask = ['bssaxset.exe', 'inetcfg.exe', 'rts.exe', 'rtsconst.exe', 'rtsinfo.exe']
+                    copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_EXE(), mask, [])
+                    mask = ['llComDat.dll', 'llrtscfg.dll', 'llxmlman.dll', 'msxml2.bpl']
+                    copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_SYSTEM(), mask, [])
+                    copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(), ['bsi.dll'], [])
+                    copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTAdmin(), ['bsi.dll'], [])
+                    # todo INETTEMP
     return True
 
 
@@ -1094,7 +1112,7 @@ def copy_bls():
         print('NOT COPYING BLS. Path {} not exists'.format(const_dir_COMPARED_BLS))
         return False
 
-        # -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
 def copy_bll(ClientEverythingInEXE):
     print('COPYING BLL files to patch')
     bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?b*.bls'])
@@ -1167,18 +1185,25 @@ def main_debug_without_clean():
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
     '''
-    #if download_build(global_settings):  # если завершена загрузка билда
+
+    if download_build(global_settings):  # если завершена загрузка билда
         # загрузим дополнительный билд
-        #download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll')
+        download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll')
+        '''
         # загрузим все исходники текущей ревизии
-        #if download_starteam(global_settings, None, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
+        if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
             # загрузим поверх ревизии исходников, помеченные метками
-            #if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_SOURCE, '', 'BLS/', '*.bls'):
+            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
                 # запустим компиляцию этой каши
+                pass
+        '''
+    '''
     if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
-        # копируем готовые BLL в патч
-        copy_bll(global_settings.ClientEverythingInEXE)
+      # копируем готовые BLL в патч
+      copy_bll(global_settings.ClientEverythingInEXE)
+    '''
     print('DONE!!!\a')
+
 
 #main_debug_without_clean()
 #bls_get_uses_graph('D:\\tokill2')
