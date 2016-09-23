@@ -818,22 +818,23 @@ def bls_get_uses_graph(path):
                 # удаляем однострочные комментарии, которые начинаются на "//"
                 text = __replace_unwanted_symbols__(r'//.*', text)
                 # находим текст между словом "uses" и ближайшей точкой с запятой
-                find = re.search(r'\buses\b([\s\S][^;]*);', text, flags=re.IGNORECASE)
-                if find:
-                    text = find.group(1)
-                else:
-                    text = ''
-                # разбиваем найденный текст на части между запятыми
-                uses_list = [line.strip()+'.bls' for line in text.split(',') if line.strip()]
-                # проверим, что такой файл еще не был обработан
-                file_name_without_path = split_filename(file_name).lower()
-                item_already_in_list = bls_uses_graph.get(file_name_without_path)
-                if item_already_in_list:
-                    # если такой файл уже есть в списке, то выдаем ошибку
-                    print1('ERROR: duplicate files, remove one of "{}" or "{}"'.format(item_already_in_list, file_name_without_path))
-                else:
-                    # если файла нет в списке зависимостей, то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
-                    bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
+                list_of_uses = re.findall(r'\buses\b([\s\S][^;]*);', text, flags=re.IGNORECASE)
+                if len(list_of_uses):
+                    for group in list_of_uses:
+                        text_of_uses = group
+                        # разбиваем найденный текст на части между запятыми
+                        uses_list = [line.strip()+'.bls' for line in text_of_uses.split(',') if line.strip()]
+                        # проверим, что такой файл еще не был обработан
+                        file_name_without_path = split_filename(file_name).lower()
+                        item_already_in_list = bls_uses_graph.get(file_name_without_path)
+                        # если элемент с названием "file_name_without_path" уже есть в списке bls_uses_graph
+                        if item_already_in_list:
+                            # то дополним его [список_зависимостей] списком "uses_list"
+                            item_already_in_list[1].extend(uses_list);
+                        else:
+                            # если файла нет в списке зависимостей,
+                            # то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
+                            bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
     return bls_uses_graph
 
 
@@ -1185,28 +1186,25 @@ def main_debug_without_clean():
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
     '''
-
+    '''
     if download_build(global_settings):  # если завершена загрузка билда
         # загрузим дополнительный билд
         download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll')
-        '''
         # загрузим все исходники текущей ревизии
         if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
             # загрузим поверх ревизии исходников, помеченные метками
             if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
                 # запустим компиляцию этой каши
                 pass
-        '''
     '''
     if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
       # копируем готовые BLL в патч
       copy_bll(global_settings.ClientEverythingInEXE)
-    '''
     print('DONE!!!\a')
 
 
 #main_debug_without_clean()
-#bls_get_uses_graph('D:\\tokill2')
+#bls_get_uses_graph('D:\\tokill')
 main()
 
 
