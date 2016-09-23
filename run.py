@@ -836,6 +836,7 @@ def bls_get_uses_graph(path):
                             # то дополним его [список_зависимостей] списком "uses_list"
                             item_already_in_list[1].extend(uses_list)
                         else:
+                            # TODO: ЭТА ВЕТКА НЕ НУЖНА, НАДО УДАЛИТЬ (ВЫШЕ УЖЕ ДОБАВЛЯЮ ПУСТОЙ ЭЛЕМЕНТ)
                             # если файла нет в списке зависимостей,
                             # то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
                             bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
