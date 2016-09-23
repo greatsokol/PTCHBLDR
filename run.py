@@ -891,8 +891,6 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
                 printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
         else:
             print1('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
-            print("Press any key")
-            sys.stdin.read(1)
 
 
 # -------------------------------------------------------------------------------------------------
