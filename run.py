@@ -818,7 +818,7 @@ def bls_get_uses_graph(path):
                 # удаляем однострочные комментарии, которые начинаются на "//"
                 text = __replace_unwanted_symbols__(r'//.*', text)
                 # находим текст между словом "uses" и ближайшей точкой с запятой
-                list_of_uses = re.findall(r'\buses\b([\s\S][^;]*);', text, flags=re.IGNORECASE)
+                list_of_uses = re.findall(r'(?<=\buses\s)(?s)(.*?)(?=;)', text, flags=re.IGNORECASE|re.MULTILINE)
 
                 file_name_without_path = split_filename(file_name).lower()
                 # добавляем пустой элемент для файла "file_name", на случай, если файл не имеет uses
@@ -828,18 +828,19 @@ def bls_get_uses_graph(path):
                     for text_of_uses in list_of_uses:
                         # разбиваем найденный текст на части между запятыми
                         uses_list = [line.strip()+'.bls' for line in text_of_uses.split(',') if line.strip()]
-                        # проверим, что такой файл еще не был обработан
+                        if uses_list:
+                            # проверим, что такой файл еще не был обработан
 
-                        item_already_in_list = bls_uses_graph.get(file_name_without_path)
-                        # если элемент с названием "file_name_without_path" уже есть в списке bls_uses_graph
-                        if item_already_in_list:
-                            # то дополним его [список_зависимостей] списком "uses_list"
-                            item_already_in_list[1].extend(uses_list)
-                        else:
-                            # TODO: ЭТА ВЕТКА НЕ НУЖНА, НАДО УДАЛИТЬ (ВЫШЕ УЖЕ ДОБАВЛЯЮ ПУСТОЙ ЭЛЕМЕНТ)
-                            # если файла нет в списке зависимостей,
-                            # то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
-                            bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
+                            item_already_in_list = bls_uses_graph.get(file_name_without_path)
+                            # если элемент с названием "file_name_without_path" уже есть в списке bls_uses_graph
+                            if item_already_in_list:
+                                # то дополним его [список_зависимостей] списком "uses_list"
+                                item_already_in_list[1].extend(uses_list)
+                            else:
+                                # TODO: ЭТА ВЕТКА НЕ НУЖНА, НАДО УДАЛИТЬ (ВЫШЕ УЖЕ ДОБАВЛЯЮ ПУСТОЙ ЭЛЕМЕНТ)
+                                # если файла нет в списке зависимостей,
+                                # то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
+                                bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
     return bls_uses_graph
 
 
