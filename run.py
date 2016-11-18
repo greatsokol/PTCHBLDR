@@ -14,6 +14,7 @@ import sys
 const_instance_BANK = "BANK"
 const_instance_IC = "IC"
 const_instance_CLIENT = "CLIENT"
+const_instance_CLIENT_MBA = "CLIENT_MBA"
 const_dir_TEMP = os.path.join(os.path.abspath(''), '_TEMP')
 const_dir_TEMP_BUILD_BK = os.path.join(const_dir_TEMP, '_BUILD', 'BK')
 const_dir_TEMP_BUILD_IC = os.path.join(const_dir_TEMP, '_BUILD', 'IC')
@@ -23,6 +24,7 @@ const_dir_AFTER = os.path.join(const_dir_TEMP, '_AFTER')
 const_dir_COMPARED = os.path.join(const_dir_TEMP, '_COMPARE_RESULT')
 const_dir_COMPARED_BLS = os.path.join(const_dir_COMPARED, 'BLS')
 const_dir_COMPARED_BLS_SOURCE = os.path.join(const_dir_COMPARED_BLS, 'SOURCE')
+const_dir_COMPARED_BLS_SOURCE_RCK = os.path.join(const_dir_COMPARED_BLS_SOURCE, 'RCK')
 const_dir_PATCH = os.path.join(const_dir_TEMP, 'PATCH')
 
 dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, 'BASE'), instance)
@@ -406,31 +408,26 @@ def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
                     shutil.copy2(filename_with_path, dest_dir)
                 except BaseException as e:
                     print1('ERROR: can\'t copy file "{}" to "{}" ({})'.format(filename_with_path, dest_dir, e))
+
+
 # -------------------------------------------------------------------------------------------------
+def copyfiles_of_version(src_dir, dest_dir, exe_version, wildcards=['*.*'], excluded_files=[]):
+    for wildcard in wildcards:
+        files = list_files(src_dir, wildcard)
+        for filename_with_path in files:
+            filename = split_filename(filename_with_path)
+            if filename.lower() not in excluded_files and filename != '.' and filename != '..':
+                makedirs(dest_dir)
+                try:
+                    if get_binary_platform(filename_with_path) == exe_version:
+                        shutil.copy2(filename_with_path, dest_dir)
+                except BaseException as e:
+                    print1('ERROR: can\'t copy file "{}" to "{}" ({})'.format(filename_with_path, dest_dir, e))
 
 
+# -------------------------------------------------------------------------------------------------
 def quote(string2prepare):
     return "\""+string2prepare+"\""
-
-
-def get_version_from_win32_pe(file):
-    # http://windowssdk.msdn.microsoft.com/en-us/library/ms646997.aspx
-    sig = struct.pack("32s", u"VS_VERSION_INFO".encode("utf-16-le"))
-    # This pulls the whole file into memory, so not very feasible for
-    # large binaries.
-    try:
-        filedata = open(file).read()
-    except IOError:
-        return "Unknown"
-    offset = filedata.find(sig)
-    if offset == -1:
-        return "Unknown"
-
-    filedata = filedata[offset + 32: offset + 32 + (13*4)]
-    version_struct = struct.unpack("13I", filedata)
-    ver_ms, ver_ls = version_struct[4], version_struct[5]
-    return "%d.%d.%d.%d" % (ver_ls & 0x0000ffff, (ver_ms & 0xffff0000) >> 16,
-                            ver_ms & 0x0000ffff, (ver_ls & 0xffff0000) >> 16)
 
 
 # -------------------------------------------------------------------------------------------------
@@ -536,50 +533,74 @@ def read_config():
 # -------------------------------------------------------------------------------------------------
 
 
+def check_labels(settings):
+    pass;
+# -------------------------------------------------------------------------------------------------
+
+
 def download_starteam(settings, labels_list, path_for_after, path_for_before, st_path_to_download='', st_file_to_download=''):
     total_result = False
+    key_AltStarteamView = "_StarteamView".lower()  # Приставка к названию метки, в которой содержится название доп вида стартима
     try:
         if labels_list is None:
             labels_list = [('any','')]
         for key, label in labels_list:
-            if not label and not st_file_to_download:
-                raise ValueError('No label or file to download specified')
-            message = 'DOWNLOADING'
-            if st_file_to_download:
-                message += ' file(s) "{}{}"'.format(st_path_to_download, st_file_to_download)
-            if label:
-                message += ' file(s) for label "{}"'.format(label)
-            print(message + '. Please wait...')
+            if key_AltStarteamView not in key:  # Если название метки не содержит "_StarteamView"
+                if not label and not st_file_to_download:
+                    raise ValueError('No label or file to download specified')
+                message = 'DOWNLOADING'
+                if st_file_to_download:
+                    message += ' files "{}{}"'.format(st_path_to_download, st_file_to_download)
+                if label:
+                    message += ' files for label "{}"'.format(label)
 
-            if key == 'labelbefore':
-                outdir = path_for_before
-            else:
-                outdir = path_for_after
 
-            launch_string = quote(settings.stcmd)
-            launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}"'.format(
-                                settings.StarteamLogin,
-                                settings.StarteamPassword,
-                                settings.StarteamServer,
-                                settings.StarteamPort,
-                                settings.StarteamProject,
-                                settings.StarteamView)
-            if st_path_to_download:
-                launch_string += '/"{}"'.format(st_path_to_download)
-            launch_string += ' -rp ' + quote(outdir)
-            if label:
-                launch_string += ' -vl ' + quote(label)
-            if st_file_to_download:
-                launch_string += " "+st_file_to_download
+                if (key == 'LabelBefore'.lower()) or (key == 'DateBefore'.lower()):
+                    outdir = path_for_before
+                else:
+                    outdir = path_for_after
 
-            # print(launch_string)
-            result = subprocess.call(launch_string)
-            if result == 0:
-                # print1('FINISHED '+message)
-                total_result += True
-            else:
-                print1('ERROR '+message)
-                total_result += False
+                # Если у метки есть указание для скачивания в альтернативном виде,
+                # например Label22_StarteamView = DBO:Release_17:VIP:GPB:GPB 017.3 107N
+                StarteamView = settings.StarteamView
+                try:
+                    Label_AltStarteamView = dict(labels_list)[key+key_AltStarteamView]
+                    if Label_AltStarteamView is not None:
+                        StarteamView = Label_AltStarteamView
+                        message += ' from "'+StarteamView+'"'
+                except KeyError as e:
+                    pass;
+
+                launch_string = quote(settings.stcmd)
+                launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}"'.format(
+                                    settings.StarteamLogin,
+                                    settings.StarteamPassword,
+                                    settings.StarteamServer,
+                                    settings.StarteamPort,
+                                    settings.StarteamProject,
+                                    StarteamView)
+
+                if st_path_to_download:
+                    launch_string += '/"{}"'.format(st_path_to_download)
+                launch_string += ' -rp ' + quote(outdir)
+                if (key == 'datebefore') or (key == 'dateafter'):
+                    if label:
+                        launch_string += ' -vd ' + quote(label)
+                else:
+                    if label:
+                        launch_string += ' -vl ' + quote(label)
+                if st_file_to_download:
+                    launch_string += " "+st_file_to_download
+
+                # print(launch_string)
+                print(message + '. Please wait...')
+                result = subprocess.call(launch_string)
+                if result == 0:
+                    # print1('FINISHED '+message)
+                    total_result += True
+                else:
+                    print1('ERROR '+message)
+                    total_result += False
 
     except BaseException as e:
         print1('ERROR when downloading from Starteam ({})'.format(e))
@@ -649,7 +670,7 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
         elif structure_type == '12':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Визуальные формы'>"
         elif structure_type == '14':
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Конфигурации'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Конфигурации'>"
         elif structure_type == '16':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Автопроцедуры'>"
         elif structure_type == '18':
@@ -665,7 +686,7 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
         elif structure_type == '65':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS что-то'>"
         elif structure_type == '66':
-            result = "<352|66|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS Errors params'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS Errors params'>"
         elif structure_type == '71':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Генераторы'>"
         elif structure_type == '72':
@@ -673,11 +694,11 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
         elif structure_type == '73':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Хранимые процедуры'>"
         elif structure_type in ['50', '81']:
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Простые операции'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Простые операции'>"
         elif structure_type in ['51', '82']:
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Табличные операции'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Табличные операции'>"
         elif structure_type in ['52', '83'] :
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Документарные операции'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Документарные операции'>"
         elif structure_type == '84':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Статусы'>"
         else:
@@ -702,8 +723,9 @@ def download_TABLE10_files_for_DATA_FILES(settings, instance):
             exists = [file1 for file1 in eif_list if re.search(re.escape(eif10_file), file1)]
             if not exists:
                 # если файла eif10_file в списке загруженных файлов нет, то выгрузим его из стартима
-                #download_starteam_by_file(settings, 'BASE/'+instance+'/TABLES/', eif10_file, '', const_dir_COMPARED)
-                download_starteam(settings, None, const_dir_COMPARED, '', 'BASE/'+instance+'/TABLES/', eif10_file)
+                # сначала пытаемся выгрузить для 17 версии (папка TABLES), если не получается, то для 15 версии )(Table)
+                if not download_starteam(settings, None, const_dir_COMPARED, '', 'BASE/'+instance+'/TABLES/', eif10_file):
+                    download_starteam(settings, None, const_dir_COMPARED, '', 'BASE/' + instance + '/Table/', eif10_file)
 # -------------------------------------------------------------------------------------------------
 
 
@@ -730,9 +752,66 @@ def generate_upgrade10_eif(instance):
                         f.writelines(line)
                         counter += 1
                 f.writelines(const_UPGRADE10_FOOTER)
+
+
 # -------------------------------------------------------------------------------------------------
+def get_version_from_win32_pe(file):
+    # http://windowssdk.msdn.microsoft.com/en-us/library/ms646997.aspx
+    sig = struct.pack("32s", u"VS_VERSION_INFO".encode("utf-16-le"))
+    # This pulls the whole file into memory, so not very feasible for
+    # large binaries.
+    try:
+        filedata = open(file).read()
+    except IOError:
+        return "Unknown"
+    offset = filedata.find(sig)
+    if offset == -1:
+        return "Unknown"
+
+    filedata = filedata[offset + 32: offset + 32 + (13 * 4)]
+    version_struct = struct.unpack("13I", filedata)
+    ver_ms, ver_ls = version_struct[4], version_struct[5]
+    return "%d.%d.%d.%d" % (ver_ls & 0x0000ffff, (ver_ms & 0xffff0000) >> 16,
+                            ver_ms & 0x0000ffff, (ver_ls & 0xffff0000) >> 16)
 
 
+# -------------------------------------------------------------------------------------------------
+def get_binary_platform(fullFilePath):
+    IMAGE_FILE_MACHINE_I386=332
+    IMAGE_FILE_MACHINE_IA64=512
+    IMAGE_FILE_MACHINE_AMD64=34404
+
+    try:
+        with open(fullFilePath, 'rb') as f:
+            s=f.read(2).decode(encoding="utf-8", errors="strict")
+            if s!="MZ":
+                return None
+                # print("Not an EXE file")
+            else:
+                f.seek(60)
+                s=f.read(4)
+                header_offset=struct.unpack("<L", s)[0]
+                f.seek(header_offset+4)
+                s=f.read(2)
+                machine=struct.unpack("<H", s)[0]
+
+                if machine==IMAGE_FILE_MACHINE_I386:
+                    return "Win32"
+                    #print("IA-32 (32-bit x86)")
+                elif machine==IMAGE_FILE_MACHINE_IA64:
+                    return "Win64"
+                    #print("IA-64 (Itanium)")
+                elif machine==IMAGE_FILE_MACHINE_AMD64:
+                    return "Win64"
+                    #print("AMD64 (64-bit x86)")
+                else:
+                    return "Unknown"
+                    #print("Unknown architecture")
+    except BaseException:
+        return None
+
+
+# -------------------------------------------------------------------------------------------------
 def __get_exe_file_info__(fullFilePath):
     # http://windowssdk.msdn.microsoft.com/en-us/library/ms646997.aspx
     sig = struct.pack("32s", u"VS_VERSION_INFO".encode("utf-16-le"))
@@ -931,6 +1010,7 @@ def __extract_build__(build_path):
         # конец разархивации
     return build_path
 
+
 # -------------------------------------------------------------------------------------------------
 def __copy_build__(build_path, build_path_crypto, dest_path):
     # проверка наличия пути build_path
@@ -978,6 +1058,7 @@ def download_build(settings):
     if build:
         instances.append(const_instance_BANK)
         instances.append(const_instance_CLIENT)
+        instances.append(const_instance_CLIENT_MBA)
         build_version = __copy_build__(build, buildCrypto, const_dir_TEMP_BUILD_BK)
     if buildIC:
         instances.append(const_instance_IC)
@@ -987,7 +1068,7 @@ def download_build(settings):
         return False
 
     for instance in instances:
-        if instance in [const_instance_BANK, const_instance_CLIENT]:
+        if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
             is20 = ('20.1' in build_version) or ('20.2' in build_version)
             if is20 and instance == const_instance_BANK:
                 build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
@@ -1004,7 +1085,7 @@ def download_build(settings):
                 excluded_files = const_excluded_build_for_BANK
             elif instance == const_instance_IC:
                 excluded_files = const_excluded_build_for_BANK
-            elif instance == const_instance_CLIENT:
+            elif instance in [const_instance_CLIENT, const_instance_CLIENT_MBA]:
                 excluded_files = const_excluded_build_for_CLIENT
             if is20:  # для билда 20-ой версии
                 if instance == const_instance_IC:  # выкладываем билд плагина для ИК
@@ -1052,7 +1133,7 @@ def download_build(settings):
                             copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
 
             else:  # для билдов 15 и 17
-                if instance in [const_instance_BANK, const_instance_CLIENT]:
+                if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
                     # выкладываем билд для Б и БК
                     build_path = const_dir_TEMP_BUILD_BK
                     mask = ['*.exe', '*.ex', '*.bpl']  # todo bpl-ки в SYSTEM или в EXE?
@@ -1119,27 +1200,42 @@ def copy_bls():
         print('NOT COPYING BLS. Path {} not exists'.format(const_dir_COMPARED_BLS))
         return False
 
+
 # -------------------------------------------------------------------------------------------------
-def copy_bll(ClientEverythingInEXE):
+def copy_bll(client_everything_in_exe):
     print('COPYING BLL files to patch')
-    bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?b*.bls'])
+    bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?b*.bls', 'RT_*.bls'])
+    bll_files_only_mba = list_files_remove_paths_and_change_extension(const_dir_COMPARED_BLS_SOURCE_RCK, '.bll', ['*.bls'])
     bll_files_all = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['*.bls'])
     bll_files_tmp = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files_all)
     if len(bll_files_tmp) != len(bll_files_all):
         print1('ERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files_all) - set(bll_files_tmp))))
         return False
-    bll_files_client = list(set(bll_files_all) - set(bll_files_only_bank))  # list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?a*.bls', '?c*.bls'])
+
+    bll_files_client_mba = list(set(bll_files_all) - set(bll_files_only_bank))
+    bll_files_client = list(set(bll_files_client_mba) - set(bll_files_only_mba))
+
     # копируем bll для банка по списку bll_files_all
     copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files_all, [])
 
     # копируем bll для клиента по разнице списков  bll_files_all-bll_files_only_bank
-    if ClientEverythingInEXE:
+    if client_everything_in_exe:
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT), bll_files_client, [])
+        copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT_MBA), bll_files_client_mba, [])
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), bll_files_client, [])
     else:
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_CLIENT), bll_files_client, [])
+        copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_CLIENT_MBA), bll_files_client_mba, [])
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_USER(), bll_files_client, [])
     return True
+
+
+# -------------------------------------------------------------------------------------------------
+def download_mba_dll(settings):
+    if download_starteam(settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll'):
+        copyfiles_of_version(os.path.join(const_dir_TEMP_BUILD_BK, 'DLL'), const_dir_TEMP_BUILD_BK, 'Win32' ['*.dll'], [])
+        return True
+
 
 # -------------------------------------------------------------------------------------------------
 def main():
@@ -1153,24 +1249,22 @@ def main():
     print('BEGIN ----------------')
     if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
         compare_directories_BEFORE_and_AFTER()
-        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_BANK)
-        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
-        generate_upgrade10_eif(const_instance_BANK)
-        generate_upgrade10_eif(const_instance_CLIENT)
-    ShouldCompileBLS = copy_bls()
-    if download_build(global_settings):  # если завершена загрузка билда
-        # загрузим дополнительный билд (если есть)
-        if ShouldCompileBLS:
-            if download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll'):
-                copyfiles(os.path.join(const_dir_TEMP_BUILD_BK,'DLL'), const_dir_TEMP_BUILD_BK, ['*.dll'], [])
-            # загрузим все исходники текущей ревизии
-            if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
-                # загрузим поверх ревизии исходников, помеченные метками
-                if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
-                    # запустим компиляцию этой каши
-                    if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
-                        # копируем готовые BLL в патч
-                        copy_bll(global_settings.ClientEverythingInEXE)
+        for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
+            download_TABLE10_files_for_DATA_FILES(global_settings, instance)
+            generate_upgrade10_eif(instance)
+        ShouldCompileBLS = copy_bls()
+        if download_build(global_settings):  # если завершена загрузка билда
+            # загрузим дополнительный билд (если есть)
+            if ShouldCompileBLS:
+                download_mba_dll(global_settings)
+                # загрузим все исходники текущей ревизии
+                if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
+                    # загрузим поверх ревизии исходников, помеченные метками
+                    if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
+                        # запустим компиляцию этой каши
+                        if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
+                            # копируем готовые BLL в патч
+                            copy_bll(global_settings.ClientEverythingInEXE)
     print('DONE -----------------')
 
 
@@ -1212,7 +1306,7 @@ def main_debug_without_clean():
 #main_debug_without_clean()
 #bls_get_uses_graph('D:\\tokill')
 main()
-
+#generate_upgrade10_eif(const_instance_CLIENT_MBA)
 
 
 
