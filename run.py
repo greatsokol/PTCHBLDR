@@ -1233,7 +1233,7 @@ def copy_bll(client_everything_in_exe):
 # -------------------------------------------------------------------------------------------------
 def download_mba_dll(settings):
     if download_starteam(settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll'):
-        copyfiles_of_version(os.path.join(const_dir_TEMP_BUILD_BK, 'DLL'), const_dir_TEMP_BUILD_BK, 'Win32' ['*.dll'], [])
+        copyfiles_of_version(os.path.join(const_dir_TEMP_BUILD_BK, 'DLL'), const_dir_TEMP_BUILD_BK, 'Win32', ['*.dll'], [])
         return True
 
 
