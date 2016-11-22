@@ -458,11 +458,11 @@ def clean(path, masks=[]):
     if os.path.exists(path):
         try:
             if masks:
-                print('CLEANING "{}" files for "{}"'.format(path, masks))
+                print('CLEANING {} for {} files'.format(path, masks))
                 for mask in masks:
                     [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
             else:
-                print('CLEANING "{}"'.format(path))
+                print('CLEANING {}'.format(path))
                 shutil.rmtree(path, onerror=__onerror_handler__)
         except FileNotFoundError:
             pass  # если папка отсутствует, то продолжаем молча
