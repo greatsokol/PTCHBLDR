@@ -552,8 +552,10 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                 if st_file_to_download:
                     message += ' files "{}{}"'.format(st_path_to_download, st_file_to_download)
                 if label:
-                    message += ' files for label "{}"'.format(label)
-
+                    if (key == 'DateBefore'.lower() or key == 'DateAfter'.lower()):
+                        message += ' files for date "{}"'.format(label)
+                    else:
+                        message += ' files for label "{}"'.format(label)
 
                 if (key == 'LabelBefore'.lower()) or (key == 'DateBefore'.lower()):
                     outdir = path_for_before
@@ -583,11 +585,10 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                 if st_path_to_download:
                     launch_string += '/"{}"'.format(st_path_to_download)
                 launch_string += ' -rp ' + quote(outdir)
-                if (key == 'datebefore') or (key == 'dateafter'):
-                    if label:
-                        launch_string += ' -vd ' + quote(label)
-                else:
-                    if label:
+                if label:
+                    if (key == 'DateBefore'.lower() or key == 'DateAfter'.lower()):
+                        launch_string += ' -cfgd ' + quote(label)
+                    else:
                         launch_string += ' -vl ' + quote(label)
                 if st_file_to_download:
                     launch_string += " "+st_file_to_download
@@ -1276,7 +1277,7 @@ def main_debug_without_clean():
     # if not clean(const_dir_TEMP):
     #    return
     # clean(const_dir_PATCH)
-    #global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
+    global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
     print('BEGIN')
     '''
     if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
@@ -1286,7 +1287,7 @@ def main_debug_without_clean():
         generate_upgrade10_eif(const_instance_BANK)
         generate_upgrade10_eif(const_instance_CLIENT)
     '''
-    '''
+
     if download_build(global_settings):  # если завершена загрузка билда
         # загрузим дополнительный билд
         download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll')
@@ -1295,12 +1296,10 @@ def main_debug_without_clean():
             # загрузим поверх ревизии исходников, помеченные метками
             if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
                 # запустим компиляцию этой каши
-                pass
-    '''
-    if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
-      # копируем готовые BLL в патч
-      copy_bll(global_settings.ClientEverythingInEXE)
-    print('DONE!!!\a')
+                if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
+                  # копируем готовые BLL в патч
+                  copy_bll(global_settings.ClientEverythingInEXE)
+                print('DONE!!!\a')
 
 
 #main_debug_without_clean()
