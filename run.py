@@ -294,7 +294,6 @@ const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['bsrdrct.exe'
                                                                    'rtsinfo.exe',
                                                                    'rtsmbc.exe',
                                                                    'rtsserv.exe',
-                                                                   'bsdatapump.exe',
                                                                    'tcpagent.exe',
                                                                    'BSSAxInf.exe',
                                                                    'tredir.exe',
@@ -309,13 +308,126 @@ const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['bsrdrct.exe'
                                                                    'dbofileattach.dll',
                                                                    'eif2base64_cli.dll',
                                                                    'ilshield.dll',
-                                                                   'iltmail.dll',
                                                                    'llazklnk.dll',
                                                                    'llexctrl.dll',
                                                                    'llrpjet2.dll',
                                                                    'npbssplugin.dll',
                                                                    'perfcontrol.dll',
-                                                                   'ptchmake.exe']
+                                                                   'ptchmake.exe',
+                                                                   'updateal.exe',
+                                                                   'TranConv.exe',
+                                                                   'wwwgate.exe',
+                                                                   'TestTran.exe',
+                                                                   'infoinst.exe',
+                                                                   'gate_tst.exe',
+                                                                   'testconn.exe',
+                                                                   'etoknman.exe',
+                                                                   'stunnel.exe',
+                                                                   'defcfgup.exe',
+                                                                   'rxctl5.bpl',
+                                                                   'rtsrcfg.exe',
+                                                                   'rtsconst.exe',
+                                                                   'rtftobmp.exe',
+                                                                   'PtchMakeCl.exe',
+                                                                   'PrintServer.exe',
+                                                                   'phonelib.bpl',
+                                                                   'NewBase.exe',
+                                                                   'btrieve.bpl',
+                                                                   'mssobjs.bpl',
+                                                                   'bsslgn.exe',
+                                                                   'compiler.exe',
+                                                                   'VrfAgava.exe',
+                                                                   'BSSAxInf.exe',
+                                                                   'bsImport.exe',
+                                                                   'lresexpt.bpl',
+                                                                   'BSChecker.exe',
+                                                                   'bs1.exe',
+                                                                   'VerifCCom.exe',
+                                                                   'blksrv.bpl',
+                                                                   'bssetup.exe',
+                                                                   'aqtora32.dll',
+                                                                   'blocksrv.dll',
+                                                                   'rg_verb4.dll',
+                                                                   'rg_vesta.dll',
+                                                                   'cc.dll',
+                                                                   'ccom.dll',
+                                                                   'rg_vldt.dll',
+                                                                   'sendreq.dll',
+                                                                   'signcom.dll',
+                                                                   'TrConvL.dll',
+                                                                   'wsxml.dll',
+                                                                   'llmsshnd.dll',
+                                                                   'llmssobj.dll',
+                                                                   'llsocket.dll',
+                                                                   'llnetusr.dll',
+                                                                   'cr_epass.dll',
+                                                                   'llnotify.dll',
+                                                                   'llnsPars.dll',
+                                                                   'llnstool.dll',
+                                                                   'llPhone.dll',
+                                                                   'llPrReq.dll',
+                                                                   'llrrts.dll',
+                                                                   'ilCpyDocEx.dll',
+                                                                   'llrtscfg.dll',
+                                                                   'cr_pass.dll',
+                                                                   'cr_sms.dll',
+                                                                   'cr_util.dll',
+                                                                   'llsmpp.dll',
+                                                                   'llsnap.dll',
+                                                                   'llsonic.dll',
+                                                                   'devauth.dll',
+                                                                   'devcheck.dll',
+                                                                   'Dialogic.dll',
+                                                                   'llSRP.dll',
+                                                                   'eif2base.dll',
+                                                                   'Emulator.dll',
+                                                                   'LLSysInf.dll',
+                                                                   'GetIName.dll',
+                                                                   'lltblxml.dll',
+                                                                   'llTrAuth.dll',
+                                                                   'llTrServ.dll',
+                                                                   'llubstr.dll',
+                                                                   'llVTB.dll',
+                                                                   'llwebdav.dll',
+                                                                   'llwsexc.dll',
+                                                                   'llxml3ed.dll',
+                                                                   'llxmlcnz.dll',
+                                                                   'mig173.dll',
+                                                                   'mssreq.dll',
+                                                                   'notiflog.dll',
+                                                                   'rbaseal.dll',
+                                                                   'RBProxy.dll',
+                                                                   'rg_agava.dll',
+                                                                   'rg_altok.dll',
+                                                                   'rg_bsssl.dll',
+                                                                   'rg_call.dll',
+                                                                   'libcrypt.dll',
+                                                                   'rg_calus.dll',
+                                                                   'rg_ccm3e.dll',
+                                                                   'llamqdll.dll',
+                                                                   'rg_ccm3x.dll',
+                                                                   'rg_ccom2.dll',
+                                                                   'llCGate.dll',
+                                                                   'rg_clear.dll',
+                                                                   'rg_crypc.dll',
+                                                                   'rg_cryptfld.dll',
+                                                                   'rg_efssl.dll',
+                                                                   'rg_exc4.dll',
+                                                                   'rg_lite.dll',
+                                                                   'llmssreq.dll',
+                                                                   'lledint.dll',
+                                                                   'rg_msapi.dll',
+                                                                   'llepass.dll',
+                                                                   'rg_msp11.dll',
+                                                                   'rg_msp13.dll',
+                                                                   'llfraud.dll',
+                                                                   'llgraph.dll',
+                                                                   'llgraph1.dll',
+                                                                   'rg_msp2.dll',
+                                                                   'rg_mspex.dll',
+                                                                   'llhttp.dll',
+                                                                   'rg_ossl.dll'
+                                                                   ]
 # -------------------------------------------------------------------------------------------------
 
 
@@ -667,11 +779,16 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
             return ''  # пропускаем data-файлы, за них ответят 10-файлы
         file_name = file_name.replace(structure_type_raw, '')
         if structure_type == '10':
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"  # TODO здесь все сложно
+            if file_name.lower().endswith('default'):  # Для дефолтных таблиц
+                result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+            elif file_name.find(".") > 0:   # Для блобов
+                result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+            else: # Если заливается структура полностью
+                result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте таблицу"
         elif structure_type == '12':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Визуальные формы'>"
         elif structure_type == '14':
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Конфигурации'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Конфигурации'> #TODO проверьте настройку"
         elif structure_type == '16':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Автопроцедуры'>"
         elif structure_type == '18':
@@ -745,7 +862,10 @@ def generate_upgrade10_eif(instance):
         if len(eif_list) > 0:
             with open(get_filename_UPGRADE10_eif(instance), mode='w') as f:
                 f.writelines(const_UPGRADE10_HEADER)
-                counter = 1
+
+                line = make_upgrade10_eif_string_by_file_name(1, 'Version(14).eif')
+                f.writelines(line)
+                counter = 2
                 for eif_file in eif_list:
                     eif_file_name = split_filename(eif_file)
                     line = make_upgrade10_eif_string_by_file_name(counter, eif_file_name)
@@ -1129,7 +1249,7 @@ def download_build(settings):
                             copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(release), ['*.dll'], const_excluded_build_for_CLIENT)
                             mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
                             copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(release), mask, [])
-                            mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
+                            mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll', 'ilCpyDoc.dll']
                             copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(release), mask, [])
                             copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
 
@@ -1155,7 +1275,7 @@ def download_build(settings):
                         copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM(), ['*.dll'], const_excluded_build_for_CLIENT)
                     mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
                     copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), mask, [])
-                    mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll']
+                    mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll', 'ilCpyDoc.dll']
                     copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN(), mask, [])
                     copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU(), mask, [])
                     copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN_CLIENT_SYSTEM(), mask, [])
