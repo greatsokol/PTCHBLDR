@@ -674,6 +674,8 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                 else:
                     outdir = path_for_after
 
+                message += ' to "{}"'.format(outdir)
+
                 # Если у метки есть указание для скачивания в альтернативном виде,
                 # например Label22_StarteamView = DBO:Release_17:VIP:GPB:GPB 017.3 107N
                 StarteamView = settings.StarteamView
@@ -1379,9 +1381,9 @@ def main():
             if ShouldCompileBLS:
                 download_mba_dll(global_settings)
                 # загрузим все исходники текущей ревизии
-                if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
+                if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
                     # загрузим поверх ревизии исходников, помеченные метками
-                    if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
+                    if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
                         # запустим компиляцию этой каши
                         if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
                             # копируем готовые BLL в патч
@@ -1412,9 +1414,9 @@ def main_debug_without_clean():
         # загрузим дополнительный билд
         download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll')
         # загрузим все исходники текущей ревизии
-        if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
+        if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
             # загрузим поверх ревизии исходников, помеченные метками
-            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, '', 'BLS/', '*.bls'):
+            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
                 # запустим компиляцию этой каши
                 if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
                   # копируем готовые BLL в патч
