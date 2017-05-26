@@ -1079,19 +1079,25 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
     BlsFileName = BlsFileName.lower()
     if BlsFileName not in ObservedList:  # если файл отсутствует в списке обработанных
         BlsItemInfo = BlsUsesGraph.get(BlsFileName)
+        len_BlsUsesGraph = len(BlsUsesGraph)
         #print(BlsItemInfo)
         if BlsItemInfo:
             UsesList = BlsItemInfo[1]
             BlsFilePath = BlsItemInfo[0]
             if len(UsesList):  # если файл зависит от других файлов, то проведем
+                compiled_of_current_useslist = 0  # счетчик откомпилированных файлов для текущего файла
                 for UsesFileName in UsesList:  # компиляцию каждого файла
-                    __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList)
+                    compiled_of_current_useslist+=1  # увеличиваем счетчик для вывода в сообщение
+                    if UsesFileName.lower() not in SuccessList:
+                        percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
+                        print("({}%)\tCompiling {} of {} used files for \t\t{}: \t\t\t {}".format(percents, compiled_of_current_useslist, len(UsesList), BlsFileName, UsesFileName))
+                        __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList)
             # добавляем в список учтенных файлов
             ObservedList.append(BlsFileName)
             if __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile):
                 # компилируем и добавляем в список успешно откомпилированных
                 SuccessList.append(BlsFileName)
-                printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
+                # printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
         else:
             print1('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
 
@@ -1412,7 +1418,7 @@ def main_debug_without_clean():
 
     if download_build(global_settings):  # если завершена загрузка билда
         # загрузим дополнительный билд
-        download_starteam(global_settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll')
+        download_mba_dll(global_settings)
         # загрузим все исходники текущей ревизии
         if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
             # загрузим поверх ревизии исходников, помеченные метками
