@@ -9,7 +9,10 @@ import zipfile
 import struct
 import fnmatch
 import sys
-
+import time
+import datetime
+from email import message
+from statistics import mean
 
 const_instance_BANK = "BANK"
 const_instance_IC = "IC"
@@ -85,9 +88,12 @@ dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN_CLIENT_SYSTEM = lambda: os.path.join(dir
 dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU_CLIENT_SYSTEM = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'RUSSIAN', 'CLIENT', 'SYSTEM')
 
 get_filename_UPGRADE10_eif = lambda instance: os.path.join(dir_PATCH(instance), 'Upgrade(10).eif')
-print1 = lambda message: print('\t'+message)
-#print2 = lambda message: print('\t\t'+message)
 
+def log(message):
+    log_file_name = os.path.join(os.path.abspath(''),'log.txt')
+    with open(log_file_name, mode='a') as f:
+        print(message)
+        f.writelines('\n'+message)
 
 def getLastElementOfPath(path):
     result = ''
@@ -465,7 +471,7 @@ def makedirs(path):
         if not os.path.exists(path):
             os.makedirs(path)
     except BaseException as e:
-        print1('ERROR: can''t create directory "{}" ({})'.format(path, e))
+        log('\tERROR: can''t create directory "{}" ({})'.format(path, e))
 # -------------------------------------------------------------------------------------------------
 
 
@@ -505,7 +511,7 @@ def printProgress (iteration, total, prefix = '', suffix = '', decimals = 2, bar
     sys.stdout.write('%s [%s] %s%s %s\r' % (prefix, bar, percents, '%', suffix)),
     sys.stdout.flush()
     if iteration == total:
-        print("\n")
+        log("\n")
 
 
 # -------------------------------------------------------------------------------------------------
@@ -519,7 +525,7 @@ def copyfiles(src_dir, dest_dir, wildcards=['*.*'], excluded_files=[]):
                 try:
                     shutil.copy2(filename_with_path, dest_dir)
                 except BaseException as e:
-                    print1('ERROR: can\'t copy file "{}" to "{}" ({})'.format(filename_with_path, dest_dir, e))
+                    log('\tERROR: can\'t copy file "{}" to "{}" ({})'.format(filename_with_path, dest_dir, e))
 
 
 # -------------------------------------------------------------------------------------------------
@@ -534,7 +540,7 @@ def copyfiles_of_version(src_dir, dest_dir, exe_version, wildcards=['*.*'], excl
                     if get_binary_platform(filename_with_path) == exe_version:
                         shutil.copy2(filename_with_path, dest_dir)
                 except BaseException as e:
-                    print1('ERROR: can\'t copy file "{}" to "{}" ({})'.format(filename_with_path, dest_dir, e))
+                    log('\tERROR: can\'t copy file "{}" to "{}" ({})'.format(filename_with_path, dest_dir, e))
 
 
 # -------------------------------------------------------------------------------------------------
@@ -570,16 +576,16 @@ def clean(path, masks=[]):
     if os.path.exists(path):
         try:
             if masks:
-                print('CLEANING {} for {} files'.format(path, masks))
+                log('CLEANING {} for {} files'.format(path, masks))
                 for mask in masks:
                     [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
             else:
-                print('CLEANING {}'.format(path))
+                log('CLEANING {}'.format(path))
                 shutil.rmtree(path, onerror=__onerror_handler__)
         except FileNotFoundError:
             pass  # если папка отсутствует, то продолжаем молча
         except BaseException as e:
-            print1('ERROR when cleaning ({})'.format(e))
+            log('\tERROR when cleaning ({})'.format(e))
             return False
     return True
 # -------------------------------------------------------------------------------------------------
@@ -636,10 +642,10 @@ def read_config():
             raise FileNotFoundError('NOT FOUND "{}"'.format(settings.BuildIC))
 
     except BaseException as e:
-        print('ERROR when reading settings from file "{}":\n\t\t{}'.format(ini_filename, e))
+        log('ERROR when reading settings from file "{}":\n\t\t{}'.format(ini_filename, e))
         return None
     else:
-        print('SETTINGS LOADED:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}'.
+        log('SETTINGS LOADED:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}'.
               format(settings.StarteamProject, settings.StarteamView, settings.Labels, settings.stcmd))
         return settings
 # -------------------------------------------------------------------------------------------------
@@ -707,18 +713,18 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                 if st_file_to_download:
                     launch_string += " "+st_file_to_download
 
-                # print(launch_string)
-                print(message + '. Please wait...')
+                # log(launch_string)
+                log(message + '. Please wait...')
                 result = subprocess.call(launch_string)
                 if result == 0:
-                    # print1('FINISHED '+message)
+                    # log('\tFINISHED '+message)
                     total_result += True
                 else:
-                    print1('ERROR '+message)
+                    log('\tERROR '+message)
                     total_result += False
 
     except BaseException as e:
-        print1('ERROR when downloading from Starteam ({})'.format(e))
+        log('\tERROR when downloading from Starteam ({})'.format(e))
     return total_result
 # -------------------------------------------------------------------------------------------------
 
@@ -735,21 +741,21 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
         for file in dircmp.diff_files:
             path = os.path.join(after, file)
             if os.path.isfile(path):
-                print1('copying {}'.format(path))
+                log('\tcopying {}'.format(path))
                 makedirs(wheretocopy)
                 shutil.copy2(path, wheretocopy)
             else:
-                print1('something wrong {} -> {}'.format(path, wheretocopy))
+                log('\tsomething wrong {} -> {}'.format(path, wheretocopy))
 
     if dircmp.right_only:
         for file in dircmp.right_only:
             path = os.path.join(after, file)
             if os.path.isfile(path):
-                print1('copying {}'.format(path))
+                log('\tcopying {}'.format(path))
                 makedirs(wheretocopy)
                 shutil.copy2(path, wheretocopy)
             else:
-                print1('copying DIR with contents {}'.format(path))
+                log('\tcopying DIR with contents {}'.format(path))
                 clean(os.path.join(wheretocopy, file))
                 shutil.copytree(path, os.path.join(wheretocopy, file))
 # -------------------------------------------------------------------------------------------------
@@ -757,17 +763,17 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
 
 def compare_directories_BEFORE_and_AFTER():
     if os.path.exists(const_dir_BEFORE):
-        print('BEGIN compare directories:')
-        print1('BEFORE: {}'.format(const_dir_BEFORE))
-        print1('AFTER:  {}'.format(const_dir_AFTER))
+        log('BEGIN compare directories:')
+        log('\tBEFORE: {}'.format(const_dir_BEFORE))
+        log('\tAFTER:  {}'.format(const_dir_AFTER))
         __compare_and_copy_dirs_recursively__(const_dir_BEFORE, const_dir_AFTER, const_dir_COMPARED)
     else:
         os.rename(const_dir_AFTER, const_dir_COMPARED)
-        print('USING folder "AFTER" as compare result, because "BEFORE" not exists:')
-        print1('BEFORE (not exists): {}'.format(const_dir_BEFORE))
-        print1('AFTER              : {}'.format(const_dir_AFTER))
+        log('\tUSING folder "AFTER" as compare result, because "BEFORE" not exists:')
+        log('\tBEFORE (not exists): {}'.format(const_dir_BEFORE))
+        log('\tAFTER              : {}'.format(const_dir_AFTER))
 
-    print('\tFINISHED compare directories. LOOK at {}'.format(const_dir_COMPARED))
+    log('\tFINISHED compare directories. LOOK at {}'.format(const_dir_COMPARED))
 # -------------------------------------------------------------------------------------------------
 
 
@@ -822,11 +828,11 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
         elif structure_type == '84':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Статусы'>"
         else:
-            print1('ERROR unknown structure type {} for filename {}'.format(structure_type, file_name))
+            log('\tERROR unknown structure type {} for filename {}'.format(structure_type, file_name))
 
         return '  '+result.format(counter, structure_type, file_name)+'\n'
     else:
-        print1('ERROR can not detect structure type by filename ({})'.format(file_name))
+        log('\tERROR can not detect structure type by filename ({})'.format(file_name))
 # -------------------------------------------------------------------------------------------------
 
 
@@ -858,7 +864,7 @@ def generate_upgrade10_eif(instance):
             try:
                 shutil.copy2(eif_file, data_dir)
             except EnvironmentError as e:
-                print1('Unable to copy file. %s' % e)
+                log('\tUnable to copy file. %s' % e)
 
         eif_list = list_files(data_dir, '*.eif')
         if len(eif_list) > 0:
@@ -909,7 +915,7 @@ def get_binary_platform(fullFilePath):
             s=f.read(2).decode(encoding="utf-8", errors="strict")
             if s!="MZ":
                 return None
-                # print("Not an EXE file")
+                # log("Not an EXE file")
             else:
                 f.seek(60)
                 s=f.read(4)
@@ -920,16 +926,16 @@ def get_binary_platform(fullFilePath):
 
                 if machine==IMAGE_FILE_MACHINE_I386:
                     return "Win32"
-                    #print("IA-32 (32-bit x86)")
+                    #log("IA-32 (32-bit x86)")
                 elif machine==IMAGE_FILE_MACHINE_IA64:
                     return "Win64"
-                    #print("IA-64 (Itanium)")
+                    #log("IA-64 (Itanium)")
                 elif machine==IMAGE_FILE_MACHINE_AMD64:
                     return "Win64"
-                    #print("AMD64 (64-bit x86)")
+                    #log("AMD64 (64-bit x86)")
                 else:
                     return "Unknown"
-                    #print("Unknown architecture")
+                    #log("Unknown architecture")
     except BaseException:
         return None
 
@@ -977,7 +983,7 @@ def get_build_version(build_path):
                     break
 
     except BaseException as e:
-        print1('ERROR: can not detect version of build ({})'.format(e))
+        log('\tERROR: can not detect version of build ({})'.format(e))
         raise e
     return result
 
@@ -992,9 +998,9 @@ def open_encoding_aware(path):
             fh.seek(0)
         except ValueError as err:
             pass
-            #print1('Got error "{}" with {} , trying different encoding ({} was used)'.format(err, path, e))
+            #log('\tGot error "{}" with {} , trying different encoding ({} was used)'.format(err, path, e))
         else:
-            #print1('opening the file {} with encoding:  {}'.format(path, e))
+            #log('\topening the file {} with encoding:  {}'.format(path, e))
             return fh
     return None
 
@@ -1048,7 +1054,7 @@ def bls_get_uses_graph(path):
 
 # -------------------------------------------------------------------------------------------------
 def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProfile):
-    # print(BlsPath)
+    # log(BlsPath)
     # проверим, есть ли компилятор
     bscc_path = os.path.join(BuildPath, 'bscc.exe')
     if not os.path.exists(bscc_path):
@@ -1066,11 +1072,11 @@ def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProf
     # succesfully с ошибкой. так и должно быть
     if 'Compiled succesfully' not in str_res and \
        'Compiled with warnings' not in str_res:
-        print1('ERROR: File "{}", Uses list "{}"{}'.format(BlsFileName, UsesList, str_res))
-        print1('COMPILATION continues. Please wait...')
+        log('\tERROR: File "{}", Uses list "{}"{}'.format(BlsFileName, UsesList, str_res))
+        log('\tCOMPILATION continues. Please wait...')
         return False
     else:
-        # print1('Compiled "{}"'.format(bls_file_name))
+        # log('\tCompiled "{}"'.format(bls_file_name))
         return True
 
 
@@ -1080,7 +1086,7 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
     if BlsFileName not in ObservedList:  # если файл отсутствует в списке обработанных
         BlsItemInfo = BlsUsesGraph.get(BlsFileName)
         len_BlsUsesGraph = len(BlsUsesGraph)
-        #print(BlsItemInfo)
+        #log(BlsItemInfo)
         if BlsItemInfo:
             UsesList = BlsItemInfo[1]
             BlsFilePath = BlsItemInfo[0]
@@ -1090,7 +1096,7 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
                     compiled_of_current_useslist+=1  # увеличиваем счетчик для вывода в сообщение
                     if UsesFileName.lower() not in SuccessList:
                         percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
-                        print("({}%)\tCompiling {} of {} used files for \t\t{}: \t\t\t {}".format(percents, compiled_of_current_useslist, len(UsesList), BlsFileName, UsesFileName))
+                        log("({:>6}%) Compiling {:>3} of {:<3} used files for {:<20}: {:<20}".format(percents, compiled_of_current_useslist, len(UsesList), BlsFileName, UsesFileName))
                         __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList)
             # добавляем в список учтенных файлов
             ObservedList.append(BlsFileName)
@@ -1099,13 +1105,13 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
                 SuccessList.append(BlsFileName)
                 # printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
         else:
-            print1('No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
+            log('\tNo information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
 
 
 # -------------------------------------------------------------------------------------------------
 def BlsCompileAll(lic_server, lic_profile, build_path, source_path):
     clean(build_path, ['*.bls', '*.bll'])  # очищаем каталог билда от bls и bll
-    print('BEGIN BLS COMPILATION. Please wait...')
+    log('BEGIN BLS COMPILATION. Please wait...')
     copyfiles(source_path, build_path, ['*.bls'], [])   # копируем в каталог билда все bls
     bls_uses_graph = bls_get_uses_graph(build_path)     # строим граф зависимостей по строкам uses
     observed_list = []
@@ -1114,10 +1120,10 @@ def BlsCompileAll(lic_server, lic_profile, build_path, source_path):
         for bls_file_name in bls_uses_graph:                # компилируем все bls
             __BlsCompileAll__(lic_server, lic_profile, build_path, bls_uses_graph,
                                 bls_file_name, observed_list, compiled_successfully)
-        print1("COMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
+        log("\tCOMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
         return True
     except FileNotFoundError as e:
-        print1('ERROR: {}'.format(e))
+        log('\tERROR: {}'.format(e))
         return False
 
 
@@ -1127,7 +1133,7 @@ def __extract_build__(build_path):
     if '.zip' in build_zip_file.lower():
         build_tmp_dir = os.path.join(tempfile.gettempdir(), build_zip_file)
         clean(build_tmp_dir)
-        print('EXTRACTING BUILD "{}" in "{}"'.format(build_path, build_tmp_dir))
+        log('EXTRACTING BUILD "{}" in "{}"'.format(build_path, build_tmp_dir))
         try:
             with zipfile.ZipFile(build_path) as z:
                 z.extractall(os.path.join(tempfile.gettempdir(), build_zip_file))
@@ -1135,7 +1141,7 @@ def __extract_build__(build_path):
                 # нового пути к билду для последующего применения
                 build_path = build_tmp_dir
         except BaseException as e:
-            print1('ERROR EXTRACTING BUILD "{}"'.format(e))
+            log('\tERROR EXTRACTING BUILD "{}"'.format(e))
         # конец разархивации
     return build_path
 
@@ -1146,7 +1152,7 @@ def __copy_build__(build_path, build_path_crypto, dest_path):
     if not build_path:
         return
     if not os.path.exists(build_path):
-        print1('PATH {} does not exists'.format(build_path))
+        log('\tPATH {} does not exists'.format(build_path))
         return
     # если ссылка на билд указывает не на каталог, а на файл архива
     # попробуем провести разархивацию во временный каталог
@@ -1161,18 +1167,18 @@ def __copy_build__(build_path, build_path_crypto, dest_path):
             src = os.path.join(build_path, win_rel)
             dst = os.path.join(dest_path, win_rel)
             clean(dst)
-            print('COPYING BUILD {} from "{}" in "{}"'.format(version, src, dst))
+            log('COPYING BUILD {} from "{}" in "{}"'.format(version, src, dst))
             copyfiles(src, dst, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
             if build_path_crypto:
                 src = os.path.join(build_path_crypto, win_rel)
-                print('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, src, dst))
+                log('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, src, dst))
                 copyfiles(src, dst, ['CryptLib.dll', 'cr_*.dll'], [])
     else:
         clean(dest_path)
-        print('COPYING BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
+        log('COPYING BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
         copyfiles(build_path, dest_path, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
         if build_path_crypto:
-            print('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
+            log('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
             copyfiles(build_path_crypto, dest_path, ['CryptLib.dll', 'cr_*.dll'], [])
     return version
 
@@ -1209,7 +1215,7 @@ def download_build(settings):
 
         #  Если в настройках включено копирование билда в патч
         if settings.PlaceBuildIntoPatch:
-            print('COPYING build into patch for {}'.format(instance))
+            log('COPYING build into patch for {}'.format(instance))
             if instance == const_instance_BANK:
                 excluded_files = const_excluded_build_for_BANK
             elif instance == const_instance_IC:
@@ -1319,26 +1325,26 @@ def copy_bls():
             dest_dir = os.path.join(dest_dir,'BLS')
             bls_version = '17/20'
         clean(dest_dir)
-        print('COPYING BLS ("{}" version style) from "{}" to {}'.format(bls_version, source_dir, dest_dir))
+        log('COPYING BLS ("{}" version style) from "{}" to {}'.format(bls_version, source_dir, dest_dir))
         try:
             shutil.copytree(source_dir, dest_dir)
         except BaseException as e:
-            print1('ERROR when copying ({})'.format(e))
+            log('\tERROR when copying ({})'.format(e))
         return True
     else:
-        print('NOT COPYING BLS. Path {} not exists'.format(const_dir_COMPARED_BLS))
+        log('NOT COPYING BLS. Path {} not exists'.format(const_dir_COMPARED_BLS))
         return False
 
 
 # -------------------------------------------------------------------------------------------------
 def copy_bll(client_everything_in_exe):
-    print('COPYING BLL files to patch')
+    log('COPYING BLL files to patch')
     bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?b*.bls', 'RT_*.bls'])
     bll_files_only_mba = list_files_remove_paths_and_change_extension(const_dir_COMPARED_BLS_SOURCE_RCK, '.bll', ['*.bls'])
     bll_files_all = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['*.bls'])
     bll_files_tmp = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files_all)
     if len(bll_files_tmp) != len(bll_files_all):
-        print1('ERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files_all) - set(bll_files_tmp))))
+        log('\tERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files_all) - set(bll_files_tmp))))
         return False
 
     bll_files_client_mba = list(set(bll_files_all) - set(bll_files_only_bank))
@@ -1368,6 +1374,7 @@ def download_mba_dll(settings):
 
 # -------------------------------------------------------------------------------------------------
 def main():
+    log('{:=^120}'.format(''))
     global_settings = read_config()
     if global_settings is None:
         return
@@ -1375,7 +1382,7 @@ def main():
         return
     # clean(const_dir_PATCH)
     global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
-    print('BEGIN ----------------')
+    log('BUILD BEGIN {}'.format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
     if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
         compare_directories_BEFORE_and_AFTER()
         for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
@@ -1394,11 +1401,12 @@ def main():
                         if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
                             # копируем готовые BLL в патч
                             copy_bll(global_settings.ClientEverythingInEXE)
-    print('DONE -----------------')
+    log('DONE -----------------')
 
 
 # -------------------------------------------------------------------------------------------------
 def main_debug_without_clean():
+    log('{:=^120}'.format(''))
     global_settings = read_config()
     if global_settings is None:
         return
@@ -1406,7 +1414,7 @@ def main_debug_without_clean():
     #    return
     # clean(const_dir_PATCH)
     global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
-    print('BEGIN')
+    log('BEGIN')
     '''
     if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
         compare_directories_BEFORE_and_AFTER()
@@ -1427,7 +1435,7 @@ def main_debug_without_clean():
                 if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
                   # копируем готовые BLL в патч
                   copy_bll(global_settings.ClientEverythingInEXE)
-                print('DONE!!!\a')
+                log('DONE!!!\a')
 
 
 #main_debug_without_clean()
