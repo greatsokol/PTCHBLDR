@@ -1096,7 +1096,7 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
                     compiled_of_current_useslist+=1  # увеличиваем счетчик для вывода в сообщение
                     if UsesFileName.lower() not in SuccessList:
                         percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
-                        log("({:>6}%) Compiling {:>3} of {:<3} used files for {:<20}: {:<20}".format(percents, compiled_of_current_useslist, len(UsesList), BlsFileName, UsesFileName))
+                        log("({:>6}%) Compiling {:>3} of {:<3} used files for {:<30} {:<20}".format(percents, compiled_of_current_useslist, len(UsesList), BlsFileName+':', UsesFileName))
                         __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList)
             # добавляем в список учтенных файлов
             ObservedList.append(BlsFileName)
