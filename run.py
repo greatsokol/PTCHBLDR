@@ -670,12 +670,12 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                 if st_file_to_download:
                     message += ' files "{}{}"'.format(st_path_to_download, st_file_to_download)
                 if label:
-                    if (key == 'DateBefore'.lower() or key == 'DateAfter'.lower()):
+                    if (key == 'datebefore' or key == 'dateafter'):
                         message += ' files for date "{}"'.format(label)
                     else:
                         message += ' files for label "{}"'.format(label)
 
-                if (key == 'LabelBefore'.lower()) or (key == 'DateBefore'.lower()):
+                if (key == 'labelbefore') or (key == 'datebefore'):
                     outdir = path_for_before
                 else:
                     outdir = path_for_after
@@ -706,7 +706,7 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                     launch_string += '/"{}"'.format(st_path_to_download)
                 launch_string += ' -rp ' + quote(outdir)
                 if label:
-                    if (key == 'DateBefore'.lower() or key == 'DateAfter'.lower()):
+                    if (key == 'datebefore' or key == 'dateafter'):
                         launch_string += ' -cfgd ' + quote(label)
                     else:
                         launch_string += ' -vl ' + quote(label)
