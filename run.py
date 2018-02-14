@@ -1434,7 +1434,7 @@ def main():
     global_settings = read_config()
     if global_settings is None:
         return
-    continue_compilation = False;
+    continue_compilation = False
     if os.path.exists(const_dir_COMPARED_BLS):
         continue_compilation = input("Enter any letter to continue bls compilation (otherwise patch building will be restarted):") != ''
 
