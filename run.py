@@ -1424,8 +1424,19 @@ def copy_bll(client_everything_in_exe):
 # -------------------------------------------------------------------------------------------------
 def download_mba_dll(settings):
     if download_starteam(settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll'):
-        copyfiles_of_version(os.path.join(const_dir_TEMP_BUILD_BK, 'DLL'), const_dir_TEMP_BUILD_BK, 'Win32', ['*.dll'], [])
+        copyfiles_of_version(os.path.join(const_dir_TEMP_BUILD_BK, 'DLL'),
+                             const_dir_TEMP_BUILD_BK, 'Win32', ['*.dll'], [])
         return True
+
+
+# -------------------------------------------------------------------------------------------------
+def ask_starteam_password(settings):
+    if settings.StarteamPassword == '':
+        settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(settings.StarteamLogin))
+    result = settings.StarteamPassword.strip() != ''
+    if not result:
+        log('ERROR: Empty password!')
+    return result
 
 
 # -------------------------------------------------------------------------------------------------
@@ -1434,85 +1445,74 @@ def main():
     global_settings = read_config()
     if global_settings is None:
         return
+
+    bls_just_downloaded = False
     continue_compilation = False
-    if os.path.exists(const_dir_COMPARED_BLS):
-        continue_compilation = input("Enter any letter to continue bls compilation (otherwise patch building will be restarted):") != ''
+    if os.path.exists(const_dir_TEMP_TEMPSOURCE):
+        continue_compilation = \
+            input('Enter any letter to CONTINUE bls compilation (otherwise patch building will be RESTARTED):') != ''
 
     if not continue_compilation:
         if not clean(const_dir_TEMP):
             return
 
-    # clean(const_dir_PATCH)
-    global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
     if not continue_compilation:
-        log('BUILD BEGIN {}'.format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
+        log('BUILD BEGIN {}'.
+            format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
     else:
-        log('COMPILATION CONTINUED {}'.format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
+        log('COMPILATION CONTINUED {}'.
+            format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
 
-    if not continue_compilation:  #если пользователь не выбрал продолжение компиляции
-        if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
-            compare_directories_BEFORE_and_AFTER()
-            for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
-                download_TABLE10_files_for_DATA_FILES(global_settings, instance)
-                generate_upgrade10_eif(instance)
-            continue_compilation = copy_bls()
-            if continue_compilation:
-                continue_compilation=download_build(global_settings)  # если завершена загрузка билда
-            if continue_compilation:
-                continue_compilation=download_mba_dll(global_settings)  # если завершена загрузка билда
+    # Если пользователь не выбрал продолжение компиляции, запустим
+    # ЭТАП ЗАГРУЗКИ ПО МЕТКАМ И СРАВНЕНИЯ РЕВИЗИЙ:
+    if not continue_compilation:
+        if ask_starteam_password(global_settings):
+            if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
+                compare_directories_BEFORE_and_AFTER()
+                for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
+                    download_TABLE10_files_for_DATA_FILES(global_settings, instance)
+                    generate_upgrade10_eif(instance)
+                bls_just_downloaded = continue_compilation = copy_bls()
+                if continue_compilation:
+                    continue_compilation=download_build(global_settings)  # если завершена загрузка билда
+                if continue_compilation:
+                    continue_compilation=download_mba_dll(global_settings)  # если завершена загрузка билда
 
-    # если все предыдущие этапы завершились успешно,
-    # запускаем компиляцию BLS файлов:
+    # если ЭТАП ЗАГРУЗКИ завершился успешно,
+    # или пользователь выбрал переход к компиляции
+    # запускаем ЭТАП КОМПИЛЯЦИИ bls-файлов:
     if continue_compilation:
-        # загрузим все исходники текущей ревизии
-        if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
-            # загрузим поверх ревизии исходников, помеченные метками
-            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
-                # запустим компиляцию этой каши
-                if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
-                    # копируем готовые BLL в патч
-                    copy_bll(global_settings.ClientEverythingInEXE)
+        do_download_bls = True
+        # если bls-файлы были загружены не на ЭТАПЕ ЗАГРУЗКИ, спросим не стоит ли перезагрузить
+        if not bls_just_downloaded:
+            do_download_bls = input('Enter any letter to download all bls-sources again:') != ''
+        # если пользователь не отказался от загрузки всех исходников
+        # или если все bls были загружены на ЭТАПЕ ЗАГРУЗКИ
+        if do_download_bls:
+            continue_compilation = False
+            if ask_starteam_password(global_settings):
+                # загрузим все исходники текущей ревизии
+                continue_compilation = download_starteam(global_settings, None,
+                                                         const_dir_TEMP_TEMPSOURCE,
+                                                         const_dir_TEMP_TEMPSOURCE,
+                                                         'BLS/', '*.bls')
+                if continue_compilation:
+                    # загрузим поверх ревизии исходников, помеченные метками
+                    continue_compilation = download_starteam(global_settings,
+                                                             global_settings.Labels,
+                                                             const_dir_TEMP_TEMPSOURCE,
+                                                             const_dir_TEMP_TEMPSOURCE,
+                                                             'BLS/', '*.bls')
+        # запустим компиляцию этой каши
+        if continue_compilation:
+            if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile,
+                             const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
+                # копируем готовые BLL в патч
+                copy_bll(global_settings.ClientEverythingInEXE)
     log('DONE -----------------')
 
-
-# -------------------------------------------------------------------------------------------------
-def main_debug_without_clean():
-    log('{:=^120}'.format(''))
-    global_settings = read_config()
-    if global_settings is None:
-        return
-    # if not clean(const_dir_TEMP):
-    #    return
-    # clean(const_dir_PATCH)
-    global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
-    log('BEGIN')
-    '''
-    if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
-        compare_directories_BEFORE_and_AFTER()
-        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_BANK)
-        download_TABLE10_files_for_DATA_FILES(global_settings, const_instance_CLIENT)
-        generate_upgrade10_eif(const_instance_BANK)
-        generate_upgrade10_eif(const_instance_CLIENT)
-    '''
-
-    if download_build(global_settings):  # если завершена загрузка билда
-        # загрузим дополнительный билд
-        download_mba_dll(global_settings)
-        # загрузим все исходники текущей ревизии
-        if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
-            # загрузим поверх ревизии исходников, помеченные метками
-            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
-                # запустим компиляцию этой каши
-                if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
-                  # копируем готовые BLL в патч
-                  copy_bll(global_settings.ClientEverythingInEXE)
-                log('DONE!!!\a')
-
-
-#main_debug_without_clean()
-#bls_get_uses_graph('D:\\tokill')
 main()
-#generate_upgrade10_eif(const_instance_CLIENT_MBA)
+
 
 
 
