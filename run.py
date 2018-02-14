@@ -1432,11 +1432,33 @@ def download_mba_dll(settings):
 # -------------------------------------------------------------------------------------------------
 def ask_starteam_password(settings):
     if settings.StarteamPassword == '':
-        settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(settings.StarteamLogin))
+        settings.StarteamPassword = getpassword('Maestro, ENTER please StarTeam password for "{}" login:'.
+                                                format(settings.StarteamLogin))
     result = settings.StarteamPassword.strip() != ''
     if not result:
         log('ERROR: Empty password!')
     return result
+
+
+# -------------------------------------------------------------------------------------------------
+def make_decision_compilation_or_restart():
+    continue_compilation = False
+    if os.path.exists(const_dir_TEMP_TEMPSOURCE):
+        log('Folder {} exists. So we could continue bls-compilation. '
+            'Asking Maestro for decision.'.format(const_dir_TEMP_TEMPSOURCE))
+        continue_compilation = input('Enter any letter to CONTINUE bls '
+                                     'compilation (otherwise patch building will be RESTARTED):') != ''
+        if continue_compilation:
+            log('Maestro decided to CONTINUE with bls-compilation instead of restart patch building')
+        else:
+            log('Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation')
+        if not continue_compilation:
+            response = input('REALLY?! Enter "Y" to CLEAR ALL and RESTART patch building:').upper()
+            if response and response != 'Y':
+                log('ERROR: wrong answer {}'.format(response))
+                return
+            continue_compilation = response != 'Y'
+    return continue_compilation
 
 
 # -------------------------------------------------------------------------------------------------
@@ -1447,10 +1469,7 @@ def main():
         return
 
     bls_just_downloaded = False
-    continue_compilation = False
-    if os.path.exists(const_dir_TEMP_TEMPSOURCE):
-        continue_compilation = \
-            input('Enter any letter to CONTINUE bls compilation (otherwise patch building will be RESTARTED):') != ''
+    continue_compilation = make_decision_compilation_or_restart()
 
     if not continue_compilation:
         if not clean(const_dir_TEMP):
