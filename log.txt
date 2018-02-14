@@ -1,474 +1,986 @@
 
 ========================================================================================================================
 SETTINGS LOADED:
-	StarteamProject = VTB
-	StarteamView = VTB:STD_VTB_017.9_FULL
-	Labels = [('label1', 'SVDEFDBO-2144')]
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('datebefore', '11.12.17 15:27'), ('dateafter', '14.02.18 14:17')]
 	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
-BUILD BEGIN 2017-06-15 14:15:04
-DOWNLOADING files for label "SVDEFDBO-2144" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-	USING folder "AFTER" as compare result, because "BEFORE" not exists:
-	BEFORE (not exists): d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE
-	AFTER              : d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER
-	FINISHED compare directories. LOOK at d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT
-COPYING BLS ("17/20" version style) from "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\BLS\SOURCE" to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES\SOURCE\BLS
-COPYING BUILD 3.17.9.3260 from "\\fs\Builds\Builds\17.9\326\" in "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK"
-DOWNLOADING files "DLL/*.dll" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK". Please wait...
-DOWNLOADING files "BLS/*.bls" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE". Please wait...
-DOWNLOADING files "BLS/*.bls" files for label "SVDEFDBO-2144" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE". Please wait...
-CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
-BEGIN BLS COMPILATION. Please wait...
-(   0.0%) Compiling   1 of 5   used files for pacursel.bls:                  LAError.bls         
-(   0.0%) Compiling   2 of 5   used files for pacursel.bls:                  aaPrint.bls         
-(   0.0%) Compiling   2 of 9   used files for aaprint.bls:                   laCryLib.bls        
-(   0.0%) Compiling   1 of 5   used files for lacrylib.bls:                  laPublic.bls        
-(   0.0%) Compiling   1 of 4   used files for lapublic.bls:                  laSLog.bls          
-(   0.0%) Compiling   2 of 4   used files for lapublic.bls:                  olSchem.bls         
-(   0.0%) Compiling   3 of 4   used files for lapublic.bls:                  laAddLib.bls        
-(   0.0%) Compiling   2 of 2   used files for laaddlib.bls:                  laConst.bls         
-(   0.0%) Compiling   5 of 5   used files for lacrylib.bls:                  laComDatApi.bls     
-(   0.0%) Compiling   3 of 9   used files for aaprint.bls:                   laCrSign.bls        
-(   0.0%) Compiling   3 of 6   used files for lacrsign.bls:                  laCCSign.bls        
-(   0.0%) Compiling   3 of 8   used files for laccsign.bls:                  laCCXML.bls         
-(   0.0%) Compiling   6 of 8   used files for laccsign.bls:                  laCCDoc.bls         
-(   0.0%) Compiling   1 of 6   used files for laccdoc.bls:                   lcAutoNo.bls        
-(   0.0%) Compiling   3 of 3   used files for lcautono.bls:                  laLibCtl.bls        
-(   0.0%) Compiling   2 of 8   used files for lalibctl.bls:                  AA14.bls            
-(   1.0%) Compiling   5 of 8   used files for lalibctl.bls:                  laRecOpr.bls        
-(   1.0%) Compiling   6 of 8   used files for lalibctl.bls:                  laMathem.bls        
-(   1.0%) Compiling   8 of 8   used files for lalibctl.bls:                  aaBranch.bls        
-(   1.0%) Compiling   2 of 6   used files for laccdoc.bls:                   LAContrl.bls        
-(   1.0%) Compiling   2 of 9   used files for lacontrl.bls:                  LASConst.bls        
-(   1.0%) Compiling   9 of 9   used files for lacontrl.bls:                  la4RSA.bls          
-(   1.0%) Compiling   4 of 9   used files for aaprint.bls:                   PAGIFs.bls          
-(   1.0%) Compiling   6 of 9   used files for aaprint.bls:                   aaPrnSum.bls        
-(   1.0%) Compiling   9 of 9   used files for aaprint.bls:                   aaMorpher.bls       
-(   1.0%) Compiling   4 of 5   used files for pacursel.bls:                  laprint.bls         
-(   1.0%) Compiling   5 of 13  used files for laprint.bls:                   DCRoot.bls          
-(   1.0%) Compiling   4 of 5   used files for dcroot.bls:                    laCpyDoc.bls        
-(   1.0%) Compiling  10 of 13  used files for laprint.bls:                   laCusDCt.bls        
-(   1.0%) Compiling  12 of 13  used files for laprint.bls:                   laKeyEch.bls        
-(   2.0%) Compiling  13 of 13  used files for laprint.bls:                   paStamp.bls         
-(   2.0%) Compiling   5 of 5   used files for pacursel.bls:                  aaVTBStpm.bls       
-(   2.0%) Compiling   1 of 5   used files for ua179300.bls:                  uaLib.bls           
-(   2.0%) Compiling   3 of 5   used files for ua179300.bls:                  uaBakLib.bls        
-(   2.0%) Compiling   3 of 6   used files for abgefkvi.bls:                  lbLnkABS.bls        
-(   2.0%) Compiling   5 of 6   used files for abgefkvi.bls:                  lbGefApi.bls        
-(   2.0%) Compiling   6 of 6   used files for abgefkvi.bls:                  abABSKvi.bls        
-(   2.0%) Compiling   4 of 4   used files for ababskvi.bls:                  lbDocOut.bls        
-(   2.0%) Compiling   5 of 11  used files for lbstmmba.bls:                  lbInRCK.bls         
-(   2.0%) Compiling   5 of 5   used files for lbinrck.bls:                   laCnvMBA.bls        
-(   2.0%) Compiling   2 of 2   used files for lacnvmba.bls:                  ssCommon.bls        
-(   2.0%) Compiling   6 of 11  used files for lbstmmba.bls:                  lbDocMBA.bls        
-(   2.0%) Compiling   2 of 6   used files for lbdocmba.bls:                  aaMBACch.bls        
-(   2.0%) Compiling   4 of 6   used files for lbdocmba.bls:                  laXmlMBA.bls        
-(   2.0%) Compiling   1 of 1   used files for laxmlmba.bls:                  laConstMBA.bls      
-(   2.0%) Compiling   5 of 6   used files for lbdocmba.bls:                  laCommonMBA.bls     
-(   3.0%) Compiling   6 of 6   used files for lbdocmba.bls:                  lbNodeMBA.bls       
-(   3.0%) Compiling   1 of 5   used files for lbnodemba.bls:                 lbCnvRCK.bls        
-(   3.0%) Compiling  11 of 11  used files for lbstmmba.bls:                  aamba_14.bls        
-(   3.0%) Compiling   1 of 2   used files for ctstatupdateid.bls:            ctUtils.bls         
-(   3.0%) Compiling   1 of 1   used files for ctutils.bls:                   ctConsts.bls        
-(   3.0%) Compiling   1 of 6   used files for rt_w3c_20login.bls:            SSErrors.bls        
-(   3.0%) Compiling   2 of 6   used files for rt_w3c_20login.bls:            RT_1Common.bls      
-(   3.0%) Compiling   4 of 18  used files for rt_1common.bls:                SSXML.bls           
-(   3.0%) Compiling   5 of 18  used files for rt_1common.bls:                RT_0SCHEMEPARAMS.bls
-(   3.0%) Compiling   6 of 18  used files for rt_1common.bls:                RT_0USERDATA.bls    
-(   3.0%) Compiling   8 of 18  used files for rt_1common.bls:                aaCrSign.bls        
-(   3.0%) Compiling   7 of 24  used files for aacrsign.bls:                  lacancrq.bls        
-(   3.0%) Compiling   8 of 24  used files for aacrsign.bls:                  laRITCns.bls        
-(   3.0%) Compiling  12 of 24  used files for aacrsign.bls:                  lcTemplt.bls        
-(   3.0%) Compiling  17 of 24  used files for aacrsign.bls:                  saIvAck.bls         
-(   3.0%) Compiling   1 of 3   used files for saivack.bls:                   daIvAck.bls         
-(   3.0%) Compiling   2 of 2   used files for daivack.bls:                   laCCToXML.bls       
-(   4.0%) Compiling  18 of 24  used files for aacrsign.bls:                  aaCCSign.bls        
-(   4.0%) Compiling  19 of 24  used files for aacrsign.bls:                  aaCrSig1.bls        
-(   4.0%) Compiling  21 of 22  used files for aacrsig1.bls:                  laDocAck.bls        
-(   4.0%) Compiling   2 of 3   used files for ladocack.bls:                  lbHash.bls          
-(   4.0%) Compiling  22 of 22  used files for aacrsig1.bls:                  aaAccSign.bls       
-(   4.0%) Compiling  24 of 24  used files for aacrsign.bls:                  la1CBCall.bls       
-(   4.0%) Compiling  13 of 18  used files for rt_1common.bls:                lbRmAuth.bls        
-(   4.0%) Compiling  14 of 18  used files for rt_1common.bls:                abKeyEch.bls        
-(   4.0%) Compiling   4 of 13  used files for abkeyech.bls:                  CryPrint.bls        
-(   4.0%) Compiling   9 of 13  used files for abkeyech.bls:                  iaCrypto.bls        
-(   4.0%) Compiling   8 of 8   used files for iacrypto.bls:                  laGenIns.bls        
-(   4.0%) Compiling  10 of 13  used files for abkeyech.bls:                  lbMsCAAp.bls        
-(   4.0%) Compiling  11 of 13  used files for abkeyech.bls:                  laCrWzrd.bls        
-(   4.0%) Compiling   9 of 11  used files for lacrwzrd.bls:                  laLirLic.bls        
-(   4.0%) Compiling  11 of 11  used files for lacrwzrd.bls:                  laBranch.bls        
-(   4.0%) Compiling  12 of 13  used files for abkeyech.bls:                  abKeyVld.bls        
-(   4.0%) Compiling  13 of 13  used files for abkeyech.bls:                  abKeyExp.bls        
-(   4.0%) Compiling   3 of 7   used files for abkeyexp.bls:                  laCryEIP.bls        
-(   4.0%) Compiling   5 of 9   used files for lacryeip.bls:                  icCryIns.bls        
-(   4.0%) Compiling   9 of 9   used files for lacryeip.bls:                  laCrPrfD.bls        
-(   5.0%) Compiling   4 of 6   used files for rt_w3c_20login.bls:            RT_w3c_00common.bls 
-(   5.0%) Compiling   5 of 6   used files for rt_w3c_20login.bls:            RT_w3c_10Loader.bls 
-(   5.0%) Compiling   4 of 4   used files for scstmmn.bls:                   laStatem.bls        
-(   5.0%) Compiling   1 of 7   used files for acimpinf.bls:                  aa14_Inf.bls        
-(   5.0%) Compiling   3 of 7   used files for acimpinf.bls:                  laSendTy.bls        
-(   5.0%) Compiling   5 of 7   used files for acimpinf.bls:                  LcImpBS.bls         
-(   6.0%) Compiling   6 of 7   used files for acimpinf.bls:                  lcImpCch.bls        
-(   6.0%) Compiling   1 of 7   used files for acimpprs.bls:                  aa14_Prs.bls        
-(   6.0%) Compiling   2 of 4   used files for dbdpcon138i.bls:               daDPCon138i.bls     
-(   6.0%) Compiling   3 of 4   used files for dadpcon138i.bls:               la3016u.bls         
-(   6.0%) Compiling   2 of 3   used files for dbabschs.bls:                  abABSLnk.bls        
-(   6.0%) Compiling   1 of 9   used files for ababslnk.bls:                  abABSDoc.bls        
-(   6.0%) Compiling   5 of 9   used files for ababslnk.bls:                  laCalend.bls        
-(   6.0%) Compiling   3 of 7   used files for aboutshd.bls:                  lb14SHD.bls         
-(   6.0%) Compiling   4 of 8   used files for lapdcmba.bls:                  laCrdMBA.bls        
-(   6.0%) Compiling   5 of 8   used files for lapdcmba.bls:                  laLibMBA.bls        
-(   6.0%) Compiling   6 of 8   used files for lapdcmba.bls:                  aasigMBA.bls        
-(   6.0%) Compiling   7 of 8   used files for lapdcmba.bls:                  laCtrlMBA.bls       
-(   7.0%) Compiling   1 of 7   used files for abgetclient.bls:               LbXml.bls           
-(   7.0%) Compiling   2 of 4   used files for lbxml.bls:                     lb14XML.bls         
-(   7.0%) Compiling   3 of 4   used files for lbxml.bls:                     laMQConst.bls       
-(   7.0%) Compiling   5 of 7   used files for abgetclient.bls:               lbImpClient.bls     
-(   7.0%) Compiling   6 of 7   used files for abgetclient.bls:               lbAdminLog.bls      
-(   7.0%) Compiling   3 of 4   used files for lbubslnk.bls:                  lbUBSParseText.bls  
-(   7.0%) Compiling   1 of 2   used files for ocmail.bls:                    laMReprt.bls        
-(   7.0%) Compiling   4 of 5   used files for accorprs.bls:                  LaCorrBS.bls        
-(   7.0%) Compiling   2 of 5   used files for lbvabild.bls:                  lbVBILib.bls        
-(   7.0%) Compiling   1 of 2   used files for anb2bactc.bls:                 laCCCtl.bls         
-(   8.0%) Compiling   6 of 7   used files for abrsorakvt.bls:                lb14RSOra.bls       
-(   8.0%) Compiling   7 of 7   used files for abrsorakvt.bls:                lbRSOraAdd.bls      
-(   8.0%) Compiling   4 of 5   used files for anfreeclgoz.bls:               LaLimits.bls        
-(   8.0%) Compiling   1 of 4   used files for dapayroll.bls:                 laPayRoll.bls       
-(   8.0%) Compiling   7 of 7   used files for abwizrpl.bls:                  lbWizRPL.bls        
-(   8.0%) Compiling   2 of 2   used files for lbwizrpl.bls:                  lbB2BCus.bls        
-(   8.0%) Compiling   4 of 4   used files for daprinfo.bls:                  anPRDoc.bls         
-(   9.0%) Compiling   1 of 1   used files for scfilter.bls:                  laFilter.bls        
-(   9.0%) Compiling   3 of 8   used files for abrinfoc.bls:                  laUOLib.bls         
-(   9.0%) Compiling   7 of 8   used files for abrinfoc.bls:                  lbRInfoC.bls        
-(   9.0%) Compiling   1 of 5   used files for ubicblockclient.bls:           ublImpPrgs.bls      
-(   9.0%) Compiling   2 of 2   used files for ublimpprgs.bls:                ublImpLog.bls       
-(   9.0%) Compiling   3 of 5   used files for ubicblockclient.bls:           ublImpChk.bls       
-(   9.0%) Compiling   4 of 5   used files for ubicblockclient.bls:           ublImpDB.bls        
-(   9.0%) Compiling   2 of 4   used files for dbnewsf.bls:                   daFilter.bls        
-(   9.0%) Compiling   4 of 4   used files for dbnewsf.bls:                   laNews.bls          
-(  10.0%) Compiling   4 of 5   used files for dataddr.bls:                   lbAddTran.bls       
-(  10.0%) Compiling   5 of 5   used files for dataddr.bls:                   laTrns17.bls        
-(  10.0%) Compiling   1 of 2   used files for dccrmbox.bls:                  acKeyEch.bls        
-(  10.0%) Compiling  11 of 12  used files for ackeyech.bls:                  acKeyVld.bls        
-(  10.0%) Compiling  12 of 12  used files for ackeyech.bls:                  acKeyExp.bls        
-(  10.0%) Compiling   1 of 3   used files for dckeyreq.bls:                  acKeyReq.bls        
-(  10.0%) Compiling   3 of 7   used files for ackeyreq.bls:                  laKeyGen.bls        
-(  10.0%) Compiling   3 of 7   used files for lbgenint.bls:                  cbGenInt.bls        
-(  10.0%) Compiling   1 of 2   used files for sbb2bcuss.bls:                 sbB2BLib.bls        
-(  10.0%) Compiling   1 of 1   used files for sbb2blib.bls:                  sbFilter.bls        
-(  11.0%) Compiling   2 of 2   used files for notifsn.bls:                   lbNotify.bls        
-(  11.0%) Compiling   3 of 7   used files for dbarm.bls:                     lbARMChk.bls        
-(  11.0%) Compiling   3 of 6   used files for lbarmchk.bls:                  laCTLib.bls         
-(  11.0%) Compiling   2 of 3   used files for lactlib.bls:                   ctBranch.bls        
-(  11.0%) Compiling   4 of 6   used files for lbarmchk.bls:                  aaRepClt.bls        
-(  11.0%) Compiling   6 of 7   used files for dbarm.bls:                     aaDelClt.bls        
-(  11.0%) Compiling   6 of 11  used files for aadelclt.bls:                  lbRPL.bls           
-(  11.0%) Compiling   9 of 11  used files for aadelclt.bls:                  lbIPMAC.bls         
-(  11.0%) Compiling  10 of 11  used files for aadelclt.bls:                  lbTANSet.bls        
-(  11.0%) Compiling   1 of 8   used files for lbstmd5n.bls:                  abKvtd5n.bls        
-(  11.0%) Compiling   1 of 8   used files for abkvtd5n.bls:                  lb14d5n.bls         
-(  11.0%) Compiling   1 of 4   used files for lb14d5n.bls:                   lbLibd5n.bls        
-(  11.0%) Compiling   3 of 8   used files for abkvtd5n.bls:                  lbAPId5n.bls        
-(  11.0%) Compiling   7 of 8   used files for lbstmd5n.bls:                  la1256u.bls         
-(  11.0%) Compiling   8 of 8   used files for lbstmd5n.bls:                  lbLnkABSEx.bls      
-(  12.0%) Compiling   4 of 7   used files for ubprdoc.bls:                   uaControls.bls      
-(  12.0%) Compiling   4 of 7   used files for dbcusbnk.bls:                  lbCusDlg.bls        
-(  12.0%) Compiling   2 of 3   used files for dbcbuyf.bls:                   dbCliDoF.bls        
-(  12.0%) Compiling   3 of 3   used files for dbcbuyf.bls:                   dbPDocF.bls         
-(  12.0%) Compiling   1 of 13  used files for acimpltx.bls:                  aa14_LTx.bls        
-(  12.0%) Compiling   7 of 13  used files for acimpltx.bls:                  lcImpLTx.bls        
-(  13.0%) Compiling   3 of 5   used files for abgefmcs.bls:                  lbGefest.bls        
-(  13.0%) Compiling   3 of 4   used files for pab2bactc.bls:                 laCCPrn.bls         
-(  13.0%) Compiling   1 of 3   used files for mbsc_2statement.bls:           MBSC_1errors.bls    
-(  13.0%) Compiling   1 of 1   used files for mbsc_1errors.bls:              MBSC_0consts.bls    
-(  13.0%) Compiling   2 of 3   used files for mbsc_2statement.bls:           MB_DateTimeConv.bls 
-(  13.0%) Compiling   8 of 8   used files for annoticembcontrols.bls:        la138iFs.bls        
-(  13.0%) Compiling   9 of 10  used files for abdocack.bls:                  laTZApi.bls         
-(  13.0%) Compiling   1 of 9   used files for dbrem1c.bls:                   lbparsexml.bls      
-(  13.0%) Compiling   7 of 11  used files for lbparsexml.bls:                lbErrorXML.bls      
-(  14.0%) Compiling   8 of 10  used files for rt_2depositdeclarcnd.bls:      lbUnload.bls        
-(  14.0%) Compiling  10 of 10  used files for rt_2depositdeclarcnd.bls:      lbNSOUtils.bls      
-(  14.0%) Compiling   7 of 19  used files for rt_1loader.bls:                RT_1SignConf.bls    
-(  14.0%) Compiling  11 of 12  used files for rt_1signconf.bls:              aaCrVisa.bls        
-(  14.0%) Compiling  18 of 19  used files for rt_1loader.bls:                abLnkCorreqts.bls   
-(  14.0%) Compiling   2 of 15  used files for ablnkcorreqts.bls:             lbLinkMQ.bls        
-(  14.0%) Compiling   2 of 2   used files for lblinkmq.bls:                  lbMQConst.bls       
-(  14.0%) Compiling   9 of 15  used files for ablnkcorreqts.bls:             laRmUser.bls        
-(  14.0%) Compiling  12 of 15  used files for ablnkcorreqts.bls:             lbExpClientToCorreqts.bls
-(  14.0%) Compiling  13 of 15  used files for ablnkcorreqts.bls:             lbLnkCorreqts.bls   
-(  14.0%) Compiling   6 of 7   used files for sacrprof.bls:                  laCryReq.bls        
-(  15.0%) Compiling   1 of 2   used files for sasrhctx.bls:                  SysConst.bls        
-(  15.0%) Compiling   2 of 2   used files for sasrhctx.bls:                  saDateTm.bls        
-(  15.0%) Compiling   3 of 3   used files for aastrest.bls:                  aa14_1C.bls         
-(  15.0%) Compiling   1 of 3   used files for abdiacnv.bls:                  lbOutDia.bls        
-(  15.0%) Compiling   2 of 2   used files for dbevstat.bls:                  dbEvents.bls        
-(  15.0%) Compiling   2 of 3   used files for anclikey.bls:                  laMngCtr.bls        
-(  15.0%) Compiling   5 of 6   used files for abclvstm.bls:                  lbclvlib.bls        
-(  16.0%) Compiling   4 of 4   used files for sbnews.bls:                    dbNewsWiz.bls       
-(  16.0%) Compiling   3 of 3   used files for ubiicontrl.bls:                ubiDSPLib.bls       
-(  16.0%) Compiling   1 of 7   used files for mbsc_2dicts.bls:               MBSC_0tools.bls     
-(  16.0%) Compiling   3 of 7   used files for mbsc_2dicts.bls:               MBSC_1Common.bls    
-(  16.0%) Compiling   7 of 7   used files for mbsc_2dicts.bls:               MBSC_1auth.bls      
-(  16.0%) Compiling   5 of 15  used files for rt_2import.bls:                RT_1RTF.bls         
-(  16.0%) Compiling   6 of 11  used files for rt_1rtf.bls:                   dapstat.bls         
-(  16.0%) Compiling   2 of 14  used files for dapstat.bls:                   da14.bls            
-(  16.0%) Compiling  12 of 14  used files for dapstat.bls:                   dapstat_Notice.bls  
-(  16.0%) Compiling   2 of 3   used files for dapstat_notice.bls:            laStatPrint.bls     
-(  16.0%) Compiling  13 of 14  used files for dapstat.bls:                   dapstat_Inform.bls  
-(  16.0%) Compiling   7 of 11  used files for rt_1rtf.bls:                   lbstmstr.bls        
-(  16.0%) Compiling   2 of 7   used files for lbstmstr.bls:                  aaExp1C.bls         
-(  16.0%) Compiling   3 of 7   used files for lbstmstr.bls:                  aaExpLTX.bls        
-(  17.0%) Compiling   6 of 15  used files for rt_2import.bls:                RT_1Excel.bls       
-(  17.0%) Compiling   9 of 15  used files for rt_2import.bls:                RT_1DBF.bls         
-(  17.0%) Compiling  10 of 15  used files for rt_2import.bls:                RT_1Exp940.bls      
-(  17.0%) Compiling   3 of 4   used files for rt_1exp940.bls:                aaExp940.bls        
-(  17.0%) Compiling  11 of 15  used files for rt_2import.bls:                RT_1Exp940RUR.bls   
-(  17.0%) Compiling   3 of 4   used files for rt_1exp940rur.bls:             aaExp940RUR.bls     
-(  17.0%) Compiling  12 of 15  used files for rt_2import.bls:                RT_2_CHECK.bls      
-(  17.0%) Compiling  13 of 15  used files for rt_2import.bls:                RT_1ExpMC.bls       
-(  17.0%) Compiling   3 of 3   used files for rt_1expmc.bls:                 aaExpMC.bls         
-(  17.0%) Compiling  14 of 15  used files for rt_2import.bls:                RT_1ExpCSV.bls      
-(  17.0%) Compiling   3 of 4   used files for rt_1expcsv.bls:                aaExprtCSV.bls      
-(  17.0%) Compiling  15 of 15  used files for rt_2import.bls:                acImpCSV3.bls       
-(  17.0%) Compiling   1 of 12  used files for acimpcsv3.bls:                 aa14_CS.bls         
-(  18.0%) Compiling   2 of 3   used files for occcrout.bls:                  laCCWrap.bls        
-(  18.0%) Compiling   3 of 3   used files for obwsfreedoc.bls:               laWebService.bls    
-(  18.0%) Compiling   3 of 6   used files for dcprnstm.bls:                  aaTVTLib.bls        
-(  18.0%) Compiling   6 of 6   used files for dcprnstm.bls:                  sastatru.bls        
-(  18.0%) Compiling   3 of 8   used files for sastatru.bls:                  laStatRu.bls        
-(  18.0%) Compiling   4 of 8   used files for sastatru.bls:                  CustComb.bls        
-(  18.0%) Compiling   8 of 8   used files for sastatru.bls:                  laCalendar.bls      
-(  19.0%) Compiling   3 of 5   used files for abrsbcur.bls:                  lbRsLink.bls        
-(  19.0%) Compiling   3 of 3   used files for dcstatdc.bls:                  dcAddCor.bls        
-(  19.0%) Compiling   6 of 6   used files for aboutbtd.bls:                  laDelivT.bls        
-(  19.0%) Compiling   6 of 9   used files for abbisstatement.bls:            lbBisCommon.bls     
-(  19.0%) Compiling   8 of 9   used files for lbbiscommon.bls:               lbSonicESB.bls      
-(  19.0%) Compiling   3 of 11  used files for abchecka.bls:                  laNotice.bls        
-(  19.0%) Compiling   5 of 11  used files for abchecka.bls:                  VTBNotice.bls       
-(  19.0%) Compiling  10 of 11  used files for abchecka.bls:                  lbDocTimeControl.bls
-(  20.0%) Compiling   2 of 5   used files for dbpddscr.bls:                  aaSysAzk.bls        
-(  20.0%) Compiling   1 of 4   used files for aboutd5ntapicur.bls:           lb14D5NTAPI.bls     
-(  20.0%) Compiling   2 of 4   used files for aboutd5ntapicur.bls:           lbD5NTAPI.bls       
-(  20.0%) Compiling   3 of 7   used files for ababsdia.bls:                  lbABSDia.bls        
-(  20.0%) Compiling   6 of 7   used files for ababsdia.bls:                  abKviter.bls        
-(  20.0%) Compiling   4 of 6   used files for abkviter.bls:                  lbKviter.bls        
-(  20.0%) Compiling   7 of 7   used files for ababsdia.bls:                  lbDiaErr.bls        
-(  21.0%) Compiling   5 of 11  used files for dcmansel.bls:                  daManSel.bls        
-(  21.0%) Compiling   1 of 5   used files for abwfcurp.bls:                  lbWFOut.bls         
-(  21.0%) Compiling   2 of 4   used files for lbwfout.bls:                   lbWFErr.bls         
-	ERROR: File "abimpmbank.bls", Uses list "['LbXml.bls', 'laError.bls', 'lb14Xml.bls', 'lbLnkAbs.bls', 'lbImpClient.bls', 'lbAdminLog.bls', 'olSchem.bls']"
-			BS language command line compiler. Version 1.0
-			(c) Bank's Soft Systems 1999-2000
-			
-			Program d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK\abImpMbank.bls
-			  OperationType:=lb14XML_OperationTypeMBank; //90
-			Code line is 57
-			Unknown constant, variable, call, system call
-			
-			
-	COMPILATION continues. Please wait...
-(  21.0%) Compiling   7 of 8   used files for aboutrsb.bls:                  lbRsbUsr.bls        
-(  22.0%) Compiling   4 of 7   used files for lbdpdmba.bls:                  lbOdiMBA.bls        
-(  22.0%) Compiling   5 of 7   used files for lbdpdmba.bls:                  lbFromRCK.bls       
-(  22.0%) Compiling   2 of 4   used files for abubs001.bls:                  lbUBSUNL.bls        
-(  22.0%) Compiling   5 of 5   used files for lbubsunl.bls:                  abUBSUnld.bls       
-(  22.0%) Compiling   9 of 9   used files for icinstcl.bls:                  laB2BInst.bls       
-(  23.0%) Compiling   2 of 2   used files for ctctclts.bls:                  ctPhConv.bls        
-(  23.0%) Compiling   1 of 7   used files for ctphconv.bls:                  ctPrConv.bls        
-(  23.0%) Compiling   5 of 5   used files for rt_2azkplanlimitgroup.bls:     RT_2AzkCommon.bls   
-(  23.0%) Compiling   2 of 5   used files for ababxbkx.bls:                  lbAbsBkx.bls        
-(  23.0%) Compiling   1 of 5   used files for lbabsbkx.bls:                  lbBkxXpr.bls        
-	ERROR: File "uapatch259.bls", Uses list "['uaLib.bls', 'laConst.bls', 'laAddLib.bls', 'uaBakLib.bls', 'laPublic.bls']"
-			BS language command line compiler. Version 1.0
-			(c) Bank's Soft Systems 1999-2000
-			
-			Program d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK\uaPatch259.bls
-			    uaAddMsg(AddFields(RBase,'FreeClientDocGOZ'), Result);
-			Code line is 59
-			Unknown constant, variable, call, system call
-			
-			
-	COMPILATION continues. Please wait...
-(  24.0%) Compiling   4 of 14  used files for rt_2clickandtrade.bls:         RT_1Controls.bls    
-(  24.0%) Compiling   1 of 5   used files for dbcplusmba.bls:                dbMCBFrm.bls        
-(  24.0%) Compiling   4 of 10  used files for dbmcbfrm.bls:                  laDialogs.bls       
-(  24.0%) Compiling   5 of 10  used files for dbmcbfrm.bls:                  laCusDTp.bls        
-(  24.0%) Compiling   2 of 5   used files for dbcplusmba.bls:                dbCurDoc.bls        
-(  24.0%) Compiling   1 of 1   used files for dbcurdoc.bls:                  daCurDoc.bls        
-(  24.0%) Compiling   3 of 5   used files for dbcplusmba.bls:                daPDocR.bls         
-(  25.0%) Compiling   4 of 5   used files for dbcplusmba.bls:                lcDlgMBA.bls        
-(  25.0%) Compiling   5 of 5   used files for dbcplusmba.bls:                daCPlusMBA.bls      
-(  25.0%) Compiling   2 of 9   used files for datrorg.bls:                   laFltRpl.bls        
-(  25.0%) Compiling   3 of 9   used files for datrorg.bls:                   saFilterAzk.bls     
-(  25.0%) Compiling   5 of 7   used files for safilterazk.bls:               ExtList.bls         
-(  25.0%) Compiling   4 of 9   used files for datrorg.bls:                   daBKActn.bls        
-(  25.0%) Compiling   3 of 4   used files for dabkactn.bls:                  daBAddr.bls         
-(  25.0%) Compiling   6 of 9   used files for datrorg.bls:                   TestPayDocBA.bls    
-(  25.0%) Compiling   7 of 9   used files for datrorg.bls:                   daazkscr.bls        
-(  26.0%) Compiling   2 of 5   used files for dacfginf.bls:                  daCfgBS.bls         
-(  26.0%) Compiling   2 of 3   used files for dccconvf.bls:                  dcCliDoF.bls        
-(  26.0%) Compiling   4 of 6   used files for dcclidof.bls:                  saDocRu.bls         
-(  26.0%) Compiling   3 of 3   used files for dccconvf.bls:                  dcPDocF.bls         
-(  27.0%) Compiling   1 of 6   used files for datident.bls:                  laProtct.bls        
-(  27.0%) Compiling   2 of 5   used files for ab128swift.bls:                lbSWIFTMQ.bls       
-(  27.0%) Compiling   4 of 4   used files for iampse.bls:                    laCryBuf.bls        
-(  28.0%) Compiling   5 of 8   used files for dcmaintainminbalance.bls:      dcAllChk.bls        
-(  28.0%) Compiling   8 of 8   used files for dcmaintainminbalance.bls:      anMaintainMinBalance.bls
-(  28.0%) Compiling   1 of 2   used files for sbattchf.bls:                  sbBrScrl.bls        
-(  28.0%) Compiling   3 of 7   used files for ablnkmba.bls:                  laLnkAzk.bls        
-(  28.0%) Compiling   2 of 7   used files for lalnkazk.bls:                  lbFGMBA.bls         
-(  28.0%) Compiling   1 of 2   used files for mb_userdialog.bls:             MB_consts.bls       
-(  29.0%) Compiling   1 of 5   used files for abafnfbd.bls:                  lbAfnApi.bls        
-(  29.0%) Compiling   2 of 5   used files for abafnfbd.bls:                  lbAfn14.bls         
-(  29.0%) Compiling   6 of 7   used files for aboutbkw.bls:                  lbbkwadd.bls        
-(  29.0%) Compiling   6 of 9   used files for abimpfrbdgoz.bls:              lbImpMQ.bls         
-(  29.0%) Compiling   2 of 5   used files for dbreportdoc.bls:               paReportDoc.bls     
-(  30.0%) Compiling   2 of 7   used files for aboutxml.bls:                  lbOutXML.bls        
-(  30.0%) Compiling   7 of 9   used files for lboutxml.bls:                  lbPrintPDF.bls      
-(  30.0%) Compiling   1 of 1   used files for dboutbkr.bls:                  lbOutBkr.bls        
-(  30.0%) Compiling   2 of 4   used files for rjexpbudgrep.bls:              daOrgAcc.bls        
-(  30.0%) Compiling   3 of 4   used files for rjexpbudgrep.bls:              lcRunBA.bls         
-(  30.0%) Compiling   5 of 6   used files for paicinfo.bls:                  paBCICInfo.bls      
-(  31.0%) Compiling   1 of 2   used files for dccusivspecc.bls:              dcCCRoot.bls        
-(  31.0%) Compiling   2 of 2   used files for dccusivspecc.bls:              lcIvAckLib.bls      
-(  31.0%) Compiling   7 of 18  used files for dbcuscln.bls:                  daCtLib.bls         
-(  31.0%) Compiling   3 of 4   used files for dactlib.bls:                   laVisaAc.bls        
-(  31.0%) Compiling  10 of 18  used files for dbcuscln.bls:                  daCusCln.bls        
-(  31.0%) Compiling  18 of 18  used files for dbcuscln.bls:                  abLinkNS.bls        
-(  31.0%) Compiling   1 of 3   used files for dcdocackpswtankey.bls:         dcDocAckPswRoot.bls 
-(  32.0%) Compiling   1 of 1   used files for sbcusivspecc.bls:              saCusIvSpec.bls     
-(  32.0%) Compiling   2 of 3   used files for dacusdar.bls:                  daCusDoc.bls        
-(  32.0%) Compiling   2 of 9   used files for acupgr.bls:                    laUp.bls            
-(  32.0%) Compiling   4 of 5   used files for laup.bls:                      caRBase.bls         
-(  32.0%) Compiling   6 of 8   used files for carbase.bls:                   laRBase.bls         
-(  32.0%) Compiling   3 of 7   used files for abmakeup.bls:                  daStLst.bls         
-(  33.0%) Compiling   7 of 9   used files for rt_2stmswift.bls:              RT_1SPF.bls         
-(  33.0%) Compiling   1 of 4   used files for datsmail.bls:                  daTSett.bls         
-(  33.0%) Compiling   2 of 3   used files for ctrests.bls:                   ctVoiceDigit.bls    
-(  33.0%) Compiling   7 of 11  used files for daconfd138i.bls:               anConfD138i.bls     
-(  34.0%) Compiling   4 of 9   used files for abasvkboutdpco.bls:            lbASVKB14.bls       
-(  35.0%) Compiling   1 of 2   used files for mbsc_1filter.bls:              MBSC_1Status.bls    
-(  35.0%) Compiling   4 of 5   used files for rt_3lng.bls:                   RT_2IC.bls          
-(  35.0%) Compiling   6 of 36  used files for rt_2ic.bls:                    RT_1Kvit.bls        
-(  35.0%) Compiling   7 of 7   used files for rt_1kvit.bls:                  abKvitIK.bls        
-(  35.0%) Compiling   2 of 7   used files for abkvitik.bls:                  aaRefInf.bls        
-(  35.0%) Compiling   4 of 11  used files for aarefinf.bls:                  laTrPars.bls        
-(  35.0%) Compiling   2 of 7   used files for latrpars.bls:                  aaCrTran.bls        
-(  35.0%) Compiling   5 of 11  used files for aarefinf.bls:                  aaTrPars.bls        
-(  35.0%) Compiling   9 of 11  used files for aarefinf.bls:                  laCrExam.bls        
-(  35.0%) Compiling   5 of 9   used files for lacrexam.bls:                  aaDocHsh.bls        
-(  36.0%) Compiling  24 of 36  used files for rt_2ic.bls:                    obCCRout.bls        
-(  36.0%) Compiling  29 of 36  used files for rt_2ic.bls:                    obB2BRelReq.bls     
-(  36.0%) Compiling   4 of 6   used files for lboraqls.bls:                  lbOraAdd.bls        
-(  36.0%) Compiling   6 of 9   used files for ababsrsb.bls:                  abrsbkvt.bls        
-(  36.0%) Compiling   4 of 6   used files for abrsbkvt.bls:                  lbrsbkvt.bls        
-(  36.0%) Compiling   7 of 9   used files for ababsrsb.bls:                  lbKviRsB.bls        
-(  37.0%) Compiling   2 of 7   used files for dbgenerc.bls:                  lbGenerC.bls        
-(  37.0%) Compiling  14 of 18  used files for lbgenerc.bls:                  lbGenFSt.bls        
-(  37.0%) Compiling   5 of 7   used files for dbgenerc.bls:                  daSpiner.bls        
-(  37.0%) Compiling   3 of 5   used files for abafnmcs.bls:                  lbAfnAdd.bls        
-(  38.0%) Compiling   2 of 2   used files for dbwizrplnp.bls:                abWizRPLNP.bls      
-(  38.0%) Compiling   2 of 3   used files for aaexpxsl.bls:                  laXSLDocs.bls       
-(  38.0%) Compiling   8 of 13  used files for parsexml.bls:                  ParseSTMReqXML.bls  
-(  38.0%) Compiling   9 of 13  used files for parsexml.bls:                  ParsePayDocRuXML.bls
-(  38.0%) Compiling  11 of 13  used files for parsexml.bls:                  ParseProbe.bls      
-(  38.0%) Compiling  12 of 13  used files for parsexml.bls:                  ParseStatusRequest.bls
-(  39.0%) Compiling   2 of 4   used files for dbdpcre138i.bls:               daDPCre138i.bls     
-(  40.0%) Compiling   3 of 4   used files for ubiirights.bls:                ubImpConst.bls      
-(  40.0%) Compiling   2 of 10  used files for aboutxmlfraud.bls:             lb14Fraud.bls       
-(  40.0%) Compiling   8 of 12  used files for dbarmcln.bls:                  paBCInfo.bls        
-(  40.0%) Compiling  12 of 12  used files for dbarmcln.bls:                  dbRPLSet.bls        
-(  40.0%) Compiling   3 of 3   used files for dbrplset.bls:                  laMeter.bls         
-(  41.0%) Compiling   2 of 2   used files for dasltranstype.bls:             daSlTree.bls        
-(  42.0%) Compiling   1 of 11  used files for acimppf.bls:                   aa14_PF.bls         
-(  42.0%) Compiling   2 of 2   used files for dbsrdel.bls:                   dbRootDl.bls        
-(  42.0%) Compiling   1 of 4   used files for acrinfoc.bls:                  caRInfoC.bls        
-(  43.0%) Compiling   2 of 2   used files for dbacctocnt.bls:                sbCustAcCnT.bls     
-(  44.0%) Compiling   7 of 8   used files for acimpxmlz.bls:                 laXMLDocs.bls       
-(  44.0%) Compiling   6 of 6   used files for abibsstm.bls:                  abIbsKvt.bls        
-(  45.0%) Compiling   2 of 5   used files for dacrpost.bls:                  daCrPrfD.bls        
-(  45.0%) Compiling   3 of 5   used files for dacrpost.bls:                  daCrWrPD.bls        
-(  45.0%) Compiling   5 of 5   used files for dacrpost.bls:                  laMultiSign.bls     
-(  45.0%) Compiling   6 of 6   used files for dbinetwz.bls:                  lbImpARMC.bls       
-(  46.0%) Compiling   7 of 8   used files for dbchangeletterofcredru.bls:    daIniVal.bls        
-(  47.0%) Compiling  11 of 21  used files for dacrwzrd.bls:                  daCrWrPl.bls        
-(  47.0%) Compiling  13 of 21  used files for dacrwzrd.bls:                  daCrPrfE.bls        
-(  47.0%) Compiling  19 of 21  used files for dacrwzrd.bls:                  daCryReq.bls        
-(  48.0%) Compiling   9 of 21  used files for dbwzrdcl.bls:                  daRefreh.bls        
-(  48.0%) Compiling  10 of 21  used files for dbwzrdcl.bls:                  dbRmUWzd.bls        
-(  49.0%) Compiling  12 of 21  used files for dbwzrdcl.bls:                  dbBnkAcc.bls        
-(  49.0%) Compiling   8 of 8   used files for dbbnkacc.bls:                  laBnkAccType.bls    
-(  49.0%) Compiling  15 of 21  used files for dbwzrdcl.bls:                  sbARMCln.bls        
-(  49.0%) Compiling   5 of 8   used files for dcdpcon.bls:                   daDPCon.bls         
-(  49.0%) Compiling   7 of 7   used files for dbstatruf.bls:                 dbBSysDF.bls        
-(  49.0%) Compiling   4 of 8   used files for dccolord.bls:                  dcNDS.bls           
-(  51.0%) Compiling   5 of 5   used files for darepmba.bls:                  LaRepMBA.bls        
-(  51.0%) Compiling   4 of 6   used files for lbrepmba.bls:                  acBllCsh.bls        
-(  52.0%) Compiling   2 of 2   used files for dctrnot.bls:                   daTrAcc.bls         
-(  54.0%) Compiling   2 of 3   used files for dbconfdif.bls:                 dbBnkDoF.bls        
-(  55.0%) Compiling   1 of 6   used files for abafnstm.bls:                  lbAfnKvt.bls        
-(  55.0%) Compiling   4 of 6   used files for abafnstm.bls:                  lbAfnStm.bls        
-(  55.0%) Compiling   6 of 7   used files for ababsstmxml.bls:               lbABSStmXML.bls     
-(  55.0%) Compiling   1 of 5   used files for lbabsstmxml.bls:               lbXMLlib.bls        
-(  56.0%) Compiling   3 of 5   used files for caviewrb.bls:                  caRBWiz.bls         
-(  56.0%) Compiling   6 of 7   used files for carbwiz.bls:                   caTimeT.bls         
-(  57.0%) Compiling  10 of 10  used files for dbrbase.bls:                   laVVersn.bls        
-(  57.0%) Compiling   1 of 4   used files for mb_obmail.bls:                 abSWIFTMQ.bls       
-(  57.0%) Compiling   5 of 7   used files for abswiftmq.bls:                 abStmSWIFT.bls      
-(  57.0%) Compiling   6 of 7   used files for abswiftmq.bls:                 ab101SWIFT.bls      
-(  58.0%) Compiling   3 of 9   used files for ababswf.bls:                   lbABSWF.bls         
-(  60.0%) Compiling   3 of 11  used files for abcrygen.bls:                  lbCryGen.bls        
-(  63.0%) Compiling   1 of 6   used files for abubsabs.bls:                  abUBSKvt.bls        
-(  63.0%) Compiling   6 of 6   used files for rt_2clientcustomdoc.bls:       laMaskUtils.bls     
-(  63.0%) Compiling   7 of 13  used files for rt_3docack.bls:                laSMSGen.bls        
-(  64.0%) Compiling   3 of 7   used files for ababsbkr.bls:                  lbABSBkr.bls        
-(  64.0%) Compiling   6 of 7   used files for ababsbkr.bls:                  lbAnsBkr.bls        
-(  65.0%) Compiling   5 of 12  used files for abkvtxml.bls:                  lbKVTXML.bls        
-(  65.0%) Compiling   2 of 2   used files for dcbnkdof.bls:                  dcBSysDF.bls        
-(  72.0%) Compiling   4 of 4   used files for dbnwizp3.bls:                  aaRecipientsImp.bls 
-(  72.0%) Compiling   5 of 5   used files for aarecipientsimp.bls:           daInfoForm.bls      
-(  74.0%) Compiling   2 of 3   used files for ababxdcb.bls:                  lbAbsDcb.bls        
-(  76.0%) Compiling   1 of 11  used files for acimppf_f.bls:                 aa14_PF_f.bls       
-(  77.0%) Compiling  10 of 11  used files for sbrbase.bls:                   fnExcel.bls         
-(  79.0%) Compiling   7 of 10  used files for rt_2depositdeclar.bls:         anDepositDeclar.bls 
-(  79.0%) Compiling   4 of 4   used files for laeimail.bls:                  laEIDoc.bls         
-(  82.0%) Compiling   3 of 7   used files for ababsxml.bls:                  lbABSXML.bls        
-(  86.0%) Compiling   1 of 4   used files for rt_2admin.bls:                 RT_1Entry.bls       
-(  87.0%) Compiling   3 of 3   used files for sbrinfoc.bls:                  dbSelClt.bls        
-(  92.0%) Compiling   3 of 6   used files for ababsbtd.bls:                  lbABSBtD.bls        
-(  92.0%) Compiling   3 of 5   used files for dbdosstm.bls:                  abDosStm.bls        
-(  93.0%) Compiling   2 of 4   used files for ababs21c.bls:                  lbABS21C.bls        
-(  98.0%) Compiling   1 of 5   used files for dccplusmba.bls:                dcMainF.bls         
-	COMPILED 1898 of 1900
-COPYING BLL files to patch
-DONE -----------------
+BUILD BEGIN 2018-02-14 14:26:34
+DOWNLOADING files for date "11.12.17 15:27" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for date "14.02.18 14:17" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
 ========================================================================================================================
 SETTINGS LOADED:
 	StarteamProject = DBO
-	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs
-	Labels = [('label001', 'SVDEFDBO-1068'), ('label002', 'SVDEFDBO-1116'), ('label003', 'SVDEFDBO-1117'), ('label004', 'SVDEFDBO-1151'), ('label005', 'SVDEFDBO-1174'), ('label006', 'SVDEFDBO-1175'), ('label007', 'SVDEFDBO-1182'), ('label008', 'SVDEFDBO-1226'), ('label009', 'SVDEFDBO-1255'), ('label010', 'SVDEFDBO-1317'), ('label011', 'SVDEFDBO-1338'), ('label012', 'SVDEFDBO-1357'), ('label013', 'SVDEFDBO-1410'), ('label014', 'SVDEFDBO-1455'), ('label015', 'SVDEFDBO-1475'), ('label016', 'SVDEFDBO-1503'), ('label017', 'SVDEFDBO-1553'), ('label018', 'SVDBOLINE-128'), ('label019', 'SVDEFDBO-1665'), ('label020', 'SVDEFDBO-1732'), ('label021', 'SVDEFDBO-1734'), ('label022', 'SVDEFDBO-1840'), ('label023', 'SVDEFDBO-1852'), ('label024', 'SVDEFDBO-1858'), ('label025', 'SVDEFDBO-1873'), ('label026', 'SVDEFDBO-1874'), ('label027', 'SVDEFDBO-1887'), ('label028', 'SVDEFDBO-1901'), ('label029', 'SVDEFDBO-1912'), ('label030', 'SVDEFDBO-1941'), ('label031', 'SVDEFDBO-2198'), ('label032', 'SVDEFDBO-2384'), ('label033', 'SVDEFDBO-2398')]
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('datebefore', '11.12.17 15:27'), ('dateafter', '14.02.18 14:17')]
 	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
 CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP
-BUILD BEGIN 2017-06-27 15:13:29
-DOWNLOADING files for label "SVDEFDBO-1068" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-	ERROR DOWNLOADING files for label "SVDEFDBO-1068" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER"
-DOWNLOADING files for label "SVDEFDBO-1116" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-	ERROR DOWNLOADING files for label "SVDEFDBO-1116" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER"
-DOWNLOADING files for label "SVDEFDBO-1117" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+	ERROR when cleaning ((<class 'OSError'>, OSError(41, 'Папка не пуста'), <traceback object at 0x00000000031E88C8>))
 ========================================================================================================================
 SETTINGS LOADED:
 	StarteamProject = DBO
-	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs
-	Labels = [('label001', 'SVDEFDBO-1068'), ('label002', 'SVDEFDBO-1116'), ('label003', 'SVDEFDBO-1117'), ('label004', 'SVDEFDBO-1151'), ('label005', 'SVDEFDBO-1174'), ('label006', 'SVDEFDBO-1175'), ('label007', 'SVDEFDBO-1182'), ('label008', 'SVDEFDBO-1226'), ('label009', 'SVDEFDBO-1255'), ('label010', 'SVDEFDBO-1317'), ('label011', 'SVDEFDBO-1338'), ('label012', 'SVDEFDBO-1357'), ('label013', 'SVDEFDBO-1410'), ('label014', 'SVDEFDBO-1455'), ('label015', 'SVDEFDBO-1475'), ('label016', 'SVDEFDBO-1503'), ('label017', 'SVDEFDBO-1553'), ('label018', 'SVDBOLINE-128'), ('label019', 'SVDEFDBO-1665'), ('label020', 'SVDEFDBO-1732'), ('label021', 'SVDEFDBO-1734'), ('label022', 'SVDEFDBO-1840'), ('label023', 'SVDEFDBO-1852'), ('label024', 'SVDEFDBO-1858'), ('label025', 'SVDEFDBO-1873'), ('label026', 'SVDEFDBO-1874'), ('label027', 'SVDEFDBO-1887'), ('label028', 'SVDEFDBO-1901'), ('label029', 'SVDEFDBO-1912'), ('label030', 'SVDEFDBO-1941'), ('label031', 'SVDEFDBO-2198'), ('label032', 'SVDEFDBO-2384'), ('label033', 'SVDEFDBO-2398')]
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('datebefore', '11.12.17 15:27'), ('dateafter', '14.02.18 14:17')]
 	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
-BUILD BEGIN 2017-06-27 15:14:38
-DOWNLOADING files for label "SVDEFDBO-1068" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1116" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1117" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1151" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1174" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1175" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1182" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1226" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1255" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1317" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
-DOWNLOADING files for label "SVDEFDBO-1338" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('datebefore', '11.12.17 15:27'), ('dateafter', '14.02.18 14:17')]
+	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
+BUILD BEGIN 2018-02-14 15:00:15
+DOWNLOADING files for date "11.12.17 15:27" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for date "14.02.18 14:17" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+	ERROR DOWNLOADING files for date "14.02.18 14:17" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER"
+BEGIN compare directories:
+	BEFORE: d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE
+	AFTER:  d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('datebefore', '11.12.17 15:27'), ('label000', 'patch_20180214.GPB 020.1.300.1')]
+	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
+CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('datebefore', '11.12.17 15:27'), ('label000', 'patch_20180214.GPB 020.1.300.1')]
+	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
+BUILD BEGIN 2018-02-14 15:27:30
+DOWNLOADING files for date "11.12.17 15:27" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label "patch_20180214.GPB 020.1.300.1" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+BEGIN compare directories:
+	BEFORE: d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE
+	AFTER:  d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\History\RT\_kosas.txt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\History\DBO\_kosas.txt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\History\DBO\_sanya.txt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\History\DBO\_ledvv.txt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\Migration(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\UserLib(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\LinkBC(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\Controls(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\DepOpStamp(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\RTS(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\LinkABS(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\LinkTxtGPBDepOp(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\DSPCACHE(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\EventsArch(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\MsgToCurrVbk(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\RootPayDocScheme(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\SendToFile(82).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\ConfDocInquiry138I(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\StatementRuMBADefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\FreeBankDocMBADefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\MsgToCurrVbkDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\CurrDealInquiry138IDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\DocStatuses(84).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\ConfDocInquiry138IDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\GPBCancelAcceptMBADefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\Migration(81).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\Events(81).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\ExportUserList(81).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\FreeClientDocDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\MBAReportDocDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\Crypto(81).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCCredDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCFSConfDocInquiryDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCFSCrCfDcInquiry(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCFSCrCfDcInquiryDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCRenewCred(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCRenewCon(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCRenewCredDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCCon(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCDocInfDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCMsgToCurrInspDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCMsgToCurrInsp(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\Migration(82).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCDocInf(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCCredMBADefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCClose(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCFSConfDocInquiry(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCCred(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCConDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCRenewConDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCDocInfMBADefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\UNCCloseDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\MSGTOCURRVBK(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\CONFDOCINQUIRY138I(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\MIGCRYPTOPROFILE(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\MIGCUSTOMER(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\CONFDOCINQUIRY138IARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\FREEDOCDEATTACHSET(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\MSGTOCURRVBKARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCFSCONFDOCINQUIRYARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCFSCONFDOCINQUIRY(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCCONARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\SKVOABSSETTING(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCFSCRCFDCINQUIRYARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCMSGREFDOCSARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCCLOSEARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\KPP(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCCON(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCRENEWCREDARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCRENEWCRED(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCRENEWCON(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCRENEWCONARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCFSCRCFDCINQUIRY(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\DETACHSTATISTICS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCDOCINF(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\RESULTTOCORPORATION(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCMSGTOCURRINSP(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCDOCINFARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCMSGTOCURRINSPARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCCRED(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCCLOSE(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCMSGREFDOCS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\MIGREMOTEUSER(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\UNCCREDARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\MIGSYNCCLIENTS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Empty\MIGAZKACCLISTR(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Config\CUSTOMER(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Config\FILTERSETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Config\CONTROLCONSTANTS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Config\NOCOPYDOCFIELDS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Config\ARMABCODE(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Config\CONTROLSETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Config\CONTROLGROUPS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\NOTICECONFIG(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\SPECIALDOCSETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\DOCPRINTSETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\MBAINMSGSETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\DOCMULTIPRINTSETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\REMOTENAVTREES(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\ABSMANAGERTYPE(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\SYSTEMLOGCODESET(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\DOCSCHEMESETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\TRANSSCHEMA(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\LINKTXT(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\REMOTENAVMENUS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\ORDERSTARTFLAG(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\STAT1256(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\MBAMSGXMLSTRUCTURE(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\PAYOPERTYPEINT138I(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\ABSDOCOUTLIB(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\FREEDOCTYPE(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\UNCMSGTOCURRSUBJECT(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\UNCCLOSEGROUND(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\DOCTYPEINT181I(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\MIGSYNCTABLES(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\UNCMSGDVKSTATUS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\DELIVERYTYPE181I(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\ACCMASKDEFORDER(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\UNCMSGDVKSUBJ(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\StoredProc\CHECKUIN(73).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\RemoteUserScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBConvDepoBankDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\CurrDealInquiry138iScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MsgToCurrVbkScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\PayOperTypeInt138iScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MsgToCurrVbkScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\StatementRuScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MsgToCurrVbkDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\ConfDocInquiry138iDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\ConfDocInquiry138iScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBCredConfBankDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\FreeBankDocDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBCredConfBankDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\ArmAbLogScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBTrigBalBankDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\CryptoWizzardSetup(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MsgToCurrVbkDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\PayOperTypeInt138iDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\FreeDocDeattachSetDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\CryptoCrtSelectScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\AccMaskDefOrderScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\ScrollerExport(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBCancelAcceptDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\FreeDocDeattachSetScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\DepOpScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBConvConfBankDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MainCBankFormSecurity(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\RootScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\ConfDocInquiry138iDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\CustomerDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\CryptoCrtScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\DepOpDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\RootDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBCancelAcceptScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\DebetLimitScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\ConfDocInquiry138iScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MainCBankFormDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBConvConfBankScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBConvConfBankDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBNetBankDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBConvConfBankScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MainCBankFormMBA(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\ConfDoc138iPSBlobDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\RootViewScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\ARMABOperativeConsoleScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\CryptoLibTypeScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\DepOpDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\AccountDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\GPBCostInsBankDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredPSDocsDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredTrancheBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\DocTypeInt181iScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseFilterDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewPSDocsDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\FreeDocDeattachAutoSetDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredPayRetDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCClosePSRowsDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\DeliveryType181iScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSSupportingDocumentArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredRecInfoBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseGroundScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewScrollFilter(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\EventsDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MigrationMainForm(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\DeliveryType181iDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\SKVOABSSettingDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MigSyncTablesScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrSubjectDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewPSRowsDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSSupportingDocument(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseGroundDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredFilterDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrSubjectScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MigSyncTablesDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredTrancheBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\EventsScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MigrationRPLSyncDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgRefDocsReport(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryBlobDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\SKVOABSSettingScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MigrationImportDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryBlobDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfBlobDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredPSRowsDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredPayRetBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\DocTypeInt181iDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredRecInfoBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\EventsScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\EventsDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryBlobDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Inet\SUBSYS(65).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\User.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\Statuses.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\RT.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\UNCRenewCon.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\M_BSSCRYPT_CONTROLS_NOTALLOWCREATEDOCUMENT.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\RT_ICS_UNCMSGTOCURRINSP.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\RT_ICS_MSGTOCURRVBK.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\RT_ICS_UNCFSCRCFDCINQUIRY.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\M_BSSCRYPT_DAMSGFROMCURR.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\UNCDocInf_LRes.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\RT_ICS_UNCCON.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\RT_ICS_MSGCURRINSPRELDOCS.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\UNCCon.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\UNCFSCORCONFDOCINQUIRY.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\UNCCred.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\RT_ICS_UNCCRED.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\RT_ICS_UNCFSCONFDOCINQUIRY.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\M_BSSCRYPT_CONTROLS_MSGTOCURRVBKPSEMPTY.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\Conf181_lres.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\RT_ICS_UNCDOCINF.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\UNCFSCONFDOCINQUIRY.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\UNCClose_lres.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Loc_Res\UNCCONCREDCHECKNOTEMPTY.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Generators\MIGSESSIONGENERATOR(71).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Rights\Migration(18).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Sheduler\RootBankDefault(16).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Sheduler\RootBankMBADefault(16).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\View\VIEWICMSGCURRINSPRELDOCSALL(72).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\View\VIEWSYSTEMLOGREMOTEUSERS(72).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\View\VIEWICMSGCURRINSPRELDOCSARC(72).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\View\VIEWICMSGCURRINSPRELDOCS(72).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\PAYOPERTYPEINT138I(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\MIGCRYPTOPROFILE(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\CONFDOCINQUIRY138IDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\FREECLIENTDOCDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\FREEDOCDEATTACHSET(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\CRYPTOCRT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\MIGCUSTOMER(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\DEALPASSPORT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\CONFDOCINQUIRY138I.CONFDOCPSBLOBDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\CUSTOMER(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCMSGTOCURRINSP(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\DOCTYPEINT181I(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCON(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCLOSEARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCREDDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED.DPREISSUEINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\MIGAZKACCLISTR(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCLOSEGROUND(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\DELIVERYTYPE181I(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCRCFDCINQUIRY.SPDOC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\ROOTUNC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCMSGTOCURRSUBJECT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\MIGSYNCTABLES(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCMSGREFDOCS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCON.DPINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\ROOTUNC.PSROWS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCONDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCON.PSROWS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCDOCINFARC.DEALINFOBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCRED.CREDTRANCHEBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCLOSE.PSROWS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCON.DPINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED.CREDTRANCHEBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCONDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCONFDOCINQUIRY(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCDOCINF.DEALINFOBLOBDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\ROOTUNC.PSDOCS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCMSGTOCURRINSPARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCREDARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCRED(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCDOCINF(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCRCFDCINQUIRY.SPDOCDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCON.NONRESIDENTINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCONFDOCINQUIRY.SPD(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCLOSEMBADEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCONARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCONFDOCINQUIRYARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCDOCINFARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCDOCINFMBADEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCDOCINFDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED.NONRESIDENTINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCDOCINF.DEALINFOBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED.CREDRECEIPTINFOBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCRED.DPINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED.PAYMENTRETURNBLOBNONUM(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCREDARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCONFDOCINQUIRYDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED.DPINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCMSGDVKSUBJ(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\MIGREMOTEUSER(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCON.DPREISSUEINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCONFDOCINQUIRY.SPDDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCMSGTOCURRINSPDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCRED.PAYMENTRETURNBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCRCFDCINQUIRYARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCON.NONRESIDENTINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCRED.NONRESIDENTINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCRED.DPREISSUEINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCMSGREFDOCSARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCREDDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCRCFDCINQUIRY(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED.PSROWS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\MIGSYNCCLIENTS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCON(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCLOSEDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCON.DPREISSUEINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCRCFDCINQUIRYARC.SPDOC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCONARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCMSGDVKSTATUS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\SKVOABSSETTING(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED.PSDOCS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\DETACHSTATISTICS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCLOSE(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\ACCMASKDEFORDER(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCON.PSDOCS(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\ROOTUNC.DPPERMINFOBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED.PAYMENTRETURNBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCCRED.CREDRECEIPTINFOBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCRENEWCRED(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\TABLES\UNCFSCRCFDCINQUIRYDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\CLIENT_MBA\FORMS\MainCBankFormMBA(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Configs\UserLib(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Configs\Controls(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Configs\DepOpStamp(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Configs\DSPCACHE(14).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Loc_Res\User_v2.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Loc_Res\M_BSSCRYPT_CONTROLS_NOTALLOWCREATEDOCUMENT.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Loc_Res\UNCCon.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Loc_Res\UNCCONCREDCHECKNOTEMPTY.eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\OPERATIONS\Crypto(81).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\OPERATIONS\UNCCon(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\OPERATIONS\UNCCredDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\OPERATIONS\UNCConDefault(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\OPERATIONS\UNCCred(83).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Empty\UNCCONARC(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Empty\UNCCON(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Config\CONTROLSETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Config\CONTROLGROUPS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Config\CONTROLCONSTANTS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Filled\TRANSSCHEMA(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Filled\DOCSCHEMESETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Filled\LINKTXT(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Filled\STAT1256(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Filled\DOCPRINTSETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Filled\DOCMULTIPRINTSETTINGS(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Filled\PAYOPERTYPEINT138I(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\Table data\Filled\MAILREPORT(data).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCRED.CREDTRANCHEBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCRED.NONRESIDENTINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCON.DPINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCONDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCRED(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCREDDEFAULT(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCRED.PAYMENTRETURNBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCRED.CREDRECEIPTINFOBLOB(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCRED.DPINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCON.DPREISSUEINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCON.NONRESIDENTINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCRED.DPREISSUEINFO(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCREDARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCON(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\TABLES\UNCCONARC(10).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\StoredProc\CHECKUIN(73).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\MainCBankFormDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredPayRetBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredRecInfoBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConDialogArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConTemplateScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredTrancheBlobDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConScroller$CONSCONTR(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredFilterDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredTemplateScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConBankInfoDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredBankInfoDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConScrollerArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCConScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Client\FORMS\UNCCredScrollerArc(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\BSI_scripts\RT_Ic\bsi.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\remotecorresp\remotecorresp.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\depopanswergpb\depopanswergpb.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\depopanswergpb\depopanswergpb_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\depopanswergpb\depopanswergpb_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\mainpage\mainpage.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\COLLECTIONORDER\COLLECTIONORDER.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\COLLECTIONORDER\COLLECTIONORDER_scFilter.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\payorderru\payorderru.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\freeclientdoc\freeclientdoc_english.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\freeclientdoc\freeclientdoc.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\freeclientdoc\freeclientdoc_russian.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\remotebenef\remotebenef.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\confdocinquiry138i_russian.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\confdocinquiry138i_scDocTbl.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\confdocinquiry138i_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\PSgrounddocs_form_russian.htm
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\confdocinquiry138i_scFilter.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\PSgrounddocs_form_english.htm
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\confdocinquiry138i.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\confdocinquiry138i.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\PSgrounddocs_form.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\confdocinquiry138i_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\confdocinquiry138i_english.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\confdocinquiry138i_print_russian.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\PSgrounddocs138_form_english.htm
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\confdocinquiry138i\PSgrounddocs138_form_russian.htm
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbtransit\gpbtransit_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbtransit\gpbtransit.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbtransit\gpbtransit_scFilter.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcredconfbank\gpbcredconfbank_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcredconfbank\gpbcredconfbank.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbnetbank\gpbnetbank_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbnetbank\gpbnetbank.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvconfclient\gpbconvconfclient_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvconfclient\gpbconvconfclient.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvconfclient\gpbconvconfclient_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvconfclient\gpbconvconfclient.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbtrigbalclient\gpbtrigbalclient_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbtrigbalclient\gpbtrigbalclient.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbtrigbalclient\gpbtrigbalclient_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydocru\paydocru_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydocru\paydocru_scDocTbl.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydocru\paydocru_print_russian.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\GPBCancelAccept\GPBCANCELACCEPT_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\GPBCancelAccept\GPBCANCELACCEPT.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\payrolldoc\payrolldoc_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\payrolldoc\payrolldoc_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\remoteofficials\remoteofficials.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\remoteground\remoteground.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvconfbank\gpbconvconfbank.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvconfbank\gpbconvconfbank_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\remotes2rinfo\remotes2rinfo.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvdepobank\gpbconvdepobank_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvdepobank\gpbconvdepobank.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcostinsbank\gpbcostinsbank_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcostinsbank\gpbcostinsbank.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvdepoclient\gpbconvdepoclient_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvdepoclient\gpbconvdepoclient_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvdepoclient\gpbconvdepoclient.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbconvdepoclient\gpbconvdepoclient.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcredconfclient\gpbcredconfclient_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcredconfclient\gpbcredconfclient.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcredconfclient\gpbcredconfclient_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcredconfclient\gpbcredconfclient.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbtrigbalbank\gpbtrigbalbank_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbtrigbalbank\gpbtrigbalbank.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\remotendscalctype\remotendscalctype_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\currconversion\currconversion.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\currconversion\currconversion_scFilter.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\currconversion\currconversion_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\redealpasscon138i\redealpasscon138i_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbnetclient\gpbnetclient_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbnetclient\gpbnetclient.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbnetclient\gpbnetclient_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcostinsclient\gpbcostinsclient.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcostinsclient\gpbcostinsclient_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcostinsclient\gpbcostinsclient.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbcostinsclient\gpbcostinsclient_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\depopconfgpb\depopconfgpb_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\depopconfgpb\depopconfgpb.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\currdealinquiry138i\currdealinquiry138i_scDocTbl.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\dealpassport\dealpassport_russian.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\dealpassport\dealpassport.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\dealpassport\dealpassport_scDocTbl.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\dealpassport\dealpassport_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\dealpassport\dealpassport_russian.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\remotegroundint\remotegroundint.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\paydoccur_scDocTbl.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\paydoccur_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\paydoccur.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\paydoccur_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\paydoccur_english.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\paydoccur_scFilter.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\paydoccur_russian.xml
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\uncclose
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\uncrenewcon
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\uncmsgtocurrinsp
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\unccloseground
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\msgcurrinspreldocs
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\unccred
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\uncfscrcfdcinquiry
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\uncdocinf
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\deliverytype181i
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\msgtocurrvbk
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\unccon
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\uncmsgtocurrsubject
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\uncrenewcred
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\uncfsconfdocinquiry
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\xsl\default_tbl_scroller.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\xsl\default_doc_scroller.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\xsl\LRSC_russian.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\xsl\LRSC_english.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_checks.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_toolbar.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_misc.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\locres_russian.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_common.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_form.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_calendar.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_scroller.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_xml.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_errors.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\locres_english.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_files.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\jquery-3.2.1.min.map
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\jquery-3.2.1.min.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\err6.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\refresh.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\flash.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\desc.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\desctrue.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\asc.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\hourglass_trans.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\superflash.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\table_sql_check.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\fltrmin.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\clock.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\element_up.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\table_sql_view_sm.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\home.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\amount.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\save_small.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\table_sql_view.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\edit.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\descfalse.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\calendar.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\docdn.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\sandglass_ani.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\renum.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\err5.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\err8.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\delete2.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\del.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\new_attach.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\calclear.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\err3.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\err1.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\clock_ani.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\docup.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\add.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\err2.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\err7.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\find_skvo.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\fltrmax.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\calc.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\ico\element_add.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\toolbar\addrel.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\img\toolbar\viewrel.gif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\css\main.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\bsi_err.htm
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\COLLECTIONORDER\COLLECTIONORDER_scroller.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\confdocinquiry138i\confdocinquiry138i_scroller.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\confdocinquiry138i\CONFDOCINQUIRY138I_scheme.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\confdocinquiry138i\confdocinquiry138i_fdata.xtt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\RemoteNDSCalctype\remotendscalctype_scheme.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\payopertypeint138i\payopertypeint138i_scroller.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\currconversion\currconversion_scroller.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\currdealinquiry138i\CURRDEALINQUIRY138I_scheme.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\currdealinquiry138i\currdealinquiry138I_scroller.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\paydoccur\paydoccur_scroller.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\gpbtransit\gpbtransit_scroller.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\GPBCancelAccept\GPBCANCELACCEPT_fData.xtt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\dealpassport\dealpassport_scroller.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\import\impform.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\remotes2rinfo\REMOTES2RINFO_scheme.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\gpbcredconfclient\gpbcredconfclient_fdata.xtt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\schemes.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\CHECK_DATA.xtt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\toolbar.dtd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\statuses.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\DEFAULT_VIEW.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\DEFAULT_TBL_FORM.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\toolbar.xml
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\uncrenewcon
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\uncmsgtocurrinsp
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\uncmsgtocurrsubject
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\msgcurrinspreldocs
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\unccred
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\uncfscrcfdcinquiry
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\UNCDocInf
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\unccloseground
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\doctypeint181i
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\deliverytype181i
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\msgtocurrvbk
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\unccon
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\uncfsconfdocinquiry
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\uncclose
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\uncrenewcred
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\loader.htt
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\nav-tree.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\laCnvRCK.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\lbMsgMBA.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\laPDMBA.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\dbmsgsit.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\lbOdiMBA.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\aasigMBA.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\abSchemMBA.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\lbRepMBA.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\lbLnkAzk.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\daRepMBA.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\lbFillMBA.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\PRINT\COMMON\paStamps.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\BS\TEXT\acImpLTx.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RSAEVENTS\BANK\lbEventsMQ.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UPGRADE\COMMON\uaLib.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UPGRADE\COMMON\uaCertDB.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UPGRADE\COMMON\ua20_1_300.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\Core\RT_2IC.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\Dictionaries\RT_2AzkPlanLimitGroup.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\Dictionaries\RT_2Account.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\Dictionaries\RT_2AzkPact.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\Dictionaries\RT_2AzkProject.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\Dictionaries\RT_2UNCMsgToCurrSubject.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\Dictionaries\rt_2deliverytype181i.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\Dictionaries\RT_2UNCCloseGround.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\Dictionaries\RT_2MsgCurrInspRelDocs.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\COMMON\SSCommon.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\UTILS\RT_1common.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\UTILS\RT_1Events.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\UTILS\RT_2GPBDepOp.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\UTILS\RT_2_CHECK.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laEvents.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\LAPUBLIC.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\LASCONST.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\la138iFs.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laMigLib.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\LABRANCH.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laGpbDepOp.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\daDialog.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\fnExcel.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\LACONTRL.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\daARMABLog.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\LALIBCTL.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laXML.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\LACRYLIB.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\daCtrl17.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\LACPYDOC.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\LAPRINT.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laUtils.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laSkvoLib.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\lbEventsArch.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\dbARMABLog.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laprint181i.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\dbARMReadObject.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laFreClX.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laUncCon.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laUNCMsgDVK.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\aaDetach.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\BANK\dbFrDocDeat.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\ConfDocInquiry138i\Visual\Common\daConfD138i.bls
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\ConfDocInquiry138i\CONTROL
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\ConfDocInquiry138i\RTS
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\ConfDocInquiry138i\PRINT
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBCostIns\RTS\RT_2GpbCostInsClient.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GpbCredConf\Control\angpbcredop.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GpbCredConf\RTS\RT_2GPBCredConfClient.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\DepOpAnswerGPB\RTS\RT_2DepOpAnswerGPB.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\DEALPASSCRED\Visual\Common\daDPCre138i.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBConvConf\Control\angpbconvop.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBConvConf\RTS\RT_2GPBConvConfClient.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\FREECLIENTDOC\OPERATIONS\BANK\AARLDFRD.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\FREECLIENTDOC\Print\Common\paFreeClientDoc.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\DepOpConfGPB\Control\anDepOpConf.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\MsgToCurrVbk\Visual\Common\daMsgToCIVbk.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\MsgToCurrVbk\Print\Common\paMsgToCIVbk.bls
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\MsgToCurrVbk\RTS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\ReDealPassCred138i\Visual\Common\daReDPCre138i.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\CURRDEALINQUIRY138I\CONTROL\ANCURINQ138I.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\CURRDEALINQUIRY138I\RTS\RT_2CurrDealInquiry138I.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\MsgFromCurrInspector\Visual\Common\daDVKMes.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\DEALPASSCON\Visual\Common\daDPCon138i.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBTransit\RTS\RT_2GPBTransit.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\CURRCONVERSION\RTS\RT_2CurrConversion.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBNetConf\Control\anGpbNetOp.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBNetConf\RTS\RT_2GPBNetClient.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\COLLECTIONORDER\RTS\RT_2COLLECTIONORDER.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GpbConvDep\Control\anGPBConvDep.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GpbConvDep\RTS\RT_2GPBConvDepoClient.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\ReDealPassCon138i\Visual\Common\daReDPCon138i.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\PAYDOCCUR\CONTROL\ANPDOCC.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\PAYDOCCUR\RTS\RT_2PayDocCur.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBTrigBalConf\Visual\Common\daGpbTrigBalOp.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBTrigBalConf\Control\anGPBTrBalOp.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBTrigBalConf\RTS\RT_2GpbTrigBalBank.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBTrigBalConf\RTS\RT_2GpbTrigBalClient.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\GPBCancelAccept\RTS\RT_2GPBCANCELACCEPT.bls
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\UNCClose
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\UNCMsgToCurrInsp
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\UNCFSCrCfDcInquiry
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\UNCCon
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\UNCFSConfDocInquiry
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\UNCCred
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\UNCDOCINF
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\UNCRenewCred
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\UNCRenewCon
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\CRYPTO\VISUAL\COMMON\daCrWzrd.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\CRYPTO\VISUAL\COMMON\saCryCrt.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\CRYPTO\KERNEL\COMMON\AACRSIGN.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\CRYPTO\KERNEL\COMMON\LACRWZRD.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\CRYPTO\KERNEL\COMMON\IACRYPTO.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\CRYPTO\KERNEL\COMMON\laCryEIP.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\COMMON\MISC\daDeattachF.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\COMMON\MISC\fnCSV.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\COMMON\MISC\daUNCClGr.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\COMMON\MISC\saUNCMsg2CISubj.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\COMMON\MISC\saUNCMsgRefDocs.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\BANK\MISC\AADELCLT.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\BANK\MISC\dbExpUsr.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\BANK\MISC\sbARMABOperConsole.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\BANK\MISC\dbDPConF181i.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ADMIN\CLIENT\dcMainF.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Migration\Bank\lbMigLib.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Migration\Bank\dbMigSyncTbl.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Migration\Bank\dbMigRpl.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Migration\Bank\obMigRpl.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Migration\Bank\lbMigXTI.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Migration\Bank\obMigImp.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Migration\Bank\dbMigImp.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Migration\Bank\sbMigSyncTbl.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\OPERATIONS\COMMON\aacpdoc.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\OPERATIONS\BANK\MISC\obSKVO.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\COMMON\KERNEL\ABDOCOUT.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\COMMON\KERNEL\ABABSDOC.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\COMMON\KERNEL\lbInOutGpb.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\RKOIBSO (51)\ab51Kvt.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\BTDOC (0)\aboutbtd.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\SKVO (90)\abSKVOOut.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\SKVO (90)\lbSKVOadd.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\SKVO (90)\abskvokvt.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\SKVO (90)\abSKVOIn.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\IBSO (41)\abIbsKvt.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\Txt_GPBConfDocs (202)\abGpbDepOpImp.bls
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Entity
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\makeall.pl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\GetBLL.pl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\Version.usr
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\PSApplicationType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\CreditCashVoucherType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\BankOrderType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\DealPassportType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\TransitAccountWriteOffType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\PersonInfoType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\ContractType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\InfObjectHistoryReportType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\PaymentDocType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\ReceiptType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\SustainingDocCertificateType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\EPDocumentType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\PaymentOrderCurType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\HMSConfigRequestType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\ObjectHeaderType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\AddressType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\NotificationType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\DebitCashVoucherType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\TransactionType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\FreeMessageType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\LinksType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\EBDocumentType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\CashDepositOrderType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\RegistryType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\OrgInfoType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\SourceNotificationType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\BusinessNotificationType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\ApplicFormType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\MessageHeaderType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\RequestRPCType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\TransferType.xsd
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\XSD\SKVO\SyntAccountsType.xsd
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\SETUP\CommonLibraries\SUBSYS\Migration
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\RootListNoAmount.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\ConfDocInquiry138i.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\NEWLISTS.RTF
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\MsgToCurrVbk.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\RootList181.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCClose.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\List181Conf.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\List181UNCConf.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\List181UNCCrCf.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCFSCrConDocI.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\List181ReNew.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\List181DocInf.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCCred.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\List181Close.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCCon.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCRenewCredp2.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCFSConfD.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCDocInf.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCRenewCon.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCMESSDOC.RTF
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\List181MsgToCurr.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCDocInf2015.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\UNCRenewCred.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\ConfDocInquiry138i.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\NEWLISTS.RTF
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCCon.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\List181DocInf.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCRenewCredp2.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\List181Conf.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCFSCrConDocI.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCClose.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCDocInf2015.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCCred.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCFSConfD.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCDocInf.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCRenewCon.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\MsgToCurrVbk.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\UNCRenewCred.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\Scripts\SETUP\CommonBuildLibs32.ini
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\Scripts\SETUP\CommonBuildLibs64.ini
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\XSD
+	copying DIR with contents d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLL
+	FINISHED compare directories. LOOK at d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT
+DOWNLOADING files "BASE/BANK/TABLES/ARMABCODE(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/CONTROLCONSTANTS(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/CONTROLGROUPS(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/CONTROLSETTINGS(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/FILTERSETTINGS(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/NOCOPYDOCFIELDS(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/CONFDOCINQUIRY138I(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/CONFDOCINQUIRY138IARC(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/KPP(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/MSGTOCURRVBK(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/MSGTOCURRVBKARC(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/RESULTTOCORPORATION(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/ABSDOCOUTLIB(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/ABSMANAGERTYPE(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/DOCMULTIPRINTSETTINGS(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/DOCPRINTSETTINGS(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/DOCSCHEMESETTINGS(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/FREEDOCTYPE(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/LINKTXT(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/MBAINMSGSETTINGS(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+DOWNLOADING files "BASE/BANK/TABLES/MBAMSGXMLSTRUCTURE(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...

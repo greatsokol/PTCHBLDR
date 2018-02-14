@@ -663,19 +663,24 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
         if labels_list is None:
             labels_list = [('any','')]
         for key, label in labels_list:
-            if key_AltStarteamView not in key:  # Если название метки не содержит "_StarteamView"
+            # Если название метки НЕ содержит "_StarteamView", то будем грузить
+            # (а если содержит, то это не метка, а приставка с указанием вида в стартиме)
+            if key_AltStarteamView not in key:
                 if not label and not st_file_to_download:
                     raise ValueError('No label or file to download specified')
+
+                isDownloadBetweenDates = (key == 'datebefore' or key == 'dateafter')
+                isDownloadInitialState = (key == 'labelbefore' or key == 'datebefore')
                 message = 'DOWNLOADING'
                 if st_file_to_download:
                     message += ' files "{}{}"'.format(st_path_to_download, st_file_to_download)
                 if label:
-                    if (key == 'datebefore' or key == 'dateafter'):
+                    if (isDownloadBetweenDates):
                         message += ' files for date "{}"'.format(label)
                     else:
                         message += ' files for label "{}"'.format(label)
 
-                if (key == 'labelbefore') or (key == 'datebefore'):
+                if isDownloadInitialState:
                     outdir = path_for_before
                 else:
                     outdir = path_for_after
@@ -694,19 +699,19 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                     pass;
 
                 launch_string = quote(settings.stcmd)
-                launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}"'.format(
+                launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}" -rp "{}"'.format(
                                     settings.StarteamLogin,
                                     settings.StarteamPassword,
                                     settings.StarteamServer,
                                     settings.StarteamPort,
                                     settings.StarteamProject,
-                                    StarteamView)
+                                    StarteamView,
+                                    outdir)
 
                 if st_path_to_download:
                     launch_string += '/"{}"'.format(st_path_to_download)
-                launch_string += ' -rp ' + quote(outdir)
                 if label:
-                    if (key == 'datebefore' or key == 'dateafter'):
+                    if isDownloadBetweenDates:
                         launch_string += ' -cfgd ' + quote(label)
                     else:
                         launch_string += ' -vl ' + quote(label)
@@ -777,6 +782,62 @@ def compare_directories_BEFORE_and_AFTER():
 # -------------------------------------------------------------------------------------------------
 
 
+def make_upgrade10_eif_string_for_tables(file_name):
+    file_name_lower = file_name.lower()
+    if file_name_lower.endswith('default'):  # Для дефолтных таблиц
+        result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name.find(".") > 0:  # Для блобов
+        result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('orderstartflag'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'Flag'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
+    elif file_name_lower.startswith('docschemesettings'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
+    elif file_name_lower.startswith('docprintsettings'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'BranchID,CustId,SchemeId'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
+    elif file_name_lower.startswith('docmultiprintsettings'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'SchemeID,PrintFormName'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
+    elif file_name_lower.startswith('noticeconfig'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('mailreport'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('linktxt'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'NameFormat'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
+    elif file_name_lower.startswith('memorydiasoftbuf'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|''|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('absmanagertype'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID'|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('dcmversions'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'SchemeID,PatchNewVersion'|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('transschema'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ConnType,SchemaName'|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('remotenavmenus'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('remotenavtrees'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('wanavtrees'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('balaccountsettings'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('rkobranches'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('nocopydocfields'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('mbamsgxmlstructure'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('mbamsgscheme'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('mbamsgdocstatus'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('mbadocumentssettings'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('controlsettings') or file_name_lower.startswith('controlconstants') or file_name_lower.startswith('controlgroups'):
+        result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ ВЫЗОВ uaControls или другой ua-шки  >"
+    else:  # Если заливается структура полностью
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте сопособ обновления таблицы, сейчас - заливается полностью"
+    return result
+# -------------------------------------------------------------------------------------------------
+
+
 def make_upgrade10_eif_string_by_file_name(counter, file_name):
     result = ''
     file_type_match = re.findall('\((?:\d+|data)\)\.eif', file_name, flags=re.IGNORECASE)
@@ -787,12 +848,7 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
             return ''  # пропускаем data-файлы, за них ответят 10-файлы
         file_name = file_name.replace(structure_type_raw, '')
         if structure_type == '10':
-            if file_name.lower().endswith('default'):  # Для дефолтных таблиц
-                result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-            elif file_name.find(".") > 0:   # Для блобов
-                result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-            else: # Если заливается структура полностью
-                result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте таблицу"
+            result = make_upgrade10_eif_string_for_tables(file_name)
         elif structure_type == '12':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Визуальные формы'>"
         elif structure_type == '14':
@@ -1378,29 +1434,43 @@ def main():
     global_settings = read_config()
     if global_settings is None:
         return
-    if not clean(const_dir_TEMP):
-        return
+    continue_compilation = False;
+    if os.path.exists(const_dir_COMPARED_BLS):
+        continue_compilation = input("Enter any letter to continue bls compilation (otherwise patch building will be restarted):") != ''
+
+    if not continue_compilation:
+        if not clean(const_dir_TEMP):
+            return
+
     # clean(const_dir_PATCH)
     global_settings.StarteamPassword = getpassword('ENTER StarTeam password for {}:'.format(global_settings.StarteamLogin))
-    log('BUILD BEGIN {}'.format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
+    if not continue_compilation:
+        log('BUILD BEGIN {}'.format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
+    else:
+        log('COMPILATION CONTINUED {}'.format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
+
     if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
         compare_directories_BEFORE_and_AFTER()
         for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
             download_TABLE10_files_for_DATA_FILES(global_settings, instance)
             generate_upgrade10_eif(instance)
-        ShouldCompileBLS = copy_bls()
-        if download_build(global_settings):  # если завершена загрузка билда
-            # загрузим дополнительный билд (если есть)
-            if ShouldCompileBLS:
-                download_mba_dll(global_settings)
-                # загрузим все исходники текущей ревизии
-                if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
-                    # загрузим поверх ревизии исходников, помеченные метками
-                    if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
-                        # запустим компиляцию этой каши
-                        if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
-                            # копируем готовые BLL в патч
-                            copy_bll(global_settings.ClientEverythingInEXE)
+        continue_compilation = copy_bls()
+        if continue_compilation:
+            continue_compilation=download_build(global_settings)  # если завершена загрузка билда
+        if continue_compilation:
+            continue_compilation=download_mba_dll(global_settings)  # если завершена загрузка билда
+
+    # если все предыдущие этапы завершились успешно,
+    # запускаем компиляцию BLS файлов:
+    if continue_compilation:
+        # загрузим все исходники текущей ревизии
+        if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
+            # загрузим поверх ревизии исходников, помеченные метками
+            if download_starteam(global_settings, global_settings.Labels, const_dir_TEMP_TEMPSOURCE, const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
+                # запустим компиляцию этой каши
+                if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile, const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
+                    # копируем готовые BLL в патч
+                    copy_bll(global_settings.ClientEverythingInEXE)
     log('DONE -----------------')
 
 
