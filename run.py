@@ -1449,16 +1449,17 @@ def main():
     else:
         log('COMPILATION CONTINUED {}'.format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
 
-    if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
-        compare_directories_BEFORE_and_AFTER()
-        for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
-            download_TABLE10_files_for_DATA_FILES(global_settings, instance)
-            generate_upgrade10_eif(instance)
-        continue_compilation = copy_bls()
-        if continue_compilation:
-            continue_compilation=download_build(global_settings)  # если завершена загрузка билда
-        if continue_compilation:
-            continue_compilation=download_mba_dll(global_settings)  # если завершена загрузка билда
+    if not continue_compilation:  #если пользователь не выбрал продолжение компиляции
+        if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
+            compare_directories_BEFORE_and_AFTER()
+            for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
+                download_TABLE10_files_for_DATA_FILES(global_settings, instance)
+                generate_upgrade10_eif(instance)
+            continue_compilation = copy_bls()
+            if continue_compilation:
+                continue_compilation=download_build(global_settings)  # если завершена загрузка билда
+            if continue_compilation:
+                continue_compilation=download_mba_dll(global_settings)  # если завершена загрузка билда
 
     # если все предыдущие этапы завершились успешно,
     # запускаем компиляцию BLS файлов:
