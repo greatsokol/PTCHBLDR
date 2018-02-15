@@ -833,7 +833,7 @@ def make_upgrade10_eif_string_for_tables(file_name):
     elif file_name_lower.startswith('controlsettings') or file_name_lower.startswith('controlconstants') or file_name_lower.startswith('controlgroups'):
         result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ ВЫЗОВ uaControls или другой ua-шки  >"
     else:  # Если заливается структура полностью
-        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте сопособ обновления таблицы, сейчас - заливается полностью"
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте способ обновления таблицы, сейчас - заливается полностью"
     return result
 # -------------------------------------------------------------------------------------------------
 
@@ -1116,7 +1116,8 @@ def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProf
     if not os.path.exists(bscc_path):
         # компилятора нет, ошибка
         raise FileNotFoundError('Compiler {} not found'.format(bscc_path))
-    run_str = bscc_path+' {} -M0 -O0 -S{} -A{}'.format(BlsPath, LicServer, LicProfile)
+    run_str = bscc_path+' "{}" -M0 -O0 -S{} -A{}'.format(BlsPath, LicServer, LicProfile)
+    # log(run_str)
     '''
     subprocess.call(run_str)
     return True
@@ -1444,19 +1445,19 @@ def ask_starteam_password(settings):
 def make_decision_compilation_or_restart():
     continue_compilation = False
     if os.path.exists(const_dir_TEMP_TEMPSOURCE):
-        log('Folder {} exists. So we could continue bls-compilation. '
-            'Asking Maestro for decision.'.format(const_dir_TEMP_TEMPSOURCE))
+        log('Folder {} EXISTS. So we could CONTINUE bls-compilation.\n'
+            'ASKING Maestro for decision.'.format(const_dir_TEMP_TEMPSOURCE))
         continue_compilation = input('Enter any letter to CONTINUE bls '
                                      'compilation (otherwise patch building will be RESTARTED):') != ''
         if continue_compilation:
-            log('Maestro decided to CONTINUE with bls-compilation instead of restart patch building')
+            log('\tMaestro decided to CONTINUE with bls-compilation instead of restart patch building')
         else:
-            log('Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation')
+            log('\tMaestro decided to RESTART patch building instead of CONTINUE with bls-compilation')
         if not continue_compilation:
             response = input('REALLY?! Enter "Y" to CLEAR ALL and RESTART patch building:').upper()
             if response and response != 'Y':
-                log('ERROR: wrong answer {}'.format(response))
-                return
+                log('\tERROR: wrong answer {}'.format(response))
+                exit(1000)
             continue_compilation = response != 'Y'
     return continue_compilation
 
@@ -1504,7 +1505,7 @@ def main():
         do_download_bls = True
         # если bls-файлы были загружены не на ЭТАПЕ ЗАГРУЗКИ, спросим не стоит ли перезагрузить
         if not bls_just_downloaded:
-            do_download_bls = input('Enter any letter to download all bls-sources again:') != ''
+            do_download_bls = input('Enter any letter to DOWNLOAD all bls-sources again:') != ''
         # если пользователь не отказался от загрузки всех исходников
         # или если все bls были загружены на ЭТАПЕ ЗАГРУЗКИ
         if do_download_bls:
