@@ -28,6 +28,8 @@ const_dir_COMPARED = os.path.join(const_dir_TEMP, '_COMPARE_RESULT')
 const_dir_COMPARED_BLS = os.path.join(const_dir_COMPARED, 'BLS')
 const_dir_COMPARED_BLS_SOURCE = os.path.join(const_dir_COMPARED_BLS, 'SOURCE')
 const_dir_COMPARED_BLS_SOURCE_RCK = os.path.join(const_dir_COMPARED_BLS_SOURCE, 'RCK')
+const_dir_COMPARED_WWW = os.path.join(const_dir_COMPARED, 'WWW')
+const_dir_COMPARED_RT_TPL = os.path.join(const_dir_COMPARED, 'RT_TPL')
 const_dir_PATCH = os.path.join(const_dir_TEMP, 'PATCH')
 
 dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, 'BASE'), instance)
@@ -45,6 +47,8 @@ dir_PATCH_LIBFILES_BNK_LICENSE_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK
 dir_PATCH_LIBFILES_BNK_RTS = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'rts')
 dir_PATCH_LIBFILES_BNK_RTS_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK_RTS(), 'EXE')
 dir_PATCH_LIBFILES_BNK_RTS_SYSTEM = lambda: os.path.join(dir_PATCH_LIBFILES_BNK_RTS(), 'SYSTEM')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'SYBSYS')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS(), 'TEMPLATE')
 
 dir_PATCH_LIBFILES_BNK_WWW = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'WWW')
 dir_PATCH_LIBFILES_BNK_WWW_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW(version), 'EXE')
@@ -1371,7 +1375,7 @@ def download_build(settings):
 
 
 # -------------------------------------------------------------------------------------------------
-def copy_bls(clean_destdir,source_dir, dest_dir):
+def copy_bls(clean_destdir, source_dir, dest_dir):
     bls_version = '15'
     if os.path.exists(source_dir):
         # source_dir = const_dir_COMPARED_BLS
@@ -1388,9 +1392,10 @@ def copy_bls(clean_destdir,source_dir, dest_dir):
             shutil.copytree(source_dir, dest_dir)
         except BaseException as e:
             log('\tERROR when copying ({})'.format(e))
+            return False
         return True
     else:
-        log('NOT COPYING BLS. Path {} not exists'.format(const_dir_COMPARED_BLS))
+        log('NOT COPYING BLS. Path {} not exists'.format(source_dir))
         return False
 
 
@@ -1424,6 +1429,37 @@ def copy_bll(client_everything_in_exe):
 
 
 # -------------------------------------------------------------------------------------------------
+def copy_www():
+    source_dir = const_dir_COMPARED_WWW
+    if os.path.exists(source_dir):
+        log('COPYING WWW files to patch')
+        try:
+            shutil.copytree(source_dir, dir_PATCH_LIBFILES_BNK_WWW())
+        except BaseException as e:
+            log('\tERROR when copying ({})'.format(e))
+            return False
+        return True
+    else:
+        log('NOT COPYING WWW. Path {} not exists'.format(source_dir))
+        return False
+
+# -------------------------------------------------------------------------------------------------
+def copy_rt_tpl():
+    source_dir = const_dir_COMPARED_RT_TPL
+    if os.path.exists(source_dir):
+        log('COPYING RT_TPL files to patch')
+        try:
+            shutil.copytree(source_dir, dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE())
+        except BaseException as e:
+            log('\tERROR when copying ({})'.format(e))
+            return False
+        return True
+    else:
+        log('NOT COPYING RT_TPL. Path {} not exists'.format(source_dir))
+        return False
+
+
+# -------------------------------------------------------------------------------------------------
 def download_mba_dll(settings):
     if download_starteam(settings, None, const_dir_TEMP_BUILD_BK, '', 'DLL/', '*.dll'):
         copyfiles_of_version(os.path.join(const_dir_TEMP_BUILD_BK, 'DLL'),
@@ -1447,7 +1483,7 @@ def make_decision_compilation_or_restart():
     continue_compilation = False
     if os.path.exists(const_dir_TEMP_TEMPSOURCE):
         log('Folder {} EXISTS. So we could CONTINUE bls-compilation.\n'
-            'ASKING Maestro for decision.'.format(const_dir_TEMP_TEMPSOURCE))
+            'Asking Maestro for decision.'.format(const_dir_TEMP_TEMPSOURCE))
         continue_compilation = input('Enter any letter to CONTINUE bls '
                                      'compilation (otherwise patch building will be RESTARTED):') != ''
         if continue_compilation:
@@ -1493,18 +1529,23 @@ def main():
                 for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
                     download_TABLE10_files_for_DATA_FILES(global_settings, instance)
                     generate_upgrade10_eif(instance)
+                copy_www()
+                copy_rt_tpl()
                 bls_just_downloaded = continue_compilation = copy_bls(True,
                                                                       const_dir_COMPARED_BLS,
                                                                       dir_PATCH_LIBFILES_SOURCE)
-                if continue_compilation:
-                    continue_compilation=download_build(global_settings)  # если завершена загрузка билда
-                if continue_compilation:
-                    continue_compilation=download_mba_dll(global_settings)  # если завершена загрузка билда
+                need_download_build = continue_compilation or global_settings.PlaceBuildIntoPatch
+                # если требуется загрузка билда (для компиляции или для помещения в патч)
+                if need_download_build:
+                    build_downloaded = download_build(global_settings)
+                #  если требуется загрузка билда и предыдущая загрузка основного билда успешна
+                if build_downloaded and need_download_build:
+                    build_downloaded = download_mba_dll(global_settings)
 
     # если ЭТАП ЗАГРУЗКИ завершился успешно,
     # или пользователь выбрал переход к компиляции
     # запускаем ЭТАП КОМПИЛЯЦИИ bls-файлов:
-    if continue_compilation:
+    if continue_compilation and build_downloaded:
         do_download_bls = True
         # если bls-файлы были загружены не на ЭТАПЕ ЗАГРУЗКИ, спросим не стоит ли перезагрузить
         if not bls_just_downloaded:
