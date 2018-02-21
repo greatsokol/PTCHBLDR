@@ -1371,17 +1371,18 @@ def download_build(settings):
 
 
 # -------------------------------------------------------------------------------------------------
-def copy_bls():
+def copy_bls(clean_destdir,source_dir, dest_dir):
     bls_version = '15'
-    if os.path.exists(const_dir_COMPARED_BLS):
-        source_dir = const_dir_COMPARED_BLS
-        dest_dir = dir_PATCH_LIBFILES_SOURCE
-        if os.path.exists(const_dir_COMPARED_BLS_SOURCE):
+    if os.path.exists(source_dir):
+        # source_dir = const_dir_COMPARED_BLS
+        # dest_dir = dir_PATCH_LIBFILES_SOURCE
+        if os.path.exists(os.path.join(source_dir,'SOURCE')):
             # если такой путь существует, значит BLS выложены как для 17/20 версии
-            source_dir = const_dir_COMPARED_BLS_SOURCE
+            source_dir = os.path.join(source_dir,'SOURCE')
             dest_dir = os.path.join(dest_dir,'BLS')
             bls_version = '17/20'
-        clean(dest_dir)
+        if clean_destdir:
+            clean(dest_dir)
         log('COPYING BLS ("{}" version style) from "{}" to {}'.format(bls_version, source_dir, dest_dir))
         try:
             shutil.copytree(source_dir, dest_dir)
@@ -1433,7 +1434,7 @@ def download_mba_dll(settings):
 # -------------------------------------------------------------------------------------------------
 def ask_starteam_password(settings):
     if settings.StarteamPassword == '':
-        settings.StarteamPassword = getpassword('Maestro, ENTER please StarTeam password for "{}" login:'.
+        settings.StarteamPassword = getpassword('Maestro, please ENTER StarTeam PASSWORD for "{}":'.
                                                 format(settings.StarteamLogin))
     result = settings.StarteamPassword.strip() != ''
     if not result:
@@ -1492,7 +1493,9 @@ def main():
                 for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
                     download_TABLE10_files_for_DATA_FILES(global_settings, instance)
                     generate_upgrade10_eif(instance)
-                bls_just_downloaded = continue_compilation = copy_bls()
+                bls_just_downloaded = continue_compilation = copy_bls(True,
+                                                                      const_dir_COMPARED_BLS,
+                                                                      dir_PATCH_LIBFILES_SOURCE)
                 if continue_compilation:
                     continue_compilation=download_build(global_settings)  # если завершена загрузка билда
                 if continue_compilation:
@@ -1517,12 +1520,18 @@ def main():
                                                          const_dir_TEMP_TEMPSOURCE,
                                                          'BLS/', '*.bls')
                 if continue_compilation:
+                    # тест - не выкачивать, а взять результат сравнения
+                    copy_bls(False,
+                             const_dir_COMPARED_BLS,
+                             const_dir_TEMP_TEMPSOURCE)
+                    '''
                     # загрузим поверх ревизии исходников, помеченные метками
                     continue_compilation = download_starteam(global_settings,
                                                              global_settings.Labels,
                                                              const_dir_TEMP_TEMPSOURCE,
                                                              const_dir_TEMP_TEMPSOURCE,
                                                              'BLS/', '*.bls')
+                    '''
         # запустим компиляцию этой каши
         if continue_compilation:
             if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile,
