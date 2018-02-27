@@ -30,6 +30,11 @@ const_dir_COMPARED_BLS_SOURCE = os.path.join(const_dir_COMPARED_BLS, 'SOURCE')
 const_dir_COMPARED_BLS_SOURCE_RCK = os.path.join(const_dir_COMPARED_BLS_SOURCE, 'RCK')
 const_dir_COMPARED_WWW = os.path.join(const_dir_COMPARED, 'WWW')
 const_dir_COMPARED_RT_TPL = os.path.join(const_dir_COMPARED, 'RT_TPL')
+const_dir_COMPARED_RTF = os.path.join(const_dir_COMPARED, 'RTF')
+const_dir_COMPARED_RTF_BANK = os.path.join(const_dir_COMPARED_RTF, 'Bank')
+const_dir_COMPARED_RTF_CLIENT = os.path.join(const_dir_COMPARED_RTF, 'Client')
+const_dir_COMPARED_RTF_REPJET = os.path.join(const_dir_COMPARED_RTF, 'RepJet')
+
 const_dir_PATCH = os.path.join(const_dir_TEMP, 'PATCH')
 
 dir_COMPARED_BASE = lambda instance: os.path.join(os.path.join(const_dir_COMPARED, 'BASE'), instance)
@@ -41,14 +46,17 @@ dir_PATCH_LIBFILES_USER = lambda instance: os.path.join(dir_PATCH_LIBFILES(insta
 dir_PATCH_LIBFILES_SOURCE = os.path.join(dir_PATCH_LIBFILES(const_instance_BANK), 'SOURCE')
 
 dir_PATCH_LIBFILES_BNK = lambda version='': os.path.join(dir_PATCH(const_instance_BANK), 'LIBFILES{}.BNK'.format(version))
-dir_PATCH_LIBFILES_BNK_ADD = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'add')
-dir_PATCH_LIBFILES_BNK_BSISET_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'bsiset', 'EXE')
-dir_PATCH_LIBFILES_BNK_LICENSE_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'license', 'EXE')
-dir_PATCH_LIBFILES_BNK_RTS = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'rts')
-dir_PATCH_LIBFILES_BNK_RTS_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK_RTS(), 'EXE')
-dir_PATCH_LIBFILES_BNK_RTS_SYSTEM = lambda: os.path.join(dir_PATCH_LIBFILES_BNK_RTS(), 'SYSTEM')
-dir_PATCH_LIBFILES_BNK_RTS_SUBSYS = lambda: os.path.join(dir_PATCH_LIBFILES_BNK(), 'SYBSYS')
-dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE = lambda: os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS(), 'TEMPLATE')
+dir_PATCH_LIBFILES_BNK_ADD = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'add')
+dir_PATCH_LIBFILES_BNK_BSISET_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'bsiset', 'EXE')
+dir_PATCH_LIBFILES_BNK_LICENSE_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'license', 'EXE')
+dir_PATCH_LIBFILES_BNK_RTS = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'rts')
+dir_PATCH_LIBFILES_BNK_RTS_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS(version), 'EXE')
+dir_PATCH_LIBFILES_BNK_RTS_SYSTEM = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS(version), 'SYSTEM')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS(version), 'SUBSYS')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS(version), 'TEMPLATE')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS(version), 'PRINT')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT(version), 'RTF')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT(version), 'RepJet')
 
 dir_PATCH_LIBFILES_BNK_WWW = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'WWW')
 dir_PATCH_LIBFILES_BNK_WWW_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW(version), 'EXE')
@@ -68,6 +76,9 @@ dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion = lambda build_versio
 dir_PATCH_LIBFILES_EXE = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES(instance, version), 'EXE')
 dir_PATCH_LIBFILES_SYSTEM = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES(instance, version), 'SYSTEM')
 dir_PATCH_LIBFILES_SUBSYS = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES(instance, version), 'SUBSYS')
+dir_PATCH_LIBFILES_SUBSYS_PRINT = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES_SUBSYS(instance, version), 'PRINT')
+dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES_SUBSYS_PRINT(instance, version), 'RTF')
+dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES_SUBSYS_PRINT(instance, version), 'RepJet')
 dir_PATCH_LIBFILES_INSTCLNT = lambda : os.path.join(dir_PATCH_LIBFILES_SUBSYS(const_instance_BANK), 'INSTCLNT')
 dir_PATCH_LIBFILES_INETTEMP = lambda : os.path.join(dir_PATCH_LIBFILES_INSTCLNT(), 'INETTEMP')
 dir_PATCH_LIBFILES_TEMPLATE = lambda : os.path.join(dir_PATCH_LIBFILES_INSTCLNT(), 'TEMPLATE')
@@ -457,6 +468,7 @@ class GlobalSettings:
     ClientEverythingInEXE = False
     LicenseServer = ''
     LicenseProfile = ''
+    Is20Version = None
 # -------------------------------------------------------------------------------------------------
 
 
@@ -837,7 +849,10 @@ def make_upgrade10_eif_string_for_tables(file_name):
     elif file_name_lower.startswith('controlsettings') or file_name_lower.startswith('controlconstants') or file_name_lower.startswith('controlgroups'):
         result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ ВЫЗОВ uaControls или другой ua-шки  >"
     else:  # Если заливается структура полностью
-        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте способ обновления таблицы, сейчас - заливается полностью"
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> " \
+                 "#TODO проверьте способ обновления таблицы, сейчас - заливается полностью. " \
+                 "Для дельты и обновления строк: |TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'название_полей'. " \
+                 "Только заменить структуру десятки: |TRUE|FALSE|FALSE|FALSE|TRUE|FALSE|NULL'"
     return result
 # -------------------------------------------------------------------------------------------------
 
@@ -1023,7 +1038,7 @@ def __get_exe_file_info__(fullFilePath):
 # -------------------------------------------------------------------------------------------------
 
 
-def get_build_version(build_path):
+def extract_build_version(build_path):
     result = 'unknown'
     try:
         if os.path.exists(build_path):
@@ -1208,7 +1223,7 @@ def __extract_build__(build_path):
 
 
 # -------------------------------------------------------------------------------------------------
-def __copy_build__(build_path, build_path_crypto, dest_path):
+def __copy_build_ex__(build_path, build_path_crypto, dest_path, only_get_version):
     # проверка наличия пути build_path
     if not build_path:
         return
@@ -1221,26 +1236,40 @@ def __copy_build__(build_path, build_path_crypto, dest_path):
     if build_path_crypto:
         build_path_crypto = __extract_build__(build_path_crypto)
     # определяем версию билда
-    version = get_build_version(build_path)
-    if ('20.1' in version) or ('20.2' in version):
-        for release in ['32', '64']:
-            win_rel = 'Win{}\\Release'.format(release)
-            src = os.path.join(build_path, win_rel)
-            dst = os.path.join(dest_path, win_rel)
-            clean(dst)
-            log('COPYING BUILD {} from "{}" in "{}"'.format(version, src, dst))
-            copyfiles(src, dst, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
+    version = extract_build_version(build_path)
+    if not only_get_version:
+        if ('20.1' in version) or ('20.2' in version):
+            for release in ['32', '64']:
+                win_rel = 'Win{}\\Release'.format(release)
+                src = os.path.join(build_path, win_rel)
+                dst = os.path.join(dest_path, win_rel)
+                clean(dst)
+                log('COPYING BUILD {} from "{}" in "{}"'.format(version, src, dst))
+                copyfiles(src, dst, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
+                if build_path_crypto:
+                    src = os.path.join(build_path_crypto, win_rel)
+                    log('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, src, dst))
+                    copyfiles(src, dst, ['CryptLib.dll', 'cr_*.dll'], [])
+        else:
+            clean(dest_path)
+            log('COPYING BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
+            copyfiles(build_path, dest_path, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
             if build_path_crypto:
-                src = os.path.join(build_path_crypto, win_rel)
-                log('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, src, dst))
-                copyfiles(src, dst, ['CryptLib.dll', 'cr_*.dll'], [])
-    else:
-        clean(dest_path)
-        log('COPYING BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
-        copyfiles(build_path, dest_path, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
-        if build_path_crypto:
-            log('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
-            copyfiles(build_path_crypto, dest_path, ['CryptLib.dll', 'cr_*.dll'], [])
+                log('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
+                copyfiles(build_path_crypto, dest_path, ['CryptLib.dll', 'cr_*.dll'], [])
+    return version
+
+
+# -------------------------------------------------------------------------------------------------
+def __copy_build__(build_path, build_path_crypto, dest_path):
+    return __copy_build_ex__(build_path, build_path_crypto, dest_path, False)
+
+
+# -------------------------------------------------------------------------------------------------
+def get_build_version(settings):
+    log('Detecting BUILD VERSION')
+    version = __copy_build_ex__(settings.BuildBK, None, None, True)
+    log('\tBUILD VERSION is {}'.format(version))
     return version
 
 
@@ -1273,6 +1302,7 @@ def download_build(settings):
                 copyfiles(build_path, const_dir_TEMP_BUILD_BK, ['*.*'], [])
         else:
             is20 = ('20.1' in buildIC_version) or ('20.2' in buildIC_version)
+        settings.Is20Version = is20
 
         #  Если в настройках включено копирование билда в патч
         if settings.PlaceBuildIntoPatch:
@@ -1292,6 +1322,7 @@ def download_build(settings):
                     copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
 
                     for release in ['32', '64']:  # выкладываем билд в LIBFILES32(64).BNK
+                        build_path_bank = os.path.join(const_dir_TEMP_BUILD_BK, 'Win{}\\Release'.format(release))
                         copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK(release), ['UpdateIc.exe'], [])
                         copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_EXE(release), ['bsiset.exe'], [])
                         mask = ['bsi.dll', 'bsi.jar']
@@ -1429,34 +1460,77 @@ def copy_bll(client_everything_in_exe):
 
 
 # -------------------------------------------------------------------------------------------------
-def copy_www():
+def copy_www(settings):
     source_dir = const_dir_COMPARED_WWW
     if os.path.exists(source_dir):
-        log('COPYING WWW files to patch')
         try:
-            shutil.copytree(source_dir, dir_PATCH_LIBFILES_BNK_WWW())
+            if settings.Is20Version:
+                for release in ['32', '64']:
+                    dest_dir = dir_PATCH_LIBFILES_BNK_WWW(release)
+                    log('COPYING WWW files to {}'.format(dest_dir))
+                    shutil.copytree(source_dir, dest_dir)
+            else:
+                dest_dir = dir_PATCH_LIBFILES_BNK_WWW()
+                log('COPYING WWW files to {}'.format(dest_dir))
+                shutil.copytree(source_dir, dest_dir)
         except BaseException as e:
             log('\tERROR when copying ({})'.format(e))
-            return False
-        return True
     else:
         log('NOT COPYING WWW. Path {} not exists'.format(source_dir))
-        return False
+
 
 # -------------------------------------------------------------------------------------------------
-def copy_rt_tpl():
+def copy_rt_tpl(settings):
     source_dir = const_dir_COMPARED_RT_TPL
     if os.path.exists(source_dir):
-        log('COPYING RT_TPL files to patch')
         try:
             shutil.copytree(source_dir, dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE())
+            if settings.Is20Version:
+                for release in ['32', '64']:
+                    dest_dir = dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE(release)
+                    log('COPYING RT_TPL files to {}'.format(dest_dir))
+                    shutil.copytree(source_dir, dest_dir)
+            else:
+                dest_dir = dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE()
+                log('COPYING RT_TPL files to {}'.format(dest_dir))
+                shutil.copytree(source_dir, dest_dir)
         except BaseException as e:
             log('\tERROR when copying ({})'.format(e))
-            return False
-        return True
     else:
         log('NOT COPYING RT_TPL. Path {} not exists'.format(source_dir))
-        return False
+
+
+# -------------------------------------------------------------------------------------------------
+def copy_rtf(settings):
+    source_dirs = [const_dir_COMPARED_RTF, const_dir_COMPARED_RTF_BANK,
+                   const_dir_COMPARED_RTF_CLIENT, const_dir_COMPARED_RTF_REPJET]
+    for source_dir in source_dirs:
+        if os.path.exists(source_dir):
+            dest_dirs = []
+            if source_dir in [const_dir_COMPARED_RTF, const_dir_COMPARED_RTF_BANK]:
+                dest_dirs = [dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_BANK)]
+            if source_dir in [const_dir_COMPARED_RTF, const_dir_COMPARED_RTF_CLIENT]:
+                dest_dirs = [dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_CLIENT),
+                             dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_CLIENT_MBA)]
+                if settings.Is20Version:
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF('32'))
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF('64'))
+                else:
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF())
+            if source_dir == const_dir_COMPARED_RTF_REPJET:
+                dest_dirs = [dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_BANK),
+                             dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_CLIENT),
+                             dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_CLIENT_MBA)]
+                if settings.Is20Version:
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet('32'))
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet('64'))
+                else:
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet())
+            for dest_dir in dest_dirs:
+                log('COPYING RTF/RepJet files to {}'.format(dest_dir))
+                copyfiles(source_dir, dest_dir)
+        else:
+            log('NOT COPYING RTF from {}. Path not exists'.format(source_dir))
 
 
 # -------------------------------------------------------------------------------------------------
@@ -1529,8 +1603,6 @@ def main():
                 for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
                     download_TABLE10_files_for_DATA_FILES(global_settings, instance)
                     generate_upgrade10_eif(instance)
-                copy_www()
-                copy_rt_tpl()
                 bls_just_downloaded = continue_compilation = copy_bls(True,
                                                                       const_dir_COMPARED_BLS,
                                                                       dir_PATCH_LIBFILES_SOURCE)
@@ -1540,7 +1612,17 @@ def main():
                     build_downloaded = download_build(global_settings)
                 #  если требуется загрузка билда и предыдущая загрузка основного билда успешна
                 if build_downloaded and need_download_build:
-                    build_downloaded = download_mba_dll(global_settings)
+                    download_mba_dll(global_settings)
+                # Если билд не скачивался (при этом мы определяемся с версией билда),
+                # то все равно попробуем получить его версию, чтобы определиться с каталогами
+                # для выкладывания ИК
+                if not build_downloaded:
+                    build_version = get_build_version(global_settings)
+                    global_settings.Is20Version = ('20.1' in build_version) or ('20.2' in build_version)
+                copy_www(global_settings)
+                copy_rt_tpl(global_settings)
+                copy_rtf(global_settings)
+
 
     # если ЭТАП ЗАГРУЗКИ завершился успешно,
     # или пользователь выбрал переход к компиляции
