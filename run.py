@@ -51,6 +51,7 @@ dir_PATCH_LIBFILES_BNK_BSISET_EXE = lambda version='': os.path.join(dir_PATCH_LI
 dir_PATCH_LIBFILES_BNK_LICENSE_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'license', 'EXE')
 dir_PATCH_LIBFILES_BNK_RTS = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'rts')
 dir_PATCH_LIBFILES_BNK_RTS_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS(version), 'EXE')
+dir_PATCH_LIBFILES_BNK_RTS_USER = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS(version), 'USER')
 dir_PATCH_LIBFILES_BNK_RTS_SYSTEM = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS(version), 'SYSTEM')
 dir_PATCH_LIBFILES_BNK_RTS_SUBSYS = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS(version), 'SUBSYS')
 dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS(version), 'TEMPLATE')
@@ -95,6 +96,10 @@ dir_PATCH_LIBFILES_TEMPLATE_DISTRIB = lambda: os.path.join(dir_PATCH_LIBFILES_TE
 dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), 'CLIENT')
 dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT(), 'EXE')
 dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT(), 'SYSTEM')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT(), 'SUBSYS')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS(), 'PRINT')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT(), 'RTF')
+dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT(), 'RepJet')
 dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_USER = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT(), 'USER')
 dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE(), 'Language')
 dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN = lambda: os.path.join(dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE(), 'ENGLISH')
@@ -449,9 +454,9 @@ const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['bsrdrct.exe'
                                                                    'llhttp.dll',
                                                                    'rg_ossl.dll'
                                                                    ]
+
+
 # -------------------------------------------------------------------------------------------------
-
-
 class GlobalSettings:
     stcmd = ''
     StarteamServer = ''
@@ -469,9 +474,9 @@ class GlobalSettings:
     LicenseServer = ''
     LicenseProfile = ''
     Is20Version = None
+
+
 # -------------------------------------------------------------------------------------------------
-
-
 def getpassword(message):
     import getpass
     # running under PyCharm or not
@@ -479,18 +484,37 @@ def getpassword(message):
         return getpass.fallback_getpass(message)
     else:
         return getpass.getpass(message)
+
+
 # -------------------------------------------------------------------------------------------------
+def copy_tree(src, dest, ignore=None):
+    if os.path.isdir(src):
+        if not os.path.isdir(dest):
+            os.makedirs(dest)
+        files = os.listdir(src)
+        if ignore is not None:
+            ignored = ignore(src, files)
+        else:
+            ignored = set()
+        for f in files:
+            if f not in ignored:
+                copy_tree(os.path.join(src, f),
+                          os.path.join(dest, f),
+                          ignore)
+    else:
+        shutil.copyfile(src, dest)
 
 
+# -------------------------------------------------------------------------------------------------
 def makedirs(path):
     try:
         if not os.path.exists(path):
             os.makedirs(path)
     except BaseException as e:
         log('\tERROR: can''t create directory "{}" ({})'.format(path, e))
+
+
 # -------------------------------------------------------------------------------------------------
-
-
 def list_files(path, mask):
     return [os.path.join(d, filename) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
 
@@ -778,7 +802,7 @@ def __compare_and_copy_dirs_recursively__(before, after, wheretocopy):
             else:
                 log('\tcopying DIR with contents {}'.format(path))
                 clean(os.path.join(wheretocopy, file))
-                shutil.copytree(path, os.path.join(wheretocopy, file))
+                copy_tree(path, os.path.join(wheretocopy, file))
 # -------------------------------------------------------------------------------------------------
 
 
@@ -1420,7 +1444,7 @@ def copy_bls(clean_destdir, source_dir, dest_dir):
             clean(dest_dir)
         log('COPYING BLS ("{}" version style) from "{}" to {}'.format(bls_version, source_dir, dest_dir))
         try:
-            shutil.copytree(source_dir, dest_dir)
+            copy_tree(source_dir, dest_dir)
         except BaseException as e:
             log('\tERROR when copying ({})'.format(e))
             return False
@@ -1431,9 +1455,10 @@ def copy_bls(clean_destdir, source_dir, dest_dir):
 
 
 # -------------------------------------------------------------------------------------------------
-def copy_bll(client_everything_in_exe):
+def copy_bll(settings):
     log('COPYING BLL files to patch')
-    bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?b*.bls', 'RT_*.bls'])
+    bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?b*.bls'])
+    bll_files_only_rts = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['RT_*.bls'])
     bll_files_only_mba = list_files_remove_paths_and_change_extension(const_dir_COMPARED_BLS_SOURCE_RCK, '.bll', ['*.bls'])
     bll_files_all = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['*.bls'])
     bll_files_tmp = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files_all)
@@ -1441,14 +1466,21 @@ def copy_bll(client_everything_in_exe):
         log('\tERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files_all) - set(bll_files_tmp))))
         return False
 
-    bll_files_client_mba = list(set(bll_files_all) - set(bll_files_only_bank))
+    bll_files_client_mba = list(set(bll_files_all) - set(bll_files_only_bank) - set(bll_files_only_rts))
     bll_files_client = list(set(bll_files_client_mba) - set(bll_files_only_mba))
+    bll_files_all = list(set(bll_files_all) - set(bll_files_only_rts))
 
     # копируем bll для банка по списку bll_files_all
     copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files_all, [])
+    # копируем bll для RTS по списку bll_files_only_rts
+    if settings.Is20Version:
+        for release in ['32', '64']:
+            copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(release), bll_files_only_rts, [])
+    else:
+        copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(), bll_files_only_rts, [])
 
     # копируем bll для клиента по разнице списков  bll_files_all-bll_files_only_bank
-    if client_everything_in_exe:
+    if settings.ClientEverythingInEXE:
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT), bll_files_client, [])
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT_MBA), bll_files_client_mba, [])
         copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), bll_files_client, [])
@@ -1468,11 +1500,11 @@ def copy_www(settings):
                 for release in ['32', '64']:
                     dest_dir = dir_PATCH_LIBFILES_BNK_WWW(release)
                     log('COPYING WWW files to {}'.format(dest_dir))
-                    shutil.copytree(source_dir, dest_dir)
+                    copy_tree(source_dir, dest_dir)
             else:
                 dest_dir = dir_PATCH_LIBFILES_BNK_WWW()
                 log('COPYING WWW files to {}'.format(dest_dir))
-                shutil.copytree(source_dir, dest_dir)
+                copy_tree(source_dir, dest_dir)
         except BaseException as e:
             log('\tERROR when copying ({})'.format(e))
     else:
@@ -1484,16 +1516,16 @@ def copy_rt_tpl(settings):
     source_dir = const_dir_COMPARED_RT_TPL
     if os.path.exists(source_dir):
         try:
-            shutil.copytree(source_dir, dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE())
+            copy_tree(source_dir, dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE())
             if settings.Is20Version:
                 for release in ['32', '64']:
                     dest_dir = dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE(release)
                     log('COPYING RT_TPL files to {}'.format(dest_dir))
-                    shutil.copytree(source_dir, dest_dir)
+                    copy_tree(source_dir, dest_dir)
             else:
                 dest_dir = dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE()
                 log('COPYING RT_TPL files to {}'.format(dest_dir))
-                shutil.copytree(source_dir, dest_dir)
+                copy_tree(source_dir, dest_dir)
         except BaseException as e:
             log('\tERROR when copying ({})'.format(e))
     else:
@@ -1507,27 +1539,34 @@ def copy_rtf(settings):
     for source_dir in source_dirs:
         if os.path.exists(source_dir):
             dest_dirs = []
+            what = 'RTF'
+            # Общие и банковские
             if source_dir in [const_dir_COMPARED_RTF, const_dir_COMPARED_RTF_BANK]:
-                dest_dirs = [dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_BANK)]
+                dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_BANK))
+            # Общие и клиентские
             if source_dir in [const_dir_COMPARED_RTF, const_dir_COMPARED_RTF_CLIENT]:
-                dest_dirs = [dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_CLIENT),
-                             dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_CLIENT_MBA)]
+                dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_CLIENT))
+                dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_CLIENT_MBA))
+                dest_dirs.append(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF())
                 if settings.Is20Version:
                     dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF('32'))
                     dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF('64'))
                 else:
                     dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF())
+            # RepJet для всех
             if source_dir == const_dir_COMPARED_RTF_REPJET:
-                dest_dirs = [dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_BANK),
-                             dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_CLIENT),
-                             dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_CLIENT_MBA)]
+                what = 'RepJet'
+                dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_BANK))
+                dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_CLIENT))
+                dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_CLIENT_MBA))
+                dest_dirs.append(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet())
                 if settings.Is20Version:
                     dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet('32'))
                     dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet('64'))
                 else:
                     dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet())
             for dest_dir in dest_dirs:
-                log('COPYING RTF/RepJet files to {}'.format(dest_dir))
+                log('COPYING {} files to {}'.format(what, dest_dir))
                 copyfiles(source_dir, dest_dir)
         else:
             log('NOT COPYING RTF from {}. Path not exists'.format(source_dir))
@@ -1544,7 +1583,7 @@ def download_mba_dll(settings):
 # -------------------------------------------------------------------------------------------------
 def ask_starteam_password(settings):
     if settings.StarteamPassword == '':
-        settings.StarteamPassword = getpassword('Maestro, please ENTER StarTeam PASSWORD for "{}":'.
+        settings.StarteamPassword = getpassword('Maestro, please, ENTER StarTeam PASSWORD for "{}":'.
                                                 format(settings.StarteamLogin))
     result = settings.StarteamPassword.strip() != ''
     if not result:
@@ -1557,15 +1596,15 @@ def make_decision_compilation_or_restart():
     continue_compilation = False
     if os.path.exists(const_dir_TEMP_TEMPSOURCE):
         log('Folder {} EXISTS. So we could CONTINUE bls-compilation.\n'
-            'Asking Maestro for decision.'.format(const_dir_TEMP_TEMPSOURCE))
-        continue_compilation = input('Enter any letter to CONTINUE bls '
+            '\tAsking Maestro for decision.'.format(const_dir_TEMP_TEMPSOURCE))
+        continue_compilation = input('Maestro, please, ENTER any letter to CONTINUE bls '
                                      'compilation (otherwise patch building will be RESTARTED):') != ''
         if continue_compilation:
             log('\tMaestro decided to CONTINUE with bls-compilation instead of restart patch building')
         else:
             log('\tMaestro decided to RESTART patch building instead of CONTINUE with bls-compilation')
         if not continue_compilation:
-            response = input('REALLY?! Enter "Y" to CLEAR ALL and RESTART patch building:').upper()
+            response = input('\tREALLY?!\n\tMaestro, please, ENTER "Y" to CLEAR ALL and RESTART patch building:').upper()
             if response and response != 'Y':
                 log('\tERROR: wrong answer {}'.format(response))
                 exit(1000)
@@ -1607,6 +1646,7 @@ def main():
                                                                       const_dir_COMPARED_BLS,
                                                                       dir_PATCH_LIBFILES_SOURCE)
                 need_download_build = continue_compilation or global_settings.PlaceBuildIntoPatch
+                build_downloaded = False
                 # если требуется загрузка билда (для компиляции или для помещения в патч)
                 if need_download_build:
                     build_downloaded = download_build(global_settings)
@@ -1622,12 +1662,13 @@ def main():
                 copy_www(global_settings)
                 copy_rt_tpl(global_settings)
                 copy_rtf(global_settings)
+                continue_compilation = continue_compilation and (build_downloaded or not need_download_build)
 
 
     # если ЭТАП ЗАГРУЗКИ завершился успешно,
     # или пользователь выбрал переход к компиляции
     # запускаем ЭТАП КОМПИЛЯЦИИ bls-файлов:
-    if continue_compilation and build_downloaded:
+    if continue_compilation:
         do_download_bls = True
         # если bls-файлы были загружены не на ЭТАПЕ ЗАГРУЗКИ, спросим не стоит ли перезагрузить
         if not bls_just_downloaded:
@@ -1660,7 +1701,7 @@ def main():
             if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile,
                              const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
                 # копируем готовые BLL в патч
-                copy_bll(global_settings.ClientEverythingInEXE)
+                copy_bll(global_settings)
     log('DONE -----------------')
 
 main()
