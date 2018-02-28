@@ -1521,7 +1521,6 @@ def copy_rt_tpl(settings):
     source_dir = const_dir_COMPARED_RT_TPL
     if os.path.exists(source_dir):
         try:
-            copy_tree(source_dir, dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE())
             if settings.Is20Version:
                 for release in ['32', '64']:
                     dest_dir = dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE(release)
