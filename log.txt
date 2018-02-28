@@ -4602,3 +4602,48 @@ SETTINGS LOADED:
 Folder d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
 	Asking Maestro for decision.
 	Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('labelbefore', 'patch_20180226.GPB 020.1.300.1'), ('label000', '20180228.GPB 020.1.300.1')]
+	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
+Folder d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation
+CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP
+	ERROR when cleaning ((<class 'OSError'>, OSError(41, 'Папка не пуста'), <traceback object at 0x0000000002BD0888>))
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('labelbefore', 'patch_20180226.GPB 020.1.300.1'), ('label000', '20180228.GPB 020.1.300.1')]
+	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
+Folder d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation
+CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP for [] files
+BUILD BEGIN 2018-02-28 20:12:40
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('labelbefore', 'patch_20180226.GPB 020.1.300.1'), ('label000', '20180228.GPB 020.1.300.1')]
+	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
+Folder d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation
+CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP for ['*.*'] files
+BUILD BEGIN 2018-02-28 20:14:19
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl
+	Labels = [('labelbefore', 'patch_20180226.GPB 020.1.300.1'), ('label000', '20180228.GPB 020.1.300.1')]
+	stcmd = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2008\stcmd.exe
+Folder d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation
+CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP
+BUILD BEGIN 2018-02-28 20:26:26
+DOWNLOADING files for label "patch_20180226.GPB 020.1.300.1" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...

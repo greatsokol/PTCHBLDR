@@ -604,12 +604,13 @@ def __onerror_handler__(func, path, exc_info):
     Usage : ``shutil.rmtree(path, onerror=onerror)``
     """
     import stat
-    if not os.access(path, os.W_OK):
+    #if not os.access(path, os.W_OK):
         # Is the error an access error ?
-        os.chmod(path, stat.S_IWUSR)
-        func(path)
-    else:
-        raise BaseException(exc_info)
+    os.chmod(path, stat.S_IWRITE)
+    os.chmod(path, stat.S_IWUSR)
+    func(path)
+    #else:
+     #   raise BaseException(exc_info)
 
 
 def clean(path, masks=[]):
@@ -618,9 +619,13 @@ def clean(path, masks=[]):
             if masks:
                 log('CLEANING {} for {} files'.format(path, masks))
                 for mask in masks:
+                    # чистим все файлы по маске mask
                     [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
             else:
                 log('CLEANING {}'.format(path))
+                # Сначала чистим все файлы,
+                [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in files]
+                # потом чистим все
                 shutil.rmtree(path, onerror=__onerror_handler__)
         except FileNotFoundError:
             pass  # если папка отсутствует, то продолжаем молча
