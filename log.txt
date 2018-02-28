@@ -4647,3 +4647,177 @@ Folder d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE EXISTS. So we c
 CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP
 BUILD BEGIN 2018-02-28 20:26:26
 DOWNLOADING files for label "patch_20180226.GPB 020.1.300.1" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label "20180228.GPB 020.1.300.1" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+BEGIN compare directories:
+	BEFORE: d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE
+	AFTER:  d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\FREECLIENTDOC\CONTROL\anFreClX.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\STATEMENTRU\PRINT\COMMON\DAPSTAT.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\PAYORDERRU\Visual\Common\daPayOrd.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\SCHEMES\MBAReportDoc\RTS\RT_2mbareportdoc.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\InformService\RT_w3c_20StmExp1c.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\EXPIMP\RT_2Import.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RTS\EXPIMP\RT_1RTF.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\Migration\Bank\obMigImp.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\ABS\SKVO (90)\abSKVOOut.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UPGRADE\COMMON\ua20_1_300.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\RCK\LaRepMBA.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\PAPSTAT.BLS
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\crypto\crypto_view.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\expstm\expstm_form.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\expstm\expstm.css
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\expstm\expstm.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\gpbtransit\gpbtransit.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\currconversion\currconversion.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\mbareportdoc\mbareportdoc_print_russian.xsl
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\mbareportdoc\mbareportdoc.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\opercode_form_russian.htm
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\opercode_form.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\scheme\paydoccur\opercode_form_english.htm
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\v1\js\c_common.js
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\WWW\bsi_sites\rt_ic\bsi_err.htm
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RT_Tpl\rt_ic\statuses.xml
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\CurrConvNew.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Bank\PlatPor$.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\PlatPor$.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\RTF\Client\CurrConvNew.rtf
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\OPERATIONS\PrintDocument(81).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MigrationImportDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MsgToCurrVbkScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MsgToCurrVbkScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MsgToCurrVbkDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCredScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCDocInfDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCMsgToCurrInspDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCConScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConDialogDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewConScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\MsgToCurrVbkDialogArcDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCRenewCredScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryDialog(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCCloseScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSCrCfDcInquiryScroller(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\UNCFSConfDocInquiryScrollerDefault(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Configs\LinkABS(14).eif
+	FINISHED compare directories. LOOK at d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT
+COPYING BLS ("17/20" version style) from "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\BLS\SOURCE" to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES\SOURCE\BLS
+COPYING BUILD 3.20.1.2230 from "\\fs\Builds\Builds\20.1\223\Win32\Release" in "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK\Win32\Release"
+COPYING BUILD 3.20.1.2230 from "\\fs\Builds\Builds\20.1\223\Win64\Release" in "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK\Win64\Release"
+COPYING BUILD 3.20.2.1060 from "\\fs\Builds\Builds\20.2\106\Win32\Release" in "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\IC\Win32\Release"
+COPYING BUILD 3.20.2.1060 from "\\fs\Builds\Builds\20.2\106\Win64\Release" in "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\IC\Win64\Release"
+COPYING build into patch for BANK
+COPYING build into patch for CLIENT
+COPYING build into patch for CLIENT_MBA
+COPYING build into patch for IC
+DOWNLOADING files "DLL/*.dll" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK". Please wait...
+COPYING WWW files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES32.BNK\WWW
+COPYING WWW files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES64.BNK\WWW
+COPYING RT_TPL files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES32.BNK\rts\SUBSYS\TEMPLATE
+COPYING RT_TPL files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES64.BNK\rts\SUBSYS\TEMPLATE
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\CLIENT\LIBFILES\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\CLIENT_MBA\LIBFILES\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES\SUBSYS\INSTCLNT\TEMPLATE\DISTRIB\CLIENT\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES32.BNK\rts\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES64.BNK\rts\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\CLIENT\LIBFILES\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\CLIENT_MBA\LIBFILES\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES\SUBSYS\INSTCLNT\TEMPLATE\DISTRIB\CLIENT\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES32.BNK\rts\SUBSYS\PRINT\RTF
+COPYING RTF files to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES64.BNK\rts\SUBSYS\PRINT\RTF
+NOT COPYING RTF from d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\RTF\RepJet. Path not exists
+DOWNLOADING files "BLS/*.bls" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE". Please wait...
+COPYING BLS ("17/20" version style) from "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\BLS\SOURCE" to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE\BLS
+CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+(   0.0%) Compiling   1 of 9   used files for rt_waarmclient.bls:            SSCommon.bls        
+(   0.0%) Compiling   1 of 1   used files for sscommon.bls:                  laPublic.bls        
+(   0.0%) Compiling   1 of 7   used files for lapublic.bls:                  laSLog.bls          
+(   0.0%) Compiling   1 of 1   used files for laslog.bls:                    laError.bls         
+(   0.0%) Compiling   1 of 1   used files for laerror.bls:                   laConst.bls         
+(   0.0%) Compiling   2 of 7   used files for lapublic.bls:                  olSchem.bls         
+(   0.0%) Compiling   3 of 7   used files for lapublic.bls:                  laAddLib.bls        
+(   0.0%) Compiling   5 of 7   used files for lapublic.bls:                  laSConst.bls        
+(   0.0%) Compiling   6 of 7   used files for lapublic.bls:                  laUtils.bls         
+(   0.0%) Compiling   7 of 7   used files for lapublic.bls:                  laDecl.bls          
+(   1.0%) Compiling   2 of 9   used files for rt_waarmclient.bls:            SSErrors.bls        
+(   1.0%) Compiling   3 of 9   used files for rt_waarmclient.bls:            laBranch.bls        
+(   1.0%) Compiling   4 of 4   used files for labranch.bls:                  laRecOpr.bls        
+(   1.0%) Compiling   4 of 9   used files for rt_waarmclient.bls:            lbImpARMC.bls       
+(   1.0%) Compiling   5 of 9   used files for rt_waarmclient.bls:            lbARMChk.bls        
+(   1.0%) Compiling   3 of 6   used files for lbarmchk.bls:                  laCTLib.bls         
+(   1.0%) Compiling   2 of 3   used files for lactlib.bls:                   ctBranch.bls        
+(   1.0%) Compiling   2 of 3   used files for ctbranch.bls:                  aaBranch.bls        
+(   1.0%) Compiling   4 of 6   used files for lbarmchk.bls:                  aaRepClt.bls        
+(   1.0%) Compiling   8 of 9   used files for rt_waarmclient.bls:            RT_wa1Main.bls      
+(   1.0%) Compiling   3 of 25  used files for rt_wa1main.bls:                SSXML.bls           
+(   1.0%) Compiling   4 of 25  used files for rt_wa1main.bls:                RT_0SCHEMEPARAMS.bls
+(   1.0%) Compiling   5 of 25  used files for rt_wa1main.bls:                RT_0USERDATA.bls    
+(   1.0%) Compiling   6 of 25  used files for rt_wa1main.bls:                RT_1Common.bls      
+(   1.0%) Compiling   1 of 21  used files for rt_1common.bls:                LCAutoNo.bls        
+(   1.0%) Compiling   4 of 4   used files for lcautono.bls:                  laLibCtl.bls        
+(   1.0%) Compiling   6 of 12  used files for lalibctl.bls:                  laMathem.bls        
+(   1.0%) Compiling  10 of 12  used files for lalibctl.bls:                  la3025u.bls         
+(   1.0%) Compiling  12 of 12  used files for lalibctl.bls:                  laMigLib.bls        
+(   1.0%) Compiling   8 of 21  used files for rt_1common.bls:                aaPrint.bls         
+(   1.0%) Compiling   3 of 7   used files for aaprint.bls:                   laCryLib.bls        
+(   1.0%) Compiling   5 of 5   used files for lacrylib.bls:                  laComDatApi.bls     
+(   2.0%) Compiling   4 of 7   used files for aaprint.bls:                   PAGIFs.bls          
+(   2.0%) Compiling   6 of 7   used files for aaprint.bls:                   aaAccept.bls        
+(   2.0%) Compiling   7 of 7   used files for aaprint.bls:                   aaPrnSum.bls        
+(   2.0%) Compiling   9 of 21  used files for rt_1common.bls:                aaCrSign.bls        
+(   2.0%) Compiling   7 of 26  used files for aacrsign.bls:                  lacancrq.bls        
+(   2.0%) Compiling   8 of 26  used files for aacrsign.bls:                  laRITCns.bls        
+(   2.0%) Compiling  10 of 26  used files for aacrsign.bls:                  laPrint.bls         
+(   2.0%) Compiling   6 of 16  used files for laprint.bls:                   DCRoot.bls          
+(   2.0%) Compiling   4 of 6   used files for dcroot.bls:                    laCpyDoc.bls        
+(   2.0%) Compiling   6 of 6   used files for dcroot.bls:                    daARMAB.bls         
+(   2.0%) Compiling   1 of 4   used files for daarmab.bls:                   daARMABLog.bls      
+(   2.0%) Compiling   4 of 4   used files for daarmab.bls:                   daDialog.bls        
+(   2.0%) Compiling  11 of 16  used files for laprint.bls:                   laCusDCt.bls        
+(   2.0%) Compiling  13 of 16  used files for laprint.bls:                   laKeyEch.bls        
+(   2.0%) Compiling  14 of 16  used files for laprint.bls:                   paStamp.bls         
+(   2.0%) Compiling  16 of 16  used files for laprint.bls:                   laPrint181i.bls     
+(   2.0%) Compiling  12 of 26  used files for aacrsign.bls:                  lcTemplt.bls        
+(   2.0%) Compiling  14 of 26  used files for aacrsign.bls:                  laCCSign.bls        
+(   2.0%) Compiling   3 of 8   used files for laccsign.bls:                  laCCXML.bls         
+(   2.0%) Compiling   6 of 8   used files for laccsign.bls:                  laCCDoc.bls         
+(   2.0%) Compiling   2 of 4   used files for laccdoc.bls:                   LAContrl.bls        
+(   2.0%) Compiling   8 of 8   used files for lacontrl.bls:                  laPDReg.bls         
+(   3.0%) Compiling  15 of 26  used files for aacrsign.bls:                  laCrSign.bls        
+(   3.0%) Compiling  17 of 26  used files for aacrsign.bls:                  saIvAck.bls         
+(   3.0%) Compiling   1 of 3   used files for saivack.bls:                   daIvAck.bls         
+(   3.0%) Compiling   2 of 2   used files for daivack.bls:                   laCCToXML.bls       
+(   3.0%) Compiling  18 of 26  used files for aacrsign.bls:                  aaCCSign.bls        
+(   3.0%) Compiling  19 of 26  used files for aacrsign.bls:                  laDocAck.bls        
+(   3.0%) Compiling   2 of 3   used files for ladocack.bls:                  lbHash.bls          
+(   3.0%) Compiling  20 of 26  used files for aacrsign.bls:                  aaAccSign.bls       
+(   3.0%) Compiling  21 of 26  used files for aacrsign.bls:                  aaCrDlIn.bls        
+(   3.0%) Compiling   7 of 10  used files for aacrdlin.bls:                  la138iFs.bls        
+(   3.0%) Compiling   8 of 10  used files for aacrdlin.bls:                  laEvents.bls        
