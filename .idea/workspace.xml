@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ffcf7241-615c-47f2-b5e0-82d2808b990b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log.txt" afterPath="$PROJECT_DIR$/log.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run.py" afterPath="$PROJECT_DIR$/run.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.ini" afterPath="$PROJECT_DIR$/settings.ini" />
     </list>
     <ignored path=".idea/" />
@@ -28,8 +28,8 @@
       <file leaf-file-name="run.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="1462" column="12" lean-forward="false" selection-start-line="1462" selection-start-column="4" selection-end-line="1462" selection-end-column="12" />
+            <state relative-caret-position="590">
+              <caret line="806" column="55" lean-forward="true" selection-start-line="806" selection-start-column="55" selection-end-line="806" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -39,11 +39,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>downlo</find>
-      <find>const_dir_TEMP_BUILD_BK</find>
-      <find>BlsCompileAll</find>
-      <find>tab</find>
-      <find>\t</find>
       <find>printProgress</find>
       <find>print1</find>
       <find>make_upgrade10_eif_string_by_file_name</find>
@@ -66,9 +61,14 @@
       <find>download_build</find>
       <find>PlaceBuildIntoPatch</find>
       <find>const_dir_COMPARED_WWW</find>
-      <find>download_starteam</find>
       <find>syb</find>
       <find>dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET</find>
+      <find>check_labels</find>
+      <find>subprocess</find>
+      <find>strip</find>
+      <find>wal</find>
+      <find>starteam_list_directories</find>
+      <find>download_starteam</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -119,7 +119,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -134,7 +134,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -313,13 +313,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1464793755244</updated>
-    </task>
-    <task id="LOCAL-00017" summary="download_build2 начало">
-      <created>1464948143106</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1464948143106</updated>
     </task>
     <task id="LOCAL-00018" summary="download_build2">
       <created>1464961774032</created>
@@ -657,7 +650,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519847969919</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="+ WWW, RT_TPL, RTF copying to patch">
+      <created>1519892042016</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1519892042016</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TodoView">
@@ -673,13 +673,13 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15138593" sideWeight="0.254818" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15298508" sideWeight="0.254818" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.62955034" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46573874" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19509594" sideWeight="0.74518204" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23560767" sideWeight="0.74518204" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.617773" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -738,17 +738,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>1104</line>
+          <line>1143</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>776</line>
+          <line>815</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>830</line>
+          <line>869</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
@@ -1108,8 +1108,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="1462" column="12" lean-forward="false" selection-start-line="1462" selection-start-column="4" selection-end-line="1462" selection-end-column="12" />
+        <state relative-caret-position="590">
+          <caret line="806" column="55" lean-forward="true" selection-start-line="806" selection-start-column="55" selection-end-line="806" selection-end-column="55" />
           <folding />
         </state>
       </provider>
