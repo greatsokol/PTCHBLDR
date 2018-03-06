@@ -696,8 +696,11 @@ def read_config():
 
 
 # -------------------------------------------------------------------------------------------------
-def starteam_list_directories(settings, excluded_folders=None):
-    log('Loading directories from Starteam. Please wait...')
+def starteam_list_directories(settings, label, label_command, excluded_folders=None):
+    message = 'Loading directories from Starteam'
+    if label_command:
+        message += ' for label(date) "{}"'.format(label)
+    log(message+'. Please wait...')
     launch_string = quote(settings.stcmd)
     launch_string += ' list -nologo -cf -p "{}:{}@{}:{}/{}/{}"'.format(
         settings.StarteamLogin,
@@ -706,6 +709,9 @@ def starteam_list_directories(settings, excluded_folders=None):
         settings.StarteamPort,
         settings.StarteamProject,
         settings.StarteamView)
+
+    if label_command:
+        launch_string += label_command
 
     process = subprocess.Popen(launch_string, shell=False, stdout=subprocess.PIPE)
     out, err = process.communicate()
@@ -718,9 +724,10 @@ def starteam_list_directories(settings, excluded_folders=None):
         dir_list = str_res.splitlines()
         del dir_list[0]  # В первой строке будет путь к виду стартима
         dir_list = [dirname.strip().replace('\\', '') for dirname in dir_list]
+        dir_list.sort()
+        dir_list_return = []
         if excluded_folders:
             excluded_folders_lower = [excluded_folder.lower() for excluded_folder in excluded_folders]
-            dir_list_return = []
             for dir in dir_list:
                 if dir.lower() not in excluded_folders_lower:
                     dir_list_return.append(dir)
@@ -733,16 +740,23 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
     total_result = False
     key_AltStarteamView = "_StarteamView".lower()  # Приставка к названию метки, в которой содержится название доп вида стартима
     try:
-        if st_path_to_download == '':
-            starteam_dirs = starteam_list_directories(settings, ['BLL', 'BLL_Client', 'Doc', '_Personal',
-                                                                 '_TZ', '_ProjectData', '_ProjectData2',
-                                                                 'BUILD', 'History', 'Scripts', 'DLL'])
-        else:
-            starteam_dirs = ['']
-
         if labels_list is None:
-            labels_list = [('any','')]
+            labels_list = [('any', '')]
         for key, label in labels_list:
+            isDownloadBetweenDates = (key == 'datebefore' or key == 'dateafter')
+            isDownloadInitialState = (key == 'labelbefore' or key == 'datebefore')
+            label_command = ''
+            if label:
+                if isDownloadBetweenDates:
+                    label_command = ' -cfgd ' + quote(label)
+                else:
+                    label_command = ' -cfgl ' + quote(label) #vl
+            starteam_dirs = ['']
+            if st_path_to_download == '':
+                starteam_dirs = starteam_list_directories(settings, label, label_command,
+                                                          ['BLL', 'BLL_Client', 'Doc', '_Personal',
+                                                                     '_TZ', '_ProjectData', '_ProjectData2',
+                                                                     'BUILD', 'History', 'Scripts', 'DLL'])
             for starteam_dir in starteam_dirs:
                 if starteam_dir == '':
                     starteam_dir=st_path_to_download
@@ -751,17 +765,11 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                 if key_AltStarteamView not in key:
                     if not label and not st_file_to_download:
                         raise ValueError('No label or file to download specified')
-
-                    isDownloadBetweenDates = (key == 'datebefore' or key == 'dateafter')
-                    isDownloadInitialState = (key == 'labelbefore' or key == 'datebefore')
                     message = 'DOWNLOADING'
                     if st_file_to_download:
                         message += ' files "{}{}"'.format(starteam_dir, st_file_to_download)
                     if label:
-                        if (isDownloadBetweenDates):
-                            message += ' files for date "{}" from {}'.format(label, starteam_dir)
-                        else:
-                            message += ' files for label "{}" from {}'.format(label, starteam_dir)
+                        message += ' files for label(date) "{}" from {}'.format(label, starteam_dir)
 
                     if isDownloadInitialState:
                         outdir = path_for_before
@@ -793,12 +801,8 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                         launch_string += '/{}'.format(starteam_dir)
                     launch_string += '"'
                     launch_string += ' -rp "{}"'.format(outdir)
-
-                    if label:
-                        if isDownloadBetweenDates:
-                            launch_string += ' -cfgd ' + quote(label)
-                        else:
-                            launch_string += ' -vl ' + quote(label)
+                    if label_command:
+                        launch_string += label_command
                     if st_file_to_download:
                         launch_string += " "+st_file_to_download
 
