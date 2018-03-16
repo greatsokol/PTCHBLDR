@@ -697,42 +697,54 @@ def read_config():
 
 # -------------------------------------------------------------------------------------------------
 def starteam_list_directories(settings, label, label_command, excluded_folders=None):
-    message = 'Loading directories from Starteam'
-    if label_command:
-        message += ' for label(date) "{}"'.format(label)
-    log(message+'. Please wait...')
-    launch_string = quote(settings.stcmd)
-    launch_string += ' list -nologo -cf -p "{}:{}@{}:{}/{}/{}"'.format(
-        settings.StarteamLogin,
-        settings.StarteamPassword,
-        settings.StarteamServer,
-        settings.StarteamPort,
-        settings.StarteamProject,
-        settings.StarteamView)
-
-    if label_command:
-        launch_string += label_command
-
-    process = subprocess.Popen(launch_string, shell=False, stdout=subprocess.PIPE)
-    out, err = process.communicate()
-    process.stdout.close()
-    if err:
-        log(err.decode('windows-1251'))
-        return None
-    else:
-        str_res = out.decode('windows-1251')
-        dir_list = str_res.splitlines()
-        del dir_list[0]  # В первой строке будет путь к виду стартима
-        dir_list = [dirname.strip().replace('\\', '') for dirname in dir_list]
-        dir_list.sort()
-        dir_list_return = []
-        if excluded_folders:
-            excluded_folders_lower = [excluded_folder.lower() for excluded_folder in excluded_folders]
-            for dir in dir_list:
-                if dir.lower() not in excluded_folders_lower:
-                    dir_list_return.append(dir)
-        log('\tList of directories: {}'.format(dir_list_return))
-        return dir_list_return
+    out = None
+    counter = 0
+    while (out is None) and (counter < 2):
+        counter += 1
+        launch_string = quote(settings.stcmd)
+        launch_string += ' list -nologo -x -cf -p "{}:{}@{}:{}/{}/{}"'.format(
+            settings.StarteamLogin,
+            settings.StarteamPassword,
+            settings.StarteamServer,
+            settings.StarteamPort,
+            settings.StarteamProject,
+            settings.StarteamView)
+        message = 'Loading directories from Starteam'
+        if label_command:
+            launch_string += label_command
+            message += ' for label(date) "{}"'.format(label)
+        log(message+'. Please wait...')
+        process = subprocess.Popen(launch_string, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = process.communicate()
+        process.stdout.close()
+        if err:
+            message = '\tCan not download directories for label(date) {}.'.format(label)
+            label = datetime.datetime.fromtimestamp(time.time()).strftime('%d.%m.%y %H:%M')
+            label_command = ' -cfgd ' + quote(label)
+            if counter == 1:
+                message += ' TRYING to load directories for current time {}.'.format(label)
+            log(message)
+            out = None
+        else:
+            str_res = out.decode('windows-1251')
+            if str_res:
+                dir_list = str_res.splitlines()
+                del dir_list[0]  # В первой строке будет путь к виду стартима
+                dir_list = [dirname.strip().replace('\\', '') for dirname in dir_list]
+                dir_list.sort()
+                dir_list_return = []
+                if excluded_folders:
+                    excluded_folders_lower = [excluded_folder.lower() for excluded_folder in excluded_folders]
+                    for dir in dir_list:
+                        if dir.lower() not in excluded_folders_lower:
+                            dir_list_return.append(dir)
+                log('\tList of directories: {}'.format(dir_list_return))
+                if len(dir_list_return)>0:
+                    return dir_list_return
+                else:
+                    return None
+            else:
+                return None
 
 
 # -------------------------------------------------------------------------------------------------
@@ -745,18 +757,22 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
         for key, label in labels_list:
             isDownloadBetweenDates = (key == 'datebefore' or key == 'dateafter')
             isDownloadInitialState = (key == 'labelbefore' or key == 'datebefore')
-            label_command = ''
+            label_command_dir = label_command = ''
             if label:
                 if isDownloadBetweenDates:
-                    label_command = ' -cfgd ' + quote(label)
+                    label_command_dir = label_command = ' -cfgd ' + quote(label)
                 else:
-                    label_command = ' -cfgl ' + quote(label) #vl
-            starteam_dirs = ['']
+                    label_command_dir = ' -cfgl ' + quote(label)
+                    label_command = ' -vl ' + quote(label)
+            starteam_dirs = None
             if st_path_to_download == '':
-                starteam_dirs = starteam_list_directories(settings, label, label_command,
+                starteam_dirs = starteam_list_directories(settings, label, label_command_dir,
                                                           ['BLL', 'BLL_Client', 'Doc', '_Personal',
-                                                                     '_TZ', '_ProjectData', '_ProjectData2',
-                                                                     'BUILD', 'History', 'Scripts', 'DLL'])
+                                                           '_TZ', '_ProjectData', '_ProjectData2',
+                                                           'BUILD', 'History', 'Scripts', 'DLL',
+                                                           'Config'])
+            if starteam_dirs is None:
+                starteam_dirs = ['']
             for starteam_dir in starteam_dirs:
                 if starteam_dir == '':
                     starteam_dir=st_path_to_download
@@ -924,7 +940,8 @@ def make_upgrade10_eif_string_for_tables(file_name):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> " \
                  "#TODO проверьте способ обновления таблицы, сейчас - заливается полностью. " \
                  "Для дельты и обновления строк: |TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'название_полей'. " \
-                 "Только заменить структуру десятки: |TRUE|FALSE|FALSE|FALSE|TRUE|FALSE|NULL'"
+                 "Только заменить структуру десятки: |TRUE|FALSE|FALSE|FALSE|TRUE|FALSE|NULL. " \
+                 "Заменить структуру и пересоздать: |TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL."
     return result
 # -------------------------------------------------------------------------------------------------
 
@@ -1390,7 +1407,7 @@ def download_build(settings):
                     build_path_bank = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')  # подготовим путь к билду банка
                     mask = ['bssetup.msi', 'CalcCRC.exe']
                     copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
-                    mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginWebKitSetup.exe']
+                    mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe']
                     copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
 
                     for release in ['32', '64']:  # выкладываем билд в LIBFILES32(64).BNK
@@ -1401,11 +1418,11 @@ def download_build(settings):
                         copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(release), mask, [])
                         copyfiles(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(release), mask, [])
 
-                        build_path = os.path.join(const_dir_TEMP_BUILD_IC, 'Win{}\\Release'.format(release))
-                        mask = ['BssPluginSetup.exe', 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
-                        for subversion in ['64', '32']:  # subversion - чтобы перекрестно положить файлы 32 бита в каталог 64, и наоборот
-                            copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(buildIC_version, release), mask, [])
-                            copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(buildIC_version, release), mask, [])
+                        build_path = os.path.join(const_dir_TEMP_BUILD_IC, 'Win{}\\Release'.format('32'))
+                        mask = ['BssPluginSetup.exe', 'BssPluginSetupAdmin.exe', 'BssPluginSetupNoHost.exe',
+                                'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
+                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(buildIC_version, release), mask, [])
+                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(buildIC_version, release), mask, [])
 
                 else:
                     if instance == const_instance_BANK:

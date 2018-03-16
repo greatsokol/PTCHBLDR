@@ -5,6 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log.txt" afterPath="$PROJECT_DIR$/log.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run.py" afterPath="$PROJECT_DIR$/run.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.ini" afterPath="$PROJECT_DIR$/settings.ini" />
     </list>
     <ignored path=".idea/" />
     <ignored path="_TEMP/" />
@@ -28,8 +29,8 @@
       <file leaf-file-name="run.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="961" column="107" lean-forward="false" selection-start-line="961" selection-start-column="107" selection-end-line="961" selection-end-column="107" />
+            <state relative-caret-position="225">
+              <caret line="720" column="88" lean-forward="true" selection-start-line="720" selection-start-column="88" selection-end-line="720" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -39,11 +40,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>printProgress</find>
-      <find>print1</find>
-      <find>make_upgrade10_eif_string_by_file_name</find>
-      <find>print1(</find>
-      <find>print(</find>
       <find>orderstart</find>
       <find>uses</find>
       <find>sub</find>
@@ -69,6 +65,11 @@
       <find>wal</find>
       <find>starteam_list_directories</find>
       <find>download_starteam</find>
+      <find>dir_PATCH_LIBFILES_INETTEMP</find>
+      <find>BssPluginWebKitSetup</find>
+      <find>communicate</find>
+      <find>?</find>
+      <find>date</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -119,8 +120,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -135,6 +134,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -313,13 +314,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1464793755244</updated>
-    </task>
-    <task id="LOCAL-00020" summary="хватит на сегодня">
-      <created>1464969000076</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1464969000076</updated>
     </task>
     <task id="LOCAL-00021" summary="чистка желтого гавна">
       <created>1464969656615</created>
@@ -657,7 +651,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520353568479</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="+ turbo boost new algorithm of download">
+      <created>1520353813274</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1520353813274</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TodoView">
@@ -673,7 +674,7 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15778251" sideWeight="0.254818" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16257995" sideWeight="0.254818" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.62955034" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -738,17 +739,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>1147</line>
+          <line>1164</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>819</line>
+          <line>835</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>873</line>
+          <line>889</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
@@ -1108,8 +1109,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="961" column="107" lean-forward="false" selection-start-line="961" selection-start-column="107" selection-end-line="961" selection-end-column="107" />
+        <state relative-caret-position="225">
+          <caret line="720" column="88" lean-forward="true" selection-start-line="720" selection-start-column="88" selection-end-line="720" selection-end-column="88" />
           <folding />
         </state>
       </provider>
