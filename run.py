@@ -736,7 +736,7 @@ def starteam_list_directories(settings, label, label_command, excluded_folders=N
                 if excluded_folders:
                     excluded_folders_lower = [excluded_folder.lower() for excluded_folder in excluded_folders]
                     for dir in dir_list:
-                        if dir.lower() not in excluded_folders_lower:
+                        if dir.lower() not in excluded_folders_lower and 'not in view' not in dir.lower():
                             dir_list_return.append(dir)
                 log('\tList of directories: {}'.format(dir_list_return))
                 if len(dir_list_return)>0:
