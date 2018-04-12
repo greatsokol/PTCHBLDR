@@ -469,7 +469,8 @@ class GlobalSettings:
     BuildBK = ''
     BuildIC = ''
     BuildCrypto = ''
-    PlaceBuildIntoPatch = False
+    PlaceBuildIntoPatchBK = False
+    PlaceBuildIntoPatchIC = False
     ClientEverythingInEXE = False
     LicenseServer = ''
     LicenseProfile = ''
@@ -660,7 +661,8 @@ def read_config():
         settings.BuildBK = parser.get(section_build, 'BK').strip()
         settings.BuildIC = parser.get(section_build, 'IC').strip()
         settings.BuildCrypto = parser.get(section_build, 'Crypto').strip()
-        settings.PlaceBuildIntoPatch = parser.get(section_build, 'PlaceBuildIntoPatch').lower() == 'true'
+        settings.PlaceBuildIntoPatchBK = parser.get(section_build, 'PlaceBuildIntoPatchBK').lower() == 'true'
+        settings.PlaceBuildIntoPatchIC = parser.get(section_build, 'PlaceBuildIntoPatchIC').lower() == 'true'
         settings.ClientEverythingInEXE = parser.get(section_special, 'ClientEverythingInEXE').lower() == 'true'
 
         # проверка Labels -----------------------------------
@@ -1394,7 +1396,7 @@ def download_build(settings):
         settings.Is20Version = is20
 
         #  Если в настройках включено копирование билда в патч
-        if settings.PlaceBuildIntoPatch:
+        if settings.PlaceBuildIntoPatchBK or settings.PlaceBuildIntoPatchIC:
             log('COPYING build into patch for {}'.format(instance))
             if instance == const_instance_BANK:
                 excluded_files = const_excluded_build_for_BANK
@@ -1403,7 +1405,7 @@ def download_build(settings):
             elif instance in [const_instance_CLIENT, const_instance_CLIENT_MBA]:
                 excluded_files = const_excluded_build_for_CLIENT
             if is20:  # для билда 20-ой версии
-                if instance == const_instance_IC:  # выкладываем билд плагина для ИК
+                if instance == const_instance_IC and settings.PlaceBuildIntoPatchIC:  # выкладываем билд плагина для ИК
                     build_path_bank = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')  # подготовим путь к билду банка
                     mask = ['bssetup.msi', 'CalcCRC.exe']
                     copyfiles(build_path_bank, dir_PATCH_LIBFILES_INETTEMP(), mask, [])
@@ -1424,7 +1426,7 @@ def download_build(settings):
                         copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(buildIC_version, release), mask, [])
                         copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(buildIC_version, release), mask, [])
 
-                else:
+                elif settings.PlaceBuildIntoPatchBK:
                     if instance == const_instance_BANK:
                         build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
                         # это копируются все файлы, которые будут участвовать в компиляции BLS на следующем шаге
@@ -1449,7 +1451,8 @@ def download_build(settings):
                             copyfiles(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
 
             else:  # для билдов 15 и 17
-                if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
+                if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA] \
+                        and settings.PlaceBuildIntoPatchBK:
                     # выкладываем билд для Б и БК
                     build_path = const_dir_TEMP_BUILD_BK
                     mask = ['*.exe', '*.ex', '*.bpl']  # todo bpl-ки в SYSTEM или в EXE?
@@ -1459,7 +1462,7 @@ def download_build(settings):
                     else:
                         copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
 
-                if instance == const_instance_BANK:
+                if instance == const_instance_BANK and settings.PlaceBuildIntoPatchBK:
                     copyfiles(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
                     # заполняем билдом TEMPLATE шаблон клиента в банковском патче
                     mask = ['*.exe', '*.ex', '*.bpl']
@@ -1481,7 +1484,7 @@ def download_build(settings):
                     copyfiles(build_path, dir_PATCH_LIBFILES_BNK_BSISET_EXE(), ['bsiset.exe'], [])
                     copyfiles(build_path, dir_PATCH_LIBFILES_BNK_LICENSE_EXE(), ['protcore.exe'], [])
 
-                if instance == const_instance_IC:
+                if instance == const_instance_IC and settings.PlaceBuildIntoPatchIC:
                     # заполняем LIBFILES.BNK в банковском патче билдом для ИК
                     build_path = const_dir_TEMP_BUILD_IC
                     mask = ['bssaxset.exe', 'inetcfg.exe', 'rts.exe', 'rtsconst.exe', 'rtsinfo.exe']
@@ -1716,7 +1719,9 @@ def main():
                 bls_just_downloaded = continue_compilation = copy_bls(True,
                                                                       const_dir_COMPARED_BLS,
                                                                       dir_PATCH_LIBFILES_SOURCE)
-                need_download_build = continue_compilation or global_settings.PlaceBuildIntoPatch
+                need_download_build = continue_compilation or \
+                                      global_settings.PlaceBuildIntoPatchBK or \
+                                      global_settings.PlaceBuildIntoPatchIC
                 build_downloaded = False
                 # если требуется загрузка билда (для компиляции или для помещения в патч)
                 if need_download_build:
