@@ -55,9 +55,14 @@ dir_PATCH_LIBFILES_BNK_RTS_USER = lambda version='': os.path.join(dir_PATCH_LIBF
 dir_PATCH_LIBFILES_BNK_RTS_SYSTEM = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS(version), 'SYSTEM')
 dir_PATCH_LIBFILES_BNK_RTS_SUBSYS = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS(version), 'SUBSYS')
 dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS(version), 'TEMPLATE')
-dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS(version), 'PRINT')
-dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT(version), 'RTF')
-dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT(version), 'RepJet')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS(version), 'INSTCLNT')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT(version), 'TEMPLATE')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE(version), 'DISTRIB')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB(version), 'CLIENT')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT(version), 'SUBSYS')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS(version), 'PRINT')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT(version), 'RTF')
+dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT(version), 'RepJet')
 
 dir_PATCH_LIBFILES_BNK_WWW = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK(version), 'WWW')
 dir_PATCH_LIBFILES_BNK_WWW_EXE = lambda version='': os.path.join(dir_PATCH_LIBFILES_BNK_WWW(version), 'EXE')
@@ -1267,10 +1272,11 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
                         __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList)
             # добавляем в список учтенных файлов
             ObservedList.append(BlsFileName)
-            if __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile):
-                # компилируем и добавляем в список успешно откомпилированных
-                SuccessList.append(BlsFileName)
-                # printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
+            if BlsFileName not in SuccessList:
+                if __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile):
+                    # компилируем и добавляем в список успешно откомпилированных
+                    SuccessList.append(BlsFileName)
+                    # printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
         else:
             log('\tNo information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
 
@@ -1616,10 +1622,10 @@ def copy_rtf(settings):
                 dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_CLIENT_MBA))
                 dest_dirs.append(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF())
                 if settings.Is20Version:
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF('32'))
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF('64'))
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF('32'))
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF('64'))
                 else:
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF())
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF())
             # RepJet для всех
             if source_dir == const_dir_COMPARED_RTF_REPJET:
                 what = 'RepJet'
@@ -1628,10 +1634,10 @@ def copy_rtf(settings):
                 dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_CLIENT_MBA))
                 dest_dirs.append(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet())
                 if settings.Is20Version:
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet('32'))
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet('64'))
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet('32'))
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet('64'))
                 else:
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RepJet())
+                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet())
             for dest_dir in dest_dirs:
                 log('COPYING {} files to {}'.format(what, dest_dir))
                 copyfiles(source_dir, dest_dir)
