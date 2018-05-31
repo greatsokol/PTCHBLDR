@@ -743,7 +743,7 @@ def starteam_list_directories(settings, label, label_command, excluded_folders=N
                 if excluded_folders:
                     excluded_folders_lower = [excluded_folder.lower() for excluded_folder in excluded_folders]
                     for dir in dir_list:
-                        if dir.lower() not in excluded_folders_lower and 'not in view' not in dir.lower():
+                        if dir.lower() not in excluded_folders_lower and 'not in view' not in dir.lower() and 'missing ' not in dir.lower():
                             dir_list_return.append(dir)
                 log('\tList of directories: {}'.format(dir_list_return))
                 if len(dir_list_return)>0:
@@ -895,7 +895,8 @@ def compare_directories_BEFORE_and_AFTER():
 
 def make_upgrade10_eif_string_for_tables(file_name):
     file_name_lower = file_name.lower()
-    if file_name_lower.endswith('default'):  # Для дефолтных таблиц
+    if file_name_lower.endswith('default') or \
+       file_name_lower.startswith('root'):  # Для дефолтных таблиц
         result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
     elif file_name.find(".") > 0:  # Для блобов
         result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
@@ -1428,7 +1429,8 @@ def download_build(settings):
 
                         build_path = os.path.join(const_dir_TEMP_BUILD_IC, 'Win{}\\Release'.format('32'))
                         mask = ['BssPluginSetup.exe', 'BssPluginSetupAdmin.exe', 'BssPluginSetupNoHost.exe',
-                                'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe']
+                                'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe', 'BssPluginSetupGPB.exe',
+                                'BssPluginSetupGPBNoHost.exe']
                         copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(buildIC_version, release), mask, [])
                         copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(buildIC_version, release), mask, [])
 
@@ -1532,7 +1534,7 @@ def copy_bls(clean_destdir, source_dir, dest_dir):
 def copy_bll(settings):
     log('COPYING BLL files to patch')
     bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?b*.bls'])
-    bll_files_only_rts = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['RT_*.bls'])
+    bll_files_only_rts = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['RT_*.bls','sscommon.bls','ssxml.bls','sserrors.bls'])
     bll_files_only_mba = list_files_remove_paths_and_change_extension(const_dir_COMPARED_BLS_SOURCE_RCK, '.bll', ['*.bls'])
     bll_files_all = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['*.bls'])
     bll_files_tmp = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files_all)

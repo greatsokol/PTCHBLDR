@@ -29,8 +29,8 @@
       <file leaf-file-name="run.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="1624" column="108" lean-forward="false" selection-start-line="1624" selection-start-column="108" selection-end-line="1624" selection-end-column="108" />
+            <state relative-caret-position="208">
+              <caret line="897" column="47" lean-forward="false" selection-start-line="897" selection-start-column="47" selection-end-line="897" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -40,8 +40,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>const_dir_PATCH</find>
-      <find>const_dir_COMPARED_BLS</find>
       <find>сопо</find>
       <find>const_dir_COMPARED_BLS_SOURCE</find>
       <find>copy_bls</find>
@@ -70,6 +68,8 @@
       <find>dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF</find>
       <find>dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE</find>
       <find>dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF</find>
+      <find>www</find>
+      <find>BssPluginSetup</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -120,6 +120,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -134,8 +136,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -314,13 +314,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1464793755244</updated>
-    </task>
-    <task id="LOCAL-00024" summary="копирование BLL">
-      <created>1465229936611</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1465229936611</updated>
     </task>
     <task id="LOCAL-00025" summary="копирование BLL">
       <created>1465231675944</created>
@@ -658,7 +651,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523550882307</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="+ RTF">
+      <created>1524067020548</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1524067020549</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TodoView">
@@ -674,7 +674,7 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17217484" sideWeight="0.254818" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.254818" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.62955034" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -707,7 +707,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="download_build2 начало" />
     <MESSAGE value="download_build2" />
     <MESSAGE value="clean for 15" />
     <MESSAGE value="хватит на сегодня" />
@@ -732,14 +731,15 @@
     <MESSAGE value="+ WWW, RT_TPL, RTF copying to patch" />
     <MESSAGE value="+ turbo boost new algorithm of download" />
     <MESSAGE value="+ separated PlaceBuildIntoPatch setting" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ separated PlaceBuildIntoPatch setting" />
+    <MESSAGE value="+ RTF" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ RTF" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>1171</line>
+          <line>1172</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1097,8 +1097,8 @@
     <entry file="file://D:/_Stands/__SynWr/syncrtic.py" />
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="1624" column="108" lean-forward="false" selection-start-line="1624" selection-start-column="108" selection-end-line="1624" selection-end-column="108" />
+        <state relative-caret-position="208">
+          <caret line="897" column="47" lean-forward="false" selection-start-line="897" selection-start-column="47" selection-end-line="897" selection-end-column="47" />
           <folding />
         </state>
       </provider>
