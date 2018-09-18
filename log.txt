@@ -3580,3 +3580,589 @@ BUILD BEGIN 2018-09-18 11:16:33
 Loading directories from Starteam for label(date) "20180914.GPB 020.1.420_distr.1". Please wait...
 	List of directories: ['BASE', 'BLS', 'EXTERNAL', 'MIG_UTIL', 'RTF', 'RT_Tpl', 'SETUP', 'WWW', 'XSD']
 DOWNLOADING files for label(date) "20180914.GPB 020.1.420_distr.1" from BASE to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label(date) "20180914.GPB 020.1.420_distr.1" from BLS to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label(date) "20180914.GPB 020.1.420_distr.1" from EXTERNAL to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label(date) "20180914.GPB 020.1.420_distr.1" from MIG_UTIL to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label(date) "20180914.GPB 020.1.420_distr.1" from RTF to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label(date) "20180914.GPB 020.1.420_distr.1" from RT_Tpl to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label(date) "20180914.GPB 020.1.420_distr.1" from SETUP to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label(date) "20180914.GPB 020.1.420_distr.1" from WWW to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+DOWNLOADING files for label(date) "20180914.GPB 020.1.420_distr.1" from XSD to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE". Please wait...
+Loading directories from Starteam for label(date) "20180917.GPB 020.1.420_distr.1". Please wait...
+	List of directories: ['BASE', 'BLS', 'EXTERNAL', 'MIG_UTIL', 'RTF', 'RT_Tpl', 'SETUP', 'WWW', 'XSD']
+DOWNLOADING files for label(date) "20180917.GPB 020.1.420_distr.1" from BASE to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+DOWNLOADING files for label(date) "20180917.GPB 020.1.420_distr.1" from BLS to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+DOWNLOADING files for label(date) "20180917.GPB 020.1.420_distr.1" from EXTERNAL to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+DOWNLOADING files for label(date) "20180917.GPB 020.1.420_distr.1" from MIG_UTIL to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+DOWNLOADING files for label(date) "20180917.GPB 020.1.420_distr.1" from RTF to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+DOWNLOADING files for label(date) "20180917.GPB 020.1.420_distr.1" from RT_Tpl to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+DOWNLOADING files for label(date) "20180917.GPB 020.1.420_distr.1" from SETUP to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+DOWNLOADING files for label(date) "20180917.GPB 020.1.420_distr.1" from WWW to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+DOWNLOADING files for label(date) "20180917.GPB 020.1.420_distr.1" from XSD to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER". Please wait...
+BEGIN compare directories:
+	BEFORE: d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BEFORE
+	AFTER:  d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\UTILS\COMMON\laMassSign.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\CRYPTO\VISUAL\COMMON\daCrWzrd.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BLS\SOURCE\BS\1C\acImp1C.bls
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\FORMS\CryptoWizzardSetup(12).eif
+	copying d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_AFTER\BASE\Bank\Table data\Filled\REMOTENAVTREES(data).eif
+	FINISHED compare directories. LOOK at d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT
+DOWNLOADING files "BASE/BANK/TABLES/REMOTENAVTREES(10).eif" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT". Please wait...
+COPYING BLS ("17/20" version style) from "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\BLS\SOURCE" to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\PATCH\BANK\LIBFILES\SOURCE\BLS
+COPYING BUILD 3.20.3.70 from "c:\BUILDGPB20_BUILDS\20.3\007\Win32\Release" in "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK\Win32\Release"
+COPYING BUILD 3.20.3.70 from "c:\BUILDGPB20_BUILDS\20.3\007\Win64\Release" in "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK\Win64\Release"
+COPYING BUILD 3.20.2.1220 from "c:\BUILDGPB20_BUILDS\20.2\122\Win32\Release" in "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\IC\Win32\Release"
+COPYING BUILD 3.20.2.1220 from "c:\BUILDGPB20_BUILDS\20.2\122\Win64\Release" in "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\IC\Win64\Release"
+COPYING build into patch for BANK
+COPYING build into patch for CLIENT
+COPYING build into patch for CLIENT_MBA
+COPYING build into patch for IC
+DOWNLOADING files "DLL/*.dll" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK". Please wait...
+NOT COPYING WWW. Path d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\WWW not exists
+NOT COPYING RT_TPL. Path d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\RT_TPL not exists
+NOT COPYING RTF from d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\RTF. Path not exists
+NOT COPYING RTF from d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\RTF\Bank. Path not exists
+NOT COPYING RTF from d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\RTF\Client. Path not exists
+NOT COPYING RTF from d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\RTF\RepJet. Path not exists
+DOWNLOADING files "BLS/*.bls" to "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE". Please wait...
+COPYING BLS ("17/20" version style) from "d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_COMPARE_RESULT\BLS\SOURCE" to d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE\BLS
+CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	(   0.0%) Compiling   1 of 4   used files for abibsord.bls:                  laConst.bls         
+	ERROR: File "laconst.bls", Uses list "[]"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   2 of 4   used files for abibsord.bls:                  laAddLib.bls        
+	(   0.0%) Compiling   1 of 2   used files for laaddlib.bls:                  laError.bls         
+	(   0.0%) Compiling   1 of 1   used files for laerror.bls:                   laConst.bls         
+	ERROR: File "laerror.bls", Uses list "['laConst.bls']"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   2 of 2   used files for laaddlib.bls:                  laConst.bls         
+	ERROR: File "laaddlib.bls", Uses list "['laError.bls', 'laConst.bls']"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   3 of 4   used files for abibsord.bls:                  lbIBSAdd.bls        
+	(   0.0%) Compiling   1 of 6   used files for lbibsadd.bls:                  laAddLib.bls        
+	(   0.0%) Compiling   2 of 6   used files for lbibsadd.bls:                  laConst.bls         
+	(   0.0%) Compiling   3 of 6   used files for lbibsadd.bls:                  laError.bls         
+	(   0.0%) Compiling   4 of 6   used files for lbibsadd.bls:                  lbLnkAbs.bls        
+	(   0.0%) Compiling   1 of 3   used files for lblnkabs.bls:                  laSLog.bls          
+	(   0.0%) Compiling   1 of 1   used files for laslog.bls:                    laError.bls         
+	ERROR: File "laslog.bls", Uses list "['laError.bls']"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   2 of 3   used files for lblnkabs.bls:                  laConst.bls         
+	(   0.0%) Compiling   3 of 3   used files for lblnkabs.bls:                  laPublic.bls        
+	(   0.0%) Compiling   1 of 7   used files for lapublic.bls:                  laSLog.bls          
+	(   0.0%) Compiling   2 of 7   used files for lapublic.bls:                  olSchem.bls         
+	ERROR: File "olschem.bls", Uses list "[]"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   3 of 7   used files for lapublic.bls:                  laAddLib.bls        
+	(   0.0%) Compiling   4 of 7   used files for lapublic.bls:                  laConst.bls         
+	(   0.0%) Compiling   5 of 7   used files for lapublic.bls:                  laSConst.bls        
+	ERROR: File "lasconst.bls", Uses list "[]"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   6 of 7   used files for lapublic.bls:                  laUtils.bls         
+	(   0.0%) Compiling   1 of 2   used files for lautils.bls:                   laError.bls         
+	(   0.0%) Compiling   2 of 2   used files for lautils.bls:                   laConst.bls         
+	ERROR: File "lautils.bls", Uses list "['laError.bls', 'laConst.bls']"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   7 of 7   used files for lapublic.bls:                  laDecl.bls          
+	(   0.0%) Compiling   1 of 2   used files for ladecl.bls:                    laError.bls         
+	(   0.0%) Compiling   2 of 2   used files for ladecl.bls:                    laConst.bls         
+	ERROR: File "ladecl.bls", Uses list "['laError.bls', 'laConst.bls']"
+			
+	COMPILATION continues. Please wait...
+	ERROR: File "lapublic.bls", Uses list "['laSLog.bls', 'olSchem.bls', 'laAddLib.bls', 'laConst.bls', 'laSConst.bls', 'laUtils.bls', 'laDecl.bls']"
+			
+	COMPILATION continues. Please wait...
+	ERROR: File "lblnkabs.bls", Uses list "['laSLog.bls', 'laConst.bls', 'laPublic.bls']"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   5 of 6   used files for lbibsadd.bls:                  laPublic.bls        
+	(   0.0%) Compiling   6 of 6   used files for lbibsadd.bls:                  aaBranch.bls        
+	(   0.0%) Compiling   1 of 4   used files for aabranch.bls:                  laError.bls         
+	(   0.0%) Compiling   2 of 4   used files for aabranch.bls:                  laAddLib.bls        
+	(   0.0%) Compiling   3 of 4   used files for aabranch.bls:                  laConst.bls         
+	(   0.0%) Compiling   4 of 4   used files for aabranch.bls:                  laPublic.bls        
+	ERROR: File "aabranch.bls", Uses list "['laError.bls', 'laAddLib.bls', 'laConst.bls', 'laPublic.bls']"
+			
+	COMPILATION continues. Please wait...
+	ERROR: File "lbibsadd.bls", Uses list "['laAddLib.bls', 'laConst.bls', 'laError.bls', 'lbLnkAbs.bls', 'laPublic.bls', 'aaBranch.bls']"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   4 of 4   used files for abibsord.bls:                  lacrylib.bls        
+	(   0.0%) Compiling   1 of 7   used files for lacrylib.bls:                  laPublic.bls        
+	(   0.0%) Compiling   2 of 7   used files for lacrylib.bls:                  laSlog.bls          
+	(   0.0%) Compiling   3 of 7   used files for lacrylib.bls:                  laConst.bls         
+	(   0.0%) Compiling   4 of 7   used files for lacrylib.bls:                  laAddLib.bls        
+	(   0.0%) Compiling   5 of 7   used files for lacrylib.bls:                  laComDatApi.bls     
+	(   0.0%) Compiling   1 of 1   used files for lacomdatapi.bls:               laConst.bls         
+	ERROR: File "lacomdatapi.bls", Uses list "['laConst.bls']"
+			
+	COMPILATION continues. Please wait...
+	(   0.0%) Compiling   6 of 7   used files for lacrylib.bls:                  laSConst.bls        
+	(   0.0%) Compiling   7 of 7   used files for lacrylib.bls:                  laXML.bls           
+	(   0.0%) Compiling   1 of 3   used files for laxml.bls:                     laConst.bls         
+	(   0.0%) Compiling   2 of 3   used files for laxml.bls:                     laError.bls         
+	(   0.0%) Compiling   3 of 3   used files for laxml.bls:                     laPublic.bls        
+	ERROR: File "laxml.bls", Uses list "['laConst.bls', 'laError.bls', 'laPublic.bls']"
+			
+	COMPILATION continues. Please wait...
+	ERROR: File "lacrylib.bls", Uses list "['laPublic.bls', 'laSlog.bls', 'laConst.bls', 'laAddLib.bls', 'laComDatApi.bls', 'laSConst.bls', 'laXML.bls']"
+			
+	COMPILATION continues. Please wait...
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign
+	Labels = [('labelbefore', '20180914.GPB 020.1.420_distr.1'), ('label000', '20180917.GPB 020.1.420_distr.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = True
+	Place IC build files in patch = False
+	Path to build files = c:\BUILDGPB20_BUILDS\20.3\007\
+	Path to IC build files = c:\BUILDGPB20_BUILDS\20.2\122\
+Folder d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2018-09-18 12:54:52
+CLEANING d:\Users\greatsokol\Desktop\PATCH_BLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	(   0.0%) Compiling   1 of 8   used files for dbarmbnk.bls:                  laError.bls         
+	(   0.0%) Compiling   1 of 1   used files for laerror.bls:                   laConst.bls         
+	(   0.0%) Compiling   3 of 8   used files for dbarmbnk.bls:                  lbARMChk.bls        
+	(   0.0%) Compiling   3 of 6   used files for lbarmchk.bls:                  laCTLib.bls         
+	(   0.0%) Compiling   2 of 3   used files for lactlib.bls:                   ctBranch.bls        
+	(   0.0%) Compiling   2 of 3   used files for ctbranch.bls:                  aaBranch.bls        
+	(   0.0%) Compiling   2 of 4   used files for aabranch.bls:                  laAddLib.bls        
+	(   0.0%) Compiling   4 of 4   used files for aabranch.bls:                  laPublic.bls        
+	(   0.0%) Compiling   1 of 7   used files for lapublic.bls:                  laSLog.bls          
+	(   0.0%) Compiling   2 of 7   used files for lapublic.bls:                  olSchem.bls         
+	(   0.0%) Compiling   5 of 7   used files for lapublic.bls:                  laSConst.bls        
+	(   0.0%) Compiling   6 of 7   used files for lapublic.bls:                  laUtils.bls         
+	(   0.0%) Compiling   7 of 7   used files for lapublic.bls:                  laDecl.bls          
+	(   1.0%) Compiling   4 of 6   used files for lbarmchk.bls:                  aaRepClt.bls        
+	(   1.0%) Compiling   3 of 3   used files for aarepclt.bls:                  laRecOpr.bls        
+	(   1.0%) Compiling   5 of 6   used files for lbarmchk.bls:                  laBranch.bls        
+	(   1.0%) Compiling   6 of 8   used files for dbarmbnk.bls:                  aaDelClt.bls        
+	(   1.0%) Compiling   2 of 12  used files for aadelclt.bls:                  laArched.bls        
+	(   1.0%) Compiling   6 of 12  used files for aadelclt.bls:                  lbRPL.bls           
+	(   1.0%) Compiling   2 of 4   used files for lbrpl.bls:                     laGenIns.bls        
+	(   1.0%) Compiling   9 of 12  used files for aadelclt.bls:                  lbIPMAC.bls         
+	(   1.0%) Compiling  10 of 12  used files for aadelclt.bls:                  lbTANSet.bls        
+	(   1.0%) Compiling   2 of 2   used files for lbtanset.bls:                  lbRmAuth.bls        
+	(   1.0%) Compiling   2 of 5   used files for lbrmauth.bls:                  lbHash.bls          
+	(   1.0%) Compiling   3 of 3   used files for lbhash.bls:                    laCryLib.bls        
+	(   1.0%) Compiling   5 of 7   used files for lacrylib.bls:                  laComDatApi.bls     
+	(   1.0%) Compiling   7 of 7   used files for lacrylib.bls:                  laXML.bls           
+	(   1.0%) Compiling   3 of 5   used files for lbrmauth.bls:                  laDocAck.bls        
+	(   1.0%) Compiling  12 of 12  used files for aadelclt.bls:                  daARMABLog.bls      
+	(   1.0%) Compiling   8 of 8   used files for dbarmbnk.bls:                  daARMAB.bls         
+	(   1.0%) Compiling   4 of 4   used files for daarmab.bls:                   daDialog.bls        
+	(   2.0%) Compiling   1 of 6   used files for abbkrcur.bls:                  lbOutBkr.bls        
+	(   2.0%) Compiling   2 of 6   used files for abbkrcur.bls:                  lbUnload.bls        
+	(   2.0%) Compiling   4 of 4   used files for lbunload.bls:                  lbLnkABS.bls        
+	(   2.0%) Compiling   1 of 14  used files for rt_waloader.bls:               SSCommon.bls        
+	(   2.0%) Compiling   2 of 14  used files for rt_waloader.bls:               SSErrors.bls        
+	(   2.0%) Compiling   3 of 14  used files for rt_waloader.bls:               SSXml.bls           
+	(   2.0%) Compiling   4 of 14  used files for rt_waloader.bls:               RT_0UserData.bls    
+	(   2.0%) Compiling   5 of 14  used files for rt_waloader.bls:               RT_0SCHEMEPARAMS.bls
+	(   2.0%) Compiling   6 of 14  used files for rt_waloader.bls:               RT_wa1Common.bls    
+	(   2.0%) Compiling   7 of 14  used files for rt_waloader.bls:               RT_1Common.bls      
+	(   2.0%) Compiling   1 of 22  used files for rt_1common.bls:                LCAutoNo.bls        
+	(   2.0%) Compiling   4 of 4   used files for lcautono.bls:                  laLibCtl.bls        
+	(   2.0%) Compiling   2 of 12  used files for lalibctl.bls:                  AA14.bls            
+	(   2.0%) Compiling   6 of 12  used files for lalibctl.bls:                  laMathem.bls        
+	(   2.0%) Compiling  10 of 12  used files for lalibctl.bls:                  la3025u.bls         
+	(   2.0%) Compiling  12 of 12  used files for lalibctl.bls:                  laMigLib.bls        
+	(   2.0%) Compiling   8 of 22  used files for rt_1common.bls:                aaPrint.bls         
+	(   2.0%) Compiling   4 of 8   used files for aaprint.bls:                   PAGIFs.bls          
+	(   2.0%) Compiling   6 of 8   used files for aaprint.bls:                   aaAccept.bls        
+	(   2.0%) Compiling   7 of 8   used files for aaprint.bls:                   aaPrnSum.bls        
+	(   3.0%) Compiling   9 of 22  used files for rt_1common.bls:                aaCrSign.bls        
+	(   3.0%) Compiling   7 of 27  used files for aacrsign.bls:                  lacancrq.bls        
+	(   3.0%) Compiling   8 of 27  used files for aacrsign.bls:                  laRITCns.bls        
+	(   3.0%) Compiling  10 of 27  used files for aacrsign.bls:                  laPrint.bls         
+	(   3.0%) Compiling   6 of 16  used files for laprint.bls:                   DCRoot.bls          
+	(   3.0%) Compiling   4 of 6   used files for dcroot.bls:                    laCpyDoc.bls        
+	(   3.0%) Compiling  11 of 16  used files for laprint.bls:                   laCusDCt.bls        
+	(   3.0%) Compiling  13 of 16  used files for laprint.bls:                   laKeyEch.bls        
+	(   3.0%) Compiling  14 of 16  used files for laprint.bls:                   paStamp.bls         
+	(   3.0%) Compiling  16 of 16  used files for laprint.bls:                   laPrint181i.bls     
+	(   3.0%) Compiling  12 of 27  used files for aacrsign.bls:                  lcTemplt.bls        
+	(   3.0%) Compiling  14 of 27  used files for aacrsign.bls:                  laCCSign.bls        
+	(   3.0%) Compiling   3 of 8   used files for laccsign.bls:                  laCCXML.bls         
+	(   3.0%) Compiling   6 of 8   used files for laccsign.bls:                  laCCDoc.bls         
+	(   3.0%) Compiling   2 of 4   used files for laccdoc.bls:                   LAContrl.bls        
+	(   3.0%) Compiling   8 of 8   used files for lacontrl.bls:                  laPDReg.bls         
+	(   3.0%) Compiling  15 of 27  used files for aacrsign.bls:                  laCrSign.bls        
+	(   3.0%) Compiling  17 of 27  used files for aacrsign.bls:                  saIvAck.bls         
+	(   3.0%) Compiling   1 of 3   used files for saivack.bls:                   daIvAck.bls         
+	(   3.0%) Compiling   2 of 2   used files for daivack.bls:                   laCCToXML.bls       
+	(   4.0%) Compiling  18 of 27  used files for aacrsign.bls:                  aaCCSign.bls        
+	(   4.0%) Compiling  20 of 27  used files for aacrsign.bls:                  aaAccSign.bls       
+	(   4.0%) Compiling  21 of 27  used files for aacrsign.bls:                  aaCrDlIn.bls        
+	(   4.0%) Compiling   7 of 10  used files for aacrdlin.bls:                  la138iFs.bls        
+	(   4.0%) Compiling   8 of 10  used files for aacrdlin.bls:                  laEvents.bls        
+	(   4.0%) Compiling  26 of 27  used files for aacrsign.bls:                  laUNCMsgDVK.bls     
+	(   4.0%) Compiling  27 of 27  used files for aacrsign.bls:                  laMassSign.bls      
+	(   4.0%) Compiling  15 of 22  used files for rt_1common.bls:                abKeyEch.bls        
+	(   4.0%) Compiling   4 of 16  used files for abkeyech.bls:                  CryPrint.bls        
+	(   4.0%) Compiling   9 of 16  used files for abkeyech.bls:                  iaCrypto.bls        
+	(   4.0%) Compiling   9 of 10  used files for iacrypto.bls:                  iaCryOTP.bls        
+	(   4.0%) Compiling  10 of 16  used files for abkeyech.bls:                  lbMsCAAp.bls        
+	(   4.0%) Compiling  11 of 16  used files for abkeyech.bls:                  laCrWzrd.bls        
+	(   4.0%) Compiling   9 of 13  used files for lacrwzrd.bls:                  laLirLic.bls        
+	(   4.0%) Compiling  12 of 16  used files for abkeyech.bls:                  lbCrTANSet.bls      
+	(   4.0%) Compiling  14 of 16  used files for abkeyech.bls:                  lbCryOTP.bls        
+	(   4.0%) Compiling   3 of 6   used files for lbcryotp.bls:                  lbCrEPass.bls       
+	(   4.0%) Compiling   6 of 6   used files for lbcryotp.bls:                  laSMSGen.bls        
+	(   4.0%) Compiling  15 of 16  used files for abkeyech.bls:                  abKeyEchAdd.bls     
+	(   5.0%) Compiling  19 of 22  used files for rt_1common.bls:                laSendTy.bls        
+	(   5.0%) Compiling  20 of 22  used files for rt_1common.bls:                laGPBDepOp.bls      
+	(   5.0%) Compiling  21 of 22  used files for rt_1common.bls:                aaCustomer.bls      
+	(   5.0%) Compiling   8 of 14  used files for rt_waloader.bls:               RT_1SignConf.bls    
+	(   5.0%) Compiling   5 of 7   used files for abbisordercur.bls:             lbBisCommon.bls     
+	(   5.0%) Compiling   8 of 9   used files for lbbiscommon.bls:               lbSonicESB.bls      
+	(   5.0%) Compiling   5 of 6   used files for rt_2gpbfsconfdocinquiry.bls:   la3016u.bls         
+	(   5.0%) Compiling   1 of 1   used files for mbsc_1kvit.bls:                laCrkvit.bls        
+	(   5.0%) Compiling   4 of 6   used files for pamsgtocivbk.bls:              paStamps.bls        
+	(   5.0%) Compiling   5 of 6   used files for pamsgtocivbk.bls:              daMsgToCIVbk.bls    
+	(   5.0%) Compiling   7 of 7   used files for damsgtocivbk.bls:              saDocRu.bls         
+	(   5.0%) Compiling   5 of 8   used files for sadocru.bls:                   scFilter.bls        
+	(   5.0%) Compiling   1 of 1   used files for scfilter.bls:                  laFilter.bls        
+	(   6.0%) Compiling   1 of 4   used files for dabkactn.bls:                  saFilterAzk.bls     
+	(   6.0%) Compiling   4 of 7   used files for safilterazk.bls:               SysConst.bls        
+	(   6.0%) Compiling   5 of 7   used files for safilterazk.bls:               ExtList.bls         
+	(   6.0%) Compiling   6 of 7   used files for safilterazk.bls:               laCommonMBA.bls     
+	(   6.0%) Compiling   7 of 7   used files for safilterazk.bls:               aaSysAzk.bls        
+	(   6.0%) Compiling   3 of 4   used files for dabkactn.bls:                  daBAddr.bls         
+	(   6.0%) Compiling   2 of 9   used files for darmuser.bls:                  laRmUser.bls        
+	(   6.0%) Compiling   4 of 4   used files for dcstatqr.bls:                  dcallchk.bls        
+	(   6.0%) Compiling   1 of 7   used files for mbsc_2mngdev.bls:              MBSC_1errors.bls    
+	(   6.0%) Compiling   1 of 1   used files for mbsc_1errors.bls:              MBSC_0consts.bls    
+	(   6.0%) Compiling   2 of 7   used files for mbsc_2mngdev.bls:              MBSC_0tools.bls     
+	(   6.0%) Compiling   1 of 3   used files for mbsc_0tools.bls:               MB_DateTimeConv.bls 
+	(   7.0%) Compiling   5 of 7   used files for anpdocc.bls:                   LaLimits.bls        
+	(   7.0%) Compiling   4 of 4   used files for dbrkoimpbr.bls:                daRefreh.bls        
+	(   7.0%) Compiling   2 of 4   used files for dbdepprod.bls:                 lbDepProd.bls       
+	(   7.0%) Compiling   3 of 4   used files for dbdepprod.bls:                 abDepProdXML.bls    
+	(   7.0%) Compiling   4 of 4   used files for dbdepprod.bls:                 daDepProd.bls       
+	(   7.0%) Compiling   3 of 8   used files for dadepprod.bls:                 sbFilter.bls        
+	(   7.0%) Compiling   1 of 9   used files for ababslnk.bls:                  abABSDoc.bls        
+	(   7.0%) Compiling   6 of 7   used files for ababsdoc.bls:                  aaExp1C.bls         
+	(   7.0%) Compiling   2 of 8   used files for aaexp1c.bls:                   aa14_1C.bls         
+	(   8.0%) Compiling   3 of 8   used files for aaexp1c.bls:                   lcImpBS.bls         
+	(   8.0%) Compiling   4 of 8   used files for aaexp1c.bls:                   la1256u.bls         
+	(   8.0%) Compiling   5 of 9   used files for ababslnk.bls:                  laCalend.bls        
+	(   8.0%) Compiling   2 of 3   used files for dcdpconf.bls:                  dcCliDoF.bls        
+	(   8.0%) Compiling   2 of 6   used files for dcclidof.bls:                  daFilter.bls        
+	(   8.0%) Compiling   3 of 3   used files for dcdpconf.bls:                  dcPDocF.bls         
+	(   8.0%) Compiling   8 of 8   used files for padpcon138i.bls:               paStatDP.bls        
+	(   8.0%) Compiling   3 of 4   used files for dactlib.bls:                   laVisaAc.bls        
+	(   9.0%) Compiling   5 of 6   used files for mbsc_2news.bls:                MBSC_0template.bls  
+	(   9.0%) Compiling   6 of 6   used files for mbsc_2news.bls:                MBSC_1xml.bls       
+	(   9.0%) Compiling   1 of 5   used files for ababsbkw.bls:                  lbABSBkw.bls        
+	(   9.0%) Compiling   7 of 8   used files for lbabsbkw.bls:                  lbbkwadd.bls        
+	(   9.0%) Compiling   2 of 5   used files for ababsbkw.bls:                  abKviter.bls        
+	(   9.0%) Compiling   4 of 7   used files for abkviter.bls:                  lbKviter.bls        
+	(   9.0%) Compiling   6 of 8   used files for sacrprof.bls:                  laCryReq.bls        
+	(   9.0%) Compiling   5 of 6   used files for rt_w3c_20login.bls:            RT_w3c_00common.bls 
+	(  10.0%) Compiling   6 of 6   used files for rt_w3c_20login.bls:            RT_w3c_10Loader.bls 
+	(  10.0%) Compiling   6 of 6   used files for rt_1controls.bls:              aaCrVisa.bls        
+	(  10.0%) Compiling   8 of 10  used files for dbrmuwzd.bls:                  paICInfo.bls        
+	(  10.0%) Compiling   5 of 6   used files for paicinfo.bls:                  paBCICInfo.bls      
+	(  10.0%) Compiling   3 of 10  used files for aboutrsb.bls:                  lbRsLink.bls        
+	(  10.0%) Compiling   7 of 10  used files for aboutrsb.bls:                  lbRsbUsr.bls        
+	(  11.0%) Compiling   4 of 4   used files for mbsc_2core.bls:                MBSC_1auth.bls      
+	(  11.0%) Compiling   3 of 5   used files for abdiaerr.bls:                  lbDiaErr.bls        
+	(  11.0%) Compiling   4 of 5   used files for dacrprfd.bls:                  laCryICL.bls        
+	(  11.0%) Compiling   2 of 4   used files for lacryicl.bls:                  laICLApi.bls        
+	(  11.0%) Compiling   1 of 6   used files for datatcp.bls:                   daTAddr.bls         
+	(  11.0%) Compiling   4 of 5   used files for dataddr.bls:                   lbAddTran.bls       
+	(  11.0%) Compiling   5 of 5   used files for dataddr.bls:                   laTrns17.bls        
+	(  11.0%) Compiling   3 of 6   used files for datatcp.bls:                   dbDialUp.bls        
+	(  11.0%) Compiling   3 of 7   used files for dcpayord.bls:                  dcNDS.bls           
+	(  11.0%) Compiling   6 of 7   used files for dcpayord.bls:                  dcAddCor.bls        
+	(  11.0%) Compiling   2 of 6   used files for lbdoctimecontrol.bls:          laTZApi.bls         
+	(  12.0%) Compiling   1 of 1   used files for dapstat.bls:                   papstat.bls         
+	(  12.0%) Compiling   2 of 10  used files for papstat.bls:                   da14.bls            
+	(  12.0%) Compiling   9 of 10  used files for papstat.bls:                   laStatem.bls        
+	(  12.0%) Compiling   2 of 4   used files for abcnld5ntapi.bls:              lb14D5NTAPI.bls     
+	(  12.0%) Compiling   3 of 4   used files for abcnld5ntapi.bls:              lbD5NTAPI.bls       
+	(  12.0%) Compiling   3 of 4   used files for dbtransitaccnoticefilter.bls:  dbBSysDF.bls        
+	(  13.0%) Compiling   2 of 7   used files for aboutconfxml86.bls:            lb14EGG86.bls       
+	(  13.0%) Compiling   6 of 7   used files for aboutconfxml86.bls:            lbEGGDLL86.bls      
+	(  13.0%) Compiling   7 of 7   used files for aboutconfxml86.bls:            lbOutConfXML86.bls  
+	(  13.0%) Compiling   5 of 5   used files for daopnssl.bls:                  laCryBuf.bls        
+	(  13.0%) Compiling   2 of 2   used files for daslbran.bls:                  daSlTree.bls        
+	(  13.0%) Compiling   1 of 2   used files for lcupmba.bls:                   laUpMBA.bls         
+	(  13.0%) Compiling   2 of 2   used files for lcupmba.bls:                   laAlterMBA.bls      
+	(  14.0%) Compiling   7 of 8   used files for lbkvt596egg86.bls:             lbEGG86.bls         
+	(  14.0%) Compiling   6 of 6   used files for rt_w3c_20dict.bls:             RT_2IC.bls          
+	(  14.0%) Compiling   6 of 38  used files for rt_2ic.bls:                    RT_1Kvit.bls        
+	(  14.0%) Compiling   8 of 38  used files for rt_2ic.bls:                    RT_1SPF.bls         
+	(  14.0%) Compiling  21 of 38  used files for rt_2ic.bls:                    RT_1Loader.bls      
+	(  14.0%) Compiling  17 of 18  used files for rt_1loader.bls:                RT_1Events.bls      
+	(  14.0%) Compiling  18 of 18  used files for rt_1loader.bls:                RT_1Loader_MBA.bls  
+	(  14.0%) Compiling  24 of 38  used files for rt_2ic.bls:                    obCCRout.bls        
+	(  14.0%) Compiling   6 of 9   used files for obccrout.bls:                  laCCCtl.bls         
+	(  14.0%) Compiling   9 of 9   used files for obccrout.bls:                  laCCWrap.bls        
+	(  14.0%) Compiling  29 of 38  used files for rt_2ic.bls:                    obB2BRelReq.bls     
+	(  14.0%) Compiling   6 of 10  used files for obb2brelreq.bls:               lbB2BCus.bls        
+	(  14.0%) Compiling   7 of 10  used files for obb2brelreq.bls:               abWizRPL.bls        
+	(  14.0%) Compiling   7 of 7   used files for abwizrpl.bls:                  lbWizRPL.bls        
+	(  14.0%) Compiling  31 of 38  used files for rt_2ic.bls:                    lbFraudAck.bls      
+	(  14.0%) Compiling   2 of 6   used files for lbfraudack.bls:                lb14Fraud.bls       
+	(  14.0%) Compiling   3 of 6   used files for lbfraudack.bls:                lbFraudApi.bls      
+	(  14.0%) Compiling   5 of 6   used files for lbfraudack.bls:                lbFGS.bls           
+	(  15.0%) Compiling  37 of 38  used files for rt_2ic.bls:                    RT_2IC_MBA.bls      
+	(  15.0%) Compiling   1 of 2   used files for rt_2ic_mba.bls:                RT_2AzkCommon.bls   
+	(  15.0%) Compiling   7 of 8   used files for rt_2azkcommon.bls:             laChkMBA.bls        
+	(  15.0%) Compiling   4 of 7   used files for lachkmba.bls:                  laMBATbCash.bls     
+	(  15.0%) Compiling   5 of 7   used files for lachkmba.bls:                  aaMBA_14.bls        
+	(  15.0%) Compiling   6 of 7   used files for lachkmba.bls:                  laConstMBA.bls      
+	(  15.0%) Compiling   5 of 6   used files for pacusdlc.bls:                  laCCPrn.bls         
+	(  15.0%) Compiling   1 of 3   used files for daexpmk.bls:                   aa14_MK.bls         
+	(  15.0%) Compiling   7 of 8   used files for rt_wadealpasscon138i.bls:      lbDPExpXML.bls      
+	(  16.0%) Compiling   3 of 4   used files for lbapid5n.bls:                  lbLibD5n.bls        
+	(  16.0%) Compiling   4 of 4   used files for lbapid5n.bls:                  lb14D5n.bls         
+	(  16.0%) Compiling   1 of 9   used files for abwfcncl.bls:                  lbWFOut.bls         
+	(  16.0%) Compiling   1 of 4   used files for lbwfout.bls:                   lbWFApi.bls         
+	(  16.0%) Compiling   2 of 4   used files for lbwfout.bls:                   lbWFErr.bls         
+	(  16.0%) Compiling   1 of 7   used files for abubsabs.bls:                  abUBSKvt.bls        
+	(  16.0%) Compiling   5 of 6   used files for abubskvt.bls:                  lbUBSLnk.bls        
+	(  16.0%) Compiling   3 of 5   used files for lbubslnk.bls:                  lbUBSParseText.bls  
+	(  16.0%) Compiling   1 of 7   used files for lbcrmba.bls:                   lbOdiMBA.bls        
+	(  16.0%) Compiling   1 of 5   used files for lbodimba.bls:                  aasigMBA.bls        
+	(  16.0%) Compiling   2 of 7   used files for lbcrmba.bls:                   lbMsgMBA.bls        
+	(  16.0%) Compiling   1 of 6   used files for lbmsgmba.bls:                  lbNodeMBA.bls       
+	(  16.0%) Compiling   1 of 7   used files for lbnodemba.bls:                 laCnvRCK.bls        
+	(  16.0%) Compiling   1 of 4   used files for lacnvrck.bls:                  laCnvMBA.bls        
+	(  17.0%) Compiling   2 of 7   used files for lbnodemba.bls:                 laXmlMBA.bls        
+	(  17.0%) Compiling   3 of 7   used files for lbnodemba.bls:                 laMBAFnCash.bls     
+	(  17.0%) Compiling   3 of 7   used files for lbcrmba.bls:                   lbFromRCK.bls       
+	(  17.0%) Compiling   3 of 8   used files for lbfromrck.bls:                 laMailMBA.bls       
+	(  17.0%) Compiling   5 of 8   used files for pbdoc.bls:                     LALocal.bls         
+	(  17.0%) Compiling   1 of 4   used files for ladlgmba.bls:                  laCrdMBA.bls        
+	(  17.0%) Compiling   2 of 5   used files for lbvabilb.bls:                  lbVBILib.bls        
+	(  17.0%) Compiling   3 of 3   used files for dbnwizp2.bls:                  laNews.bls          
+	(  18.0%) Compiling   9 of 10  used files for rt_2depopanswergpb.bls:        RT_2GPBDepOp.bls    
+	(  18.0%) Compiling   3 of 4   used files for abibscur.bls:                  lbIBSAdd.bls        
+	(  18.0%) Compiling   3 of 8   used files for lapdmba.bls:                   laCtrlMBA.bls       
+	(  18.0%) Compiling   5 of 5   used files for mbsc_2department.bls:          MBSC_1common.bls    
+	(  18.0%) Compiling   1 of 1   used files for dcb2bacc.bls:                  LAChkCnt.bls        
+	(  18.0%) Compiling   4 of 10  used files for abgenarm.bls:                  lbGenARM.bls        
+	(  18.0%) Compiling   6 of 10  used files for abgenarm.bls:                  lbGenerC.bls        
+	(  18.0%) Compiling   9 of 18  used files for lbgenerc.bls:                  aaTVTLib.bls        
+	(  18.0%) Compiling  10 of 18  used files for lbgenerc.bls:                  laUOlib.bls         
+	(  18.0%) Compiling  11 of 18  used files for lbgenerc.bls:                  caRBase.bls         
+	(  18.0%) Compiling   1 of 8   used files for carbase.bls:                   clMan.bls           
+	(  18.0%) Compiling   6 of 8   used files for carbase.bls:                   laRBase.bls         
+	(  19.0%) Compiling  13 of 18  used files for lbgenerc.bls:                  LAProtct.bls        
+	(  19.0%) Compiling  14 of 18  used files for lbgenerc.bls:                  lbGenFSt.bls        
+	(  19.0%) Compiling   7 of 7   used files for lbgenfst.bls:                  laB2BInst.bls       
+	(  19.0%) Compiling   8 of 10  used files for abgenarm.bls:                  lbGenInt.bls        
+	(  19.0%) Compiling   3 of 7   used files for lbgenint.bls:                  cbGenInt.bls        
+	(  19.0%) Compiling   6 of 7   used files for darepmba.bls:                  laRepMBA.bls        
+	(  19.0%) Compiling   1 of 2   used files for uagpbdbobe192.bls:             uaLib.bls           
+	(  19.0%) Compiling   1 of 4   used files for lboracnl.bls:                  lboraadd.bls        
+	(  20.0%) Compiling   1 of 3   used files for dacfggf.bls:                   aa14_GF.bls         
+	(  20.0%) Compiling   2 of 3   used files for dacfggf.bls:                   daCfgBS.bls         
+	(  20.0%) Compiling   6 of 9   used files for padpcre138i.bls:               PADocRu.bls         
+	(  20.0%) Compiling   6 of 13  used files for dacrdlin138i.bls:              anCurInq138i.bls    
+	(  20.0%) Compiling   2 of 4   used files for mb_obmail.bls:                 MB_Utils.bls        
+	(  20.0%) Compiling   3 of 4   used files for mb_obmail.bls:                 obMail.bls          
+	(  20.0%) Compiling   1 of 3   used files for obmail.bls:                    laDelivT.bls        
+	(  20.0%) Compiling   4 of 4   used files for mb_obmail.bls:                 lbSendMsgMBA.bls    
+	(  20.0%) Compiling   2 of 14  used files for lbsendmsgmba.bls:              obSend.bls          
+	(  20.0%) Compiling   2 of 5   used files for obsend.bls:                    laNotice.bls        
+	(  20.0%) Compiling  10 of 14  used files for lbsendmsgmba.bls:              lbInRCK.bls         
+	(  20.0%) Compiling   7 of 12  used files for lbinrck.bls:                   lbFGMBA.bls         
+	(  20.0%) Compiling  13 of 14  used files for lbsendmsgmba.bls:              abDocOut.bls        
+	(  20.0%) Compiling   3 of 14  used files for abdocout.bls:                  lbDocOut.bls        
+	(  20.0%) Compiling   5 of 14  used files for abdocout.bls:                  laEIDoc.bls         
+	(  20.0%) Compiling   9 of 14  used files for abdocout.bls:                  abOutXMLFraud.bls   
+	(  20.0%) Compiling   6 of 10  used files for aboutxmlfraud.bls:             lbLinkMQ.bls        
+	(  20.0%) Compiling   3 of 3   used files for lblinkmq.bls:                  lbMQConst.bls       
+	(  21.0%) Compiling   2 of 4   used files for dbdpcref138i.bls:              dbCliDoF.bls        
+	(  21.0%) Compiling   3 of 4   used files for dbdpcref138i.bls:              dbPDocF.bls         
+	(  21.0%) Compiling   3 of 7   used files for accormc.bls:                   LaCorrBS.bls        
+	(  21.0%) Compiling   4 of 7   used files for accormc.bls:                   aa14_MC.bls         
+	(  21.0%) Compiling   5 of 6   used files for abkvtdcb.bls:                  abTlsDcb.bls        
+	(  21.0%) Compiling   6 of 6   used files for abkvtdcb.bls:                  abABSKvi.bls        
+	(  22.0%) Compiling   4 of 9   used files for rt_waarmclient.bls:            lbImpARMC.bls       
+	(  22.0%) Compiling   8 of 9   used files for rt_waarmclient.bls:            RT_wa1Main.bls      
+	(  22.0%) Compiling  21 of 25  used files for rt_wa1main.bls:                RT_waExpToXSL.bls   
+	(  22.0%) Compiling   4 of 7   used files for rt_2payrolldoc.bls:            laPayRoll.bls       
+	(  22.0%) Compiling   4 of 5   used files for ubgap2.bls:                    uaBakLib.bls        
+	(  22.0%) Compiling   3 of 11  used files for sastatru.bls:                  laStatRu.bls        
+	(  22.0%) Compiling   4 of 11  used files for sastatru.bls:                  CustComb.bls        
+	(  23.0%) Compiling   2 of 9   used files for acupgr.bls:                    laUp.bls            
+	(  23.0%) Compiling   2 of 7   used files for anpdocru.bls:                  laMngCtr.bls        
+	(  23.0%) Compiling   8 of 8   used files for mbsc_2remotecorresp.bls:       MBSC_1Controls.bls  
+	(  23.0%) Compiling   1 of 1   used files for sccusdtm.bls:                  saCusDoc.bls        
+	(  23.0%) Compiling   1 of 2   used files for sacusdoc.bls:                  laCusDTp.bls        
+	(  24.0%) Compiling   1 of 1   used files for dbnotifevt.bls:                lbNotify.bls        
+	(  24.0%) Compiling   2 of 4   used files for ababxdcb.bls:                  lbAbsDcb.bls        
+	(  24.0%) Compiling   3 of 5   used files for dbrootdlsecurity.bls:          lbCusDlg.bls        
+	(  24.0%) Compiling   8 of 8   used files for anfreecl.bls:                  anFreClX.bls        
+	(  24.0%) Compiling   6 of 7   used files for anfreclx.bls:                  laFreClX.bls        
+	(  24.0%) Compiling   6 of 8   used files for acimpmc.bls:                   lcImpCch.bls        
+	(  25.0%) Compiling   3 of 5   used files for ab51csh.bls:                   lb51Add.bls         
+	(  25.0%) Compiling   3 of 9   used files for lbafnstm.bls:                  lbAfnApi.bls        
+	(  25.0%) Compiling   5 of 9   used files for lbafnstm.bls:                  lbAfnAdd.bls        
+	(  25.0%) Compiling   1 of 3   used files for daexpprs.bls:                  aa14_Prs.bls        
+	(  26.0%) Compiling   5 of 5   used files for obcrlimp.bls:                  lbCRLReset.bls      
+	(  26.0%) Compiling   7 of 7   used files for occusivspecb.bls:              lcIvAckLib.bls      
+	(  26.0%) Compiling   3 of 10  used files for lbgetmsgmba.bls:               lbLnkAzk.bls        
+	(  27.0%) Compiling   5 of 11  used files for dcuncrenewcred.bls:            daUNCRenewCred.bls  
+	(  27.0%) Compiling   5 of 5   used files for dauncrenewcred.bls:            laDocVK181i.bls     
+	(  27.0%) Compiling   1 of 1   used files for sbsselcl.bls:                  obSendS.bls         
+	(  27.0%) Compiling   3 of 11  used files for abcrygen.bls:                  lbCryGen.bls        
+	(  28.0%) Compiling   1 of 2   used files for dbpatchv.bls:                  daSpiner.bls        
+	(  28.0%) Compiling   2 of 2   used files for dbpatchv.bls:                  laVVersn.bls        
+	(  28.0%) Compiling   1 of 5   used files for mb_bdepartments.bls:           MB_consts.bls       
+	(  28.0%) Compiling   3 of 5   used files for mb_bdepartments.bls:           MB_FormUtils.bls    
+	(  28.0%) Compiling   8 of 8   used files for aarldfrd.bls:                  aaDetach.bls        
+	(  28.0%) Compiling   1 of 3   used files for abstmd5ntapimass.bls:          lbStmD5NTAPImass.bls
+	(  28.0%) Compiling   1 of 8   used files for lbstmd5ntapimass.bls:          abKvtD5NTAPI.bls    
+	(  28.0%) Compiling   4 of 7   used files for abkvtd5ntapi.bls:              lbD5NTAPIKvi.bls    
+	(  29.0%) Compiling   3 of 8   used files for lbstmd5ntapimass.bls:          lbD5NTAPImass.bls   
+	(  29.0%) Compiling   5 of 9   used files for lacryeip.bls:                  icCryIns.bls        
+	(  29.0%) Compiling   1 of 4   used files for abclvcnl.bls:                  lbclvlib.bls        
+	(  29.0%) Compiling   6 of 15  used files for dacryreq.bls:                  daCryApi.bls        
+	(  29.0%) Compiling   1 of 1   used files for sccusivspecb.bls:              saCusIvSpec.bls     
+	(  29.0%) Compiling   5 of 12  used files for dcdpcon138i.bls:               daDPCon138i.bls     
+	(  29.0%) Compiling  12 of 12  used files for dcdpcon138i.bls:               ConDPas.bls         
+	(  30.0%) Compiling  15 of 15  used files for rt_2crypto.bls:                lacryrep.bls        
+	(  30.0%) Compiling   1 of 3   used files for daexprtf.bls:                  aa14_RTF.bls        
+	(  30.0%) Compiling   1 of 2   used files for dacfgxl.bls:                   aa14_XL.bls         
+	(  31.0%) Compiling   3 of 7   used files for lbkvirsb.bls:                  lbrsbkvt.bls        
+	(  31.0%) Compiling   9 of 9   used files for rt_2gpbcredconfbank.bls:       paGpbCredOp.bls     
+	(  31.0%) Compiling   1 of 5   used files for abtxt5ntoutcnv.bls:            lboutdia.bls        
+	(  31.0%) Compiling   4 of 5   used files for abtxt5ntoutcnv.bls:            lbinoutgpb.bls      
+	(  32.0%) Compiling   1 of 2   used files for dbrbscfg.bls:                  daStLst.bls         
+	(  32.0%) Compiling   4 of 4   used files for dachargeanswer.bls:            laChargeAnswer.bls  
+	(  32.0%) Compiling   1 of 7   used files for datstcp.bls:                   daTSOnLn.bls        
+	(  32.0%) Compiling   1 of 3   used files for datsonln.bls:                  daTSett.bls         
+	(  32.0%) Compiling   6 of 12  used files for sbrbase.bls:                   caRBWiz.bls         
+	(  32.0%) Compiling   5 of 7   used files for carbwiz.bls:                   caRBGrup.bls        
+	(  33.0%) Compiling   6 of 7   used files for carbwiz.bls:                   caTimeT.bls         
+	(  33.0%) Compiling   8 of 12  used files for sbrbase.bls:                   caViewRB.bls        
+	(  33.0%) Compiling  10 of 12  used files for sbrbase.bls:                   fnExcel.bls         
+	(  33.0%) Compiling   3 of 4   used files for daarch.bls:                    aaArch.bls          
+	(  33.0%) Compiling   7 of 13  used files for dccurdoc.bls:                  daCurDoc.bls        
+	(  33.0%) Compiling   2 of 6   used files for ababs21c.bls:                  lbABS21C.bls        
+	(  33.0%) Compiling   5 of 7   used files for lbabs21c.bls:                  ab21CKvi.bls        
+	(  34.0%) Compiling   2 of 5   used files for ababxbkx.bls:                  lbAbsBkx.bls        
+	(  34.0%) Compiling   1 of 5   used files for lbabsbkx.bls:                  lbBkxXpr.bls        
+	(  34.0%) Compiling   2 of 4   used files for lbupmba.bls:                   fnRplSet.bls        
+	(  34.0%) Compiling  18 of 20  used files for rt_wacustomer.bls:             dbTANUse.bls        
+	(  34.0%) Compiling   7 of 15  used files for lbrplmba.bls:                  lbNumber.bls        
+	(  34.0%) Compiling  10 of 15  used files for lbrplmba.bls:                  saTblTre.bls        
+	(  34.0%) Compiling  11 of 15  used files for lbrplmba.bls:                  abCnvTyp.bls        
+	(  34.0%) Compiling   8 of 10  used files for abrbsend.bls:                  abMakeUp.bls        
+	(  35.0%) Compiling   1 of 1   used files for dbubsloadtextdict.bls:         lbUBSLoadTextDict.bls
+	(  35.0%) Compiling   6 of 8   used files for ab51stm.bls:                   ab51Kvt.bls         
+	(  36.0%) Compiling   3 of 7   used files for lboraqrt.bls:                  DOSUtil.bls         
+	(  36.0%) Compiling   4 of 5   used files for dctracc.bls:                   daTrAcc.bls         
+	(  37.0%) Compiling   6 of 6   used files for dbgenpas.bls:                  laMeter.bls         
+	(  37.0%) Compiling  10 of 13  used files for dcgpbtransit.bls:              daIniVal.bls        
+	(  37.0%) Compiling   5 of 12  used files for dcredpcon138i.bls:             daReDPCon138i.bls   
+	(  37.0%) Compiling   6 of 12  used files for dcredpcon138i.bls:             daReDP138i.bls      
+	(  38.0%) Compiling   2 of 4   used files for ubexpusr.bls:                  uaBackUp.bls        
+	(  38.0%) Compiling   2 of 2   used files for dbfirstrun.bls:                laDialogs.bls       
+	(  39.0%) Compiling   6 of 6   used files for dapsblob.bls:                  anConfD.bls         
+	(  40.0%) Compiling   4 of 9   used files for abasvkboutdpco.bls:            lbASVKB14.bls       
+	(  40.0%) Compiling   8 of 10  used files for ababsrsora.bls:                lbRSOraAdd.bls      
+	(  40.0%) Compiling   9 of 10  used files for ababsrsora.bls:                lbABSRSOra.bls      
+	(  40.0%) Compiling   4 of 4   used files for rt_2msgcurrinspreldocs.bls:    laSkvoLib.bls       
+	(  41.0%) Compiling   3 of 3   used files for sbb2bcus.bls:                  sbB2BLib.bls        
+	(  42.0%) Compiling   2 of 3   used files for dbconfdif.bls:                 dbBnkDoF.bls        
+	(  43.0%) Compiling   3 of 3   used files for oblicserv.bls:                 lbLicServ.bls       
+	(  43.0%) Compiling   7 of 9   used files for lblicserv.bls:                 lbEGGCus.bls        
+	(  43.0%) Compiling   9 of 9   used files for lblicserv.bls:                 lbCusLic.bls        
+	(  43.0%) Compiling   5 of 11  used files for dcuncrenewcon.bls:             daUNCRenewCon.bls   
+	(  43.0%) Compiling   6 of 11  used files for dcuncrenewcon.bls:             daUNCRenew.bls      
+	(  43.0%) Compiling   3 of 5   used files for dbcusdfd.bls:                  lbCusDTp.bls        
+	(  43.0%) Compiling   9 of 9   used files for rt_2paydoccur.bls:             RT_2PayDocCur_MBA.bls
+	(  45.0%) Compiling   1 of 7   used files for abafnstm.bls:                  lbAfnKvt.bls        
+	(  46.0%) Compiling   9 of 11  used files for rt_2gpbnetclient.bls:          anGpbNetOp.bls      
+	(  46.0%) Compiling   7 of 7   used files for andepopen.bls:                 laDepProd.bls       
+	(  47.0%) Compiling   1 of 6   used files for dbrinfoc.bls:                  lbRInfoC.bls        
+	(  47.0%) Compiling   3 of 4   used files for dbtransaccset.bls:             daTransAccSet.bls   
+	(  47.0%) Compiling   8 of 12  used files for dbarmcln.bls:                  paBCInfo.bls        
+	(  48.0%) Compiling   1 of 1   used files for dagpbfscorcrdlin.bls:          daFstat.bls         
+	(  48.0%) Compiling   3 of 5   used files for mbsc_2freedocfrombank.bls:     MBSC_1filter.bls    
+	(  48.0%) Compiling   1 of 3   used files for mbsc_1filter.bls:              MBSC_1Status.bls    
+	(  48.0%) Compiling   6 of 6   used files for lbmcrmba.bls:                  lbBlobMBA.bls       
+	(  49.0%) Compiling   6 of 6   used files for lbabsbtd.bls:                  lbLnkABSEx.bls      
+	(  49.0%) Compiling   2 of 2   used files for dbevlogn.bls:                  dbEvents.bls        
+	(  50.0%) Compiling   3 of 9   used files for abskvokvt.bls:                 lbSKVOadd.bls       
+	(  50.0%) Compiling   2 of 5   used files for rt_2azkcaller.bls:             RT_2AzkExecute.bls  
+	(  50.0%) Compiling   1 of 6   used files for lbansdia.bls:                  lbOutDDi.bls        
+	(  50.0%) Compiling   2 of 5   used files for dccusivc.bls:                  dcCCRoot.bls        
+	(  51.0%) Compiling   5 of 7   used files for rt_w3c_20stmexp1c.bls:         RT_2Import.bls      
+	(  51.0%) Compiling   5 of 9   used files for rt_2import.bls:                RT_1RTF.bls         
+	(  51.0%) Compiling   7 of 11  used files for rt_1rtf.bls:                   lbstmstr.bls        
+	(  51.0%) Compiling   6 of 8   used files for lbstmstr.bls:                  aaExpSW.bls         
+	(  51.0%) Compiling   7 of 8   used files for lbstmstr.bls:                  aaExpMC.bls         
+	(  51.0%) Compiling   8 of 8   used files for lbstmstr.bls:                  aaExpMK.bls         
+	(  51.0%) Compiling   2 of 6   used files for rjexpbudgrep.bls:              daOrgAcc.bls        
+	(  51.0%) Compiling   3 of 6   used files for rjexpbudgrep.bls:              laRunBA.bls         
+	(  51.0%) Compiling  10 of 11  used files for dcpayroll.bls:                 daPayRoll.bls       
+	(  52.0%) Compiling  11 of 13  used files for mbsc_2cryptoprofile.bls:       MBSC_0Crypto.bls    
+	(  52.0%) Compiling   1 of 4   used files for dapdcmba.bls:                  laPDCMBA.bls        
+	(  52.0%) Compiling   2 of 4   used files for dapdcmba.bls:                  daPDMBA.bls         
+	(  52.0%) Compiling   5 of 6   used files for aarefinf.bls:                  aaTrPars.bls        
+	(  53.0%) Compiling   5 of 11  used files for dcdpcre138i.bls:               daDPCre138i.bls     
+	(  53.0%) Compiling   5 of 7   used files for sbaccnt.bls:                   laBnkAccType.bls    
+	(  54.0%) Compiling   7 of 7   used files for rt_2gpbcancelaccept.bls:       RT_2GPBCANCELACCEPT_MBA.bls
+	(  55.0%) Compiling   5 of 18  used files for obmigimp.bls:                  lbMigLib.bls        
+	(  55.0%) Compiling  17 of 18  used files for obmigimp.bls:                  obMigRPL.bls        
+	(  56.0%) Compiling   8 of 9   used files for ababsmt940.bls:                lbABSMT940.bls      
+	(  58.0%) Compiling   1 of 5   used files for abstmd5n.bls:                  lbstmd5n.bls        
+	(  58.0%) Compiling   1 of 9   used files for lbstmd5n.bls:                  abKvtd5n.bls        
+	(  58.0%) Compiling   9 of 10  used files for rt_wabankaccount.bls:          dbBnkAcc.bls        
+	(  59.0%) Compiling   3 of 4   used files for dctransitaccnoticefilter.bls:  dcBSysDF.bls        
+	(  61.0%) Compiling  16 of 17  used files for dcpdocr.bls:                   laPDocR.bls         
+	(  61.0%) Compiling   8 of 9   used files for anunccon.bls:                  laUncCon.bls        
+	(  61.0%) Compiling   2 of 3   used files for dacusdar.bls:                  daCusDoc.bls        
+	(  62.0%) Compiling   4 of 6   used files for abrates.bls:                   lbCurRts.bls        
+	(  62.0%) Compiling   3 of 8   used files for ababsdia.bls:                  lbABSDia.bls        
+	(  63.0%) Compiling   2 of 2   used files for dainscpl.bls:                  laInsCPL.bls        
+	(  64.0%) Compiling   8 of 8   used files for anrurinq.bls:                  laRurDIn.bls        
+	(  64.0%) Compiling   2 of 2   used files for dbwizrplnp.bls:                abWizRPLNP.bls      
+	(  64.0%) Compiling   6 of 12  used files for dcunccon.bls:                  daUNCCon.bls        
+	(  67.0%) Compiling   7 of 8   used files for datrorg.bls:                   daazkscr.bls        
+	(  68.0%) Compiling   2 of 5   used files for ababsddi.bls:                  lbABSDDi.bls        
+	(  70.0%) Compiling   1 of 1   used files for scchargeanswer.bls:            lcChargeAnswer.bls  
+	(  71.0%) Compiling  12 of 21  used files for dacrwzrd.bls:                  daCrPrfE.bls        
+	(  71.0%) Compiling   5 of 5   used files for dbusrmon.bls:                  aaSlTree.bls        
+	(  73.0%) Compiling   3 of 10  used files for mb_obtask.bls:                 laCryPrn.bls        
+	(  74.0%) Compiling   3 of 4   used files for scloanlist.bls:                saLoanList.bls      
+	(  76.0%) Compiling   9 of 9   used files for rt_2paydocru.bls:              RT_2PayDocRu_MBA.bls
+	(  77.0%) Compiling   4 of 6   used files for dcccdofb.bls:                  scCCDocB.bls        
+	(  80.0%) Compiling   9 of 14  used files for dcmainf.bls:                   acIvAckScan.bls     
+	(  81.0%) Compiling   5 of 10  used files for dccursel.bls:                  daCurSel.bls        
+	(  83.0%) Compiling   3 of 3   used files for sbrinfoc.bls:                  dbSelClt.bls        
+	(  85.0%) Compiling   4 of 5   used files for sbnews.bls:                    dbNewsWiz.bls       
+	(  85.0%) Compiling   1 of 8   used files for abschemmba.bls:                abCheckA.bls        
+	(  86.0%) Compiling   6 of 6   used files for rt_wapaydoccur.bls:            oaStExpXLS.bls      
+	(  86.0%) Compiling   1 of 21  used files for dbwzrdcl.bls:                  dbInetWz.bls        
+	(  87.0%) Compiling  13 of 14  used files for dcdepopen.bls:                 laDepOpen.bls       
+	(  88.0%) Compiling   3 of 3   used files for dabalaccset.bls:               laChkBicMask.bls    
+	(  90.0%) Compiling   6 of 6   used files for ua_upd595p.bls:                uaRPL.bls           
+	COMPILED 2017 of 2017
+COPYING BLL files to patch
+DONE -----------------

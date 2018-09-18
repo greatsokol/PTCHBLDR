@@ -932,6 +932,8 @@ def make_upgrade10_eif_string_for_tables(file_name):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
     elif file_name_lower.startswith('mailreport'):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower.startswith('filtersettings'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ScrollerName'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
     elif file_name_lower.startswith('linktxt'):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'NameFormat'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
     elif file_name_lower.startswith('memorydiasoftbuf'):
@@ -1002,9 +1004,12 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
         elif structure_type == '30':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Сценарии'>"
         elif structure_type == '65':
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS что-то'>"
+            if file_name.lower()=='subsys(65).eif':
+                result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS что-то'> #TODO проверьте настройку"
+            else:
+                result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS что-то'>"
         elif structure_type == '66':
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS Errors params'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS Errors params'>"
         elif structure_type == '71':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Генераторы'>"
         elif structure_type == '72':
