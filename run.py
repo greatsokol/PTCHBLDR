@@ -1005,11 +1005,11 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Сценарии'>"
         elif structure_type == '65':
             if file_name.lower()=='subsys(65).eif':
-                result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS что-то'> #TODO проверьте настройку"
+                result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS SUBSYS(65)'> #TODO проверьте настройку"
             else:
-                result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS что-то'>"
+                result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS(65)'>"
         elif structure_type == '66':
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS Errors params'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS Errors/Tasks params'>"
         elif structure_type == '71':
             result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Генераторы'>"
         elif structure_type == '72':
