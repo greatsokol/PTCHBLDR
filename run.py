@@ -82,6 +82,7 @@ dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion = lambda build_versio
 dir_PATCH_LIBFILES_EXE = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES(instance, version), 'EXE')
 dir_PATCH_LIBFILES_SYSTEM = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES(instance, version), 'SYSTEM')
 dir_PATCH_LIBFILES_SUBSYS = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES(instance, version), 'SUBSYS')
+dir_PATCH_LIBFILES_SUBSYS_TEMPLATE = lambda: os.path.join(dir_PATCH_LIBFILES_SUBSYS(const_instance_BANK, ''), 'TEMPLATE')
 dir_PATCH_LIBFILES_SUBSYS_PRINT = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES_SUBSYS(instance, version), 'PRINT')
 dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES_SUBSYS_PRINT(instance, version), 'RTF')
 dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET = lambda instance, version='': os.path.join(dir_PATCH_LIBFILES_SUBSYS_PRINT(instance, version), 'RepJet')
@@ -477,6 +478,7 @@ class GlobalSettings:
     PlaceBuildIntoPatchBK = False
     PlaceBuildIntoPatchIC = False
     ClientEverythingInEXE = False
+    BuildRTSZIP = False
     LicenseServer = ''
     LicenseProfile = ''
     Is20Version = None
@@ -669,6 +671,7 @@ def read_config():
         settings.PlaceBuildIntoPatchBK = parser.get(section_build, 'PlaceBuildIntoPatchBK').lower() == 'true'
         settings.PlaceBuildIntoPatchIC = parser.get(section_build, 'PlaceBuildIntoPatchIC').lower() == 'true'
         settings.ClientEverythingInEXE = parser.get(section_special, 'ClientEverythingInEXE').lower() == 'true'
+        settings.BuildRTSZIP = parser.get(section_special, 'BuildRTSZIP').lower() == 'true'
 
         # проверка Labels -----------------------------------
         all_labels = ''
@@ -697,8 +700,23 @@ def read_config():
         log('ERROR when reading settings from file "{}":\n\t\t{}'.format(ini_filename, e))
         return None
     else:
-        log('SETTINGS LOADED:\n\tStarteamProject = {}\n\tStarteamView = {}\n\tLabels = {}\n\tstcmd = {}'.
-              format(settings.StarteamProject, settings.StarteamView, settings.Labels, settings.stcmd))
+        log('SETTINGS LOADED:\n\t'
+            'StarteamProject = {}\n\t'
+            'StarteamView = {}\n\t'
+            'Labels = {}\n\t'
+            'Licence server = {}\n\t'
+            'Licence profile = {}\n\t'
+            'Path to stcmd.exe = {}\n\t'
+            'Build RTS.ZIP = {}\n\t'
+            'Place BLL/DLL in EXE folder of Client patch = {}\n\t'
+            'Place build files in patch = {}\n\t'
+            'Place IC build files in patch = {}\n\t'
+            'Path to build files = {}\n\t'
+            'Path to IC build files = {}'.
+              format(settings.StarteamProject, settings.StarteamView, settings.Labels, settings.LicenseServer,
+                     settings.LicenseProfile, settings.stcmd,
+                     settings.BuildRTSZIP, settings.ClientEverythingInEXE, settings.PlaceBuildIntoPatchBK,
+                     settings.PlaceBuildIntoPatchIC,settings.BuildBK,settings.BuildIC))
         return settings
 
 
@@ -902,6 +920,8 @@ def make_upgrade10_eif_string_for_tables(file_name):
         result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
     elif file_name_lower.startswith('orderstartflag'):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'Flag'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
+    elif file_name_lower.startswith('paygrndparam'):
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
     elif file_name_lower.startswith('docschemesettings'):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
     elif file_name_lower.startswith('docprintsettings'):
@@ -949,7 +969,7 @@ def make_upgrade10_eif_string_for_tables(file_name):
                  "#TODO проверьте способ обновления таблицы, сейчас - заливается полностью. " \
                  "Для дельты и обновления строк: |TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'название_полей'. " \
                  "Только заменить структуру десятки: |TRUE|FALSE|FALSE|FALSE|TRUE|FALSE|NULL. " \
-                 "Заменить структуру и пересоздать: |TRUE|TRUE|FALSE|TRUE|FALSE|FALSE|NULL."
+                 "Заменить структуру и пересоздать: |TRUE|TRUE|FALSE|TRUE|TRUE|FALSE|NULL."
     return result
 # -------------------------------------------------------------------------------------------------
 
@@ -1319,6 +1339,8 @@ def __extract_build__(build_path):
         # конец разархивации
     return build_path
 
+def is_20_version(version):
+    return ('20.1' in version) or ('20.2' in version) or ('20.3' in version)
 
 # -------------------------------------------------------------------------------------------------
 def __copy_build_ex__(build_path, build_path_crypto, dest_path, only_get_version):
@@ -1336,7 +1358,7 @@ def __copy_build_ex__(build_path, build_path_crypto, dest_path, only_get_version
     # определяем версию билда
     version = extract_build_version(build_path)
     if not only_get_version:
-        if ('20.1' in version) or ('20.2' in version):
+        if is_20_version(version):
             for release in ['32', '64']:
                 win_rel = 'Win{}\\Release'.format(release)
                 src = os.path.join(build_path, win_rel)
@@ -1392,14 +1414,14 @@ def download_build(settings):
 
     for instance in instances:
         if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
-            is20 = ('20.1' in build_version) or ('20.2' in build_version)
+            is20 = is_20_version(build_version)
             if is20 and instance == const_instance_BANK:
                 build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
                 # это копируются все файлы, которые будут участвовать в компиляции BLS на следующем шаге
                 # т.к. в результате __copy_build__ весь билд оказывается разделен на Win32 и Win64
                 copyfiles(build_path, const_dir_TEMP_BUILD_BK, ['*.*'], [])
         else:
-            is20 = ('20.1' in buildIC_version) or ('20.2' in buildIC_version)
+            is20 = is_20_version(buildIC_version)
         settings.Is20Version = is20
 
         #  Если в настройках включено копирование билда в патч
@@ -1496,9 +1518,15 @@ def download_build(settings):
                     # заполняем LIBFILES.BNK в банковском патче билдом для ИК
                     build_path = const_dir_TEMP_BUILD_IC
                     mask = ['bssaxset.exe', 'inetcfg.exe', 'rts.exe', 'rtsconst.exe', 'rtsinfo.exe']
-                    copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_EXE(), mask, [])
+                    if settings.BuildRTSZIP:
+                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_EXE(), mask, [])
+                    else:
+                        copyfiles(build_path, dir_PATCH_LIBFILES_EXE(const_instance_BANK), mask, [])
                     mask = ['llComDat.dll', 'llrtscfg.dll', 'llxmlman.dll', 'msxml2.bpl']
-                    copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_SYSTEM(), mask, [])
+                    if settings.BuildRTSZIP:
+                        copyfiles(build_path, dir_PATCH_LIBFILES_BNK_RTS_SYSTEM(), mask, [])
+                    else:
+                        copyfiles(build_path, dir_PATCH_LIBFILES_SYSTEM(const_instance_BANK), mask, [])
                     copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(), ['bsi.dll'], [])
                     copyfiles(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTAdmin(), ['bsi.dll'], [])
                     # todo INETTEMP
@@ -1549,11 +1577,14 @@ def copy_bll(settings):
     # копируем bll для банка по списку bll_files_all
     copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files_all, [])
     # копируем bll для RTS по списку bll_files_only_rts
-    if settings.Is20Version:
-        for release in ['32', '64']:
-            copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(release), bll_files_only_rts, [])
+    if settings.BuildRTSZIP:
+        if settings.Is20Version:
+            for release in ['32', '64']:
+                copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(release), bll_files_only_rts, [])
+        else:
+            copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(), bll_files_only_rts, [])
     else:
-        copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(), bll_files_only_rts, [])
+        copyfiles(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files_only_rts, [])
 
     # копируем bll для клиента по разнице списков  bll_files_all-bll_files_only_bank
     if settings.ClientEverythingInEXE:
@@ -1592,15 +1623,21 @@ def copy_rt_tpl(settings):
     source_dir = const_dir_COMPARED_RT_TPL
     if os.path.exists(source_dir):
         try:
-            if settings.Is20Version:
-                for release in ['32', '64']:
-                    dest_dir = dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE(release)
+            if settings.BuildRTSZIP:
+                if settings.Is20Version:
+                    for release in ['32', '64']:
+                        dest_dir = dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE(release)
+                        log('COPYING RT_TPL files to {}'.format(dest_dir))
+                        copy_tree(source_dir, dest_dir)
+                else:
+                    dest_dir = dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE()
                     log('COPYING RT_TPL files to {}'.format(dest_dir))
                     copy_tree(source_dir, dest_dir)
             else:
-                dest_dir = dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE()
+                dest_dir = dir_PATCH_LIBFILES_SUBSYS_TEMPLATE()
                 log('COPYING RT_TPL files to {}'.format(dest_dir))
                 copy_tree(source_dir, dest_dir)
+
         except BaseException as e:
             log('\tERROR when copying ({})'.format(e))
     else:
@@ -1623,11 +1660,12 @@ def copy_rtf(settings):
                 dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_CLIENT))
                 dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_RTF(const_instance_CLIENT_MBA))
                 dest_dirs.append(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF())
-                if settings.Is20Version:
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF('32'))
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF('64'))
-                else:
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF())
+                if settings.BuildRTSZIP:
+                    if settings.Is20Version:
+                        dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF('32'))
+                        dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF('64'))
+                    else:
+                        dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF())
             # RepJet для всех
             if source_dir == const_dir_COMPARED_RTF_REPJET:
                 what = 'RepJet'
@@ -1635,11 +1673,12 @@ def copy_rtf(settings):
                 dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_CLIENT))
                 dest_dirs.append(dir_PATCH_LIBFILES_SUBSYS_PRINT_REPJET(const_instance_CLIENT_MBA))
                 dest_dirs.append(dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet())
-                if settings.Is20Version:
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet('32'))
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet('64'))
-                else:
-                    dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet())
+                if settings.BuildRTSZIP:
+                    if settings.Is20Version:
+                        dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet('32'))
+                        dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet('64'))
+                    else:
+                        dest_dirs.append(dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RepJet())
             for dest_dir in dest_dirs:
                 log('COPYING {} files to {}'.format(what, dest_dir))
                 copyfiles(source_dir, dest_dir)
@@ -1742,7 +1781,7 @@ def main():
                 # для выкладывания ИК
                 if not build_downloaded:
                     build_version = get_build_version(global_settings)
-                    global_settings.Is20Version = ('20.1' in build_version) or ('20.2' in build_version)
+                    global_settings.Is20Version = is_20_version(build_version)
                 copy_www(global_settings)
                 copy_rt_tpl(global_settings)
                 copy_rtf(global_settings)
