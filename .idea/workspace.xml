@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/settings.ini" afterDir="false" />
     </list>
     <ignored path=".idea/" />
     <ignored path="_TEMP/" />
@@ -27,8 +28,8 @@
       <file leaf-file-name="run.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="1011" column="61" selection-start-line="1011" selection-start-column="61" selection-end-line="1011" selection-end-column="61" />
+            <state relative-caret-position="454">
+              <caret line="1173" selection-start-line="1173" selection-end-line="1173" />
             </state>
           </provider>
         </entry>
@@ -37,11 +38,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>subprocess</find>
-      <find>strip</find>
-      <find>wal</find>
-      <find>starteam_list_directories</find>
-      <find>download_starteam</find>
       <find>dir_PATCH_LIBFILES_INETTEMP</find>
       <find>BssPluginWebKitSetup</find>
       <find>communicate</find>
@@ -67,6 +63,11 @@
       <find>settings lo</find>
       <find>20.1</find>
       <find>filtersett</find>
+      <find>remotenav</find>
+      <find>COPYING BUILD</find>
+      <find>__copy_build_ex__</find>
+      <find>extract_build_version</find>
+      <find>list_files</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -226,20 +227,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1464793755244</updated>
-    </task>
-    <task id="LOCAL-00027" summary="прогрессбар">
-      <created>1465286715968</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1465286715968</updated>
-    </task>
-    <task id="LOCAL-00028" summary="buildcrypto">
-      <created>1465565127620</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1465565127620</updated>
     </task>
     <task id="LOCAL-00029" summary="copy_bls">
       <created>1466169451648</created>
@@ -570,7 +557,21 @@
       <option name="project" value="LOCAL" />
       <updated>1537258641777</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="upgrade(10).eif tuning">
+      <created>1537283996878</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1537283996880</updated>
+    </task>
+    <task id="LOCAL-00077" summary="upgrade(10).eif tuning">
+      <created>1537284125884</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1537284125884</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TodoView">
@@ -586,12 +587,12 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.254818" visible="true" weight="0.053304903" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.254818" visible="true" weight="0.05490405" />
       <window_info anchor="bottom" id="TODO" order="4" weight="0.32976446" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" weight="0.46573874" />
       <window_info anchor="bottom" id="Python Console" order="6" weight="0.32976446" />
-      <window_info anchor="bottom" id="Run" order="0" weight="0.62955034" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.628877" />
       <window_info anchor="right" id="Structure" order="4" sideWeight="0.74518204" side_tool="true" visible="true" weight="0.18070363" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32976446" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -619,7 +620,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="clean for 15" />
     <MESSAGE value="хватит на сегодня" />
     <MESSAGE value="чистка желтого гавна" />
     <MESSAGE value="BEGIN компиляция в главной функции" />
@@ -644,14 +644,15 @@
     <MESSAGE value="+ separated PlaceBuildIntoPatch setting" />
     <MESSAGE value="+ RTF" />
     <MESSAGE value="20.3 build support" />
-    <option name="LAST_COMMIT_MESSAGE" value="20.3 build support" />
+    <MESSAGE value="upgrade(10).eif tuning" />
+    <option name="LAST_COMMIT_MESSAGE" value="upgrade(10).eif tuning" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>1197</line>
+          <line>1199</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -669,6 +670,27 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15589">
+          <caret line="917" column="40" selection-start-line="917" selection-start-column="26" selection-end-line="917" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16150">
+          <caret line="950" column="50" lean-forward="true" selection-start-line="950" selection-start-column="50" selection-end-line="950" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16949">
+          <caret line="997" column="36" lean-forward="true" selection-start-line="997" selection-start-column="36" selection-end-line="997" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16303">
@@ -699,8 +721,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="1011" column="61" selection-start-line="1011" selection-start-column="61" selection-end-line="1011" selection-end-column="61" />
+        <state relative-caret-position="454">
+          <caret line="1173" selection-start-line="1173" selection-end-line="1173" />
         </state>
       </provider>
     </entry>

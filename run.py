@@ -914,7 +914,8 @@ def compare_directories_BEFORE_and_AFTER():
 def make_upgrade10_eif_string_for_tables(file_name):
     file_name_lower = file_name.lower()
     if file_name_lower.endswith('default') or \
-       file_name_lower.startswith('root'):  # Для дефолтных таблиц
+       file_name_lower.startswith('root') or \
+        file_name_lower=='CUSTOMEROLDRPL':  # Для дефолтных таблиц
         result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
     elif file_name.find(".") > 0:  # Для блобов
         result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
@@ -945,9 +946,9 @@ def make_upgrade10_eif_string_for_tables(file_name):
     elif file_name_lower.startswith('transschema'):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ConnType,SchemaName'|NULL|NULL|NULL|NULL|'Таблицы'>"
     elif file_name_lower.startswith('remotenavmenus'):
-        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы"
     elif file_name_lower.startswith('remotenavtrees'):
-        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID'|NULL|NULL|NULL|NULL|'Таблицы'> #TODO проверьте data таблицы, обновлять нужно только эталонное дерево"
     elif file_name_lower.startswith('wanavtrees'):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
     elif file_name_lower.startswith('balaccountsettings'):
@@ -1175,7 +1176,8 @@ def extract_build_version(build_path):
                     ver = __get_exe_file_info__(f)
                 except FileNotFoundError:
                     pass
-                if ver is not None:
+                # отладочный билд имеет кривую версию, нужно пропустить
+                if (ver is not None) and (ver != '1.0.0.0') and (ver != '0.0.0.0'):
                     result = ver
                     break
 
@@ -1737,13 +1739,6 @@ def main():
     global_settings = read_config()
     if global_settings is None:
         return
-    '''
-    ask_starteam_password(global_settings)
-    starteam_list_directories(global_settings, ['BLL', 'BLL_Client', 'Doc', '_Personal',
-                                                                 '_TZ', '_ProjectData', '_ProjectData2',
-                                                                 'BUILD', 'History', 'DLL'])
-    return
-    '''
 
     bls_just_downloaded = False
     continue_compilation = make_decision_compilation_or_restart()
