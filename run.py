@@ -482,6 +482,7 @@ class GlobalSettings:
     LicenseServer = ''
     LicenseProfile = ''
     Is20Version = None
+    BLLVersion = ''
 
 
 # -------------------------------------------------------------------------------------------------
@@ -672,7 +673,7 @@ def read_config():
         settings.PlaceBuildIntoPatchIC = parser.get(section_build, 'PlaceBuildIntoPatchIC').lower() == 'true'
         settings.ClientEverythingInEXE = parser.get(section_special, 'ClientEverythingInEXE').lower() == 'true'
         settings.BuildRTSZIP = parser.get(section_special, 'BuildRTSZIP').lower() == 'true'
-
+        settings.BLLVersion = parser.get(section_build, 'BLLVersion').strip()
         # проверка Labels -----------------------------------
         all_labels = ''
         for label in settings.Labels:
@@ -712,11 +713,13 @@ def read_config():
             'Place build files in patch = {}\n\t'
             'Place IC build files in patch = {}\n\t'
             'Path to build files = {}\n\t'
-            'Path to IC build files = {}'.
+            'Path to IC build files = {}\n\t'
+            'BLL version={}'.
               format(settings.StarteamProject, settings.StarteamView, settings.Labels, settings.LicenseServer,
                      settings.LicenseProfile, settings.stcmd,
                      settings.BuildRTSZIP, settings.ClientEverythingInEXE, settings.PlaceBuildIntoPatchBK,
-                     settings.PlaceBuildIntoPatchIC,settings.BuildBK,settings.BuildIC))
+                     settings.PlaceBuildIntoPatchIC,settings.BuildBK,settings.BuildIC,
+                     settings.BLLVersion))
         return settings
 
 
@@ -965,7 +968,9 @@ def make_upgrade10_eif_string_for_tables(file_name):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
     elif file_name_lower.startswith('mbadocumentssettings'):
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('controlsettings') or file_name_lower.startswith('controlconstants') or file_name_lower.startswith('controlgroups'):
+    elif file_name_lower.startswith('controlsettings') or \
+         file_name_lower.startswith('controlconstants') or \
+         file_name_lower.startswith('controlgroups'):
         result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ ВЫЗОВ uaControls или другой ua-шки  >"
     else:  # Если заливается структура полностью
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> " \
@@ -1252,7 +1257,7 @@ def bls_get_uses_graph(path):
 
 
 # -------------------------------------------------------------------------------------------------
-def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProfile):
+def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProfile, Version):
     # log(BlsPath)
     # проверим, есть ли компилятор
     bscc_path = os.path.join(BuildPath, 'bscc.exe')
@@ -1260,6 +1265,8 @@ def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProf
         # компилятора нет, ошибка
         raise FileNotFoundError('Compiler {} not found'.format(bscc_path))
     run_str = bscc_path+' "{}" -M0 -O0 -S{} -A{}'.format(BlsPath, LicServer, LicProfile)
+    if Version:
+        run_str = run_str+' -V"{}"'.format(Version)
     # log(run_str)
     '''
     subprocess.call(run_str)
@@ -1281,7 +1288,7 @@ def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProf
 
 
 # -------------------------------------------------------------------------------------------------
-def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileName, ObservedList, SuccessList):
+def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileName, ObservedList, SuccessList, Version):
     BlsFileName = BlsFileName.lower()
     if BlsFileName not in ObservedList:  # если файл отсутствует в списке обработанных
         BlsItemInfo = BlsUsesGraph.get(BlsFileName)
@@ -1291,17 +1298,19 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
             UsesList = BlsItemInfo[1]
             BlsFilePath = BlsItemInfo[0]
             if len(UsesList):  # если файл зависит от других файлов, то проведем
-                compiled_of_current_useslist = 0  # счетчик откомпилированных файлов для текущего файла
+                #compiled_of_current_useslist = 0  # счетчик откомпилированных файлов для текущего файла
                 for UsesFileName in UsesList:  # компиляцию каждого файла
-                    compiled_of_current_useslist+=1  # увеличиваем счетчик для вывода в сообщение
+                    #compiled_of_current_useslist+=1  # увеличиваем счетчик для вывода в сообщение
                     if UsesFileName.lower() not in SuccessList:
-                        percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
-                        log("\t({:>6}%) Compiling {:>3} of {:<3} used files for {:<30} {:<20}".format(percents, compiled_of_current_useslist, len(UsesList), BlsFileName+':', UsesFileName))
-                        __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList)
+                        #percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
+                        #log("\t({:>6}%) Compiling {:>3} of {:<3} used files for {:<30} {:<20}".format(percents, compiled_of_current_useslist, len(UsesList), BlsFileName+':', UsesFileName))
+                        __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList, Version)
             # добавляем в список учтенных файлов
             ObservedList.append(BlsFileName)
             if BlsFileName not in SuccessList:
-                if __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile):
+                percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
+                log("\t\t({:>6}%) Compiling {}".format(percents, BlsFileName))
+                if __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile, Version):
                     # компилируем и добавляем в список успешно откомпилированных
                     SuccessList.append(BlsFileName)
                     # printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
@@ -1310,7 +1319,7 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
 
 
 # -------------------------------------------------------------------------------------------------
-def BlsCompileAll(lic_server, lic_profile, build_path, source_path):
+def BlsCompileAll(lic_server, lic_profile, build_path, source_path, bll_version):
     clean(build_path, ['*.bls', '*.bll'])  # очищаем каталог билда от bls и bll
     log('BEGIN BLS COMPILATION. Please wait...')
     copyfiles(source_path, build_path, ['*.bls'], [])   # копируем в каталог билда все bls
@@ -1319,8 +1328,10 @@ def BlsCompileAll(lic_server, lic_profile, build_path, source_path):
     compiled_successfully = []
     try:
         for bls_file_name in bls_uses_graph:                # компилируем все bls
+            log("\tCompiling {}:".format(bls_file_name))
             __BlsCompileAll__(lic_server, lic_profile, build_path, bls_uses_graph,
-                                bls_file_name, observed_list, compiled_successfully)
+                                bls_file_name, observed_list, compiled_successfully,
+                                bll_version)
         log("\tCOMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
         return True
     except FileNotFoundError as e:
@@ -1822,7 +1833,8 @@ def main():
         # запустим компиляцию этой каши
         if continue_compilation:
             if BlsCompileAll(global_settings.LicenseServer, global_settings.LicenseProfile,
-                             const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE):
+                             const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE,
+                             global_settings.BLLVersion):
                 # копируем готовые BLL в патч
                 copy_bll(global_settings)
     log('DONE -----------------')

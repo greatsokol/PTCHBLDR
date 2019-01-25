@@ -28,8 +28,8 @@
       <file leaf-file-name="run.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="1173" selection-start-line="1173" selection-end-line="1173" />
+            <state relative-caret-position="277">
+              <caret line="1256" column="50" selection-start-line="1256" selection-start-column="50" selection-end-line="1256" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -38,8 +38,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dir_PATCH_LIBFILES_INETTEMP</find>
-      <find>BssPluginWebKitSetup</find>
       <find>communicate</find>
       <find>?</find>
       <find>date</find>
@@ -68,6 +66,8 @@
       <find>__copy_build_ex__</find>
       <find>extract_build_version</find>
       <find>list_files</find>
+      <find>GlobalSettings</find>
+      <find>read_config</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -77,15 +77,16 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/settings.ini" />
+        <option value="$PROJECT_DIR$/run_test.py" />
         <option value="$PROJECT_DIR$/run.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="97" />
+    <option name="y" value="35" />
     <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -129,24 +130,6 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="PATCH_BLDR" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -166,6 +149,27 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
+    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PATCH_BLDR" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Nosetests">
       <module name="PATCH_BLDR" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -179,6 +183,7 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <module name="PATCH_BLDR" />
@@ -192,6 +197,7 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="py.test">
       <module name="PATCH_BLDR" />
@@ -206,6 +212,7 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
@@ -227,13 +234,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1464793755244</updated>
-    </task>
-    <task id="LOCAL-00029" summary="copy_bls">
-      <created>1466169451648</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1466169451648</updated>
     </task>
     <task id="LOCAL-00030" summary="copy_bls">
       <created>1466169460350</created>
@@ -571,7 +571,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537284125884</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="build version extraction fix">
+      <created>1538485114942</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1538485114943</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TodoView">
@@ -587,13 +594,13 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.254818" visible="true" weight="0.05490405" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.254818" visible="true" weight="0.15884861" />
       <window_info anchor="bottom" id="TODO" order="4" weight="0.32976446" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" weight="0.46573874" />
       <window_info anchor="bottom" id="Python Console" order="6" weight="0.32976446" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.628877" />
-      <window_info anchor="right" id="Structure" order="4" sideWeight="0.74518204" side_tool="true" visible="true" weight="0.18070363" />
+      <window_info active="true" anchor="right" id="Structure" order="4" sideWeight="0.74518204" side_tool="true" visible="true" weight="0.18070363" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32976446" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="1" weight="0.617773" />
@@ -620,7 +627,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="хватит на сегодня" />
     <MESSAGE value="чистка желтого гавна" />
     <MESSAGE value="BEGIN компиляция в главной функции" />
     <MESSAGE value="копирование BLL" />
@@ -645,24 +651,25 @@
     <MESSAGE value="+ RTF" />
     <MESSAGE value="20.3 build support" />
     <MESSAGE value="upgrade(10).eif tuning" />
-    <option name="LAST_COMMIT_MESSAGE" value="upgrade(10).eif tuning" />
+    <MESSAGE value="build version extraction fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="build version extraction fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>1199</line>
+          <line>1202</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>860</line>
+          <line>863</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>914</line>
+          <line>917</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
@@ -670,6 +677,70 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21437">
+          <caret line="1261" column="37" lean-forward="true" selection-start-line="1261" selection-start-column="37" selection-end-line="1261" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21505">
+          <caret line="1265" column="18" lean-forward="true" selection-start-line="1265" selection-start-column="18" selection-end-line="1265" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31110">
+          <caret line="1830" column="57" lean-forward="true" selection-start-line="1830" selection-start-column="57" selection-end-line="1830" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31076">
+          <caret line="1828" selection-start-line="1828" selection-end-line="1828" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31076">
+          <caret line="1828" selection-start-line="1828" selection-end-line="1828" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31076">
+          <caret line="1828" selection-start-line="1828" selection-end-line="1828" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_test.py" />
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31076">
+          <caret line="1828" lean-forward="true" selection-start-line="1828" selection-end-line="1828" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13413">
+          <caret line="789" column="42" selection-start-line="789" selection-start-column="42" selection-end-line="789" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19941">
+          <caret line="1173" selection-start-line="1173" selection-end-line="1173" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15589">
@@ -719,10 +790,11 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/run_test.py" />
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="1173" selection-start-line="1173" selection-end-line="1173" />
+        <state relative-caret-position="277">
+          <caret line="1256" column="50" selection-start-line="1256" selection-start-column="50" selection-end-line="1256" selection-end-column="50" />
         </state>
       </provider>
     </entry>
