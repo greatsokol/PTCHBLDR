@@ -1290,20 +1290,20 @@ def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProf
 
 
 # -------------------------------------------------------------------------------------------------
-def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileName, ObservedList, SuccessList, Version, Tabs):
+def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileName, ObservedList, Version, Tabs):
     BlsFileName = BlsFileName.lower()
     if BlsFileName not in ObservedList:  # если файл отсутствует в списке обработанных
-        ObservedList.append(BlsFileName) # добавляем в список учтенных файлов
         percents = round(100.00 * (len(ObservedList) / float(len(BlsUsesGraph))), 0)
-        log("{:>6}%".format(percents)+Tabs+"Compiling {} ".format(BlsFileName))
+        log("{:>6}%".format(percents)+Tabs+"{}".format(BlsFileName))
         BlsItemInfo = BlsUsesGraph.get(BlsFileName)
         if BlsItemInfo:
-            UsesList = BlsItemInfo[1]
             BlsFilePath = BlsItemInfo[0]
+            UsesList = BlsItemInfo[1]
             if len(UsesList):  # если файл зависит от других файлов, то проведем
                 for UsesFileName in UsesList:  # компиляцию каждого файла
-                    __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList, Version, Tabs + "\t")
-            __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile, Version)
+                    __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, Version, Tabs + "\t")
+            if __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile, Version):
+                ObservedList.append(BlsFileName)  # добавляем в список учтенных файлов
         else:
             log(Tabs+'No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
 
@@ -1315,13 +1315,12 @@ def BlsCompileAll(lic_server, lic_profile, build_path, source_path, bll_version)
     copyfiles(source_path, build_path, ['*.bls'], [])   # копируем в каталог билда все bls
     bls_uses_graph = bls_get_uses_graph(build_path)     # строим граф зависимостей по строкам uses
     observed_list = []
-    compiled_successfully = []
     try:
         for bls_file_name in bls_uses_graph:                # компилируем все bls
             __BlsCompileAll__(lic_server, lic_profile, build_path, bls_uses_graph,
-                                bls_file_name, observed_list, compiled_successfully,
+                                bls_file_name, observed_list,
                                 bll_version,"\t")
-        log("\tCOMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
+        log("\tCOMPILED {} of {}".format(len(observed_list), len(bls_uses_graph)))
         return True
     except FileNotFoundError as e:
         log('\tERROR: {}'.format(e))
