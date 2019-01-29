@@ -1293,33 +1293,17 @@ def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProf
 def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileName, ObservedList, SuccessList, Version, Tabs):
     BlsFileName = BlsFileName.lower()
     if BlsFileName not in ObservedList:  # если файл отсутствует в списке обработанных
-        log(Tabs+"Compiling {}:".format(BlsFileName))
+        ObservedList.append(BlsFileName) # добавляем в список учтенных файлов
+        percents = round(100.00 * (len(ObservedList) / float(len(BlsUsesGraph))), 0)
+        log("{:>6}%".format(percents)+Tabs+"Compiling {} ".format(BlsFileName))
         BlsItemInfo = BlsUsesGraph.get(BlsFileName)
-        len_BlsUsesGraph = len(BlsUsesGraph)
-        #log(BlsItemInfo)
         if BlsItemInfo:
             UsesList = BlsItemInfo[1]
             BlsFilePath = BlsItemInfo[0]
             if len(UsesList):  # если файл зависит от других файлов, то проведем
-                #compiled_of_current_useslist = 0  # счетчик откомпилированных файлов для текущего файла
                 for UsesFileName in UsesList:  # компиляцию каждого файла
-                    #compiled_of_current_useslist+=1  # увеличиваем счетчик для вывода в сообщение
-                    if UsesFileName.lower() not in SuccessList:
-                        #percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
-                        #log("\t({:>6}%) Compiling {:>3} of {:<3} used files for {:<30} {:<20}".format(percents, compiled_of_current_useslist, len(UsesList), BlsFileName+':', UsesFileName))
-                        __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList, Version, Tabs + "\t")
-            # добавляем в список учтенных файлов
-            ObservedList.append(BlsFileName)
-            percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
-            if BlsFileName not in SuccessList:
-                #log(Tabs+"({:>6}%) Compiling {}".format(percents, BlsFileName))
-                if __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile, Version):
-                    # компилируем и добавляем в список успешно откомпилированных
-                    SuccessList.append(BlsFileName)
-
-                    # printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
-            #else:
-                #log(Tabs+"({:>6}%) Already compiled earlier".format(percents))
+                    __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList, Version, Tabs + "\t")
+            __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile, Version)
         else:
             log(Tabs+'No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
 

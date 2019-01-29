@@ -71559,3 +71559,2583 @@ BEGIN BLS COMPILATION. Please wait...
 	COMPILED 2104 of 2105
 COPYING BLL files to patch
 DONE -----------------
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:11:38
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling dbipmac.bls:
+		(   0.0%) Compiling laconst.bls
+		(   0.0%) Compiling laerror.bls
+		(   0.0%) Compiling laslog.bls
+		(   0.0%) Compiling olschem.bls
+		(   0.0%) Compiling laaddlib.bls
+		(   0.0%) Compiling lasconst.bls
+		(   0.0%) Compiling lautils.bls
+		(   0.0%) Compiling ladecl.bls
+		(   0.0%) Compiling lapublic.bls
+		(   0.0%) Compiling lbipmac.bls
+		(   0.0%) Compiling dbipmac.bls
+	Compiling dacruset.bls:
+		(   1.0%) Compiling dacruset.bls
+	Compiling rt_2currconversion.bls:
+		(   1.0%) Compiling sscommon.bls
+		(   1.0%) Compiling sserrors.bls
+		(   1.0%) Compiling aa14.bls
+		(   1.0%) Compiling larecopr.bls
+		(   1.0%) Compiling lamathem.bls
+		(   1.0%) Compiling aabranch.bls
+		(   1.0%) Compiling la3025u.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:12:32
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling rt_waplacetype.bls:
+		(   0.0%) Compiling laconst.bls
+		(   0.0%) Compiling laerror.bls
+		(   0.0%) Compiling laslog.bls
+		(   0.0%) Compiling olschem.bls
+		(   0.0%) Compiling laaddlib.bls
+		(   0.0%) Compiling lasconst.bls
+		(   0.0%) Compiling lautils.bls
+		(   0.0%) Compiling ladecl.bls
+		(   0.0%) Compiling lapublic.bls
+		(   0.0%) Compiling sscommon.bls
+		(   0.0%) Compiling sserrors.bls
+		(   1.0%) Compiling aa14.bls
+		(   1.0%) Compiling larecopr.bls
+		(   1.0%) Compiling lamathem.bls
+		(   1.0%) Compiling aabranch.bls
+		(   1.0%) Compiling la3025u.bls
+		(   1.0%) Compiling labranch.bls
+		(   1.0%) Compiling lamiglib.bls
+		(   1.0%) Compiling lalibctl.bls
+		(   1.0%) Compiling lcautono.bls
+		(   1.0%) Compiling ssxml.bls
+		(   1.0%) Compiling rt_0schemeparams.bls
+		(   1.0%) Compiling rt_0userdata.bls
+		(   1.0%) Compiling lacomdatapi.bls
+		(   1.0%) Compiling laxml.bls
+		(   1.0%) Compiling lacrylib.bls
+		(   1.0%) Compiling pagifs.bls
+		(   1.0%) Compiling aaaccept.bls
+		(   1.0%) Compiling aaprnsum.bls
+		(   1.0%) Compiling aaprint.bls
+		(   1.0%) Compiling lacancrq.bls
+		(   1.0%) Compiling laritcns.bls
+		(   2.0%) Compiling lacpydoc.bls
+		(   2.0%) Compiling daarmablog.bls
+		(   2.0%) Compiling dadialog.bls
+		(   2.0%) Compiling daarmab.bls
+		(   2.0%) Compiling dcroot.bls
+		(   2.0%) Compiling lacusdct.bls
+		(   2.0%) Compiling lakeyech.bls
+		(   2.0%) Compiling pastamp.bls
+		(   2.0%) Compiling laprint181i.bls
+		(   2.0%) Compiling laprint.bls
+		(   2.0%) Compiling lctemplt.bls
+		(   2.0%) Compiling laccxml.bls
+		(   2.0%) Compiling lapdreg.bls
+		(   2.0%) Compiling lacontrl.bls
+		(   2.0%) Compiling laccdoc.bls
+		(   2.0%) Compiling laccsign.bls
+		(   2.0%) Compiling lacrsign.bls
+		(   2.0%) Compiling lacctoxml.bls
+		(   2.0%) Compiling daivack.bls
+		(   2.0%) Compiling saivack.bls
+		(   2.0%) Compiling aaccsign.bls
+		(   3.0%) Compiling lbhash.bls
+		(   3.0%) Compiling ladocack.bls
+		(   3.0%) Compiling aaaccsign.bls
+		(   3.0%) Compiling la138ifs.bls
+		(   3.0%) Compiling laevents.bls
+		(   3.0%) Compiling aacrdlin.bls
+		(   3.0%) Compiling launcmsgdvk.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:25:02
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling saattchf.bls:
+		(   0.0%) Compiling saattchf.bls
+	Compiling acimp1c.bls:
+	Compiling aa14_1c.bls:
+		(   0.0%) Compiling aa14_1c.bls
+	Compiling lapublic.bls:
+	Compiling laslog.bls:
+	Compiling laerror.bls:
+	Compiling laconst.bls:
+		(   0.0%) Compiling laconst.bls
+		(   0.0%) Compiling laerror.bls
+		(   0.0%) Compiling laslog.bls
+	Compiling olschem.bls:
+		(   0.0%) Compiling olschem.bls
+	Compiling laaddlib.bls:
+		(   0.0%) Compiling laaddlib.bls
+	Compiling lasconst.bls:
+		(   0.0%) Compiling lasconst.bls
+	Compiling lautils.bls:
+		(   0.0%) Compiling lautils.bls
+	Compiling ladecl.bls:
+		(   0.0%) Compiling ladecl.bls
+		(   0.0%) Compiling lapublic.bls
+	Compiling lasendty.bls:
+	Compiling aa14.bls:
+		(   1.0%) Compiling aa14.bls
+	Compiling lalibctl.bls:
+	Compiling larecopr.bls:
+		(   1.0%) Compiling larecopr.bls
+	Compiling lamathem.bls:
+		(   1.0%) Compiling lamathem.bls
+	Compiling aabranch.bls:
+		(   1.0%) Compiling aabranch.bls
+	Compiling la3025u.bls:
+		(   1.0%) Compiling la3025u.bls
+	Compiling lamiglib.bls:
+	Compiling labranch.bls:
+		(   1.0%) Compiling labranch.bls
+		(   1.0%) Compiling lamiglib.bls
+		(   1.0%) Compiling lalibctl.bls
+		(   1.0%) Compiling lasendty.bls
+	Compiling lcimpbs.bls:
+		(   1.0%) Compiling lcimpbs.bls
+	Compiling lcimpcch.bls:
+		(   1.0%) Compiling lcimpcch.bls
+		(   1.0%) Compiling acimp1c.bls
+	Compiling abrbsend.bls:
+	Compiling clman.bls:
+		(   1.0%) Compiling clman.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:30:02
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling aa14.bls:
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:33:31
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling ladepopen.bls:
+		(   0.0%) Compiling ladepopen.bls
+	Compiling dcbradlg.bls:
+	Compiling latzapi.bls:
+	Compiling lapublic.bls:
+	Compiling laslog.bls:
+	Compiling laerror.bls:
+	Compiling laconst.bls:
+		(   0.0%) Compiling laconst.bls
+		(   0.0%) Compiling laerror.bls
+		(   0.0%) Compiling laslog.bls
+	Compiling olschem.bls:
+		(   0.0%) Compiling olschem.bls
+	Compiling laaddlib.bls:
+		(   0.0%) Compiling laaddlib.bls
+	Compiling lasconst.bls:
+		(   0.0%) Compiling lasconst.bls
+	Compiling lautils.bls:
+		(   0.0%) Compiling lautils.bls
+	Compiling ladecl.bls:
+		(   0.0%) Compiling ladecl.bls
+		(   0.0%) Compiling lapublic.bls
+		(   0.0%) Compiling latzapi.bls
+		(   1.0%) Compiling dcbradlg.bls
+	Compiling uadatetimesent.bls:
+	Compiling ualib.bls:
+		(   1.0%) Compiling ualib.bls
+		(   1.0%) Compiling uadatetimesent.bls
+	Compiling lbd5ntapikvi.bls:
+	Compiling aabranch.bls:
+		(   1.0%) Compiling aabranch.bls
+	Compiling lbdocout.bls:
+		(   1.0%) Compiling lbdocout.bls
+		(   1.0%) Compiling lbd5ntapikvi.bls
+	Compiling sacrprof.bls:
+	Compiling larecopr.bls:
+		(   1.0%) Compiling larecopr.bls
+	Compiling lacryreq.bls:
+	Compiling lakeyech.bls:
+	Compiling lacrylib.bls:
+	Compiling lacomdatapi.bls:
+		(   1.0%) Compiling lacomdatapi.bls
+	Compiling laxml.bls:
+		(   1.0%) Compiling laxml.bls
+		(   1.0%) Compiling lacrylib.bls
+	Compiling daarmablog.bls:
+		(   1.0%) Compiling daarmablog.bls
+		(   1.0%) Compiling lakeyech.bls
+	Compiling lbmscaap.bls:
+		(   1.0%) Compiling lbmscaap.bls
+	Compiling lalirlic.bls:
+		(   1.0%) Compiling lalirlic.bls
+	Compiling lacrwzrd.bls:
+	Compiling iacrypto.bls:
+	Compiling lagenins.bls:
+		(   1.0%) Compiling lagenins.bls
+	Compiling iacryotp.bls:
+		(   1.0%) Compiling iacryotp.bls
+		(   1.0%) Compiling iacrypto.bls
+	Compiling labranch.bls:
+		(   1.0%) Compiling labranch.bls
+		(   1.0%) Compiling lacrwzrd.bls
+		(   1.0%) Compiling lacryreq.bls
+	Compiling laevents.bls:
+	Compiling lcautono.bls:
+	Compiling lalibctl.bls:
+	Compiling aa14.bls:
+		(   1.0%) Compiling aa14.bls
+	Compiling lamathem.bls:
+		(   2.0%) Compiling lamathem.bls
+	Compiling la3025u.bls:
+		(   2.0%) Compiling la3025u.bls
+	Compiling lamiglib.bls:
+		(   2.0%) Compiling lamiglib.bls
+		(   2.0%) Compiling lalibctl.bls
+		(   2.0%) Compiling lcautono.bls
+	Compiling dcroot.bls:
+	Compiling lacpydoc.bls:
+		(   2.0%) Compiling lacpydoc.bls
+	Compiling daarmab.bls:
+	Compiling dadialog.bls:
+		(   2.0%) Compiling dadialog.bls
+		(   2.0%) Compiling daarmab.bls
+		(   2.0%) Compiling dcroot.bls
+		(   2.0%) Compiling laevents.bls
+		(   2.0%) Compiling sacrprof.bls
+	Compiling iampse.bls:
+	Compiling lacrybuf.bls:
+		(   2.0%) Compiling lacrybuf.bls
+		(   2.0%) Compiling iampse.bls
+	Compiling sbdeford.bls:
+		(   2.0%) Compiling sbdeford.bls
+	Compiling sccurflt.bls:
+		(   2.0%) Compiling sccurflt.bls
+	Compiling sbfilter.bls:
+	Compiling lafilter.bls:
+		(   2.0%) Compiling lafilter.bls
+		(   2.0%) Compiling sbfilter.bls
+	Compiling daqueset.bls:
+		(   2.0%) Compiling daqueset.bls
+	Compiling lbegg86.bls:
+		(   2.0%) Compiling lbegg86.bls
+	Compiling dainscpl.bls:
+	Compiling lainscpl.bls:
+		(   2.0%) Compiling lainscpl.bls
+		(   2.0%) Compiling dainscpl.bls
+	Compiling dbarmreadobject.bls:
+	Compiling dbarmablog.bls:
+		(   3.0%) Compiling dbarmablog.bls
+		(   3.0%) Compiling dbarmreadobject.bls
+	Compiling dacuscln.bls:
+		(   3.0%) Compiling dacuscln.bls
+	Compiling lbwizrpl.bls:
+	Compiling lbb2bcus.bls:
+		(   3.0%) Compiling lbb2bcus.bls
+		(   3.0%) Compiling lbwizrpl.bls
+	Compiling rt_wagpbfscrcrdlinquiry.bls:
+	Compiling sscommon.bls:
+		(   3.0%) Compiling sscommon.bls
+	Compiling sserrors.bls:
+		(   3.0%) Compiling sserrors.bls
+	Compiling rt_1common.bls:
+	Compiling ssxml.bls:
+		(   3.0%) Compiling ssxml.bls
+	Compiling rt_0schemeparams.bls:
+		(   3.0%) Compiling rt_0schemeparams.bls
+	Compiling rt_0userdata.bls:
+		(   3.0%) Compiling rt_0userdata.bls
+	Compiling aaprint.bls:
+	Compiling pagifs.bls:
+		(   3.0%) Compiling pagifs.bls
+	Compiling aaaccept.bls:
+		(   3.0%) Compiling aaaccept.bls
+	Compiling aaprnsum.bls:
+		(   3.0%) Compiling aaprnsum.bls
+		(   3.0%) Compiling aaprint.bls
+	Compiling aacrsign.bls:
+	Compiling lacancrq.bls:
+		(   3.0%) Compiling lacancrq.bls
+	Compiling laritcns.bls:
+		(   3.0%) Compiling laritcns.bls
+	Compiling laprint.bls:
+	Compiling lacusdct.bls:
+		(   3.0%) Compiling lacusdct.bls
+	Compiling pastamp.bls:
+		(   3.0%) Compiling pastamp.bls
+	Compiling laprint181i.bls:
+		(   3.0%) Compiling laprint181i.bls
+		(   3.0%) Compiling laprint.bls
+	Compiling lctemplt.bls:
+		(   3.0%) Compiling lctemplt.bls
+	Compiling laccsign.bls:
+	Compiling laccxml.bls:
+		(   4.0%) Compiling laccxml.bls
+	Compiling laccdoc.bls:
+	Compiling lacontrl.bls:
+	Compiling lapdreg.bls:
+		(   4.0%) Compiling lapdreg.bls
+		(   4.0%) Compiling lacontrl.bls
+		(   4.0%) Compiling laccdoc.bls
+		(   4.0%) Compiling laccsign.bls
+	Compiling lacrsign.bls:
+		(   4.0%) Compiling lacrsign.bls
+	Compiling saivack.bls:
+	Compiling daivack.bls:
+	Compiling lacctoxml.bls:
+		(   4.0%) Compiling lacctoxml.bls
+		(   4.0%) Compiling daivack.bls
+		(   4.0%) Compiling saivack.bls
+	Compiling aaccsign.bls:
+		(   4.0%) Compiling aaccsign.bls
+	Compiling ladocack.bls:
+	Compiling lbhash.bls:
+		(   4.0%) Compiling lbhash.bls
+		(   4.0%) Compiling ladocack.bls
+	Compiling aaaccsign.bls:
+		(   4.0%) Compiling aaaccsign.bls
+	Compiling aacrdlin.bls:
+	Compiling la138ifs.bls:
+		(   4.0%) Compiling la138ifs.bls
+		(   4.0%) Compiling aacrdlin.bls
+	Compiling launcmsgdvk.bls:
+		(   4.0%) Compiling launcmsgdvk.bls
+	Compiling lamasssign.bls:
+		(   4.0%) Compiling lamasssign.bls
+		(   4.0%) Compiling aacrsign.bls
+	Compiling lbrmauth.bls:
+		(   4.0%) Compiling lbrmauth.bls
+	Compiling abkeyech.bls:
+	Compiling cryprint.bls:
+		(   4.0%) Compiling cryprint.bls
+	Compiling lbcrtanset.bls:
+		(   4.0%) Compiling lbcrtanset.bls
+	Compiling lbcryotp.bls:
+	Compiling lbcrepass.bls:
+		(   5.0%) Compiling lbcrepass.bls
+	Compiling lasmsgen.bls:
+		(   5.0%) Compiling lasmsgen.bls
+		(   5.0%) Compiling lbcryotp.bls
+	Compiling abkeyechadd.bls:
+		(   5.0%) Compiling abkeyechadd.bls
+		(   5.0%) Compiling abkeyech.bls
+	Compiling lasendty.bls:
+		(   5.0%) Compiling lasendty.bls
+	Compiling lagpbdepop.bls:
+		(   5.0%) Compiling lagpbdepop.bls
+	Compiling aacustomer.bls:
+		(   5.0%) Compiling aacustomer.bls
+		(   5.0%) Compiling rt_1common.bls
+		(   5.0%) Compiling rt_wagpbfscrcrdlinquiry.bls
+	Compiling mbsc2_0docexport.bls:
+	Compiling mbsc2_0tools.bls:
+	Compiling mb_datetimeconv.bls:
+		(   5.0%) Compiling mb_datetimeconv.bls
+	Compiling mbsc2_1errors.bls:
+	Compiling mbsc2_0consts.bls:
+		(   5.0%) Compiling mbsc2_0consts.bls
+		(   5.0%) Compiling mbsc2_1errors.bls
+	Compiling mbsc_0consts.bls:
+		(   5.0%) Compiling mbsc_0consts.bls
+	Compiling lbfraudack.bls:
+	Compiling lb14fraud.bls:
+		(   5.0%) Compiling lb14fraud.bls
+	Compiling lbfraudapi.bls:
+		(   5.0%) Compiling lbfraudapi.bls
+	Compiling lbfgs.bls:
+		(   5.0%) Compiling lbfgs.bls
+		(   5.0%) Compiling lbfraudack.bls
+		(   5.0%) Compiling mbsc2_0tools.bls
+	Compiling mbsc2_1common.bls:
+		(   5.0%) Compiling mbsc2_1common.bls
+	Compiling padocru.bls:
+		(   5.0%) Compiling padocru.bls
+		(   6.0%) Compiling mbsc2_0docexport.bls
+	Compiling ladocacksms.bls:
+		(   6.0%) Compiling ladocacksms.bls
+	Compiling rt_wabankru.bls:
+		(   6.0%) Compiling rt_wabankru.bls
+	Compiling rt_2deplist.bls:
+		(   6.0%) Compiling rt_2deplist.bls
+	Compiling dbsmsset.bls:
+		(   6.0%) Compiling dbsmsset.bls
+	Compiling rt_2b2bdestcustomer.bls:
+		(   6.0%) Compiling rt_2b2bdestcustomer.bls
+	Compiling mbsc_2dicts.bls:
+	Compiling mbsc_0tools.bls:
+	Compiling mbsc_1errors.bls:
+		(   6.0%) Compiling mbsc_1errors.bls
+		(   6.0%) Compiling mbsc_0tools.bls
+	Compiling mbsc_1common.bls:
+		(   6.0%) Compiling mbsc_1common.bls
+	Compiling mbsc_1auth.bls:
+		(   6.0%) Compiling mbsc_1auth.bls
+		(   6.0%) Compiling mbsc_2dicts.bls
+	Compiling dbnotifevt.bls:
+	Compiling lbnotify.bls:
+		(   6.0%) Compiling lbnotify.bls
+		(   6.0%) Compiling dbnotifevt.bls
+	Compiling mb_formutils.bls:
+	Compiling mb_consts.bls:
+		(   6.0%) Compiling mb_consts.bls
+		(   6.0%) Compiling mb_formutils.bls
+	Compiling dbrootdlsecurity.bls:
+	Compiling lavisaac.bls:
+		(   6.0%) Compiling lavisaac.bls
+	Compiling lbcusdlg.bls:
+		(   6.0%) Compiling lbcusdlg.bls
+		(   6.0%) Compiling dbrootdlsecurity.bls
+	Compiling dbubsloadtextdict.bls:
+	Compiling lbubsloadtextdict.bls:
+		(   6.0%) Compiling lbubsloadtextdict.bls
+		(   6.0%) Compiling dbubsloadtextdict.bls
+	Compiling lcupmba.bls:
+	Compiling laupmba.bls:
+		(   6.0%) Compiling laupmba.bls
+	Compiling laaltermba.bls:
+		(   7.0%) Compiling laaltermba.bls
+		(   7.0%) Compiling lcupmba.bls
+	Compiling daexpltx.bls:
+	Compiling aa14_ltx.bls:
+		(   7.0%) Compiling aa14_ltx.bls
+		(   7.0%) Compiling daexpltx.bls
+	Compiling sbdepopen.bls:
+		(   7.0%) Compiling sbdepopen.bls
+	Compiling latzone.bls:
+		(   7.0%) Compiling latzone.bls
+	Compiling rt_2remotegroundint.bls:
+		(   7.0%) Compiling rt_2remotegroundint.bls
+	Compiling dagpbconvop.bls:
+	Compiling dcallchk.bls:
+		(   7.0%) Compiling dcallchk.bls
+		(   7.0%) Compiling dagpbconvop.bls
+	Compiling lbeventsarch.bls:
+	Compiling aaarch.bls:
+		(   7.0%) Compiling aaarch.bls
+		(   7.0%) Compiling lbeventsarch.bls
+	Compiling sadpclos.bls:
+	Compiling sadocru.bls:
+	Compiling scfilter.bls:
+		(   7.0%) Compiling scfilter.bls
+		(   7.0%) Compiling sadocru.bls
+		(   7.0%) Compiling sadpclos.bls
+	Compiling dcivacksig.bls:
+		(   7.0%) Compiling dcivacksig.bls
+	Compiling dauncclgr.bls:
+		(   7.0%) Compiling dauncclgr.bls
+	Compiling ua20_1_300.bls:
+	Compiling uabaklib.bls:
+		(   7.0%) Compiling uabaklib.bls
+		(   7.0%) Compiling ua20_1_300.bls
+	Compiling dasltranstype.bls:
+	Compiling dasltree.bls:
+		(   7.0%) Compiling dasltree.bls
+		(   7.0%) Compiling dasltranstype.bls
+	Compiling aboutbks.bls:
+	Compiling lbunload.bls:
+	Compiling lblnkabs.bls:
+		(   7.0%) Compiling lblnkabs.bls
+		(   8.0%) Compiling lbunload.bls
+	Compiling lbbkwadd.bls:
+		(   8.0%) Compiling lbbkwadd.bls
+	Compiling ladelivt.bls:
+		(   8.0%) Compiling ladelivt.bls
+		(   8.0%) Compiling aboutbks.bls
+	Compiling scb2bfreedocc.bls:
+		(   8.0%) Compiling scb2bfreedocc.bls
+	Compiling dadoctypint138.bls:
+		(   8.0%) Compiling dadoctypint138.bls
+	Compiling ab51crs.bls:
+	Compiling lb51add.bls:
+		(   8.0%) Compiling lb51add.bls
+		(   8.0%) Compiling ab51crs.bls
+	Compiling lbaddtran.bls:
+		(   8.0%) Compiling lbaddtran.bls
+	Compiling ladialogs.bls:
+		(   8.0%) Compiling ladialogs.bls
+	Compiling ubarchupd.bls:
+		(   8.0%) Compiling ubarchupd.bls
+	Compiling lacusdtp.bls:
+		(   8.0%) Compiling lacusdtp.bls
+	Compiling rt_wacountry.bls:
+		(   8.0%) Compiling rt_wacountry.bls
+	Compiling abubskvt.bls:
+	Compiling lbubslnk.bls:
+	Compiling lbubsparsetext.bls:
+		(   8.0%) Compiling lbubsparsetext.bls
+		(   8.0%) Compiling lbubslnk.bls
+		(   8.0%) Compiling abubskvt.bls
+	Compiling rt_2dealpasscon.bls:
+		(   8.0%) Compiling rt_2dealpasscon.bls
+	Compiling rt_2custombillc.bls:
+		(   8.0%) Compiling rt_2custombillc.bls
+	Compiling sbrbase.bls:
+	Compiling carbase.bls:
+	Compiling clman.bls:
+		(   8.0%) Compiling clman.bls
+	Compiling lauolib.bls:
+		(   8.0%) Compiling lauolib.bls
+	Compiling larbase.bls:
+		(   8.0%) Compiling larbase.bls
+		(   8.0%) Compiling carbase.bls
+	Compiling carbwiz.bls:
+	Compiling carbgrup.bls:
+		(   9.0%) Compiling carbgrup.bls
+	Compiling catimet.bls:
+	Compiling lacalend.bls:
+		(   9.0%) Compiling lacalend.bls
+		(   9.0%) Compiling catimet.bls
+	Compiling daspiner.bls:
+		(   9.0%) Compiling daspiner.bls
+		(   9.0%) Compiling carbwiz.bls
+	Compiling caviewrb.bls:
+		(   9.0%) Compiling caviewrb.bls
+	Compiling fnexcel.bls:
+		(   9.0%) Compiling fnexcel.bls
+		(   9.0%) Compiling sbrbase.bls
+	Compiling dbgvisdl.bls:
+		(   9.0%) Compiling dbgvisdl.bls
+	Compiling pacrdlin138i.bls:
+		(   9.0%) Compiling pacrdlin138i.bls
+	Compiling rt_2dealpasscred138i.bls:
+	Compiling la3016u.bls:
+		(   9.0%) Compiling la3016u.bls
+		(   9.0%) Compiling rt_2dealpasscred138i.bls
+	Compiling rjexpbudgrep.bls:
+	Compiling sysconst.bls:
+		(   9.0%) Compiling sysconst.bls
+	Compiling daorgacc.bls:
+	Compiling safilterazk.bls:
+	Compiling extlist.bls:
+		(   9.0%) Compiling extlist.bls
+	Compiling lacommonmba.bls:
+		(   9.0%) Compiling lacommonmba.bls
+	Compiling aasysazk.bls:
+		(   9.0%) Compiling aasysazk.bls
+		(   9.0%) Compiling safilterazk.bls
+	Compiling lacnvrck.bls:
+	Compiling lacnvmba.bls:
+	Compiling laconstmba.bls:
+		(   9.0%) Compiling laconstmba.bls
+		(   9.0%) Compiling lacnvmba.bls
+		(   9.0%) Compiling lacnvrck.bls
+		(   9.0%) Compiling daorgacc.bls
+	Compiling larunba.bls:
+		(  10.0%) Compiling larunba.bls
+		(  10.0%) Compiling rjexpbudgrep.bls
+	Compiling ab203que.bls:
+	Compiling lb203add.bls:
+		(  10.0%) Compiling lb203add.bls
+		(  10.0%) Compiling ab203que.bls
+	Compiling dacrsign.bls:
+		(  10.0%) Compiling dacrsign.bls
+	Compiling notifexe.bls:
+		(  10.0%) Compiling notifexe.bls
+	Compiling abafnfcd.bls:
+	Compiling lbafnadd.bls:
+	Compiling lbafn14.bls:
+		(  10.0%) Compiling lbafn14.bls
+		(  10.0%) Compiling lbafnadd.bls
+	Compiling lbafnapi.bls:
+		(  10.0%) Compiling lbafnapi.bls
+		(  10.0%) Compiling abafnfcd.bls
+	Compiling lbmcrmba.bls:
+	Compiling aasigmba.bls:
+	Compiling aamba_14.bls:
+		(  10.0%) Compiling aamba_14.bls
+		(  10.0%) Compiling aasigmba.bls
+	Compiling laxmlmba.bls:
+		(  10.0%) Compiling laxmlmba.bls
+	Compiling lbblobmba.bls:
+	Compiling lambafncash.bls:
+		(  10.0%) Compiling lambafncash.bls
+	Compiling lbnodemba.bls:
+		(  10.0%) Compiling lbnodemba.bls
+		(  10.0%) Compiling lbblobmba.bls
+		(  10.0%) Compiling lbmcrmba.bls
+	Compiling rt_2gpbtrigbalclient.bls:
+	Compiling aabankru.bls:
+		(  10.0%) Compiling aabankru.bls
+		(  10.0%) Compiling rt_2gpbtrigbalclient.bls
+	Compiling dbdepinterest.bls:
+	Compiling lbdepprod.bls:
+		(  10.0%) Compiling lbdepprod.bls
+	Compiling dadepprod.bls:
+		(  10.0%) Compiling dadepprod.bls
+		(  11.0%) Compiling dbdepinterest.bls
+	Compiling rt_2customdealc.bls:
+		(  11.0%) Compiling rt_2customdealc.bls
+	Compiling mbsc2_1filter.bls:
+	Compiling mbsc2_1status.bls:
+		(  11.0%) Compiling mbsc2_1status.bls
+		(  11.0%) Compiling mbsc2_1filter.bls
+	Compiling mbsc_2paysendtype.bls:
+		(  11.0%) Compiling mbsc_2paysendtype.bls
+	Compiling dcdocackpswtankey.bls:
+	Compiling dcdocackpswroot.bls:
+		(  11.0%) Compiling dcdocackpswroot.bls
+		(  11.0%) Compiling dcdocackpswtankey.bls
+	Compiling ancurcon.bls:
+	Compiling lalimits.bls:
+		(  11.0%) Compiling lalimits.bls
+		(  11.0%) Compiling ancurcon.bls
+	Compiling dcnewsacksig.bls:
+		(  11.0%) Compiling dcnewsacksig.bls
+	Compiling rt_watransport.bls:
+		(  11.0%) Compiling rt_watransport.bls
+	Compiling lab2binst.bls:
+		(  11.0%) Compiling lab2binst.bls
+	Compiling anivackc.bls:
+		(  11.0%) Compiling anivackc.bls
+	Compiling dbcstora.bls:
+		(  11.0%) Compiling dbcstora.bls
+	Compiling obmigrpl.bls:
+	Compiling lbmiglib.bls:
+	Compiling lbmigxti.bls:
+		(  11.0%) Compiling lbmigxti.bls
+		(  11.0%) Compiling lbmiglib.bls
+		(  11.0%) Compiling obmigrpl.bls
+	Compiling abbkrcur.bls:
+	Compiling lboutbkr.bls:
+		(  11.0%) Compiling lboutbkr.bls
+		(  11.0%) Compiling abbkrcur.bls
+	Compiling lbodimba.bls:
+		(  11.0%) Compiling lbodimba.bls
+	Compiling dacrset.bls:
+		(  11.0%) Compiling dacrset.bls
+	Compiling aboutswi.bls:
+		(  12.0%) Compiling aboutswi.bls
+	Compiling rt_2account.bls:
+		(  12.0%) Compiling rt_2account.bls
+	Compiling abubsabs.bls:
+		(  12.0%) Compiling abubsabs.bls
+	Compiling pafreebankdoc.bls:
+		(  12.0%) Compiling pafreebankdoc.bls
+	Compiling ubsynchrolog.bls:
+		(  12.0%) Compiling ubsynchrolog.bls
+	Compiling sbcusivspecb.bls:
+	Compiling sacusivspec.bls:
+		(  12.0%) Compiling sacusivspec.bls
+		(  12.0%) Compiling sbcusivspecb.bls
+	Compiling rt_2accinfoblock.bls:
+		(  12.0%) Compiling rt_2accinfoblock.bls
+	Compiling dbtanuse.bls:
+	Compiling lbtanuse.bls:
+		(  12.0%) Compiling lbtanuse.bls
+		(  12.0%) Compiling dbtanuse.bls
+	Compiling angpbconvop.bls:
+		(  12.0%) Compiling angpbconvop.bls
+	Compiling lb14d5n.bls:
+	Compiling lblibd5n.bls:
+		(  12.0%) Compiling lblibd5n.bls
+		(  12.0%) Compiling lb14d5n.bls
+	Compiling rt_wageneratedistr.bls:
+	Compiling lbgenint.bls:
+	Compiling cbgenint.bls:
+		(  12.0%) Compiling cbgenint.bls
+		(  12.0%) Compiling lbgenint.bls
+		(  12.0%) Compiling rt_wageneratedistr.bls
+	Compiling mbsc_2ndscalculationtype.bls:
+		(  12.0%) Compiling mbsc_2ndscalculationtype.bls
+	Compiling anuncfsconfd.bls:
+		(  12.0%) Compiling anuncfsconfd.bls
+	Compiling lacalendar.bls:
+		(  12.0%) Compiling lacalendar.bls
+	Compiling rt_wagpbcancelaccept.bls:
+		(  12.0%) Compiling rt_wagpbcancelaccept.bls
+	Compiling dbrelatt.bls:
+		(  12.0%) Compiling dbrelatt.bls
+	Compiling abrsorakvt.bls:
+	Compiling ababskvi.bls:
+		(  13.0%) Compiling ababskvi.bls
+	Compiling lb14rsora.bls:
+		(  13.0%) Compiling lb14rsora.bls
+	Compiling lbrsoraadd.bls:
+		(  13.0%) Compiling lbrsoraadd.bls
+		(  13.0%) Compiling abrsorakvt.bls
+	Compiling dbtempl.bls:
+	Compiling da14.bls:
+		(  13.0%) Compiling da14.bls
+		(  13.0%) Compiling dbtempl.bls
+	Compiling acdocack.bls:
+		(  13.0%) Compiling acdocack.bls
+	Compiling lbgenerc15.bls:
+	Compiling lagenins15.bls:
+		(  13.0%) Compiling lagenins15.bls
+	Compiling lacryicl.bls:
+	Compiling laiclapi.bls:
+		(  13.0%) Compiling laiclapi.bls
+		(  13.0%) Compiling lacryicl.bls
+	Compiling latransp.bls:
+		(  13.0%) Compiling latransp.bls
+	Compiling latrns17.bls:
+		(  13.0%) Compiling latrns17.bls
+	Compiling aatvtlib.bls:
+		(  13.0%) Compiling aatvtlib.bls
+		(  13.0%) Compiling lbgenerc15.bls
+	Compiling rt_watransitaccpaydoc.bls:
+		(  13.0%) Compiling rt_watransitaccpaydoc.bls
+	Compiling ab21cbuy.bls:
+	Compiling lb21cadd.bls:
+		(  13.0%) Compiling lb21cadd.bls
+	Compiling la1256u.bls:
+		(  13.0%) Compiling la1256u.bls
+		(  13.0%) Compiling ab21cbuy.bls
+	Compiling datrexpi.bls:
+		(  13.0%) Compiling datrexpi.bls
+	Compiling anpayord.bls:
+		(  13.0%) Compiling anpayord.bls
+	Compiling rt_2depproducts.bls:
+		(  13.0%) Compiling rt_2depproducts.bls
+	Compiling abclvcnv.bls:
+	Compiling lbclvlib.bls:
+		(  14.0%) Compiling lbclvlib.bls
+		(  14.0%) Compiling abclvcnv.bls
+	Compiling rt_wagenpasswords.bls:
+	Compiling larmuser.bls:
+		(  14.0%) Compiling larmuser.bls
+		(  14.0%) Compiling rt_wagenpasswords.bls
+	Compiling rt_3org.bls:
+		(  14.0%) Compiling rt_3org.bls
+	Compiling dbrplwiz.bls:
+		(  14.0%) Compiling dbrplwiz.bls
+	Compiling dcccdofc.bls:
+	Compiling dafilter.bls:
+		(  14.0%) Compiling dafilter.bls
+	Compiling scccdocc.bls:
+		(  14.0%) Compiling scccdocc.bls
+		(  14.0%) Compiling dcccdofc.bls
+	Compiling rt_2redealpasscred138i.bls:
+		(  14.0%) Compiling rt_2redealpasscred138i.bls
+	Compiling rt_2design.bls:
+		(  14.0%) Compiling rt_2design.bls
+	Compiling lbsetrsb.bls:
+		(  14.0%) Compiling lbsetrsb.bls
+	Compiling dbcrlsrs.bls:
+	Compiling obcrlimp.bls:
+	Compiling lbcrlreset.bls:
+		(  14.0%) Compiling lbcrlreset.bls
+		(  14.0%) Compiling obcrlimp.bls
+		(  14.0%) Compiling dbcrlsrs.bls
+	Compiling abbkrcnl.bls:
+		(  14.0%) Compiling abbkrcnl.bls
+	Compiling laarched.bls:
+		(  14.0%) Compiling laarched.bls
+	Compiling larurdin.bls:
+		(  14.0%) Compiling larurdin.bls
+	Compiling abwftapd.bls:
+	Compiling lbwfapi.bls:
+		(  14.0%) Compiling lbwfapi.bls
+	Compiling lbwfout.bls:
+	Compiling lbwferr.bls:
+		(  14.0%) Compiling lbwferr.bls
+		(  14.0%) Compiling lbwfout.bls
+		(  15.0%) Compiling abwftapd.bls
+	Compiling dauncdocinf.bls:
+	Compiling anuncdocinf.bls:
+		(  15.0%) Compiling anuncdocinf.bls
+		(  15.0%) Compiling dauncdocinf.bls
+	Compiling pabcicinfo.bls:
+		(  15.0%) Compiling pabcicinfo.bls
+	Compiling mb_userdialog.bls:
+		(  15.0%) Compiling mb_userdialog.bls
+	Compiling sbcusivb.bls:
+		(  15.0%) Compiling sbcusivb.bls
+	Compiling rt_2creditpayperiod.bls:
+		(  15.0%) Compiling rt_2creditpayperiod.bls
+	Compiling rt_2depinterestpay.bls:
+		(  15.0%) Compiling rt_2depinterestpay.bls
+	Compiling lbclrplmba.bls:
+	Compiling lbinrck.bls:
+	Compiling lanotice.bls:
+		(  15.0%) Compiling lanotice.bls
+	Compiling lbmsgmba.bls:
+		(  15.0%) Compiling lbmsgmba.bls
+	Compiling lbfgmba.bls:
+		(  15.0%) Compiling lbfgmba.bls
+		(  15.0%) Compiling lbinrck.bls
+		(  15.0%) Compiling lbclrplmba.bls
+	Compiling lavversn.bls:
+		(  15.0%) Compiling lavversn.bls
+	Compiling rt_2currconversion.bls:
+		(  15.0%) Compiling rt_2currconversion.bls
+	Compiling abrsoracnl.bls:
+		(  15.0%) Compiling abrsoracnl.bls
+	Compiling rt_2msgtocurrvbk.bls:
+		(  15.0%) Compiling rt_2msgtocurrvbk.bls
+	Compiling dbarmab.bls:
+		(  15.0%) Compiling dbarmab.bls
+	Compiling rt_2custombillb.bls:
+		(  15.0%) Compiling rt_2custombillb.bls
+	Compiling iaccom3x.bls:
+		(  15.0%) Compiling iaccom3x.bls
+	Compiling oaresend.bls:
+		(  15.0%) Compiling oaresend.bls
+	Compiling dadpclgr.bls:
+		(  16.0%) Compiling dadpclgr.bls
+	Compiling dcaltadr.bls:
+		(  16.0%) Compiling dcaltadr.bls
+	Compiling rt_1signconf.bls:
+		(  16.0%) Compiling rt_1signconf.bls
+	Compiling sauncdocinf.bls:
+		(  16.0%) Compiling sauncdocinf.bls
+	Compiling dbstrule.bls:
+	Compiling dbslogo.bls:
+		(  16.0%) Compiling dbslogo.bls
+		(  16.0%) Compiling dbstrule.bls
+	Compiling dccbuyf.bls:
+	Compiling dcclidof.bls:
+		(  16.0%) Compiling dcclidof.bls
+	Compiling dcpdocf.bls:
+		(  16.0%) Compiling dcpdocf.bls
+		(  16.0%) Compiling dccbuyf.bls
+	Compiling rt_wamsgtocurrinspector.bls:
+		(  16.0%) Compiling rt_wamsgtocurrinspector.bls
+	Compiling dcarched.bls:
+		(  16.0%) Compiling dcarched.bls
+	Compiling rt_wagpbnetbank.bls:
+		(  16.0%) Compiling rt_wagpbnetbank.bls
+	Compiling dcwizrpl.bls:
+		(  16.0%) Compiling dcwizrpl.bls
+	Compiling rt_2residentattribute.bls:
+		(  16.0%) Compiling rt_2residentattribute.bls
+	Compiling aboutd5ntapirur.bls:
+	Compiling lb14d5ntapi.bls:
+		(  16.0%) Compiling lb14d5ntapi.bls
+	Compiling lbd5ntapi.bls:
+		(  16.0%) Compiling lbd5ntapi.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:43:30
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:44:30
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling aacrvisa.bls:
+	Compiling lacrylib.bls:
+	Compiling lapublic.bls:
+	Compiling laslog.bls:
+	Compiling laerror.bls:
+	Compiling laconst.bls:
+		(   0.0%) Compiling laconst.bls
+		(   0.0%) Compiling laerror.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:50:07
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:51:07
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling abrsorakvt.bls:
+		Compiling laerror.bls:
+			Compiling laconst.bls:
+		(   0.0%) Compiling laconst.bls
+		(   0.0%) Compiling laerror.bls
+		Compiling lasconst.bls:
+		(   0.0%) Compiling lasconst.bls
+		Compiling lblnkabs.bls:
+			Compiling laslog.bls:
+		(   0.0%) Compiling laslog.bls
+			Compiling lapublic.bls:
+				Compiling olschem.bls:
+		(   0.0%) Compiling olschem.bls
+				Compiling laaddlib.bls:
+		(   0.0%) Compiling laaddlib.bls
+				Compiling lautils.bls:
+		(   0.0%) Compiling lautils.bls
+				Compiling ladecl.bls:
+		(   0.0%) Compiling ladecl.bls
+		(   0.0%) Compiling lapublic.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:52:35
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling sbaccnt.bls:
+		Compiling laconst.bls:
+			(   0.0%) Compiling laconst.bls
+			Compiling aabranch.bls:
+				Compiling laerror.bls:
+					(   0.0%) Compiling laerror.bls
+					Compiling laaddlib.bls:
+						(   0.0%) Compiling laaddlib.bls
+						Compiling lapublic.bls:
+							Compiling laslog.bls:
+								(   0.0%) Compiling laslog.bls
+								Compiling olschem.bls:
+									(   0.0%) Compiling olschem.bls
+									Compiling lasconst.bls:
+										(   0.0%) Compiling lasconst.bls
+										Compiling lautils.bls:
+											(   0.0%) Compiling lautils.bls
+											Compiling ladecl.bls:
+												(   0.0%) Compiling ladecl.bls
+												(   0.0%) Compiling lapublic.bls
+							(   0.0%) Compiling aabranch.bls
+				Compiling sbfilter.bls:
+					Compiling lafilter.bls:
+						(   0.0%) Compiling lafilter.bls
+						(   1.0%) Compiling sbfilter.bls
+					Compiling labnkacctype.bls:
+						(   1.0%) Compiling labnkacctype.bls
+						Compiling dadialog.bls:
+							Compiling daarmablog.bls:
+								(   1.0%) Compiling daarmablog.bls
+								(   1.0%) Compiling dadialog.bls
+							(   1.0%) Compiling sbaccnt.bls
+	Compiling dbcrgentan.bls:
+		Compiling lacrylib.bls:
+			Compiling lacomdatapi.bls:
+				(   1.0%) Compiling lacomdatapi.bls
+				Compiling laxml.bls:
+					(   1.0%) Compiling laxml.bls
+					(   1.0%) Compiling lacrylib.bls
+			Compiling lameter.bls:
+				(   1.0%) Compiling lameter.bls
+				Compiling lbhash.bls:
+					(   1.0%) Compiling lbhash.bls
+					(   1.0%) Compiling dbcrgentan.bls
+	Compiling mbsc_2paysendtype.bls:
+		Compiling mbsc_1errors.bls:
+			Compiling mbsc_0consts.bls:
+				(   1.0%) Compiling mbsc_0consts.bls
+				(   1.0%) Compiling mbsc_1errors.bls
+			Compiling mb_datetimeconv.bls:
+				(   1.0%) Compiling mb_datetimeconv.bls
+				(   1.0%) Compiling mbsc_2paysendtype.bls
+	Compiling ladepprod.bls:
+		(   1.0%) Compiling ladepprod.bls
+	Compiling rt_wacurrsell.bls:
+		Compiling sscommon.bls:
+			(   1.0%) Compiling sscommon.bls
+			Compiling sserrors.bls:
+				(   1.0%) Compiling sserrors.bls
+				Compiling rt_1common.bls:
+					Compiling lcautono.bls:
+						Compiling lalibctl.bls:
+							Compiling aa14.bls:
+								(   1.0%) Compiling aa14.bls
+								Compiling larecopr.bls:
+									(   1.0%) Compiling larecopr.bls
+									Compiling lamathem.bls:
+										(   1.0%) Compiling lamathem.bls
+										Compiling la3025u.bls:
+											(   2.0%) Compiling la3025u.bls
+											Compiling lamiglib.bls:
+												Compiling labranch.bls:
+													(   2.0%) Compiling labranch.bls
+													(   2.0%) Compiling lamiglib.bls
+												(   2.0%) Compiling lalibctl.bls
+							(   2.0%) Compiling lcautono.bls
+						Compiling ssxml.bls:
+							(   2.0%) Compiling ssxml.bls
+							Compiling rt_0schemeparams.bls:
+								(   2.0%) Compiling rt_0schemeparams.bls
+								Compiling rt_0userdata.bls:
+									(   2.0%) Compiling rt_0userdata.bls
+									Compiling aaprint.bls:
+										Compiling pagifs.bls:
+											(   2.0%) Compiling pagifs.bls
+											Compiling aaaccept.bls:
+												(   2.0%) Compiling aaaccept.bls
+												Compiling aaprnsum.bls:
+													(   2.0%) Compiling aaprnsum.bls
+													(   2.0%) Compiling aaprint.bls
+										Compiling aacrsign.bls:
+											Compiling lacancrq.bls:
+												(   2.0%) Compiling lacancrq.bls
+												Compiling laritcns.bls:
+													(   2.0%) Compiling laritcns.bls
+													Compiling laprint.bls:
+														Compiling dcroot.bls:
+															Compiling lacpydoc.bls:
+																(   2.0%) Compiling lacpydoc.bls
+																Compiling daarmab.bls:
+																	(   2.0%) Compiling daarmab.bls
+																	(   2.0%) Compiling dcroot.bls
+															Compiling lacusdct.bls:
+																(   2.0%) Compiling lacusdct.bls
+																Compiling lakeyech.bls:
+																	(   2.0%) Compiling lakeyech.bls
+																	Compiling pastamp.bls:
+																		(   2.0%) Compiling pastamp.bls
+																		Compiling laprint181i.bls:
+																			(   2.0%) Compiling laprint181i.bls
+																			(   3.0%) Compiling laprint.bls
+														Compiling lctemplt.bls:
+															(   3.0%) Compiling lctemplt.bls
+															Compiling laccsign.bls:
+																Compiling laccxml.bls:
+																	(   3.0%) Compiling laccxml.bls
+																	Compiling laccdoc.bls:
+																		Compiling lacontrl.bls:
+																			Compiling lapdreg.bls:
+																				(   3.0%) Compiling lapdreg.bls
+																				(   3.0%) Compiling lacontrl.bls
+																			(   3.0%) Compiling laccdoc.bls
+																		(   3.0%) Compiling laccsign.bls
+																Compiling lacrsign.bls:
+																	(   3.0%) Compiling lacrsign.bls
+																	Compiling saivack.bls:
+																		Compiling daivack.bls:
+																			Compiling lacctoxml.bls:
+																				(   3.0%) Compiling lacctoxml.bls
+																				(   3.0%) Compiling daivack.bls
+																			(   3.0%) Compiling saivack.bls
+																		Compiling aaccsign.bls:
+																			(   3.0%) Compiling aaccsign.bls
+																			Compiling ladocack.bls:
+																				(   3.0%) Compiling ladocack.bls
+																				Compiling aaaccsign.bls:
+																					(   3.0%) Compiling aaaccsign.bls
+																					Compiling aacrdlin.bls:
+																						Compiling la138ifs.bls:
+																							(   3.0%) Compiling la138ifs.bls
+																							Compiling laevents.bls:
+																								(   3.0%) Compiling laevents.bls
+																								(   3.0%) Compiling aacrdlin.bls
+																						Compiling launcmsgdvk.bls:
+																							(   3.0%) Compiling launcmsgdvk.bls
+																							Compiling lamasssign.bls:
+																								(   3.0%) Compiling lamasssign.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:55:58
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 10:59:08
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:02:49
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:03:54
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:05:26
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:06:49
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:09:29
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+L	Compiling lb14fraud.bls:
+L		(   0.0%) Compiling lb14fraud.bls
+L	Compiling rt_2depproducts.bls:
+L__	Compiling sscommon.bls:
+L____	Compiling lapublic.bls:
+L______	Compiling laslog.bls:
+L________	Compiling laerror.bls:
+L__________	Compiling laconst.bls:
+L__________		(   0.0%) Compiling laconst.bls
+L__________		(   0.0%) Compiling laerror.bls
+L________		(   0.0%) Compiling laslog.bls
+L________	Compiling olschem.bls:
+L________		(   0.0%) Compiling olschem.bls
+L__________	Compiling laaddlib.bls:
+L__________		(   0.0%) Compiling laaddlib.bls
+L____________	Compiling lasconst.bls:
+L____________		(   0.0%) Compiling lasconst.bls
+L______________	Compiling lautils.bls:
+L______________		(   0.0%) Compiling lautils.bls
+L________________	Compiling ladecl.bls:
+L________________		(   0.0%) Compiling ladecl.bls
+L________________		(   0.0%) Compiling lapublic.bls
+L____		(   0.0%) Compiling sscommon.bls
+L____	Compiling rt_1common.bls:
+L______	Compiling lcautono.bls:
+L________	Compiling lalibctl.bls:
+L__________	Compiling aa14.bls:
+L__________		(   1.0%) Compiling aa14.bls
+L____________	Compiling larecopr.bls:
+L____________		(   1.0%) Compiling larecopr.bls
+L______________	Compiling lamathem.bls:
+L______________		(   1.0%) Compiling lamathem.bls
+L________________	Compiling aabranch.bls:
+L________________		(   1.0%) Compiling aabranch.bls
+L__________________	Compiling la3025u.bls:
+L__________________		(   1.0%) Compiling la3025u.bls
+L____________________	Compiling lamiglib.bls:
+L______________________	Compiling labranch.bls:
+L______________________		(   1.0%) Compiling labranch.bls
+L______________________		(   1.0%) Compiling lamiglib.bls
+L____________________		(   1.0%) Compiling lalibctl.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:10:29
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling lbd5ntapikvi.bls:
+		Compiling lasconst.bls:
+			(   0.0%) Compiling lasconst.bls
+			Compiling laconst.bls:
+				(   0.0%) Compiling laconst.bls
+				Compiling aabranch.bls:
+					Compiling laerror.bls:
+						(   0.0%) Compiling laerror.bls
+						Compiling laaddlib.bls:
+							(   0.0%) Compiling laaddlib.bls
+							Compiling lapublic.bls:
+								Compiling laslog.bls:
+									(   0.0%) Compiling laslog.bls
+									Compiling olschem.bls:
+										(   0.0%) Compiling olschem.bls
+										Compiling lautils.bls:
+											(   0.0%) Compiling lautils.bls
+											Compiling ladecl.bls:
+												(   0.0%) Compiling ladecl.bls
+												(   0.0%) Compiling lapublic.bls
+								(   0.0%) Compiling aabranch.bls
+					Compiling lbdocout.bls:
+						(   0.0%) Compiling lbdocout.bls
+						(   1.0%) Compiling lbd5ntapikvi.bls
+	Compiling ubinddocid.bls:
+		(   1.0%) Compiling ubinddocid.bls
+	Compiling rjperca.bls:
+		Compiling sysconst.bls:
+			(   1.0%) Compiling sysconst.bls
+			Compiling daorgacc.bls:
+				Compiling safilterazk.bls:
+					Compiling extlist.bls:
+						(   1.0%) Compiling extlist.bls
+						Compiling lacommonmba.bls:
+							(   1.0%) Compiling lacommonmba.bls
+							Compiling aasysazk.bls:
+								(   1.0%) Compiling aasysazk.bls
+								(   1.0%) Compiling safilterazk.bls
+					Compiling lacnvrck.bls:
+						Compiling lacnvmba.bls:
+							Compiling laconstmba.bls:
+								(   1.0%) Compiling laconstmba.bls
+								(   1.0%) Compiling lacnvmba.bls
+							(   1.0%) Compiling lacnvrck.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:11:27
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling lachkbicmask.bls:
+		Compiling lapublic.bls:
+			Compiling laslog.bls:
+				Compiling laerror.bls:
+					Compiling laconst.bls:
+						(   0.0%) Compiling laconst.bls
+						(   0.0%) Compiling laerror.bls
+					(   0.0%) Compiling laslog.bls
+				Compiling olschem.bls:
+					(   0.0%) Compiling olschem.bls
+					Compiling laaddlib.bls:
+						(   0.0%) Compiling laaddlib.bls
+						Compiling lasconst.bls:
+							(   0.0%) Compiling lasconst.bls
+							Compiling lautils.bls:
+								(   0.0%) Compiling lautils.bls
+								Compiling ladecl.bls:
+									(   0.0%) Compiling ladecl.bls
+									(   0.0%) Compiling lapublic.bls
+			(   0.0%) Compiling lachkbicmask.bls
+	Compiling ancusivackc.bls:
+		Compiling laccctl.bls:
+			Compiling lalibctl.bls:
+				Compiling aa14.bls:
+					(   0.0%) Compiling aa14.bls
+					Compiling larecopr.bls:
+						(   1.0%) Compiling larecopr.bls
+						Compiling lamathem.bls:
+							(   1.0%) Compiling lamathem.bls
+							Compiling aabranch.bls:
+								(   1.0%) Compiling aabranch.bls
+								Compiling la3025u.bls:
+									(   1.0%) Compiling la3025u.bls
+									Compiling lamiglib.bls:
+										Compiling labranch.bls:
+											(   1.0%) Compiling labranch.bls
+											(   1.0%) Compiling lamiglib.bls
+										(   1.0%) Compiling lalibctl.bls
+				(   1.0%) Compiling laccctl.bls
+			(   1.0%) Compiling ancusivackc.bls
+	Compiling ua20_1_316.bls:
+		Compiling ualib.bls:
+			(   1.0%) Compiling ualib.bls
+			Compiling uabaklib.bls:
+				(   1.0%) Compiling uabaklib.bls
+				(   1.0%) Compiling ua20_1_316.bls
+	Compiling mbsc_2remoteground.bls:
+		Compiling mbsc_1errors.bls:
+			Compiling mbsc_0consts.bls:
+				(   1.0%) Compiling mbsc_0consts.bls
+				(   1.0%) Compiling mbsc_1errors.bls
+			Compiling mb_datetimeconv.bls:
+				(   1.0%) Compiling mb_datetimeconv.bls
+				Compiling mbsc_1common.bls:
+					Compiling lakeyech.bls:
+						Compiling lacrylib.bls:
+							Compiling lacomdatapi.bls:
+								(   1.0%) Compiling lacomdatapi.bls
+								Compiling laxml.bls:
+									(   1.0%) Compiling laxml.bls
+									(   1.0%) Compiling lacrylib.bls
+							Compiling daarmablog.bls:
+								(   1.0%) Compiling daarmablog.bls
+								(   1.0%) Compiling lakeyech.bls
+						Compiling mbsc_0tools.bls:
+							(   1.0%) Compiling mbsc_0tools.bls
+							Compiling aacrsign.bls:
+								Compiling lacancrq.bls:
+									Compiling lcautono.bls:
+										(   2.0%) Compiling lcautono.bls
+										(   2.0%) Compiling lacancrq.bls
+									Compiling laritcns.bls:
+										(   2.0%) Compiling laritcns.bls
+										Compiling laprint.bls:
+											Compiling aaaccept.bls:
+												(   2.0%) Compiling aaaccept.bls
+												Compiling dcroot.bls:
+													Compiling lacpydoc.bls:
+														(   2.0%) Compiling lacpydoc.bls
+														Compiling daarmab.bls:
+															Compiling dadialog.bls:
+																(   2.0%) Compiling dadialog.bls
+																(   2.0%) Compiling daarmab.bls
+															(   2.0%) Compiling dcroot.bls
+													Compiling lacusdct.bls:
+														(   2.0%) Compiling lacusdct.bls
+														Compiling pastamp.bls:
+															(   2.0%) Compiling pastamp.bls
+															Compiling laprint181i.bls:
+																(   2.0%) Compiling laprint181i.bls
+																(   2.0%) Compiling laprint.bls
+											Compiling lctemplt.bls:
+												(   2.0%) Compiling lctemplt.bls
+												Compiling laccsign.bls:
+													Compiling laccxml.bls:
+														(   2.0%) Compiling laccxml.bls
+														Compiling laccdoc.bls:
+															Compiling lacontrl.bls:
+																Compiling lapdreg.bls:
+																	(   2.0%) Compiling lapdreg.bls
+																	(   2.0%) Compiling lacontrl.bls
+																(   2.0%) Compiling laccdoc.bls
+															(   2.0%) Compiling laccsign.bls
+													Compiling lacrsign.bls:
+														(   2.0%) Compiling lacrsign.bls
+														Compiling saivack.bls:
+															Compiling daivack.bls:
+																Compiling lacctoxml.bls:
+																	(   2.0%) Compiling lacctoxml.bls
+																	(   2.0%) Compiling daivack.bls
+																(   3.0%) Compiling saivack.bls
+															Compiling aaccsign.bls:
+																(   3.0%) Compiling aaccsign.bls
+																Compiling ladocack.bls:
+																	Compiling lbhash.bls:
+																		(   3.0%) Compiling lbhash.bls
+																		(   3.0%) Compiling ladocack.bls
+																	Compiling aaaccsign.bls:
+																		(   3.0%) Compiling aaaccsign.bls
+																		Compiling aacrdlin.bls:
+																			Compiling la138ifs.bls:
+																				(   3.0%) Compiling la138ifs.bls
+																				Compiling laevents.bls:
+																					(   3.0%) Compiling laevents.bls
+																					(   3.0%) Compiling aacrdlin.bls
+																			Compiling launcmsgdvk.bls:
+																				(   3.0%) Compiling launcmsgdvk.bls
+																				Compiling lamasssign.bls:
+																					(   3.0%) Compiling lamasssign.bls
+																					(   3.0%) Compiling aacrsign.bls
+								Compiling lbcryotp.bls:
+									Compiling lbcrtanset.bls:
+										Compiling iacryotp.bls:
+											(   3.0%) Compiling iacryotp.bls
+											(   3.0%) Compiling lbcrtanset.bls
+										Compiling lbcrepass.bls:
+											(   3.0%) Compiling lbcrepass.bls
+											Compiling lasmsgen.bls:
+												(   3.0%) Compiling lasmsgen.bls
+												(   3.0%) Compiling lbcryotp.bls
+									(   3.0%) Compiling mbsc_1common.bls
+					(   3.0%) Compiling mbsc_2remoteground.bls
+	Compiling mbsc_1auth.bls:
+		(   3.0%) Compiling mbsc_1auth.bls
+	Compiling padrcash.bls:
+		Compiling aaprint.bls:
+			Compiling pagifs.bls:
+				(   3.0%) Compiling pagifs.bls
+				Compiling aaprnsum.bls:
+					(   3.0%) Compiling aaprnsum.bls
+					(   4.0%) Compiling aaprint.bls
+			Compiling pastamps.bls:
+				(   4.0%) Compiling pastamps.bls
+				(   4.0%) Compiling padrcash.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:13:34
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling sbtrancl.bls:
+		(   0.0%) Compiling sbtrancl.bls
+	Compiling dcbsysdf.bls:
+		Compiling lafilter.bls:
+			Compiling lapublic.bls:
+				Compiling laslog.bls:
+					Compiling laerror.bls:
+						Compiling laconst.bls:
+							(   0.0%) Compiling laconst.bls
+						(   0.0%) Compiling laerror.bls
+					(   0.0%) Compiling laslog.bls
+				Compiling olschem.bls:
+					(   0.0%) Compiling olschem.bls
+				Compiling laaddlib.bls:
+					(   0.0%) Compiling laaddlib.bls
+				Compiling lasconst.bls:
+					(   0.0%) Compiling lasconst.bls
+				Compiling lautils.bls:
+					(   0.0%) Compiling lautils.bls
+				Compiling ladecl.bls:
+					(   0.0%) Compiling ladecl.bls
+				(   0.0%) Compiling lapublic.bls
+			Compiling aabranch.bls:
+				(   0.0%) Compiling aabranch.bls
+			(   1.0%) Compiling lafilter.bls
+		Compiling dafilter.bls:
+			(   1.0%) Compiling dafilter.bls
+		(   1.0%) Compiling dcbsysdf.bls
+	Compiling angpbconvdep.bls:
+		Compiling lalibctl.bls:
+			Compiling aa14.bls:
+				(   1.0%) Compiling aa14.bls
+			Compiling larecopr.bls:
+				(   1.0%) Compiling larecopr.bls
+			Compiling lamathem.bls:
+				(   1.0%) Compiling lamathem.bls
+			Compiling la3025u.bls:
+				(   1.0%) Compiling la3025u.bls
+			Compiling lamiglib.bls:
+				Compiling labranch.bls:
+					(   1.0%) Compiling labranch.bls
+				(   1.0%) Compiling lamiglib.bls
+			(   1.0%) Compiling lalibctl.bls
+		Compiling lacontrl.bls:
+			Compiling lapdreg.bls:
+				(   1.0%) Compiling lapdreg.bls
+			(   1.0%) Compiling lacontrl.bls
+		(   1.0%) Compiling angpbconvdep.bls
+	Compiling rt_wacountry.bls:
+		Compiling sscommon.bls:
+			(   1.0%) Compiling sscommon.bls
+		Compiling rt_1common.bls:
+			Compiling lcautono.bls:
+				(   1.0%) Compiling lcautono.bls
+			Compiling sserrors.bls:
+				(   1.0%) Compiling sserrors.bls
+			Compiling ssxml.bls:
+				(   1.0%) Compiling ssxml.bls
+			Compiling rt_0schemeparams.bls:
+				(   1.0%) Compiling rt_0schemeparams.bls
+			Compiling rt_0userdata.bls:
+				(   1.0%) Compiling rt_0userdata.bls
+			Compiling aaprint.bls:
+				Compiling lacrylib.bls:
+					Compiling lacomdatapi.bls:
+						(   1.0%) Compiling lacomdatapi.bls
+					Compiling laxml.bls:
+						(   1.0%) Compiling laxml.bls
+					(   2.0%) Compiling lacrylib.bls
+				Compiling pagifs.bls:
+					(   2.0%) Compiling pagifs.bls
+				Compiling aaaccept.bls:
+					(   2.0%) Compiling aaaccept.bls
+				Compiling aaprnsum.bls:
+					(   2.0%) Compiling aaprnsum.bls
+				(   2.0%) Compiling aaprint.bls
+			Compiling aacrsign.bls:
+				Compiling lacancrq.bls:
+					(   2.0%) Compiling lacancrq.bls
+				Compiling laritcns.bls:
+					(   2.0%) Compiling laritcns.bls
+				Compiling laprint.bls:
+					Compiling dcroot.bls:
+						Compiling lacpydoc.bls:
+							(   2.0%) Compiling lacpydoc.bls
+						Compiling daarmab.bls:
+							Compiling daarmablog.bls:
+								(   2.0%) Compiling daarmablog.bls
+							Compiling dadialog.bls:
+								(   2.0%) Compiling dadialog.bls
+							(   2.0%) Compiling daarmab.bls
+						(   2.0%) Compiling dcroot.bls
+					Compiling lacusdct.bls:
+						(   2.0%) Compiling lacusdct.bls
+					Compiling lakeyech.bls:
+						(   2.0%) Compiling lakeyech.bls
+					Compiling pastamp.bls:
+						(   2.0%) Compiling pastamp.bls
+					Compiling laprint181i.bls:
+						(   2.0%) Compiling laprint181i.bls
+					(   2.0%) Compiling laprint.bls
+				Compiling lctemplt.bls:
+					(   2.0%) Compiling lctemplt.bls
+				Compiling laccsign.bls:
+					Compiling laccxml.bls:
+						(   2.0%) Compiling laccxml.bls
+					Compiling laccdoc.bls:
+						(   2.0%) Compiling laccdoc.bls
+					(   2.0%) Compiling laccsign.bls
+				Compiling lacrsign.bls:
+					(   3.0%) Compiling lacrsign.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:15:51
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling angpbtrbalop.bls:
+		Compiling laconst.bls:
+		(   0.0%) Compiling laconst.bls
+		Compiling laerror.bls:
+		(   0.0%) Compiling laerror.bls
+		Compiling lalibctl.bls:
+			Compiling aa14.bls:
+			(   0.0%) Compiling aa14.bls
+			Compiling laaddlib.bls:
+			(   0.0%) Compiling laaddlib.bls
+			Compiling larecopr.bls:
+				Compiling olschem.bls:
+				(   0.0%) Compiling olschem.bls
+			(   0.0%) Compiling larecopr.bls
+			Compiling lamathem.bls:
+			(   0.0%) Compiling lamathem.bls
+			Compiling lapublic.bls:
+				Compiling laslog.bls:
+				(   0.0%) Compiling laslog.bls
+				Compiling lasconst.bls:
+				(   0.0%) Compiling lasconst.bls
+				Compiling lautils.bls:
+				(   0.0%) Compiling lautils.bls
+				Compiling ladecl.bls:
+				(   0.0%) Compiling ladecl.bls
+			(   1.0%) Compiling lapublic.bls
+			Compiling aabranch.bls:
+			(   1.0%) Compiling aabranch.bls
+			Compiling la3025u.bls:
+			(   1.0%) Compiling la3025u.bls
+			Compiling lamiglib.bls:
+				Compiling labranch.bls:
+				(   1.0%) Compiling labranch.bls
+			(   1.0%) Compiling lamiglib.bls
+		(   1.0%) Compiling lalibctl.bls
+		Compiling lalimits.bls:
+		(   1.0%) Compiling lalimits.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:16:55
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling dccoracc.bls:
+		Compiling lalibctl.bls:
+			Compiling laerror.bls:
+				Compiling laconst.bls:
+			Compiling aa14.bls:
+			Compiling laaddlib.bls:
+			Compiling larecopr.bls:
+				Compiling olschem.bls:
+			Compiling lamathem.bls:
+			Compiling lapublic.bls:
+				Compiling laslog.bls:
+				Compiling lasconst.bls:
+				Compiling lautils.bls:
+				Compiling ladecl.bls:
+			Compiling aabranch.bls:
+			Compiling la3025u.bls:
+			Compiling lamiglib.bls:
+				Compiling labranch.bls:
+		Compiling lachkcnt.bls:
+			Compiling da14.bls:
+				Compiling daarmab.bls:
+					Compiling daarmablog.bls:
+					Compiling dadialog.bls:
+		Compiling lacontrl.bls:
+			Compiling lapdreg.bls:
+	Compiling antracc.bls:
+	Compiling notify.bls:
+		Compiling lbnotify.bls:
+		Compiling notifmbsc.bls:
+	Compiling sbpostbr.bls:
+		Compiling sbfilter.bls:
+			Compiling lafilter.bls:
+	Compiling lb203add.bls:
+		Compiling lblnkabs.bls:
+	Compiling lbapid5n.bls:
+		Compiling lblibd5n.bls:
+		Compiling lb14d5n.bls:
+	Compiling mbsc2_2bankru.bls:
+		Compiling mbsc2_0tools.bls:
+			Compiling mb_datetimeconv.bls:
+			Compiling mbsc2_1errors.bls:
+				Compiling mbsc2_0consts.bls:
+			Compiling mbsc_0consts.bls:
+			Compiling lbfraudack.bls:
+				Compiling ladocack.bls:
+					Compiling lbhash.bls:
+						Compiling lacrylib.bls:
+							Compiling lacomdatapi.bls:
+							Compiling laxml.bls:
+				Compiling lb14fraud.bls:
+				Compiling lbfraudapi.bls:
+				Compiling lbfgs.bls:
+	Compiling dastlst.bls:
+		Compiling aatvtlib.bls:
+	Compiling mbsc_2auth.bls:
+		Compiling lasmsgen.bls:
+		Compiling lbrmauth.bls:
+		Compiling lbipmac.bls:
+		Compiling mbsc_0tools.bls:
+			Compiling mbsc_1errors.bls:
+		Compiling lbcryotp.bls:
+			Compiling lbcrtanset.bls:
+				Compiling iacryotp.bls:
+			Compiling lbcrepass.bls:
+			Compiling lacrsign.bls:
+				Compiling laccsign.bls:
+					Compiling laccxml.bls:
+					Compiling laccdoc.bls:
+						Compiling lcautono.bls:
+	Compiling rt_2cbccodes.bls:
+		Compiling sscommon.bls:
+		Compiling rt_1common.bls:
+			Compiling sserrors.bls:
+			Compiling ssxml.bls:
+			Compiling rt_0schemeparams.bls:
+			Compiling rt_0userdata.bls:
+			Compiling aaprint.bls:
+				Compiling pagifs.bls:
+				Compiling aaaccept.bls:
+				Compiling aaprnsum.bls:
+			Compiling aacrsign.bls:
+				Compiling lacancrq.bls:
+				Compiling laritcns.bls:
+				Compiling laprint.bls:
+					Compiling dcroot.bls:
+						Compiling lacpydoc.bls:
+					Compiling lacusdct.bls:
+					Compiling lakeyech.bls:
+					Compiling pastamp.bls:
+					Compiling laprint181i.bls:
+				Compiling lctemplt.bls:
+				Compiling saivack.bls:
+					Compiling daivack.bls:
+						Compiling lacctoxml.bls:
+				Compiling aaccsign.bls:
+				Compiling aaaccsign.bls:
+				Compiling aacrdlin.bls:
+					Compiling la138ifs.bls:
+					Compiling laevents.bls:
+				Compiling launcmsgdvk.bls:
+				Compiling lamasssign.bls:
+			Compiling abkeyech.bls:
+				Compiling cryprint.bls:
+				Compiling iacrypto.bls:
+					Compiling lagenins.bls:
+				Compiling lbmscaap.bls:
+				Compiling lacrwzrd.bls:
+					Compiling lalirlic.bls:
+				Compiling abkeyechadd.bls:
+			Compiling lasendty.bls:
+			Compiling lagpbdepop.bls:
+			Compiling aacustomer.bls:
+	Compiling pacusblc.bls:
+		Compiling laccprn.bls:
+	Compiling mbsc_2payurgenttype.bls:
+	Compiling anchargerequest.bls:
+	Compiling lbkviter.bls:
+	Compiling dbuncrenewcred.bls:
+		Compiling dauncrenewcred.bls:
+			Compiling la3016u.bls:
+			Compiling ladocvk181i.bls:
+	Compiling rt_2paramcry.bls:
+		Compiling rt_1signconf.bls:
+		Compiling rt_1events.bls:
+	Compiling dacurrur.bls:
+	Compiling rt_2gpbconvconfbank.bls:
+	Compiling daunccon.bls:
+	Compiling dbbis.bls:
+	Compiling lalocal.bls:
+	Compiling dccrmbox.bls:
+		Compiling ackeyech.bls:
+			Compiling lacryicl.bls:
+				Compiling laiclapi.bls:
+	Compiling lbfillmba.bls:
+		Compiling lacommonmba.bls:
+		Compiling laxmlmba.bls:
+			Compiling laconstmba.bls:
+	Compiling pauncfscrcdi.bls:
+		Compiling pastamps.bls:
+	Compiling dbsyslog.bls:
+	Compiling dcprdocf.bls:
+		Compiling dcclidof.bls:
+			Compiling dafilter.bls:
+			Compiling sadocru.bls:
+				Compiling scfilter.bls:
+		Compiling dcpdocf.bls:
+	Compiling dauncccdsp.bls:
+	Compiling rt_2statementquery.bls:
+	Compiling rt_2gpbfscrcfdcinquiry.bls:
+	Compiling dagpbnetop.bls:
+		Compiling dcallchk.bls:
+	Compiling rt_2gpbbaseassets.bls:
+	Compiling scdeplist.bls:
+	Compiling lactlib.bls:
+		Compiling ctbranch.bls:
+	Compiling dctransitaccnoticemessage.bls:
+	Compiling padpcon138i.bls:
+		Compiling pastatdp.bls:
+	Compiling aboutxml.bls:
+		Compiling lb14xml.bls:
+		Compiling lboutxml.bls:
+		Compiling lbunload.bls:
+	Compiling dagpbdepop.bls:
+	Compiling mb_settings.bls:
+	Compiling rt_2uncmsgtocurrinsp.bls:
+	Compiling dcnewsacksig.bls:
+	Compiling ababslnk.bls:
+		Compiling ababsdoc.bls:
+			Compiling aaexp1c.bls:
+				Compiling aa14_1c.bls:
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:21:15
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling abubsunld.bls:
+		Compiling laerror.bls:
+			Compiling laconst.bls:
+		Compiling lbubslnk.bls:
+			Compiling lapublic.bls:
+				Compiling laslog.bls:
+				Compiling olschem.bls:
+				Compiling laaddlib.bls:
+				Compiling lasconst.bls:
+				Compiling lautils.bls:
+				Compiling ladecl.bls:
+			Compiling lbubsparsetext.bls:
+			Compiling lblnkabs.bls:
+	Compiling abchecka.bls:
+		Compiling aacrsign.bls:
+			Compiling lacrylib.bls:
+				Compiling lacomdatapi.bls:
+				Compiling laxml.bls:
+			Compiling lacancrq.bls:
+				Compiling lcautono.bls:
+					Compiling lalibctl.bls:
+						Compiling aa14.bls:
+						Compiling larecopr.bls:
+						Compiling lamathem.bls:
+						Compiling aabranch.bls:
+						Compiling la3025u.bls:
+						Compiling lamiglib.bls:
+							Compiling labranch.bls:
+			Compiling laritcns.bls:
+			Compiling laprint.bls:
+				Compiling aaaccept.bls:
+				Compiling dcroot.bls:
+					Compiling lacpydoc.bls:
+					Compiling daarmab.bls:
+						Compiling daarmablog.bls:
+						Compiling dadialog.bls:
+				Compiling lacusdct.bls:
+				Compiling lakeyech.bls:
+				Compiling pastamp.bls:
+				Compiling laprint181i.bls:
+			Compiling lctemplt.bls:
+			Compiling laccsign.bls:
+				Compiling laccxml.bls:
+				Compiling laccdoc.bls:
+					Compiling lacontrl.bls:
+						Compiling lapdreg.bls:
+			Compiling lacrsign.bls:
+			Compiling saivack.bls:
+				Compiling daivack.bls:
+					Compiling lacctoxml.bls:
+			Compiling aaccsign.bls:
+			Compiling ladocack.bls:
+				Compiling lbhash.bls:
+			Compiling aaaccsign.bls:
+			Compiling aacrdlin.bls:
+				Compiling la138ifs.bls:
+				Compiling laevents.bls:
+			Compiling launcmsgdvk.bls:
+			Compiling lamasssign.bls:
+		Compiling lanotice.bls:
+		Compiling abdocack.bls:
+			Compiling lbrmauth.bls:
+		Compiling abchargeconfirm.bls:
+		Compiling lbfraudapi.bls:
+			Compiling lb14fraud.bls:
+		Compiling lbfraudack.bls:
+			Compiling lbfgs.bls:
+		Compiling lbdoctimecontrol.bls:
+			Compiling latzapi.bls:
+			Compiling lacalend.bls:
+	Compiling ctbranch.bls:
+	Compiling datstcp.bls:
+		Compiling datsonln.bls:
+			Compiling datsett.bls:
+				Compiling laprotct.bls:
+					Compiling lalocal.bls:
+		Compiling daspiner.bls:
+			Compiling carbase.bls:
+				Compiling clman.bls:
+				Compiling lauolib.bls:
+				Compiling larbase.bls:
+	Compiling pafreebankdoc.bls:
+		Compiling aaprint.bls:
+			Compiling pagifs.bls:
+			Compiling aaprnsum.bls:
+	Compiling abrsorasell.bls:
+		Compiling lb14rsora.bls:
+		Compiling lbrsoraadd.bls:
+		Compiling la1256u.bls:
+	Compiling daexp1c.bls:
+		Compiling aa14_1c.bls:
+	Compiling rt_wastatementquery.bls:
+		Compiling sscommon.bls:
+		Compiling sserrors.bls:
+		Compiling rt_1common.bls:
+			Compiling ssxml.bls:
+			Compiling rt_0schemeparams.bls:
+			Compiling rt_0userdata.bls:
+			Compiling abkeyech.bls:
+				Compiling cryprint.bls:
+				Compiling iacrypto.bls:
+					Compiling lagenins.bls:
+					Compiling iacryotp.bls:
+				Compiling lbmscaap.bls:
+				Compiling lacrwzrd.bls:
+					Compiling lalirlic.bls:
+				Compiling lbcrtanset.bls:
+				Compiling lbcryotp.bls:
+					Compiling lbcrepass.bls:
+					Compiling lasmsgen.bls:
+				Compiling abkeyechadd.bls:
+			Compiling lasendty.bls:
+			Compiling lagpbdepop.bls:
+			Compiling aacustomer.bls:
+	Compiling anuncfsconfd.bls:
+	Compiling dainscpl.bls:
+		Compiling lainscpl.bls:
+	Compiling dbrkobranch.bls:
+	Compiling padocru.bls:
+	Compiling sbcryptosafetemlatechoose.bls:
+	Compiling abafntapd.bls:
+		Compiling lbafn14.bls:
+		Compiling lbafnadd.bls:
+		Compiling lbafnapi.bls:
+	Compiling rt_2remoteofficials.bls:
+	Compiling dbfreedg.bls:
+	Compiling dbsetabs.bls:
+	Compiling andpcon.bls:
+	Compiling dbgenarm.bls:
+		Compiling lbgenarm.bls:
+		Compiling lbgenerc.bls:
+			Compiling lbrpl.bls:
+			Compiling aatvtlib.bls:
+			Compiling lbgenfst.bls:
+				Compiling lab2binst.bls:
+			Compiling latrns17.bls:
+			Compiling lbwizrpl.bls:
+				Compiling lbb2bcus.bls:
+			Compiling laccwrap.bls:
+		Compiling lbgenint.bls:
+			Compiling cbgenint.bls:
+		Compiling larmuser.bls:
+		Compiling lacryreq.bls:
+	Compiling rt_2payopertypeint138i.bls:
+	Compiling rt_2crypto.bls:
+		Compiling rt_1controls.bls:
+			Compiling aacrvisa.bls:
+		Compiling rt_1signconf.bls:
+		Compiling lacryrep.bls:
+	Compiling dctracc.bls:
+		Compiling datracc.bls:
+			Compiling la3016u.bls:
+	Compiling anuncfscrcdi.bls:
+	Compiling dcuncrenewcon.bls:
+		Compiling dcallchk.bls:
+	ERROR: File "dcallchk.bls", Uses list "['laError.bls', 'LaContrl.bls', 'laConst.bls', 'laLibCtl.bls', 'lcAutoNo.bls', 'aaBranch.bls', 'laAddLib.bls', 'daARMAB.bls']"
+			
+	COMPILATION continues. Please wait...
+		Compiling dauncrenewcon.bls:
+			Compiling ladocvk181i.bls:
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:25:17
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	(   0.0%) Compiling rt_2gpbdrawalcash.bls:
+		(   0.0%) Compiling sscommon.bls:
+			(   0.0%) Compiling lapublic.bls:
+				(   0.0%) Compiling laslog.bls:
+					(   0.0%) Compiling laerror.bls:
+						(   0.0%) Compiling laconst.bls:
+				(   0.0%) Compiling olschem.bls:
+				(   0.0%) Compiling laaddlib.bls:
+				(   0.0%) Compiling lasconst.bls:
+				(   0.0%) Compiling lautils.bls:
+				(   1.0%) Compiling ladecl.bls:
+		(   1.0%) Compiling sserrors.bls:
+		(   1.0%) Compiling rt_1common.bls:
+			(   1.0%) Compiling lcautono.bls:
+				(   1.0%) Compiling lalibctl.bls:
+					(   1.0%) Compiling aa14.bls:
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to RESTART patch building instead of CONTINUE with bls-compilation
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:26:24
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling 0.0 rt_2loanlist.bls%
+		Compiling 0.0 sscommon.bls%
+			Compiling 0.0 lapublic.bls%
+				Compiling 0.0 laslog.bls%
+					Compiling 0.0 laerror.bls%
+						Compiling 0.0 laconst.bls%
+				Compiling 0.0 olschem.bls%
+				Compiling 0.0 laaddlib.bls%
+				Compiling 0.0 lasconst.bls%
+				Compiling 0.0 lautils.bls%
+				Compiling 1.0 ladecl.bls%
+		Compiling 1.0 rt_1common.bls%
+			Compiling 1.0 lcautono.bls%
+				Compiling 1.0 lalibctl.bls%
+					Compiling 1.0 aa14.bls%
+					Compiling 1.0 larecopr.bls%
+					Compiling 1.0 lamathem.bls%
+					Compiling 1.0 aabranch.bls%
+					Compiling 1.0 la3025u.bls%
+					Compiling 1.0 lamiglib.bls%
+						Compiling 1.0 labranch.bls%
+			Compiling 1.0 sserrors.bls%
+			Compiling 1.0 ssxml.bls%
+			Compiling 1.0 rt_0schemeparams.bls%
+			Compiling 1.0 rt_0userdata.bls%
+			Compiling 1.0 aaprint.bls%
+				Compiling 1.0 lacrylib.bls%
+					Compiling 1.0 lacomdatapi.bls%
+					Compiling 1.0 laxml.bls%
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:27:11
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+	Compiling rt_2relreqc.bls    0.0%
+		Compiling sscommon.bls    0.0%
+			Compiling lapublic.bls    0.0%
+				Compiling laslog.bls    0.0%
+					Compiling laerror.bls    0.0%
+						Compiling laconst.bls    0.0%
+				Compiling olschem.bls    0.0%
+				Compiling laaddlib.bls    0.0%
+				Compiling lasconst.bls    0.0%
+				Compiling lautils.bls    0.0%
+				Compiling ladecl.bls    1.0%
+		Compiling sserrors.bls    1.0%
+		Compiling rt_1common.bls    1.0%
+			Compiling lcautono.bls    1.0%
+				Compiling lalibctl.bls    1.0%
+					Compiling aa14.bls    1.0%
+					Compiling larecopr.bls    1.0%
+					Compiling lamathem.bls    1.0%
+					Compiling aabranch.bls    1.0%
+					Compiling la3025u.bls    1.0%
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:28:11
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+{:>6}%	Compiling 0.0 
+{:>6}%		Compiling 0.0 
+{:>6}%			Compiling 0.0 
+{:>6}%				Compiling 0.0 
+{:>6}%					Compiling 0.0 
+{:>6}%						Compiling 0.0 
+{:>6}%				Compiling 0.0 
+{:>6}%				Compiling 0.0 
+{:>6}%				Compiling 0.0 
+{:>6}%				Compiling 0.0 
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 11:28:46
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+   0.0%	Compiling dbubscheckcondition.bls 
+   0.0%		Compiling laerror.bls 
+   0.0%			Compiling laconst.bls 
+   0.0%	Compiling sccurflt.bls 
+   0.0%	Compiling mbsc_2bankru.bls 
+   0.0%		Compiling mbsc_0tools.bls 
+   0.0%			Compiling mb_datetimeconv.bls 
+   0.0%			Compiling mbsc_1errors.bls 
+   0.0%				Compiling mbsc_0consts.bls 
+   0.0%			Compiling lapublic.bls 
+   1.0%				Compiling laslog.bls 
+   1.0%				Compiling olschem.bls 
+   1.0%				Compiling laaddlib.bls 
+   1.0%				Compiling lasconst.bls 
+   1.0%				Compiling lautils.bls 
+   1.0%				Compiling ladecl.bls 
+   1.0%	Compiling notifscr.bls 
+   1.0%		Compiling lbnotify.bls 
+   1.0%	Compiling mbsc2_2paymentorder.bls 
+   1.0%		Compiling mbsc2_0template.bls 
+   1.0%			Compiling mbsc2_0tools.bls 
+   1.0%				Compiling mbsc2_1errors.bls 
+   1.0%					Compiling mbsc2_0consts.bls 
+   1.0%				Compiling lbfraudack.bls 
+   1.0%					Compiling ladocack.bls 
+   1.0%						Compiling lbhash.bls 
+   1.0%							Compiling lacrylib.bls 
+   1.0%								Compiling lacomdatapi.bls 
+   1.0%								Compiling laxml.bls 
+   1.0%					Compiling lb14fraud.bls 
+   1.0%					Compiling lbfraudapi.bls 
+   2.0%					Compiling lbfgs.bls 
+   2.0%				Compiling lalibctl.bls 
+   2.0%					Compiling aa14.bls 
+   2.0%					Compiling larecopr.bls 
+   2.0%					Compiling lamathem.bls 
+   2.0%					Compiling aabranch.bls 
+   2.0%					Compiling la3025u.bls 
+   2.0%					Compiling lamiglib.bls 
+   2.0%						Compiling labranch.bls 
+   2.0%		Compiling mbsc2_1filter.bls 
+   2.0%			Compiling mbsc2_1status.bls 
+   2.0%		Compiling lblnkabs.bls 
+   2.0%		Compiling lbsveapi.bls 
+   2.0%	Compiling rt_wadprenewtypes.bls 
+   2.0%		Compiling sscommon.bls 
+   2.0%		Compiling rt_1common.bls 
+   2.0%			Compiling lcautono.bls 
+   2.0%			Compiling sserrors.bls 
+   2.0%			Compiling ssxml.bls 
+   2.0%			Compiling rt_0schemeparams.bls 
+   2.0%			Compiling rt_0userdata.bls 
+   3.0%			Compiling aaprint.bls 
+   3.0%				Compiling pagifs.bls 
+   3.0%				Compiling aaaccept.bls 
+   3.0%				Compiling aaprnsum.bls 
+   3.0%			Compiling aacrsign.bls 
+   3.0%				Compiling lacancrq.bls 
+   3.0%				Compiling laritcns.bls 
+   3.0%				Compiling laprint.bls 
+   3.0%					Compiling dcroot.bls 
+   3.0%						Compiling lacpydoc.bls 
+   3.0%						Compiling daarmab.bls 
+   3.0%							Compiling daarmablog.bls 
+   3.0%							Compiling dadialog.bls 
+   3.0%					Compiling lacusdct.bls 
+   3.0%					Compiling lakeyech.bls 
+   3.0%					Compiling pastamp.bls 
+   3.0%					Compiling laprint181i.bls 
+   3.0%				Compiling lctemplt.bls 
+   3.0%				Compiling laccsign.bls 
+   3.0%					Compiling laccxml.bls 
+   3.0%					Compiling laccdoc.bls 
+   4.0%						Compiling lacontrl.bls 
+   4.0%							Compiling lapdreg.bls 
+   4.0%				Compiling lacrsign.bls 
+   4.0%				Compiling saivack.bls 
+   4.0%					Compiling daivack.bls 
+   4.0%						Compiling lacctoxml.bls 
+   4.0%				Compiling aaccsign.bls 
+   4.0%				Compiling aaaccsign.bls 
+   4.0%				Compiling aacrdlin.bls 
+   4.0%					Compiling la138ifs.bls 
+   4.0%					Compiling laevents.bls 
+   4.0%				Compiling launcmsgdvk.bls 
+   4.0%				Compiling lamasssign.bls 
+   4.0%			Compiling lbrmauth.bls 
+   4.0%			Compiling abkeyech.bls 
+   4.0%				Compiling cryprint.bls 
+   4.0%				Compiling iacrypto.bls 
+   4.0%					Compiling lagenins.bls 
+   4.0%					Compiling iacryotp.bls 
+   4.0%				Compiling lbmscaap.bls 
+   4.0%				Compiling lacrwzrd.bls 
+   5.0%					Compiling lalirlic.bls 
+   5.0%				Compiling lbcrtanset.bls 
+   5.0%				Compiling lbcryotp.bls 
+   5.0%					Compiling lbcrepass.bls 
+   5.0%					Compiling lasmsgen.bls 
+   5.0%				Compiling abkeyechadd.bls 
+   5.0%			Compiling lasendty.bls 
+   5.0%			Compiling lagpbdepop.bls 
+   5.0%			Compiling aacustomer.bls 
+   5.0%	Compiling rt_wagpbconvdepobank.bls 
+   5.0%		Compiling aabankru.bls 
+   5.0%	Compiling ocivackb.bls 
+   5.0%		Compiling lcivacklib.bls 
+   5.0%	Compiling uadeford.bls 
+   5.0%		Compiling ualib.bls 
+   5.0%		Compiling uabaklib.bls 
+   5.0%	Compiling dcplanterm.bls 
+   5.0%	Compiling abibstrn.bls 
+   5.0%		Compiling lbibsadd.bls 
+   5.0%	Compiling mbsc2_2cbccodes.bls 
+   5.0%	Compiling abafnout.bls 
+   6.0%		Compiling lbafnapi.bls 
+   6.0%		Compiling lbafn14.bls 
+   6.0%	Compiling anchargerequest.bls 
+   6.0%	Compiling dcpdcmba.bls 
+   6.0%		Compiling aamba_14.bls 
+   6.0%	Compiling dbcstdia.bls 
+   6.0%	Compiling pagpbcostop.bls 
+   6.0%		Compiling pastamps.bls 
+   6.0%	Compiling rt_wachargeconfirm.bls 
+   6.0%	Compiling sacrprex.bls 
+   6.0%	Compiling rt_2gpbdepop.bls 
+   6.0%	Compiling scccdocc.bls 
+   6.0%		Compiling scfilter.bls 
+   6.0%			Compiling lafilter.bls 
+   6.0%	Compiling rt_2gpbconvconfbank.bls 
+   6.0%	Compiling rt_2gpbnetclient.bls 
+   6.0%		Compiling angpbnetop.bls 
+   6.0%			Compiling lalimits.bls 
+   6.0%	Compiling dbarmab.bls 
+   6.0%	Compiling dccconvf.bls 
+   6.0%		Compiling dcclidof.bls 
+   7.0%			Compiling dafilter.bls 
+   7.0%			Compiling sadocru.bls 
+   7.0%		Compiling dcpdocf.bls 
+   7.0%	Compiling rt_2uncmsgtocurrsubject.bls 
+   7.0%	Compiling pacrdlin.bls 
+   7.0%	Compiling dbcrydir.bls 
+   7.0%	Compiling dcdpcon138i.bls 
+   7.0%		Compiling dcallchk.bls 
+   7.0%		Compiling dadpcon138i.bls 
+   7.0%			Compiling la3016u.bls 
+   7.0%		Compiling condpas.bls 
