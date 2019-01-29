@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ffcf7241-615c-47f2-b5e0-82d2808b990b" name="Default" comment="">
+    <list default="true" id="ffcf7241-615c-47f2-b5e0-82d2808b990b" name="Default" comment="build version extraction fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/settings.ini" afterDir="false" />
     </list>
@@ -11,7 +10,6 @@
     <ignored path="_TEMP/" />
     <ignored path="log.txt" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="run.py" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="1256" column="50" selection-start-line="1256" selection-start-column="50" selection-end-line="1256" selection-end-column="50" />
+            <state relative-caret-position="531">
+              <caret line="1317" column="20" selection-start-line="1317" selection-start-column="20" selection-end-line="1317" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -38,10 +36,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>communicate</find>
-      <find>?</find>
-      <find>date</find>
-      <find>PlaceBuildIntoPatch</find>
       <find>dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_PRINT_RTF</find>
       <find>dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_TEMPLATE</find>
       <find>dir_PATCH_LIBFILES_BNK_RTS_SUBSYS_INSTCLNT_TEMPLATE_DISTRIB_CLIENT_SUBSYS_PRINT_RTF</find>
@@ -65,9 +59,13 @@
       <find>COPYING BUILD</find>
       <find>__copy_build_ex__</find>
       <find>extract_build_version</find>
-      <find>list_files</find>
       <find>GlobalSettings</find>
       <find>read_config</find>
+      <find>Compiling</find>
+      <find>sort</find>
+      <find>bls_get_uses_graph</find>
+      <find>list_files</find>
+      <find>list_files(</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -594,25 +592,25 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.254818" visible="true" weight="0.15884861" />
-      <window_info anchor="bottom" id="TODO" order="4" weight="0.32976446" />
-      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="2" weight="0.46573874" />
-      <window_info anchor="bottom" id="Python Console" order="6" weight="0.32976446" />
-      <window_info anchor="bottom" id="Run" order="0" weight="0.628877" />
-      <window_info active="true" anchor="right" id="Structure" order="4" sideWeight="0.74518204" side_tool="true" visible="true" weight="0.18070363" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32976446" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.254818" visible="true" weight="0.16204691" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="1" weight="0.617773" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.58458245" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.8543897" />
+      <window_info anchor="bottom" id="Version Control" order="3" weight="0.46573874" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.32976446" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32976446" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="9" weight="0.32976446" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32976446" />
+      <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Data View" order="3" weight="0.18070363" />
-      <window_info anchor="bottom" id="Messages" order="8" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="3" weight="0.32976446" />
+      <window_info anchor="right" id="Structure" order="4" sideWeight="0.74518204" side_tool="true" visible="true" weight="0.18070363" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -622,9 +620,6 @@
     <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="чистка желтого гавна" />
@@ -657,144 +652,32 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/run.py</url>
-          <line>1202</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>863</line>
+          <line>864</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run.py</url>
-          <line>917</line>
+          <line>918</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="52" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21437">
-          <caret line="1261" column="37" lean-forward="true" selection-start-line="1261" selection-start-column="37" selection-end-line="1261" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21505">
-          <caret line="1265" column="18" lean-forward="true" selection-start-line="1265" selection-start-column="18" selection-end-line="1265" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31110">
-          <caret line="1830" column="57" lean-forward="true" selection-start-line="1830" selection-start-column="57" selection-end-line="1830" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31076">
-          <caret line="1828" selection-start-line="1828" selection-end-line="1828" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31076">
-          <caret line="1828" selection-start-line="1828" selection-end-line="1828" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31076">
-          <caret line="1828" selection-start-line="1828" selection-end-line="1828" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run_test.py" />
-    <entry file="file://$PROJECT_DIR$/run.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/encodings/cp1251.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31076">
-          <caret line="1828" lean-forward="true" selection-start-line="1828" selection-end-line="1828" />
+        <state relative-caret-position="306">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13413">
-          <caret line="789" column="42" selection-start-line="789" selection-start-column="42" selection-end-line="789" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19941">
-          <caret line="1173" selection-start-line="1173" selection-end-line="1173" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15589">
-          <caret line="917" column="40" selection-start-line="917" selection-start-column="26" selection-end-line="917" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16150">
-          <caret line="950" column="50" lean-forward="true" selection-start-line="950" selection-start-column="50" selection-end-line="950" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16949">
-          <caret line="997" column="36" lean-forward="true" selection-start-line="997" selection-start-column="36" selection-end-line="997" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16303">
-          <caret line="959" column="98" lean-forward="true" selection-start-line="959" selection-start-column="98" selection-end-line="959" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22814">
-          <caret line="1342" column="17" selection-start-line="1342" selection-start-column="13" selection-end-line="1342" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22814">
-          <caret line="1342" column="17" selection-start-line="1342" selection-start-column="13" selection-end-line="1342" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11951">
-          <caret line="703" column="13" selection-start-line="703" selection-start-column="13" selection-end-line="703" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_test.py" />
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="1256" column="50" selection-start-line="1256" selection-start-column="50" selection-end-line="1256" selection-end-column="50" />
+        <state relative-caret-position="531">
+          <caret line="1317" column="20" selection-start-line="1317" selection-start-column="20" selection-end-line="1317" selection-end-column="20" />
         </state>
       </provider>
     </entry>

@@ -525,7 +525,8 @@ def makedirs(path):
 
 # -------------------------------------------------------------------------------------------------
 def list_files(path, mask):
-    return [os.path.join(d, filename) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
+    fileslist = [os.path.join(d, filename) for d, _, files in os.walk(path) for filename in fnmatch.filter(files, mask)]
+    return sorted(fileslist)
 
 
 # -------------------------------------------------------------------------------------------------
@@ -1253,6 +1254,7 @@ def bls_get_uses_graph(path):
                                 # если файла нет в списке зависимостей,
                                 # то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
                                 bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
+
     return bls_uses_graph
 
 
@@ -1288,9 +1290,10 @@ def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProf
 
 
 # -------------------------------------------------------------------------------------------------
-def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileName, ObservedList, SuccessList, Version):
+def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileName, ObservedList, SuccessList, Version, Tabs):
     BlsFileName = BlsFileName.lower()
     if BlsFileName not in ObservedList:  # если файл отсутствует в списке обработанных
+        log(Tabs+"Compiling {}:".format(BlsFileName))
         BlsItemInfo = BlsUsesGraph.get(BlsFileName)
         len_BlsUsesGraph = len(BlsUsesGraph)
         #log(BlsItemInfo)
@@ -1304,18 +1307,21 @@ def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileNam
                     if UsesFileName.lower() not in SuccessList:
                         #percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
                         #log("\t({:>6}%) Compiling {:>3} of {:<3} used files for {:<30} {:<20}".format(percents, compiled_of_current_useslist, len(UsesList), BlsFileName+':', UsesFileName))
-                        __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList, Version)
+                        __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, UsesFileName, ObservedList, SuccessList, Version, Tabs + "\t")
             # добавляем в список учтенных файлов
             ObservedList.append(BlsFileName)
+            percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
             if BlsFileName not in SuccessList:
-                percents = round(100.00 * (len(SuccessList) / float(len_BlsUsesGraph)), 0)
-                log("\t\t({:>6}%) Compiling {}".format(percents, BlsFileName))
+                #log(Tabs+"({:>6}%) Compiling {}".format(percents, BlsFileName))
                 if __BlsCompile__(BuildPath, BlsFileName, BlsFilePath, UsesList, LicServer, LicProfile, Version):
                     # компилируем и добавляем в список успешно откомпилированных
                     SuccessList.append(BlsFileName)
+
                     # printProgress(len(SuccessList), len(BlsUsesGraph), decimals=0, barLength=20)
+            #else:
+                #log(Tabs+"({:>6}%) Already compiled earlier".format(percents))
         else:
-            log('\tNo information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
+            log(Tabs+'No information about file to compile "{}". Probably not all SOURCE were downloaded.'.format(BlsFileName))
 
 
 # -------------------------------------------------------------------------------------------------
@@ -1328,10 +1334,9 @@ def BlsCompileAll(lic_server, lic_profile, build_path, source_path, bll_version)
     compiled_successfully = []
     try:
         for bls_file_name in bls_uses_graph:                # компилируем все bls
-            log("\tCompiling {}:".format(bls_file_name))
             __BlsCompileAll__(lic_server, lic_profile, build_path, bls_uses_graph,
                                 bls_file_name, observed_list, compiled_successfully,
-                                bll_version)
+                                bll_version,"\t")
         log("\tCOMPILED {} of {}".format(len(compiled_successfully), len(bls_uses_graph)))
         return True
     except FileNotFoundError as e:
