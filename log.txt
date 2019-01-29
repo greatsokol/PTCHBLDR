@@ -2063,3 +2063,664 @@ BEGIN BLS COMPILATION. Please wait...
   0%			laslog.bls
   0%			olschem.bls
   0%			lasconst.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 12:42:29
+CLEANING d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+  0%	angpbtransit.bls
+  0%		laerror.bls
+  0%			laconst.bls
+  0%		lalibctl.bls
+  0%			aa14.bls
+  0%			laaddlib.bls
+  0%			larecopr.bls
+  0%				olschem.bls
+  0%			lamathem.bls
+  0%			lapublic.bls
+  0%				laslog.bls
+  0%				lasconst.bls
+  0%				lautils.bls
+  0%				ladecl.bls
+  1%			aabranch.bls
+  1%			la3025u.bls
+  1%			lamiglib.bls
+  1%				labranch.bls
+  1%		lalimits.bls
+  1%	ubsrcdocid.bls
+  1%	lbstmd5ntapi.bls
+  1%		abkvtd5ntapi.bls
+  1%			lblnkabs.bls
+  1%			lbd5ntapikvi.bls
+  1%				lbdocout.bls
+  1%			lbd5ntapi.bls
+  1%				lbunload.bls
+  1%				lb14d5ntapi.bls
+  1%		la1256u.bls
+  1%	abafncnl.bls
+  1%		lbafn14.bls
+  1%		lbafnapi.bls
+  1%		lbafnadd.bls
+  2%	dagpbtrigbalop.bls
+  2%		lagpbdepop.bls
+  2%		dcallchk.bls
+  2%			lacontrl.bls
+  2%				lapdreg.bls
+  2%			lcautono.bls
+  2%			daarmab.bls
+  2%				daarmablog.bls
+  2%				dadialog.bls
+  2%		la138ifs.bls
+  2%	clman.bls
+  2%	lbeggdll86.bls
+  2%		lb14egg86.bls
+  2%	ababsbkr.bls
+  2%		lbabsbkr.bls
+  2%		abkviter.bls
+  2%			lbkviter.bls
+  2%		lbansbkr.bls
+  2%			lacalend.bls
+  2%			lboutbkr.bls
+  3%	pagpbfscrcdi.bls
+  3%		laprint.bls
+  3%			aaaccept.bls
+  3%			dcroot.bls
+  3%				lacpydoc.bls
+  3%			lacusdct.bls
+  3%			lacrylib.bls
+  3%				lacomdatapi.bls
+  3%				laxml.bls
+  3%			lakeyech.bls
+  3%			pastamp.bls
+  3%			laprint181i.bls
+  3%		pastamps.bls
+  3%	rt_wapayrolldoc.bls
+  3%		sscommon.bls
+  3%		sserrors.bls
+  3%		ssxml.bls
+  3%		rt_1common.bls
+  3%			rt_0schemeparams.bls
+  3%			rt_0userdata.bls
+  3%			aaprint.bls
+  3%				pagifs.bls
+  3%				aaprnsum.bls
+  4%			aacrsign.bls
+  4%				lacancrq.bls
+  4%				laritcns.bls
+  4%				lctemplt.bls
+  4%				laccsign.bls
+  4%					laccxml.bls
+  4%					laccdoc.bls
+  4%				lacrsign.bls
+  4%				saivack.bls
+  4%					daivack.bls
+  4%						lacctoxml.bls
+  4%				aaccsign.bls
+  4%				ladocack.bls
+  4%					lbhash.bls
+  4%				aaaccsign.bls
+  4%				aacrdlin.bls
+  4%					laevents.bls
+  4%				launcmsgdvk.bls
+  4%				lamasssign.bls
+  4%			lbrmauth.bls
+  4%			abkeyech.bls
+  4%				cryprint.bls
+  5%				iacrypto.bls
+  5%					lagenins.bls
+  5%					iacryotp.bls
+  5%				lbmscaap.bls
+  5%				lacrwzrd.bls
+  5%					lalirlic.bls
+  5%				lbcrtanset.bls
+  5%				lbcryotp.bls
+  5%					lbcrepass.bls
+  5%					lasmsgen.bls
+  5%				abkeyechadd.bls
+  5%			lasendty.bls
+  5%			aacustomer.bls
+  5%		lapayroll.bls
+  5%	oafrdoci.bls
+  5%	ancursel.bls
+  5%	dbcusdtp.bls
+  5%		lbcusdtp.bls
+  5%		lacusdtp.bls
+  6%	aacpdoc.bls
+  6%		lanotice.bls
+  6%	dbasvkbset.bls
+  6%		lbasvkb14.bls
+  6%	abrsorasell.bls
+  6%		lb14rsora.bls
+  6%		lbrsoraadd.bls
+  6%	dabanksrvcs.bls
+  6%	obb2breq.bls
+  6%		lbb2bcus.bls
+  6%		abwizrpl.bls
+  6%			lbwizrpl.bls
+  6%	rjperc.bls
+  6%		sysconst.bls
+  6%		daorgacc.bls
+  6%			safilterazk.bls
+  6%				extlist.bls
+  6%				lacommonmba.bls
+  6%				aasysazk.bls
+  6%			lacnvrck.bls
+  6%				lacnvmba.bls
+  6%					laconstmba.bls
+  7%		larunba.bls
+  7%	abbnseek.bls
+  7%	dbstatruf.bls
+  7%		lafilter.bls
+  7%		dbclidof.bls
+  7%			dafilter.bls
+  7%		dbpdocf.bls
+  7%		lastatru.bls
+  7%			lastatem.bls
+  7%		dbbsysdf.bls
+  7%	abrbase.bls
+  7%	dbarmabaddcode.bls
+  7%	mbsc_2payurgenttype.bls
+  7%		mbsc_1errors.bls
+  7%			mbsc_0consts.bls
+  7%		mb_datetimeconv.bls
+  7%	dadpclos.bls
+  7%	abrsoracnl.bls
+  7%	rt_wabankpostclnt.bls
+  7%		aarepclt.bls
+  8%		lactlib.bls
+  8%			ctbranch.bls
+  8%		lbarmchk.bls
+  8%	scnews.bls
+  8%	dbrbscfg.bls
+  8%		dastlst.bls
+  8%			aatvtlib.bls
+  8%	lbrslink.bls
+  8%	sauncmsg2cisubj.bls
+  8%	dbrbascc.bls
+  8%		da14.bls
+  8%	rt_2gpbtransit.bls
+  8%	dbfreedg.bls
+  8%	dcdpcon138i.bls
+  8%		dadpcon138i.bls
+  8%			la3016u.bls
+  8%		condpas.bls
+  8%	uacacrl.bls
+  8%		ualib.bls
+  8%	sacrdlin138i.bls
+  8%		sadocru.bls
+  8%			scfilter.bls
+  9%	aarldfrd.bls
+  9%		aadetach.bls
+  9%			lafreclx.bls
+  9%	accormc.bls
+  9%		lcimpbs.bls
+  9%		lacorrbs.bls
+  9%		aa14_mc.bls
+  9%	parudlin.bls
+  9%	rt_wageneratedistr.bls
+  9%		lbgenint.bls
+  9%			cbgenint.bls
+  9%	mbsc2_2taxperiodparam.bls
+  9%		mbsc2_1errors.bls
+  9%			mbsc2_0consts.bls
+  9%	mbsc2_2atm.bls
+  9%		mbsc2_0tools.bls
+  9%			lbfraudack.bls
+  9%				lb14fraud.bls
+  9%				lbfraudapi.bls
+  9%				lbfgs.bls
+  9%		mbsc2_1common.bls
+ 10%	lacalldt.bls
+ 10%	dbpdreg.bls
+ 10%	sbnews.bls
+ 10%		lanews.bls
+ 10%		dbnewswiz.bls
+ 10%	lbubsparsetext.bls
+ 10%	saunccon.bls
+ 10%	ab21ckvi.bls
+ 10%		lb21cadd.bls
+ 10%		ababskvi.bls
+ 10%	rt_wagpbcostinsbank.bls
+ 10%	mbsc_2account.bls
+ 10%		mbsc_1common.bls
+ 10%			mbsc_0tools.bls
+ 10%	sbtransaccset.bls
+ 10%		sbfilter.bls
+ 10%	daunccred.bls
+ 10%	padpcon138i.bls
+ 10%		pastatdp.bls
+ 10%	lbabsstmxml.bls
+ 10%		lbxmllib.bls
+ 11%		lb14xml.bls
+ 11%		lblnkabsex.bls
+ 11%	rt_2unccred.bls
+ 11%	aacrvisa.bls
+ 11%	rt_wagpbfscurrdealinquiry.bls
+ 11%	dadelrpl.bls
+ 11%		lavisaac.bls
+ 11%	dbnwizp3.bls
+ 11%	lbabsbkw.bls
+ 11%		lbbkwadd.bls
+ 11%	rt_2remotebenef.bls
+ 11%	abafncbs.bls
+ 11%	abbkwcnl.bls
+ 11%	rt_2_misc.bls
+ 11%	dacryreq.bls
+ 11%		dacryapi.bls
+ 11%		lacryreq.bls
+ 11%		lacrybuf.bls
+ 11%	obcsoper.bls
+ 11%	dbrelatt.bls
+ 12%	lbskvoadd.bls
+ 12%	lbrplmba.bls
+ 12%		sadatetm.bls
+ 12%		lbnumber.bls
+ 12%		satbltre.bls
+ 12%		abcnvtyp.bls
+ 12%		lambafncash.bls
+ 12%	abrsbbuy.bls
+ 12%	dbstamps.bls
+ 12%		dbslogo.bls
+ 12%	dapayob.bls
+ 12%	acsendb.bls
+ 12%	anb2bfreedocc.bls
+ 12%		laccctl.bls
+ 12%	mbsc_2remoteground.bls
+ 12%	aadelclt.bls
+ 12%		laarched.bls
+ 12%		lbrpl.bls
+ 12%		lbipmac.bls
+ 12%		lbtanset.bls
+ 12%	rt_2accinfoblock.bls
+ 13%	sbloanlist.bls
+ 13%	rt_wafreeclientdoc.bls
+ 13%	dctransitaccnoticefilter.bls
+ 13%		dcbsysdf.bls
+ 13%	rt_2depopconfgpb.bls
+ 13%	lb51accblock.bls
+ 13%	pafreeclientdoc.bls
+ 13%	rt_2azkplanlimitgroup.bls
+ 13%		rt_2azkcommon.bls
+ 13%			lachkmba.bls
+ 13%				lambatbcash.bls
+ 13%				aamba_14.bls
+ 13%	rt_2dpcloseground.bls
+ 13%	dbrootdlsecurity.bls
+ 13%		lbcusdlg.bls
+ 13%	pacusivc.bls
+ 13%		laccprn.bls
+ 13%		lacusiv.bls
+ 13%	rt_wadepopcontribsch.bls
+ 13%	mbsc_2stat1256.bls
+ 13%	abubsabs.bls
+ 13%		abubskvt.bls
+ 13%			lbubslnk.bls
+ 14%	ancancrq.bls
+ 14%	dasltranstype.bls
+ 14%		dasltree.bls
+ 14%	datafile.bls
+ 14%		dataddr.bls
+ 14%			lbaddtran.bls
+ 14%			latrns17.bls
+ 14%	anbankcollectionorder.bls
+ 14%	rt_2depopen.bls
+ 14%	abdpout.bls
+ 14%		lbinoutgpb.bls
+ 14%	rt_1rtf.bls
+ 14%		dapstat.bls
+ 14%			papstat.bls
+ 14%		lbstmstr.bls
+ 14%			aaexp1c.bls
+ 14%				aa14_1c.bls
+ 14%			aaexpltx.bls
+ 14%				aa14_ltx.bls
+ 14%			aaexpsw.bls
+ 14%			aaexpmc.bls
+ 15%			aaexpmk.bls
+ 15%				aa14_mk.bls
+ 15%		paredpcre138i.bls
+ 15%	rt_2customfreedocb.bls
+ 15%	dbabslnk.bls
+ 15%	uasdrcrdlin138i.bls
+ 15%	obccrout.bls
+ 15%		laccwrap.bls
+ 15%	rt_2azkestimate.bls
+ 15%		lacrdmba.bls
+ 15%	datrpars.bls
+ 15%		latrpars.bls
+ 15%			aacrtran.bls
+ 15%	datrexpi.bls
+ 15%	andpclos.bls
+ 15%	acimp1czp.bls
+ 15%	sbcusivspecc.bls
+ 15%		sacusivspec.bls
+ 15%	daaltokseld.bls
+ 16%	padocru.bls
+ 16%	ladocacksms.bls
+ 16%	lacryicl.bls
+ 16%		laiclapi.bls
+ 16%	abouttxt.bls
+ 16%	dcdpcref.bls
+ 16%		dcclidof.bls
+ 16%		dcpdocf.bls
+ 16%	lbkvt596egg86.bls
+ 16%		lbegg86.bls
+ 16%	dbcurrur.bls
+ 16%	rt_2relreqb.bls
+ 16%	mbsc2_2paymentorder.bls
+ 16%		mbsc2_0template.bls
+ 16%		mbsc2_1filter.bls
+ 16%			mbsc2_1status.bls
+ 16%		lbsveapi.bls
+ 16%	patracc.bls
+ 16%	ackeyech.bls
+ 16%	abdcbkvi.bls
+ 16%		lbabsdcb.bls
+ 17%	rt_wapayorderru.bls
+ 17%	lbrepmba.bls
+ 17%		larepmba.bls
+ 17%			aasigmba.bls
+ 17%	dcnds.bls
+ 17%	rt_2dealpassrenew.bls
+ 17%	lbafnkvt.bls
+ 17%	aatrpars.bls
+ 17%	dbpayurt.bls
+ 17%	dbablogn.bls
+ 17%		laabsusr.bls
+ 17%	angpbfscrdlin.bls
+ 17%	dbmcbfrm.bls
+ 17%		ladialogs.bls
+ 17%		lbnotify.bls
+ 17%	abibscdi138i.bls
+ 17%		lbibsadd.bls
+ 17%	dbkeyusage.bls
+ 17%	dbsector.bls
+ 17%	mbsc2_2mngdevlist.bls
+ 17%	rt_waabsmanager.bls
+ 18%	paicinfo.bls
+ 18%		pabcicinfo.bls
+ 18%	daunccon.bls
+ 18%	aboutd5n.bls
+ 18%		lb14d5n.bls
+ 18%			lblibd5n.bls
+ 18%		lbapid5n.bls
+ 18%	padepopen.bls
+ 18%	abrinfoc.bls
+ 18%		lauolib.bls
+ 18%		lbrinfoc.bls
+ 18%	rt_wacustomdic.bls
+ 18%	damreprt.bls
+ 18%	dcpayroll.bls
+ 18%		dapayroll.bls
+ 18%	dcstexpxls.bls
+ 18%	ua2012gost.bls
+ 18%		uabaklib.bls
+ 18%	pauncfsconfd.bls
+ 18%	rt_2remotegroundint.bls
+ 18%	dcrurdif.bls
+ 19%	labnkacctype.bls
+ 19%	sbsrpl.bls
+ 19%	ab21ccur.bls
+ 19%	pauncdocinf.bls
+ 19%	dcmansel.bls
+ 19%		damansel.bls
+ 19%	aboutddi.bls
+ 19%		lboutddi.bls
+ 19%	abbkrcnl.bls
+ 19%	rt_wacollectionorder.bls
+ 19%	rt_wagpbconvconfclient.bls
+ 19%	rt_2newsack.bls
+ 19%		rt_1signconf.bls
+ 19%	carbase.bls
+ 19%		larbase.bls
+ 19%	lbcrmba.bls
+ 19%		lbodimba.bls
+ 19%		lbmsgmba.bls
+ 19%			lbnodemba.bls
+ 19%				laxmlmba.bls
+ 19%		lbfromrck.bls
+ 19%			lamailmba.bls
+ 20%	anb2bactc.bls
+ 20%	dbnewsreport.bls
+ 20%	iaopnssl.bls
+ 20%	pagpbfsdealpass.bls
+ 20%	dcb2brelreqb.bls
+ 20%	dacrwrpl.bls
+ 20%	dab2bset.bls
+ 20%	dacamba.bls
+ 20%		lapdcamba.bls
+ 20%			lapdmba.bls
+ 20%				lalibmba.bls
+ 20%				lactrlmba.bls
+ 20%		dapdmba.bls
+ 20%			ladlgmba.bls
+ 20%	dbinetstyled.bls
+ 20%	angpbnetop.bls
+ 20%	rt_waprintqueuesetup.bls
+ 20%		larmuser.bls
+ 20%	mbsc_2custkpp.bls
+ 20%	mbsc_0template.bls
+ 21%	abdiasel.bls
+ 21%		lboutdia.bls
+ 21%	dbsyslog.bls
+ 21%	lacryrep.bls
+ 21%	ubmbc880.bls
+ 21%	daselectprinter.bls
+ 21%	rt_2customactc.bls
+ 21%	angpbfscorcrdlin.bls
+ 21%	rt_2transitaccpaydoc.bls
+ 21%	dainival.bls
+ 21%	abafnrur.bls
+ 21%	dbuncrenewcon.bls
+ 21%		dauncrenewcon.bls
+ 21%			ladocvk181i.bls
+ 21%		dauncrenew.bls
+ 21%	lbabsbtd.bls
+ 21%	dacuscln.bls
+ 21%	sbuncrenewcon.bls
+ 21%		lbdpexpxml.bls
+ 21%	obbnked807.bls
+ 21%	mbsc2_2paygrndparam.bls
+ 22%	dbcrydir.bls
+ 22%	dcdpconf.bls
+ 22%	rt_wadocackprofile.bls
+ 22%	mbsc2_2stat1256.bls
+ 22%	dbstrule.bls
+ 22%	padvkmsg.bls
+ 22%	aboutxmlfraud.bls
+ 22%		lblinkmq.bls
+ 22%			lbmqconst.bls
+ 22%	rt_2dealpasscred138i.bls
+ 22%	dbabsdcb.bls
+ 22%		abtlsdcb.bls
+ 22%	pagpbconvop.bls
+ 22%	ab51csh.bls
+ 22%		lb51add.bls
+ 22%	rt_2taxperiodparam.bls
+ 22%	lboraqld.bls
+ 22%		lboraadd.bls
+ 22%	ocivackb.bls
+ 22%		lcivacklib.bls
+ 22%	rt_2gpbconvdepobank.bls
+ 23%	lbansdia.bls
+ 23%	rt_wabrancheswithbic.bls
+ 23%		latzapi.bls
+ 23%	andprne.bls
+ 23%	rt_2paytypeparam.bls
+ 23%	pacursel.bls
+ 23%	lachkbicmask.bls
+ 23%	dcaccrest.bls
+ 23%	sbcryptosafetemlatechoose.bls
+ 23%	anpayord.bls
+ 23%	rt_2payopertypeint.bls
+ 23%	laprotct.bls
+ 23%		lalocal.bls
+ 23%	dbloanstatus.bls
+ 23%	darmuser.bls
+ 23%		lbmbuser.bls
+ 23%	sccusbybr.bls
+ 23%	sbtrancl.bls
+ 23%	sbattchf.bls
+ 23%		sbbrscrl.bls
+ 23%	mbsc2_2freedoctobank.bls
+ 24%	dbrkoimpbr.bls
+ 24%		darefreh.bls
+ 24%	abrsbkvt.bls
+ 24%		lbrsbkvt.bls
+ 24%	pagpbtrigbalop.bls
+ 24%	dbcusdoc.bls
+ 24%		dacusdoc.bls
+ 24%	rt_wacurrsell.bls
+ 24%	abibscrs.bls
+ 24%	rt_waloader.bls
+ 24%		rt_wa1common.bls
+ 24%	rt_waremotefilters.bls
+ 24%	anuncrenewcred.bls
+ 24%	ab51ord.bls
+ 24%	sacrprof.bls
+ 24%	dcccdofc.bls
+ 24%		scccdocc.bls
+ 24%	dbprnslg.bls
+ 24%		dbusrmon.bls
+ 24%			aasltree.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 12:55:53
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+0.0%	dctransitaccnoticemessage.bls
+0.0%		laconst.bls
+0.0949667616334283%	dcdpcre138i.bls
+0.0949667616334283%		aabranch.bls
+0.0949667616334283%			laerror.bls
+0.14245014245014245%			laaddlib.bls
+0.1899335232668566%			lapublic.bls
+0.1899335232668566%				laslog.bls
+0.23741690408357075%				olschem.bls
+0.2849002849002849%				lasconst.bls
+0.33238366571699907%				lautils.bls
+0.3798670465337132%				ladecl.bls
+0.5223171889838556%		dcroot.bls
+0.5223171889838556%			lacpydoc.bls
+0.5698005698005698%			daarmab.bls
+0.5698005698005698%				daarmablog.bls
+0.6172839506172839%				dadialog.bls
+0.7597340930674265%		dcallchk.bls
+0.7597340930674265%			lacontrl.bls
+0.7597340930674265%				lalibctl.bls
+0.7597340930674265%					aa14.bls
+0.8072174738841406%					larecopr.bls
+0.8547008547008547%					lamathem.bls
+0.9021842355175689%					la3025u.bls
+0.949667616334283%					lamiglib.bls
+0.949667616334283%						labranch.bls
+1.0921177587844255%				lapdreg.bls
+1.1870845204178537%			lcautono.bls
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 12:56:55
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+BEGIN BLS COMPILATION. Please wait...
+  0%	ababsdcb.bls
+  0%		lapublic.bls
+  0%			laslog.bls
+  0%				laerror.bls
+  0%					laconst.bls
+  0%			olschem.bls
+  0%			laaddlib.bls
+  0%			lasconst.bls
+  0%			lautils.bls
+  0%			ladecl.bls
+  0%		lblnkabs.bls
+  0%		lbabsdcb.bls
+  0%	acimp1czp.bls
+  0%		lcimpbs.bls
+  0%		aa14_1c.bls
+  0%	dcnewsacksig.bls
+  0%	dbdictubsdialog.bls
+  0%	dbabsrun.bls
+  0%		ababslnk.bls
+  0%			ababsdoc.bls
+  0%				aaexp1c.bls
+  0%					la1256u.bls
+  0%				daarmablog.bls
+  0%			lacalend.bls
+  1%			aabranch.bls
+  1%	padrcash.bls
+  1%		aaprint.bls
+  1%			lacrylib.bls
+  1%				lacomdatapi.bls
+  1%				laxml.bls
+  1%			pagifs.bls
+  1%			aaaccept.bls
+  1%			aaprnsum.bls
+  1%		laprint.bls
+  1%			lamathem.bls
+  1%			dcroot.bls
+  1%				lacpydoc.bls
+  1%				daarmab.bls
+  1%					dadialog.bls
+  1%			lacusdct.bls
+  1%			lakeyech.bls
+  1%			pastamp.bls
+  1%			laprint181i.bls
+  1%		pastamps.bls
+  2%	sbtrancl.bls
+  2%	satrns17.bls
+  2%		latrns17.bls
+  2%			larecopr.bls
+  2%		lacryicl.bls
+  2%			laiclapi.bls
+  2%		latransp.bls
+  2%	pacrdlin138i.bls
+  2%	lcloanlist.bls
+  2%	rt_wawizzardclient.bls
+  2%		sscommon.bls

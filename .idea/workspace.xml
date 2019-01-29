@@ -26,8 +26,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="1296" column="44" selection-start-line="1296" selection-start-column="44" selection-end-line="1296" selection-end-column="44" />
+            <state relative-caret-position="90">
+              <caret line="1295" selection-start-line="1295" selection-end-line="1295" />
             </state>
           </provider>
         </entry>
@@ -81,8 +81,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="32" />
-    <option name="y" value="249" />
+    <option name="x" value="-104" />
+    <option name="y" value="70" />
     <option name="width" value="1936" />
     <option name="height" value="1096" />
   </component>
@@ -232,20 +232,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1464793755244</updated>
-    </task>
-    <task id="LOCAL-00032" summary="error when blsusesgraph">
-      <created>1467900645129</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1467900645129</updated>
-    </task>
-    <task id="LOCAL-00033" summary="fixed removing comments like     (* comment *)&#10;in bls_uses_graph">
-      <created>1467904851062</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1467904851062</updated>
     </task>
     <task id="LOCAL-00034" summary="subprocess popen nahuy wait">
       <created>1468255308203</created>
@@ -576,7 +562,21 @@
       <option name="project" value="LOCAL" />
       <updated>1548750747699</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="compilation log beautification!!!">
+      <created>1548754324264</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1548754324264</updated>
+    </task>
+    <task id="LOCAL-00082" summary="compilation log beautification!!!">
+      <created>1548754937560</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1548754937560</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TodoView">
@@ -592,11 +592,11 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.254818" visible="true" weight="0.16364606" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.254818" visible="true" weight="0.1652452" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.58458245" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.5471092" />
+      <window_info active="true" anchor="bottom" id="Debug" order="2" visible="true" weight="0.54603857" />
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.46573874" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32976446" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
@@ -662,21 +662,6 @@
           <line>918</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/run.py</url>
-          <line>1316</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/run.py</url>
-          <line>1257</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/run.py</url>
-          <line>1222</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -691,8 +676,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="1296" column="44" selection-start-line="1296" selection-start-column="44" selection-end-line="1296" selection-end-column="44" />
+        <state relative-caret-position="90">
+          <caret line="1295" selection-start-line="1295" selection-end-line="1295" />
         </state>
       </provider>
     </entry>
