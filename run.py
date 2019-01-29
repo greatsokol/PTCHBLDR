@@ -1345,6 +1345,8 @@ def __extract_build__(build_path):
         # конец разархивации
     return build_path
 
+
+# -------------------------------------------------------------------------------------------------
 def is_20_version(version):
     return ('20.1' in version) or ('20.2' in version) or ('20.3' in version)
 
