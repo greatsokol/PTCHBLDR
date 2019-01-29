@@ -1293,8 +1293,8 @@ def __BlsCompile__(BuildPath, BlsFileName, BlsPath, UsesList, LicServer, LicProf
 def __BlsCompileAll__(LicServer, LicProfile, BuildPath, BlsUsesGraph, BlsFileName, ObservedList, Version, Tabs):
     BlsFileName = BlsFileName.lower()
     if BlsFileName not in ObservedList:  # если файл отсутствует в списке обработанных
-        percents = round(100.00 * (len(ObservedList) / float(len(BlsUsesGraph))), 0)
-        log("{:>6}%".format(percents)+Tabs+"{}".format(BlsFileName))
+        percents = int(round(100.00 * (len(ObservedList) / float(len(BlsUsesGraph))), 0))
+        log("{:>3}%".format(percents)+Tabs+"{}".format(BlsFileName))
         BlsItemInfo = BlsUsesGraph.get(BlsFileName)
         if BlsItemInfo:
             BlsFilePath = BlsItemInfo[0]

@@ -1531,3 +1531,535 @@
   73.0%	Compiling rt_2depopanswergpb.bls 
   73.0%	Compiling dastateru.bls 
   73.0%	Compiling anuncrenewcon.bls 
+  73.0%	Compiling dbbis.bls 
+  73.0%	Compiling acimpufebs.bls 
+  73.0%	Compiling dbubsdocscheme.bls 
+  73.0%	Compiling dcb2bacc.bls 
+  73.0%	Compiling dbarmabevents.bls 
+  73.0%	Compiling rt_2azkkesr.bls 
+  74.0%	Compiling paaccdlr.bls 
+  74.0%	Compiling lblicserv.bls 
+  74.0%	Compiling mbsc2_2cancellationrequest.bls 
+  74.0%	Compiling abafntapd.bls 
+  74.0%	Compiling saqueset.bls 
+  74.0%	Compiling rt_2creditpayperiod.bls 
+  74.0%	Compiling dosutil.bls 
+  74.0%	Compiling dbuncrenewcon.bls 
+  74.0%	Compiling abibscdi138i.bls 
+  74.0%	Compiling scnotruracc.bls 
+  74.0%	Compiling dbrelatt.bls 
+  74.0%	Compiling sbdocackset.bls 
+  74.0%	Compiling dacfgsw.bls 
+  74.0%	Compiling dascnset.bls 
+  74.0%	Compiling rt_2branches.bls 
+  74.0%	Compiling rt_wagpbfscrcfdcinquiry.bls 
+  74.0%	Compiling acimpprs.bls 
+  74.0%	Compiling rt_wachargerequest.bls 
+  74.0%	Compiling uacacrl.bls 
+  74.0%	Compiling mb_abfinan.bls 
+  74.0%	Compiling mbsc_2remotecorresp.bls 
+  75.0%	Compiling rt_wagpbnetclient.bls 
+  75.0%	Compiling aaexpprs.bls 
+  75.0%	Compiling dbgpbtransit.bls 
+  75.0%		Compiling dbarmreadobject.bls 
+  75.0%	Compiling ababsstmxml.bls 
+  75.0%	Compiling scdeplist.bls 
+  75.0%	Compiling abafncur.bls 
+  75.0%	Compiling rt_wacountry.bls 
+  75.0%	Compiling rt_2azkproject.bls 
+  75.0%	Compiling abclvcrs.bls 
+  75.0%	Compiling dbsyslog.bls 
+  75.0%	Compiling samsg2cur.bls 
+  75.0%	Compiling aaexprtf.bls 
+  75.0%	Compiling dboutbkr.bls 
+  75.0%	Compiling dbdelabsdl.bls 
+  75.0%	Compiling lbstmd5ntapi.bls 
+  75.0%	Compiling sbbranch.bls 
+  75.0%	Compiling notifexe.bls 
+  75.0%	Compiling ua201500.bls 
+  75.0%	Compiling dccryrpl.bls 
+  75.0%	Compiling ua20_1_300.bls 
+  75.0%	Compiling dbcrlsrs.bls 
+  76.0%	Compiling dcchargeanswer.bls 
+  76.0%	Compiling rt_w3c_20stmreq.bls 
+  76.0%	Compiling sbtssetting.bls 
+  76.0%	Compiling pacrdlin138i.bls 
+  76.0%	Compiling rt_wadealpasscred138i.bls 
+  76.0%	Compiling dcdpcon138i.bls 
+  76.0%	Compiling rt_2remotendscalctype.bls 
+  76.0%	Compiling dab2bset.bls 
+  76.0%	Compiling abswift.bls 
+  76.0%	Compiling rt_2import.bls 
+  76.0%	Compiling datrexpi.bls 
+  76.0%	Compiling aacrupdc.bls 
+  76.0%	Compiling rt_waarmavailableservices.bls 
+  76.0%	Compiling dbcab.bls 
+  76.0%	Compiling abasvkboutcurd.bls 
+  76.0%	Compiling datatcp.bls 
+  76.0%	Compiling rjexpbudgrep.bls 
+  76.0%	Compiling dbubsini.bls 
+	ERROR: File "dbubsini.bls", Uses list "['lbUBSLnk.bls', 'LaPublic.bls', 'laError.bls', 'olSchem.bls', 'aaBranch.bls', 'lbLnkABS.bls', 'laConst.bls']"
+			BS language command line compiler. Version 2.0
+			(c) Bank's Soft Systems 1999-2013
+			
+			Program d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\dbubsini.bls
+			        NewClient(aTable,ReadFile(Path_OUT , 'out'+Name_FileData_Mask+IntToStr(UBSID)));
+			Code line is 367. Position: 47
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\dbubsini.bls (367): 3440. Types of actual and formal var parameters must be identical: bytes.
+			        NewClient(aTable,ReadFile(Path_OUT , 'out'+Name_FileData_Mask+IntToStr(UBSID)));
+			Code line is 367. Position: 88
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\dbubsini.bls (367): 3470. Not enough actual parameters.
+			
+			
+			
+	COMPILATION continues. Please wait...
+  76.0%	Compiling ababsbkx.bls 
+  76.0%	Compiling rt_wagpbcancelaccept.bls 
+  76.0%	Compiling dbrmpcfg.bls 
+  76.0%	Compiling datrterm.bls 
+  77.0%	Compiling ab21ccur.bls 
+  77.0%	Compiling dcbnkacc.bls 
+  77.0%	Compiling dbdocacktyp.bls 
+  77.0%	Compiling andpcon.bls 
+  77.0%	Compiling uadatetimesent.bls 
+  77.0%	Compiling mb2_group.bls 
+  77.0%	Compiling dcccdofc.bls 
+  77.0%		Compiling scccdocc.bls 
+  77.0%	Compiling abouttxt.bls 
+  77.0%	Compiling aboutconfxml86.bls 
+  77.0%	Compiling abibsrur.bls 
+  77.0%	Compiling acimp1c.bls 
+  77.0%	Compiling abbkxkvi.bls 
+  77.0%	Compiling dbfreebankdoccopyfilter.bls 
+  77.0%	Compiling angpbconvdep.bls 
+  77.0%	Compiling aatrans.bls 
+  77.0%	Compiling rt_wachargeanswer.bls 
+  77.0%	Compiling dbgenerc15.bls 
+  77.0%		Compiling lbgenerc15.bls 
+  77.0%	Compiling ancurcon.bls 
+  77.0%	Compiling rt_wadocackprofile.bls 
+  78.0%	Compiling rt_2azkplanlimitgroup.bls 
+  78.0%	Compiling avtoprocmba.bls 
+  78.0%	Compiling abbispaydoccur.bls 
+  78.0%	Compiling daaccsign.bls 
+  78.0%	Compiling dbgenpas.bls 
+  78.0%	Compiling dbwizrplnp.bls 
+  78.0%	Compiling dcpset.bls 
+  78.0%	Compiling dbevlogn.bls 
+  78.0%	Compiling rt_2custominvoicespecc.bls 
+  78.0%	Compiling aboutxml.bls 
+  78.0%	Compiling rt_wagpbconvconfclient.bls 
+  78.0%	Compiling dacfgmc.bls 
+  78.0%	Compiling sbpostnp.bls 
+  78.0%	Compiling sbipmactemp.bls 
+  78.0%	Compiling aafltadd.bls 
+  78.0%	Compiling dafbdocmba.bls 
+  78.0%	Compiling aboutbkr.bls 
+  78.0%	Compiling mbsc_2bankru.bls 
+  78.0%	Compiling mbsc2_2mngdevlist.bls 
+  78.0%	Compiling anuncfscrcdi.bls 
+  78.0%	Compiling rt_watransaddress.bls 
+  79.0%	Compiling dbgenagr.bls 
+  79.0%	Compiling sbpostcb.bls 
+  79.0%	Compiling rt_2mainpageaccounts.bls 
+  79.0%	Compiling dbqopday.bls 
+  79.0%	Compiling icicl.bls 
+  79.0%	Compiling obbespproc.bls 
+  79.0%	Compiling aboutdcb.bls 
+  79.0%	Compiling dbtransitaccnotice.bls 
+  79.0%	Compiling dbdictubsdialog.bls 
+  79.0%	Compiling pab2bfreedocc.bls 
+  79.0%	Compiling mbsc_2paygrndparam.bls 
+  79.0%	Compiling pafreebankdoc.bls 
+  79.0%	Compiling dbipmac.bls 
+  79.0%	Compiling mbsc_2freedocfrombank.bls 
+  79.0%	Compiling sagpbcanacc.bls 
+  79.0%	Compiling dbdpcre138i.bls 
+  79.0%	Compiling dccusblc.bls 
+  79.0%	Compiling abexpfraud.bls 
+  79.0%	Compiling abibscsh.bls 
+  79.0%	Compiling sabankr.bls 
+  79.0%	Compiling abcrygen.bls 
+  80.0%	Compiling mbsc_2settings.bls 
+  80.0%	Compiling rt_2freebankdoc.bls 
+  80.0%	Compiling rt_2gpbgeneralagreements.bls 
+  80.0%	Compiling sbmigsynctbl.bls 
+  80.0%	Compiling rt_w3c_20stmview.bls 
+  80.0%	Compiling abbisstatement.bls 
+  80.0%	Compiling obupdvers.bls 
+  80.0%		Compiling obmail.bls 
+  80.0%			Compiling obdepop.bls 
+  80.0%	Compiling dbgenint.bls 
+  80.0%	Compiling uadeford.bls 
+  80.0%	Compiling rt_2uncdocinf.bls 
+  80.0%	Compiling sbtrancl.bls 
+  80.0%	Compiling dapayroll.bls 
+  80.0%	Compiling dagpbdepop.bls 
+  80.0%	Compiling rt_waredealpasscon138i.bls 
+  80.0%	Compiling ab21cbuy.bls 
+  80.0%	Compiling dbnotifcnl.bls 
+  80.0%	Compiling rt_watransitaccpaydoc.bls 
+  80.0%	Compiling rt_2customfreedocb.bls 
+  80.0%	Compiling abubsval.bls 
+  81.0%	Compiling sccusdtm.bls 
+  81.0%	Compiling rt_2gpbtrigbalclient.bls 
+  81.0%	Compiling rt_wapaydocru.bls 
+  81.0%	Compiling dapaysign.bls 
+  81.0%	Compiling abafncbs.bls 
+  81.0%	Compiling dbabsbkr.bls 
+  81.0%	Compiling dbkeyusage.bls 
+  81.0%	Compiling abrsbcur.bls 
+  81.0%	Compiling dapayorderbankru.bls 
+  81.0%	Compiling rt_2stateru.bls 
+  81.0%	Compiling sbsselcl.bls 
+  81.0%	Compiling mb_userscroller.bls 
+  81.0%	Compiling daopnssl.bls 
+  81.0%	Compiling sbnews.bls 
+  81.0%		Compiling dbnewswiz.bls 
+  81.0%	Compiling lboraqrt.bls 
+  81.0%	Compiling sbunccon.bls 
+  81.0%	Compiling abclvcnl.bls 
+  81.0%	Compiling annewsack.bls 
+  81.0%	Compiling rt_2gpbcredconfbank.bls 
+  81.0%	Compiling ancusivspackc.bls 
+  82.0%	Compiling sbdpcred138i.bls 
+  82.0%	Compiling lcquickop.bls 
+  82.0%	Compiling ua20_1_440.bls 
+  82.0%	Compiling anunccon.bls 
+  82.0%	Compiling dbsstat.bls 
+  82.0%	Compiling dctanreq.bls 
+  82.0%	Compiling ababsdia.bls 
+  82.0%	Compiling sbuncrenewcon.bls 
+  82.0%	Compiling lbrp2mba.bls 
+  82.0%	Compiling dccsellf.bls 
+  82.0%	Compiling dcprnset.bls 
+  82.0%	Compiling rt_2dpcloseground.bls 
+  82.0%	Compiling rt_2deliverytype138i.bls 
+  82.0%	Compiling rt_2paramcry.bls 
+  82.0%	Compiling sbdeford.bls 
+  82.0%	Compiling aadeattachfiles.bls 
+  82.0%	Compiling saresusage.bls 
+  82.0%	Compiling abubs001.bls 
+  82.0%	Compiling lboraqls.bls 
+  82.0%	Compiling uacleartrash.bls 
+  82.0%	Compiling sacustpdf.bls 
+  83.0%	Compiling ubmbscver2.bls 
+  83.0%	Compiling abclvcnv.bls 
+  83.0%	Compiling rt_2mbamessage.bls 
+  83.0%	Compiling anrurinq.bls 
+  83.0%	Compiling rt_w3c_21stmbuilder.bls 
+  83.0%	Compiling rt_watransitaccnotice.bls 
+  83.0%	Compiling dacfgrtf.bls 
+  83.0%	Compiling rt_2azkcompany.bls 
+  83.0%	Compiling abskvoin.bls 
+  83.0%	Compiling rt_wafreebankdoc.bls 
+  83.0%	Compiling aanews.bls 
+  83.0%	Compiling dbstat1256.bls 
+  83.0%	Compiling uacouintname.bls 
+  83.0%	Compiling dbunccred.bls 
+  83.0%	Compiling ab51cac.bls 
+  83.0%	Compiling dbrootdlsecurity.bls 
+  83.0%	Compiling rt_2payorderbankru.bls 
+  83.0%	Compiling mbsc2_2freedoctobank.bls 
+  83.0%	Compiling aboutcrgxml86.bls 
+  83.0%	Compiling dbpdreg.bls 
+  83.0%	Compiling latzone.bls 
+  84.0%	Compiling notifscr.bls 
+  84.0%	Compiling dagpbconvdepop.bls 
+  84.0%	Compiling ocquickop.bls 
+  84.0%	Compiling dbcurrur.bls 
+  84.0%	Compiling dbnotifevt.bls 
+  84.0%	Compiling sbcusivb.bls 
+  84.0%	Compiling iampro11.bls 
+  84.0%	Compiling ab51que.bls 
+  84.0%	Compiling mbsc_2freedoctobank.bls 
+  84.0%	Compiling rt_wafreeclientdoc.bls 
+  84.0%	Compiling dbinetstyled.bls 
+  84.0%	Compiling acstattr.bls 
+  84.0%	Compiling mbsc_2businesscard.bls 
+  84.0%	Compiling anb2bactc.bls 
+  84.0%	Compiling paconfd.bls 
+  84.0%	Compiling dabankr.bls 
+  84.0%	Compiling pagpbcostop.bls 
+  84.0%	Compiling rt_2gpbfscrcrdlinquiry.bls 
+  84.0%	Compiling sccusivb.bls 
+  84.0%	Compiling sbcustcb.bls 
+  84.0%	Compiling dctrnot.bls 
+  85.0%	Compiling mbsc_2cryptoprofile.bls 
+  85.0%	Compiling ab51man.bls 
+  85.0%	Compiling dcredpcon138i.bls 
+  85.0%	Compiling dacruid.bls 
+  85.0%	Compiling acimp1cinvoice.bls 
+  85.0%	Compiling ababs21c.bls 
+  85.0%	Compiling savisaac.bls 
+  85.0%	Compiling sacrcertbkey.bls 
+  85.0%	Compiling dcaltadr.bls 
+  85.0%	Compiling mbsc_2auth.bls 
+  85.0%	Compiling mbsc2_2mngdev.bls 
+  85.0%	Compiling oblicserv.bls 
+  85.0%	Compiling sacrdlin138i.bls 
+  85.0%	Compiling pacusivspecc.bls 
+  85.0%	Compiling pab2breq.bls 
+  85.0%	Compiling uanavtree.bls 
+  85.0%	Compiling lbnumber.bls 
+  85.0%	Compiling abstmd5ntapi.bls 
+  85.0%	Compiling rt_2relreqb.bls 
+  85.0%	Compiling rt_2uncmsgtocurrsubject.bls 
+  85.0%	Compiling aaprrplc.bls 
+  86.0%	Compiling aaclrlog.bls 
+  86.0%	Compiling scruracc.bls 
+  86.0%	Compiling rt_2loanlist.bls 
+  86.0%	Compiling rt_waremotefilters.bls 
+  86.0%	Compiling dadpclgr.bls 
+  86.0%	Compiling acdocack.bls 
+  86.0%	Compiling rt_wagenpasswords.bls 
+  86.0%	Compiling pagpbfscrdlin.bls 
+  86.0%	Compiling iacryc.bls 
+  86.0%	Compiling ocstamps.bls 
+  86.0%	Compiling dcgpbtransit.bls 
+  86.0%	Compiling dbdpconf181i.bls 
+  86.0%	Compiling rt_2remoteground.bls 
+  86.0%	Compiling abreport.bls 
+  86.0%	Compiling rt_2b2brequest.bls 
+  86.0%	Compiling lbansdia.bls 
+  86.0%	Compiling mb_settings.bls 
+  86.0%	Compiling datrorg.bls 
+  86.0%		Compiling dabkactn.bls 
+  86.0%	Compiling rt_wacryptoca.bls 
+  86.0%	Compiling dacfggf.bls 
+  87.0%	Compiling rt_2country.bls 
+  87.0%	Compiling dacrdlin138i.bls 
+  87.0%		Compiling ancurinq138i.bls 
+  87.0%	Compiling daccom3x.bls 
+  87.0%	Compiling anclikey.bls 
+  87.0%	Compiling ababswf.bls 
+  87.0%	Compiling scstatqr.bls 
+  87.0%	Compiling anuncclos.bls 
+  87.0%	Compiling rt_2chargerequest.bls 
+  87.0%	Compiling dagpbfscorcrdlin.bls 
+  87.0%	Compiling rt_2metrics.bls 
+  87.0%	Compiling rt_wagpbcredconfclient.bls 
+  87.0%	Compiling ababsrsb.bls 
+  87.0%		Compiling abrsbkvt.bls 
+  87.0%	Compiling dcmansel.bls 
+  87.0%	Compiling obchstamp.bls 
+  87.0%	Compiling rt_2azkestimate.bls 
+  87.0%	Compiling dbcrycas.bls 
+  87.0%	Compiling sccusivspecb.bls 
+  87.0%	Compiling rt_2deplist.bls 
+  87.0%	Compiling rt_2crypto.bls 
+  88.0%	Compiling rt_waaccount.bls 
+  88.0%	Compiling pauncdocinf2015.bls 
+  88.0%	Compiling ab51csh.bls 
+  88.0%	Compiling aacrydat.bls 
+  88.0%	Compiling obb2breq.bls 
+  88.0%	Compiling rt_wawizzardclient.bls 
+  88.0%	Compiling dcplanterm.bls 
+  88.0%	Compiling dbloantypes.bls 
+  88.0%	Compiling dbgentan.bls 
+  88.0%	Compiling uadocs180.bls 
+  88.0%	Compiling dbopercona.bls 
+  88.0%	Compiling ubarchupd.bls 
+  88.0%	Compiling dbinfabs.bls 
+  88.0%	Compiling ancusdlc.bls 
+  88.0%	Compiling rt_wagentan.bls 
+  88.0%	Compiling rt_2b2baccount.bls 
+  88.0%	Compiling rt_2stm.bls 
+  88.0%	Compiling andpcon138i.bls 
+  88.0%	Compiling larefreh.bls 
+  88.0%	Compiling rt_2remotebenef.bls 
+  88.0%	Compiling rt_2dealpassrenew.bls 
+  89.0%	Compiling rt_wapaydoccur.bls 
+  89.0%	Compiling rt_2depcurrency.bls 
+  89.0%	Compiling rt_w3c_21stmviewbuilder.bls 
+  89.0%	Compiling dbuncrenewcred.bls 
+  89.0%	Compiling rt_2dealpasscon138i.bls 
+  89.0%	Compiling accorltx.bls 
+  89.0%	Compiling anredpcon138i.bls 
+  89.0%	Compiling rt_wagpbtransit.bls 
+  89.0%	Compiling daselectprinter.bls 
+  89.0%	Compiling rt_0treekrnl.bls 
+  89.0%	Compiling dbdelivt.bls 
+  89.0%	Compiling sbdepprod.bls 
+  89.0%	Compiling pbdoc.bls 
+  89.0%	Compiling rt_wadepopanswergpb.bls 
+  89.0%	Compiling darplcr.bls 
+  89.0%	Compiling dbrmauth.bls 
+  89.0%	Compiling abclvkvt.bls 
+  89.0%	Compiling dbdvkmsg.bls 
+  89.0%	Compiling abbisordercur.bls 
+  89.0%	Compiling aboutd5n.bls 
+  89.0%	Compiling rt_wacustomertype.bls 
+  90.0%	Compiling abkvtdcb.bls 
+  90.0%	Compiling abrsoracur.bls 
+  90.0%	Compiling scb2bfreedocc.bls 
+  90.0%	Compiling rt_2remotefilters.bls 
+  90.0%	Compiling dbabs.bls 
+  90.0%	Compiling dcquickop.bls 
+  90.0%	Compiling abrsorabuy.bls 
+  90.0%	Compiling sbevdocs.bls 
+  90.0%	Compiling dbabschs.bls 
+  90.0%	Compiling angpbfscrcdi.bls 
+  90.0%	Compiling dagpbfsconfd.bls 
+  90.0%	Compiling rt_waconfdocinquiry138i.bls 
+  90.0%	Compiling rt_2chargeanswer.bls 
+  90.0%	Compiling rt_2gpbdrawalcash.bls 
+  90.0%	Compiling rt_2depaccount.bls 
+  90.0%	Compiling scpostcb.bls 
+  90.0%	Compiling rt_2currbuy.bls 
+  90.0%	Compiling abibsman.bls 
+  90.0%	Compiling pauncrenewcon.bls 
+  90.0%	Compiling dcprdocf.bls 
+  90.0%	Compiling dbdocackset.bls 
+  91.0%	Compiling dbtgmail.bls 
+  91.0%	Compiling rt_2collectionorder.bls 
+  91.0%	Compiling dacalk.bls 
+  91.0%	Compiling uamasssign.bls 
+  91.0%	Compiling occcrout.bls 
+  91.0%	Compiling notify.bls 
+  91.0%	Compiling pacusdoc.bls 
+  91.0%	Compiling dbusrmnt.bls 
+  91.0%	Compiling sandstyp.bls 
+  91.0%	Compiling rt_wagpbfsdealpass.bls 
+  91.0%	Compiling iaaltok.bls 
+========================================================================================================================
+SETTINGS LOADED:
+	StarteamProject = DBO
+	StarteamView = DBO:Release_020:VIP:GPB:GPB_20.1.200_MASTER:GPB_20.1.200_1_FROZEN:GPB_20.1.200_ConfDocs:GPB_20.1.200_MBA:GPB_20.1.200_Migration:GPB_20.1.200_CurrencyControl:GPB_20.1.315_CRL:GPB_20.1.410_StmPayDoc:GPB_20.1.420_MassSign:GPB_20.1.430_MBK:GPB_20.1.440_IMGPRINT:GPB_20.1.450_CRYPTO
+	Labels = [('labelbefore', '20190124.GPB 020.1.450_patch.1'), ('label000', '20190128.GPB 020.1.450_patch.1')]
+	Licence server = bss-ofr
+	Licence profile = default
+	Path to stcmd.exe = C:\Program Files (x86)\Borland\StarTeam Cross-Platform Client 2009\stcmd.exe
+	Build RTS.ZIP = False
+	Place BLL/DLL in EXE folder of Client patch = False
+	Place build files in patch = False
+	Place IC build files in patch = False
+	Path to build files = \\fs\Builds\Builds\20.3\042\
+	Path to IC build files = \\fs\Builds\Builds\20.2\146\
+	BLL version=20190128.GPB 020.1.450
+Folder D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_TEMP_SOURCE EXISTS. So we could CONTINUE bls-compilation.
+	Asking Maestro for decision.
+  91.0%	Compiling aboutbkb.bls 
+  91.0%	Compiling rt_2dealpasscon.bls 
+  91.0%	Compiling paunccon.bls 
+	Maestro decided to CONTINUE with bls-compilation instead of restart patch building
+COMPILATION CONTINUED 2019-01-29 12:41:16
+  91.0%	Compiling dbtcpagset.bls 
+  91.0%	Compiling dbcuskpp.bls 
+  91.0%	Compiling rt_2_misc.bls 
+  91.0%	Compiling mbsc2_2paymentorder.bls 
+  91.0%	Compiling dbsetegg86.bls 
+  91.0%	Compiling rt_2gpbconvdepoclient.bls 
+  91.0%	Compiling dbcusdoc.bls 
+  92.0%	Compiling datsmail.bls 
+  92.0%	Compiling saconfd.bls 
+  92.0%	Compiling rt_w3c_22stmviewbuilder.bls 
+  92.0%	Compiling ab51crb.bls 
+  92.0%	Compiling lafdocmba.bls 
+CLEANING D:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK for ['*.bls', '*.bll'] files
+  92.0%	Compiling padpcre138i.bls 
+BEGIN BLS COMPILATION. Please wait...
+	ERROR: File "padpcre138i.bls", Uses list "['laError.bls', 'aaPrint.bls', 'laprint.bls', 'paStamps.bls', 'paStatDP.bls', 'PADocRu.bls', 'laConst.bls', 'laaddlib.bls', 'lapublic.bls']"
+			BS language command line compiler. Version 2.0
+			(c) Bank's Soft Systems 1999-2013
+			
+			Can't compile program () due to exception.
+			EFOpenError: Cannot open file "d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\PADPCRE138I.BLS". Не удается найти указанный файл
+			
+			
+	COMPILATION continues. Please wait...
+  92.0%	Compiling rt_2remotecorresp.bls 
+	ERROR: File "rt_2remotecorresp.bls", Uses list "['SSCommon.bls', 'SSErrors.bls', 'RT_1Common.bls', 'LaLibCtl.bls']"
+			BS language command line compiler. Version 2.0
+			(c) Bank's Soft Systems 1999-2013
+			
+			Can't compile program () due to exception.
+			EFOpenError: Cannot open file "d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\RT_2RemoteCorresp.bls". Не удается найти указанный файл
+			
+			
+	COMPILATION continues. Please wait...
+  92.0%	Compiling dclargestat.bls 
+	ERROR: File "dclargestat.bls", Uses list "['laPublic.bls']"
+			BS language command line compiler. Version 2.0
+			(c) Bank's Soft Systems 1999-2013
+			
+			Can't compile program () due to exception.
+			EFOpenError: Cannot open file "d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\dcLargeStat.bls". Не удается найти указанный файл
+			
+			
+	COMPILATION continues. Please wait...
+  92.0%	Compiling scchargeanswer.bls 
+	ERROR: File "scchargeanswer.bls", Uses list "['lcChargeAnswer.bls']"
+			BS language command line compiler. Version 2.0
+			(c) Bank's Soft Systems 1999-2013
+			
+			Can't compile program () due to exception.
+			EFOpenError: Cannot open file "d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\scChargeAnswer.bls". Не удается найти указанный файл
+			
+			
+	COMPILATION continues. Please wait...
+  92.0%	Compiling mbsc_2account.bls 
+	ERROR: File "mbsc_2account.bls", Uses list "['MBSC_1errors.bls', 'MB_DateTimeConv.bls', 'MBSC_0consts.bls', 'MBSC_1common.bls', 'laPublic.bls']"
+			BS language command line compiler. Version 2.0
+			(c) Bank's Soft Systems 1999-2013
+			
+			Can't compile program () due to exception.
+			EFOpenError: Cannot open file "d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\MBSC_2account.bls". Не удается найти указанный файл
+			
+			
+	COMPILATION continues. Please wait...
+  92.0%	Compiling obgenarm.bls 
+	ERROR: File "obgenarm.bls", Uses list "['lbGenerC.bls', 'laConst.bls']"
+			BS language command line compiler. Version 2.0
+			(c) Bank's Soft Systems 1999-2013
+			
+			Program d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS
+			  lbGenerC, laConst;
+			Code line is 20. Position: 4
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (20): 3550. Error loading library 'lbGenerC': ELoadLibraryError:Library lbGenerC not found..
+			  lbGenerC, laConst;
+			Code line is 20. Position: 14
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (20): 3550. Error loading library 'laConst': ELoadLibraryError:Library laConst not found..
+			  fCopyDirectoriesResult:=SO_CopyDirectory(fCopyDirectoriesFromPath,fCopyDirectoriesToPath);
+			Code line is 28. Position: 28
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (28): 3140. Undeclared identifier: 'SO_CopyDirectory'.
+			  fCopyFilesResult:=SO_CopyFile(fCopyFilesFromPath,fCopyFilesToPath);
+			Code line is 37. Position: 22
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (37): 3140. Undeclared identifier: 'SO_CopyFile'.
+			    oDLL.ResultType:=cptBoolean;
+			Code line is 58. Position: 23
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (58): 3140. Undeclared identifier: 'cptBoolean'.
+			    oDLL.ResultType:=cptBoolean;
+			Code line is 67. Position: 23
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (67): 3140. Undeclared identifier: 'cptBoolean'.
+			    oDLL.ResultType:=cptInteger;
+			Code line is 76. Position: 23
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (76): 3140. Undeclared identifier: 'cptInteger'.
+			    oDLL.ResultType:=cptInteger;
+			Code line is 81. Position: 23
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (81): 3140. Undeclared identifier: 'cptInteger'.
+			    oDLL.ResultType:=cptBoolean;
+			Code line is 108. Position: 23
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (108): 3140. Undeclared identifier: 'cptBoolean'.
+			    oDLL.ResultType:=cptBoolean;
+			Code line is 117. Position: 23
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (117): 3140. Undeclared identifier: 'cptBoolean'.
+			    oDLL.ResultType:=cptInteger;
+			Code line is 126. Position: 23
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (126): 3140. Undeclared identifier: 'cptInteger'.
+			    oDLL.ResultType:=cptInteger;
+			Code line is 131. Position: 23
+			[Compile error] d:\Users\greatsokol\Desktop\PTCHBLDR\_TEMP\_BUILD\BK\OBGENARM.BLS (131): 3140. Undeclared identifier: 'cptInteger'.
+			
+			
+			
+	COMPILATION continues. Please wait...
+  92.0%	Compiling sbcusdoc.bls 
+  0%	obsigdcm.bls
+  0%		laconst.bls
+  0%		laaddlib.bls
+  0%			laerror.bls
+  0%		lapublic.bls
+  0%			laslog.bls
+  0%			olschem.bls
+  0%			lasconst.bls
