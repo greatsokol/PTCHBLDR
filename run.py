@@ -11,8 +11,6 @@ import fnmatch
 import sys
 import time
 import datetime
-from email import message
-from statistics import mean
 
 const_instance_BANK = "BANK"
 const_instance_IC = "IC"
@@ -1174,9 +1172,9 @@ def get_version_from_win32_pe(file):
     # large binaries.
     try:
         file_data = open(file).read()
-    except IOError:
+    except IOError or FileNotFoundError:
         return "Unknown"
-    offset = file_data.find(sig)
+    offset = file_data.find(str(sig))
     if offset == -1:
         return "Unknown"
 
@@ -1220,28 +1218,28 @@ def get_binary_platform(full_file_path):
                 else:
                     return "Unknown"
                     # log("Unknown architecture")
-    except BaseException:
+    except IOError or FileNotFoundError:
         return None
 
 
 # -------------------------------------------------------------------------------------------------
-def __get_exe_file_info__(fullFilePath):
+def __get_exe_file_info__(full_file_path):
     # http://windowssdk.msdn.microsoft.com/en-us/library/ms646997.aspx
     sig = struct.pack("32s", u"VS_VERSION_INFO".encode("utf-16-le"))
     # This pulls the whole file into memory, so not very feasible for
     # large binaries.
     try:
-        with open(fullFilePath, 'rb') as f:
-            filedata = f.read()
-    except BaseException:
+        with open(full_file_path, 'rb') as f:
+            file_data = f.read()
+    except IOError or FileNotFoundError:
         return None
-    offset = filedata.find(sig)
+    offset = file_data.find(sig)
     if offset == -1:
         return None
 
-    filedata = filedata[offset + 32: offset + 32 + (13 * 4)]
-    version_struct = struct.unpack("13I", filedata)
-    ver_ms, ver_ls = version_struct[4], version_struct[5]
+    file_data = file_data[offset + 32: offset + 32 + (13 * 4)]
+    version_structure = struct.unpack("13I", file_data)
+    ver_ms, ver_ls = version_structure[4], version_structure[5]
     return "%d.%d.%d.%d" % (ver_ls & 0x0000ffff, (ver_ms & 0xffff0000) >> 16,
                             ver_ms & 0x0000ffff, (ver_ls & 0xffff0000) >> 16)
 
@@ -1262,7 +1260,7 @@ def extract_build_version(build_path):
                 ver = None
                 try:
                     ver = __get_exe_file_info__(f)
-                except FileNotFoundError:
+                except IOError or FileNotFoundError:
                     pass
                 # отладочный билд имеет кривую версию, нужно пропустить
                 if (ver is not None) and (ver != '1.0.0.0') and (ver != '0.0.0.0'):
@@ -1529,6 +1527,7 @@ def download_build(settings):
         #  Если в настройках включено копирование билда в патч
         if settings.PlaceBuildIntoPatchBK or settings.PlaceBuildIntoPatchIC:
             log('COPYING build into patch for {}'.format(instance))
+            excluded_files = ''
             if instance == const_instance_BANK:
                 excluded_files = const_excluded_build_for_BANK
             elif instance == const_instance_IC:
@@ -1892,9 +1891,9 @@ def main():
                 bls_just_downloaded = continue_compilation = copy_bls(True,
                                                                       const_dir_COMPARED_BLS,
                                                                       dir_PATCH_LIBFILES_SOURCE)
-                need_download_build = continue_compilation or \
-                                      global_settings.PlaceBuildIntoPatchBK or \
-                                      global_settings.PlaceBuildIntoPatchIC
+                need_download_build = \
+                    continue_compilation or global_settings.PlaceBuildIntoPatchBK or \
+                    global_settings.PlaceBuildIntoPatchIC
                 build_downloaded = False
                 # если требуется загрузка билда (для компиляции или для помещения в патч)
                 if need_download_build:
