@@ -11,6 +11,7 @@ import fnmatch
 import sys
 import time
 import datetime
+import cProfile
 
 const_instance_BANK = "BANK"
 const_instance_IC = "IC"
@@ -1281,12 +1282,9 @@ def open_encoding_aware(path):
             fh = open(path, 'r', encoding=e)
             fh.readlines()
             fh.seek(0)
-        except ValueError as err:
-            log(err)
+        except ValueError:
             pass
-            # log('\tGot error "{}" with {} , trying different encoding ({} was used)'.format(err, path, e))
         else:
-            # log('\topening the file {} with encoding:  {}'.format(path, e))
             return fh
     return None
 
@@ -1334,7 +1332,8 @@ def bls_get_uses_graph(path):
                                 # TODO: ЭТА ВЕТКА НЕ НУЖНА, НАДО УДАЛИТЬ (ВЫШЕ УЖЕ ДОБАВЛЯЮ ПУСТОЙ ЭЛЕМЕНТ)
                                 # если файла нет в списке зависимостей,
                                 # то добавим "{название_файла: [полное_название_с_путем, [список_зависимостей]]}"
-                                bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
+                                #bls_uses_graph.update({file_name_without_path: [file_name, uses_list]})
+                                pass
 
     return bls_uses_graph
 
@@ -1596,7 +1595,7 @@ def download_build(settings):
                 if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA] \
                         and settings.PlaceBuildIntoPatchBK:
                     # выкладываем билд для Б и БК
-                    mask = ['*.exe', '*.ex', '*.bpl']  # todo bpl-ки в SYSTEM или в EXE?
+                    mask = ['*.exe', '*.ex', '*.bpl']
                     copy_files(build_path, dir_PATCH_LIBFILES_EXE(instance), mask, excluded_files)
                     if settings.ClientEverythingInEXE and instance == const_instance_CLIENT:
                         copy_files(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_files)
@@ -1953,4 +1952,5 @@ def main():
     log('DONE -----------------')
 
 
-main()
+#main()
+cProfile.run(main())
