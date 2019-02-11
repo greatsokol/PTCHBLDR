@@ -980,68 +980,72 @@ def make_upgrade10_eif_string_for_tables(file_name):
     file_name_lower = file_name.lower()
     if file_name_lower.endswith('default') or \
             file_name_lower.startswith('root') or \
-            file_name_lower == 'CUSTOMEROLDRPL':  # Для дефолтных таблиц
+            file_name_lower == 'customeroldrpl':  # Для дефолтных таблиц
         result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
     elif file_name.find(".") > 0:  # Для блобов
         result = "<{}|{}|'{}'|TRUE|FALSE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('orderstartflag'):
+    elif file_name_lower=='orderstartflag':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'Flag'|NULL|NULL|NULL|NULL|'Таблицы'>" \
                  " #TODO проверьте data таблицы"
-    elif file_name_lower.startswith('paygrndparam'):
+    elif file_name_lower=='paygrndparam':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>" \
                  " #TODO проверьте data таблицы"
-    elif file_name_lower.startswith('docschemesettings'):
+    elif file_name_lower=='docschemesettings':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID'|NULL|NULL|NULL|NULL|'Таблицы'>" \
                  " #TODO проверьте data таблицы"
-    elif file_name_lower.startswith('docprintsettings'):
+    elif file_name_lower=='docprintsettings':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'BranchID,CustId,SchemeId'|NULL|NULL|NULL|NULL|'Таблицы'>" \
                  " #TODO проверьте data таблицы"
-    elif file_name_lower.startswith('docmultiprintsettings'):
+    elif file_name_lower=='docmultiprintsettings':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'SchemeID,PrintFormName'|NULL|NULL|NULL|NULL|'Таблицы'>" \
                  " #TODO проверьте data таблицы"
-    elif file_name_lower.startswith('noticeconfig'):
+    elif file_name_lower=='noticeconfig':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('mailreport'):
+    elif file_name_lower=='mailreport':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('filtersettings'):
+    elif file_name_lower=='filtersettings':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ScrollerName'|NULL|NULL|NULL|NULL|'Таблицы'> " \
                  "#TODO проверьте data таблицы"
-    elif file_name_lower.startswith('linktxt'):
+    elif file_name_lower=='linktxt':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'NameFormat'|NULL|NULL|NULL|NULL|'Таблицы'> " \
                  "#TODO проверьте data таблицы"
-    elif file_name_lower.startswith('memorydiasoftbuf'):
+    elif file_name_lower=='memorydiasoftbuf':
         result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|''|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('absmanagertype'):
+    elif file_name_lower=='absmanagertype':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID'|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('dcmversions'):
+    elif file_name_lower=='dcmversions':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'SchemeID,PatchNewVersion'|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('transschema'):
+    elif file_name_lower=='transschema':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ConnType,SchemaName'|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('remotenavmenus'):
+    elif file_name_lower=='remotenavmenus':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID'|NULL|NULL|NULL|NULL|'Таблицы'> " \
                  "#TODO проверьте data таблицы"
-    elif file_name_lower.startswith('remotenavtrees'):
+    elif file_name_lower=='remotenavtrees':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID'|NULL|NULL|NULL|NULL|'Таблицы'> " \
                  "#TODO проверьте data таблицы, обновлять нужно только эталонное дерево"
-    elif file_name_lower.startswith('wanavtrees'):
+    elif file_name_lower=='wanavtrees':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('balaccountsettings'):
+    elif file_name_lower=='balaccountsettings':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('rkobranches'):
+    elif file_name_lower=='rkobranches':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('nocopydocfields'):
+    elif file_name_lower=='nocopydocfields':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('mbamsgxmlstructure'):
+    elif file_name_lower=='mbamsgxmlstructure':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('mbamsgscheme'):
+    elif file_name_lower=='mbamsgscheme':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('mbamsgdocstatus'):
+    elif file_name_lower=='mbamsgdocstatus':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('mbadocumentssettings'):
+    elif file_name_lower=='mbadocumentssettings':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-    elif file_name_lower.startswith('controlsettings') or \
-            file_name_lower.startswith('controlconstants') or \
-            file_name_lower.startswith('controlgroups'):
+    elif file_name_lower=='smssettings':
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower=='offersettings':
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'Autokey'|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower=='controlsettings' or \
+            file_name_lower=='controlconstants' or \
+            file_name_lower=='controlgroups':
         result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ ВЫЗОВ uaControls или другой ua-шки  >"
     else:  # Если заливается структура полностью
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> " \
@@ -1953,4 +1957,4 @@ def main():
 
 
 #main()
-cProfile.run(main())
+cProfile.run("main()")
