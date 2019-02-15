@@ -11,7 +11,7 @@ import fnmatch
 import sys
 import time
 import datetime
-import cProfile
+
 
 const_instance_BANK = "BANK"
 const_instance_IC = "IC"
@@ -969,8 +969,12 @@ def compare_directories_before_and_after():
         log('\tUSING folder "AFTER" as compare result, because "BEFORE" not exists:')
         log('\tBEFORE (not exists): {}'.format(const_dir_BEFORE))
         log('\tAFTER              : {}'.format(const_dir_AFTER))
-
-    log('\tFINISHED compare directories. LOOK at {}'.format(const_dir_COMPARED))
+    if os.path.exists(const_dir_COMPARED):
+        log('\tFINISHED compare directories. LOOK at {}'.format(const_dir_COMPARED))
+        return True
+    else:
+        log('\tFINISHED compare directories. NO CHANGES!!!')
+        return False
 
 
 # -------------------------------------------------------------------------------------------------
@@ -1883,7 +1887,9 @@ def main():
     if not continue_compilation:
         if ask_starteam_password(global_settings):
             if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
-                compare_directories_before_and_after()
+                if not compare_directories_before_and_after():
+                    log('EXIT -----------------')
+                    return
                 for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
                     download_table_10_files_for_data_files(global_settings, instance)
                     generate_upgrade10_eif(instance)
@@ -1952,5 +1958,4 @@ def main():
     log('DONE -----------------')
 
 
-# main()
-cProfile.run("main()")
+main()
