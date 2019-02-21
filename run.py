@@ -527,7 +527,11 @@ class GlobalSettings:
         self.LicenseProfile = ''
         self.Is20Version = None
         self.BLLVersion = ''
+        self.__success = False
         self.read_config()
+
+    def was_success(self):
+        self.__success
 
     def read_config(self):
         ini_filename = 'settings.ini'
@@ -536,6 +540,8 @@ class GlobalSettings:
         section_labels = 'LABELS'
         section_build = 'BUILD'
         try:
+            if not os.path.exists(ini_filename):
+                raise FileNotFoundError('NOT FOUND ' + ini_filename)
             parser = configparser.RawConfigParser()
             res = parser.read(ini_filename, encoding="UTF-8")
             if res.count == 0:  # если файл настроек не найден
@@ -582,8 +588,9 @@ class GlobalSettings:
 
         except BaseException as e:
             log('ERROR when reading settings from file "{}":\n\t\t{}'.format(ini_filename, e))
-            return None
+
         else:
+            self.__success = True
             log('SETTINGS LOADED:\n\t'
                 'StarteamProject = {}\n\t'
                 'StarteamView = {}\n\t'
@@ -763,7 +770,7 @@ def clean(path, masks=None):
                     [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in
                      fnmatch.filter(files, mask)]
             else:
-                log('CLEANING {}'.format(path))
+                log('\nCLEANING {}'.format(path))
                 # Сначала чистим все файлы,
                 [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in files]
                 # потом чистим все
@@ -790,7 +797,7 @@ def starteam_list_directories(settings, label, label_command, excluded_folders=N
             settings.starteam_port,
             settings.starteam_project,
             settings.starteam_view)
-        message_text = 'Loading directories from Starteam'
+        message_text = '\nLoading directories from Starteam'
         if label_command:
             launch_string += label_command
             message_text += ' for label(date) "{}"'.format(label)
@@ -1831,7 +1838,7 @@ def download_mba_dll(settings):
 # -------------------------------------------------------------------------------------------------
 def ask_starteam_password(settings):
     if settings.starteam_password == '':
-        settings.starteam_password = get_password('Maestro, please, ENTER StarTeam PASSWORD for "{}":'.
+        settings.starteam_password = get_password('\nMaestro, please, ENTER StarTeam PASSWORD for "{}":'.
                                                   format(settings.starteam_login))
     result = settings.starteam_password.strip() != ''
     if not result:
@@ -1865,7 +1872,7 @@ def make_decision_compilation_or_restart():
 def main():
     log('{:=^120}'.format(''))
     global_settings = GlobalSettings()  # read_config()
-    if global_settings is None:
+    if not global_settings.was_success():
         return
 
     bls_just_downloaded = False
@@ -1876,10 +1883,10 @@ def main():
             return
 
     if not continue_compilation:
-        log('BUILD BEGIN {}'.
+        log('\nBUILD BEGIN {}'.
             format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
     else:
-        log('COMPILATION CONTINUED {}'.
+        log('\nCOMPILATION CONTINUED {}'.
             format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
 
     # Если пользователь не выбрал продолжение компиляции, запустим
@@ -1888,7 +1895,7 @@ def main():
         if ask_starteam_password(global_settings):
             if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
                 if not compare_directories_before_and_after():
-                    log('EXIT -----------------')
+                    log('\nEXIT -----------------')
                     return
                 for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
                     download_table_10_files_for_data_files(global_settings, instance)
@@ -1955,7 +1962,7 @@ def main():
                                global_settings.BLLVersion):
                 # копируем готовые BLL в патч
                 copy_bll(global_settings)
-    log('DONE -----------------')
+    log('\nDONE -----------------')
 
 
 main()
