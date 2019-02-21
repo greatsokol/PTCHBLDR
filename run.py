@@ -531,7 +531,7 @@ class GlobalSettings:
         self.read_config()
 
     def was_success(self):
-        self.__success
+        return self.__success
 
     def read_config(self):
         ini_filename = 'settings.ini'
