@@ -1095,7 +1095,7 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
         elif structure_type == '30':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Сценарии'>"
         elif structure_type == '65':
-            if file_name.lower() == 'subsys(65).eif':
+            if file_name.lower() == 'subsys(65).eif' or file_name.lower() == 'mbsc2(65).eif':
                 result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'RTS SUBSYS(65)'> " \
                          "#TODO проверьте настройку"
             else:
