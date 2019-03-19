@@ -1544,6 +1544,11 @@ def download_build(settings):
                 excluded_files = const_excluded_build_for_BANK
             elif instance in [const_instance_CLIENT, const_instance_CLIENT_MBA]:
                 excluded_files = const_excluded_build_for_CLIENT
+
+            mask_for_EXE_dir = ['*.exe', '*.ex', '*.bpl', 'LocProt.dll', 'PerfControl.dll']
+            excluded_for_SYSTEM_dir = excluded_files + ['LocProt.dll', 'PerfControl.dll']
+            excluded_for_SYSTEM_CLIENT_dir = const_excluded_build_for_CLIENT + ['LocProt.dll', 'PerfControl.dll']
+
             if is20:  # для билда 20-ой версии
                 if instance == const_instance_IC and settings.PlaceBuildIntoPatchIC:  # выкладываем билд плагина для ИК
                     build_path_bank = os.path.join(const_dir_TEMP_BUILD_BK,
@@ -1583,17 +1588,15 @@ def download_build(settings):
                         copy_files(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл CBStart.exe в корень патча
                     for release in ['32', '64']:  # выкладываем остальной билд для Б и БК для версий 32 и 64
                         build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win{}\\Release'.format(release))
-                        mask = ['*.exe', '*.ex', '*.bpl']
-                        copy_files(build_path, dir_PATCH_LIBFILES_EXE(instance, release), mask, excluded_files)
-                        copy_files(build_path, dir_PATCH_LIBFILES_SYSTEM(instance, release), ['*.dll'], excluded_files)
+                        copy_files(build_path, dir_PATCH_LIBFILES_EXE(instance, release), mask_for_EXE_dir, excluded_files)
+                        copy_files(build_path, dir_PATCH_LIBFILES_SYSTEM(instance, release), ['*.dll'], excluded_for_SYSTEM_dir)
                         copy_files(build_path, dir_PATCH_CBSTART(instance, release), ['CBStart.exe'], [])
                         if instance == const_instance_BANK:
                             # заполняем TEMPLATE шаблон клиента в банковском патче
-                            mask = ['*.exe', '*.ex', '*.bpl']
-                            copy_files(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(release), mask,
+                            copy_files(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(release), mask_for_EXE_dir,
                                        const_excluded_build_for_CLIENT)
                             copy_files(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(release),
-                                       ['*.dll'], const_excluded_build_for_CLIENT)
+                                       ['*.dll'], excluded_for_SYSTEM_CLIENT_dir)
                             mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll',
                                     'GetIName.dll']
                             copy_files(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(release), mask, [])
@@ -1606,12 +1609,11 @@ def download_build(settings):
                 if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA] \
                         and settings.PlaceBuildIntoPatchBK:
                     # выкладываем билд для Б и БК
-                    mask = ['*.exe', '*.ex', '*.bpl']
-                    copy_files(build_path, dir_PATCH_LIBFILES_EXE(instance), mask, excluded_files)
+                    copy_files(build_path, dir_PATCH_LIBFILES_EXE(instance), mask_for_EXE_dir, excluded_files)
                     if settings.ClientEverythingInEXE and instance == const_instance_CLIENT:
-                        copy_files(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_files)
+                        copy_files(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_for_SYSTEM_dir)
                     else:
-                        copy_files(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_files)
+                        copy_files(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_for_SYSTEM_dir)
 
                 if instance == const_instance_BANK and settings.PlaceBuildIntoPatchBK:
                     copy_files(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
@@ -1621,10 +1623,10 @@ def download_build(settings):
                                const_excluded_build_for_CLIENT)
                     if settings.ClientEverythingInEXE:
                         copy_files(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), ['*.dll'],
-                                   const_excluded_build_for_CLIENT)
+                                   excluded_for_SYSTEM_CLIENT_dir)
                     else:
                         copy_files(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM(), ['*.dll'],
-                                   const_excluded_build_for_CLIENT)
+                                   excluded_for_SYSTEM_CLIENT_dir)
                     mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
                     copy_files(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), mask, [])
                     mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll', 'ilCpyDoc.dll']
