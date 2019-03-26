@@ -516,6 +516,7 @@ class GlobalSettings:
         self.starteam_view = ''
         self.starteam_password = ''
         self.Labels = []
+        self.BuildAdditionalFolders = []
         self.BuildBK = ''
         self.BuildIC = ''
         self.BuildCrypto = ''
@@ -555,6 +556,8 @@ class GlobalSettings:
             self.LicenseServer = parser.get(section_special, 'LicenseServer').strip()
             self.LicenseProfile = parser.get(section_special, 'LicenseProfile').strip()
             self.Labels = parser.items(section_labels)
+            self.BuildAdditionalFolders = \
+                [filepath.strip() for filepath in parser.get(section_build, 'ADDITIONAL').split(';')]
             self.BuildBK = parser.get(section_build, 'BK').strip()
             self.BuildIC = parser.get(section_build, 'IC').strip()
             self.BuildCrypto = parser.get(section_build, 'Crypto').strip()
@@ -602,12 +605,14 @@ class GlobalSettings:
                 'Place BLL/DLL in EXE folder of Client patch = {}\n\t'
                 'Place build files in patch = {}\n\t'
                 'Place IC build files in patch = {}\n\t'
+                'Path to additional build files = {}\n\t'
                 'Path to build files = {}\n\t'
                 'Path to IC build files = {}\n\t'
-                'BLL version={}'.
+                'BLL version = {}'.
                 format(self.starteam_project, self.starteam_view, self.Labels, self.LicenseServer,
                        self.LicenseProfile, self.stcmd, self.BuildRTSZIP, self.ClientEverythingInEXE,
-                       self.PlaceBuildIntoPatchBK, self.PlaceBuildIntoPatchIC, self.BuildBK, self.BuildIC,
+                       self.PlaceBuildIntoPatchBK, self.PlaceBuildIntoPatchIC, self.BuildAdditionalFolders,
+                       self.BuildBK, self.BuildIC,
                        self.BLLVersion))
 
 
@@ -1474,18 +1479,18 @@ def __copy_build_ex__(build_path, build_path_crypto, dest_path, only_get_version
                 src = os.path.join(build_path, win_rel)
                 dst = os.path.join(dest_path, win_rel)
                 clean(dst)
-                log('COPYING BUILD {} from "{}" in "{}"'.format(version, src, dst))
+                log('COPYING BUILD {} from "{}" to "{}"'.format(version, src, dst))
                 copy_files(src, dst, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
                 if build_path_crypto:
                     src = os.path.join(build_path_crypto, win_rel)
-                    log('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, src, dst))
+                    log('COPYING CRYPTO BUILD {} from "{}" to "{}"'.format(version, src, dst))
                     copy_files(src, dst, ['CryptLib.dll', 'cr_*.dll'], [])
         else:
             clean(dest_path)
-            log('COPYING BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
+            log('COPYING BUILD {} from "{}" to "{}"'.format(version, build_path, dest_path))
             copy_files(build_path, dest_path, ['*.exe', '*.ex', '*.bpl', '*.dll'], [])
             if build_path_crypto:
-                log('COPYING CRYPTO BUILD {} from "{}" in "{}"'.format(version, build_path, dest_path))
+                log('COPYING CRYPTO BUILD {} from "{}" to "{}"'.format(version, build_path, dest_path))
                 copy_files(build_path_crypto, dest_path, ['CryptLib.dll', 'cr_*.dll'], [])
     return version
 
@@ -1526,10 +1531,13 @@ def download_build(settings):
         if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
             is20 = is_20_version(build_version)
             if is20 and instance == const_instance_BANK:
-                build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
                 # это копируются все файлы, которые будут участвовать в компиляции BLS на следующем шаге
                 # т.к. в результате __copy_build__ весь билд оказывается разделен на Win32 и Win64
+                build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
                 copy_files(build_path, const_dir_TEMP_BUILD_BK, ['*.*'], [])
+                for filepath in settings.BuildAdditionalFolders:
+                    log('COPYING ADDITIONAL from "{}" to "{}"'.format(filepath, const_dir_TEMP_BUILD_BK))
+                    copy_files(filepath, const_dir_TEMP_BUILD_BK, ['*.*'], [])
         else:
             is20 = is_20_version(build_ic_version)
         settings.Is20Version = is20
