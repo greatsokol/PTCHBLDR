@@ -1871,7 +1871,7 @@ def make_decision_compilation_or_restart():
 
 
 # -------------------------------------------------------------------------------------------------
-def main():
+def patch():
     log('{:=^120}'.format(''))
     global_settings = GlobalSettings()  # read_config()
     if not global_settings.was_success():
@@ -1967,4 +1967,19 @@ def main():
     log('\nDONE -----------------')
 
 
-main()
+
+
+def compile_only():
+    log('{:=^120}'.format(''))
+    global_settings = GlobalSettings()  # read_config()
+    if not global_settings.was_success():
+        return
+    if not clean(const_dir_TEMP):
+        return
+    if download_build(global_settings):
+        if ask_starteam_password(global_settings):
+            if download_starteam(global_settings, None, const_dir_TEMP_TEMPSOURCE,
+                                 const_dir_TEMP_TEMPSOURCE, 'BLS/', '*.bls'):
+                bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile,
+                                const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE,
+                                global_settings.BLLVersion)
