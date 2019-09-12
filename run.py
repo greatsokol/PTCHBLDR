@@ -1581,11 +1581,12 @@ def download_build(settings):
     for instance in instances:
         if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
             is20 = is_20_version(build_version)
+            # это копируются все файлы, которые будут участвовать в компиляции BLS на следующем шаге
+            # т.к. в результате __copy_build__ весь билд оказывается разделен на Win32 и Win64
             if is20 and instance == const_instance_BANK:
-                # это копируются все файлы, которые будут участвовать в компиляции BLS на следующем шаге
-                # т.к. в результате __copy_build__ весь билд оказывается разделен на Win32 и Win64
                 build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win32\\Release')
                 copy_files_from_all_subdirectories(build_path, const_dir_TEMP_BUILD_BK, ['*.*'], [])
+            if instance == const_instance_BANK:
                 for filepath in settings.BuildAdditionalFolders:
                     log('COPYING ADDITIONAL from "{}" to "{}"'.format(filepath, const_dir_TEMP_BUILD_BK))
                     copy_files_from_all_subdirectories(filepath, const_dir_TEMP_BUILD_BK, ['*.*'], [])
@@ -1746,13 +1747,13 @@ def copy_bls(clean_destdir, source_dir, dest_dir):
 # -------------------------------------------------------------------------------------------------
 def copy_bll(settings):
     log('COPYING BLL files to patch')
-    bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['?b*.bls'])
-    bll_files_only_rts = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll',
+    bll_files_only_bank = list_files_remove_paths_and_change_extension(const_dir_COMPARED_BLS, '.bll', ['?b*.bls'])
+    bll_files_only_rts = list_files_remove_paths_and_change_extension(const_dir_COMPARED_BLS, '.bll',
                                                                       ['RT_*.bls', 'sscommon.bls', 'ssxml.bls',
                                                                        'sserrors.bls'])
     bll_files_only_mba = list_files_remove_paths_and_change_extension(const_dir_COMPARED_BLS_SOURCE_RCK, '.bll',
                                                                       ['*.bls'])
-    bll_files_all = list_files_remove_paths_and_change_extension(const_dir_COMPARED, '.bll', ['*.bls'])
+    bll_files_all = list_files_remove_paths_and_change_extension(const_dir_COMPARED_BLS, '.bll', ['*.bls'])
     bll_files_tmp = list_files_by_list(const_dir_TEMP_BUILD_BK, bll_files_all)
     if len(bll_files_tmp) != len(bll_files_all):
         log('\tERROR: Not all changed BLS files were compiled {}'.format(list(set(bll_files_all) - set(bll_files_tmp))))
@@ -2042,3 +2043,13 @@ def compile_only():
                 bls_compile_all(global_settings.LicenseServer, global_settings.LicenseProfile,
                                 const_dir_TEMP_BUILD_BK, const_dir_TEMP_TEMPSOURCE,
                                 global_settings.BLLVersion)
+
+
+if __name__ == "__main__":
+    argument = sys.argv[1]
+    if argument == '/patch' or argument == '-patch':
+        patch()
+    elif argument == '/compile' or argument == '-compile':
+        compile_only()
+    else:
+        log('UNKNOWN ARGUMENT {}'.format(argument))

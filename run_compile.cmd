@@ -1,2 +1,2 @@
-python -c "import run; run.compile_only()"
+python run.py -compile
 pause

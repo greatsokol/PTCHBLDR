@@ -1,2 +1,2 @@
-python -c "import run; run.patch()"
+python run.py -patch
 pause
