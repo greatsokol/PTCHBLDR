@@ -1088,6 +1088,12 @@ def make_upgrade10_eif_string_for_tables(file_name):
                  "#TODO проверьте data таблицы, обновлять нужно только эталонное дерево"
     elif file_name_lower == 'offersettings':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'Autokey'|NULL|NULL|NULL|NULL|'Таблицы'>"
+    elif file_name_lower == 'armabcode':
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'Code'|NULL|NULL|NULL|NULL|'Таблицы'> " \
+                 "#TODO обязательно дельту"
+    elif file_name_lower == 'systemlogcodeset':
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'TransactionType'|NULL|NULL|NULL|NULL|'Таблицы'> " \
+                 "#TODO обязательно дельту"
 
     # пересоздание
     elif file_name_lower == 'postclnt':
@@ -1101,8 +1107,7 @@ def make_upgrade10_eif_string_for_tables(file_name):
             file_name_lower == 'nocopydocfields' or file_name_lower == 'mbamsgxmlstructure' or \
             file_name_lower == 'mbamsgscheme' or file_name_lower == 'mbamsgdocstatus' or \
             file_name_lower == 'mbadocumentssettings' or file_name_lower == 'smssettings' or \
-            file_name_lower == 'azkestimate' or file_name_lower == 'armabcode' or\
-            file_name_lower == 'systemlogcodeset':
+            file_name_lower == 'azkestimate':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
 
     elif file_name_lower == 'controlsettings' or \
