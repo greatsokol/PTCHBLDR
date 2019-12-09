@@ -1109,7 +1109,8 @@ def make_upgrade10_eif_string_for_tables(file_name):
             file_name_lower == 'mbadocumentssettings' or file_name_lower == 'smssettings' or \
             file_name_lower == 'azkestimate':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
-
+    elif file_name_lower == 'remotepasscfg':
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO: скорее всего, нельзя оставлять эту таблицу в патче!!!"
     elif file_name_lower == 'controlsettings' or \
             file_name_lower == 'controlconstants' or \
             file_name_lower == 'controlgroups':
