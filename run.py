@@ -916,7 +916,8 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                                                           ['BLL', 'BLL_Client', 'Doc', '_Personal',
                                                            '_TZ', '_ProjectData', '_ProjectData2',
                                                            'BUILD', 'History', 'Scripts', 'DLL',
-                                                           'Config'])
+                                                           'Config', 'WWW_react', '### Native ReactUI',
+                                                           'DBOReports', 'EXTERNAL', 'MIG_UTIL'])
 
             if starteam_dirs is None:
                 starteam_dirs = ['']
