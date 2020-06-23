@@ -916,7 +916,8 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                                                           ['BLL', 'BLL_Client', 'Doc', '_Personal',
                                                            '_TZ', '_ProjectData', '_ProjectData2',
                                                            'BUILD', 'History', 'Scripts', 'DLL',
-                                                           'Config'])
+                                                           'Config', 'WWW_react', '### Native ReactUI',
+                                                           'DBOReports', 'EXTERNAL', 'MIG_UTIL'])
 
             if starteam_dirs is None:
                 starteam_dirs = ['']
@@ -1094,6 +1095,9 @@ def make_upgrade10_eif_string_for_tables(file_name):
     elif file_name_lower == 'systemlogcodeset':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'TransactionType'|NULL|NULL|NULL|NULL|'Таблицы'> " \
                  "#TODO обязательно дельту"
+    elif file_name_lower == 'smssettings':
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID,SchemeId'|NULL|NULL|NULL|NULL|'Таблицы'> " \
+                 "#TODO обязательно дельту"
 
     # пересоздание
     elif file_name_lower == 'postclnt':
@@ -1106,8 +1110,7 @@ def make_upgrade10_eif_string_for_tables(file_name):
             file_name_lower == 'mb2_versionsinfo' or file_name_lower == 'mb_remotecfg' or \
             file_name_lower == 'nocopydocfields' or file_name_lower == 'mbamsgxmlstructure' or \
             file_name_lower == 'mbamsgscheme' or file_name_lower == 'mbamsgdocstatus' or \
-            file_name_lower == 'mbadocumentssettings' or file_name_lower == 'smssettings' or \
-            file_name_lower == 'azkestimate':
+            file_name_lower == 'mbadocumentssettings' or file_name_lower == 'azkestimate':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
     elif file_name_lower == 'remotepasscfg':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO: скорее всего, нельзя оставлять эту таблицу в патче!!!"
@@ -1115,7 +1118,8 @@ def make_upgrade10_eif_string_for_tables(file_name):
             file_name_lower == 'controlconstants' or \
             file_name_lower == 'controlgroups':
         result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ ВЫЗОВ uaControls или другой ua-шки  >"
-
+    elif file_name_lower == 'freedoctype':
+        result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ ВЫЗОВ ua-шки  >"
     else:  # Если заливается структура полностью
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> " \
                  "#TODO проверьте способ обновления таблицы, сейчас - заливается полностью. " \
