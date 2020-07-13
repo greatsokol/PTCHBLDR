@@ -838,11 +838,23 @@ def clean(path, masks=None):
 
 
 # -------------------------------------------------------------------------------------------------
-def starteam_list_directories(settings, label, label_command, excluded_folders=None):
+def starteam_list_directories(settings, labelkey, label, label_command, excluded_folders=None):
     out = None
     counter = 0
+    key_alt_starteam_view = "_StarteamView".lower()
     while (out is None) and (counter < 2):
         counter += 1
+
+        st_view = settings.starteam_view
+        st_view_message = ''
+        try:
+            label_alt_starteam_view = dict(settings.Labels)[labelkey + key_alt_starteam_view]
+            if label_alt_starteam_view is not None:
+                st_view = label_alt_starteam_view
+                st_view_message = ' from "{}"'.format(st_view)
+        except KeyError:
+            pass
+
         launch_string = quote(settings.stcmd)
         launch_string += ' list -nologo -x -cf -p "{}:{}@{}:{}/{}/{}"'.format(
             settings.starteam_login,
@@ -850,11 +862,13 @@ def starteam_list_directories(settings, label, label_command, excluded_folders=N
             settings.starteam_server,
             settings.starteam_port,
             settings.starteam_project,
-            settings.starteam_view)
+            st_view)
         message_text = '\nLoading directories from Starteam'
         if label_command:
             launch_string += label_command
             message_text += ' for label(date) "{}"'.format(label)
+            if st_view_message:
+                message_text += st_view_message
         log(message_text + '. Please wait...')
         process = subprocess.Popen(launch_string, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = process.communicate()
@@ -912,7 +926,7 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                     label_command = ' -vl ' + quote(label)
             starteam_dirs = None
             if st_path_to_download == '':
-                starteam_dirs = starteam_list_directories(settings, label, label_command_dir,
+                starteam_dirs = starteam_list_directories(settings, key, label, label_command_dir,
                                                           ['BLL', 'BLL_Client', 'Doc', '_Personal',
                                                            '_TZ', '_ProjectData', '_ProjectData2',
                                                            'BUILD', 'History', 'Scripts', 'DLL',
@@ -1152,7 +1166,7 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Конфигурации'> " \
                      "#TODO проверьте настройку"
         elif structure_type == '16':
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Автопроцедуры'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Автопроцедуры'>"
         elif structure_type == '18':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Профили'>"
         elif structure_type == '19':
@@ -2059,8 +2073,10 @@ def compile_only():
 
 
 if __name__ == "__main__":
-    argument = sys.argv[1]
-    if argument == '/patch' or argument == '-patch':
+    argument = None
+    if len(sys.argv) > 1:
+        argument = sys.argv[1]
+    if not argument or argument == '/patch' or argument == '-patch':
         patch()
     elif argument == '/compile' or argument == '-compile':
         compile_only()
