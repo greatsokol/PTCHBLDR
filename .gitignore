@@ -1,3 +1,4 @@
 _TEMP/
 .idea/
-log.txt
+run.log
+/venv/
