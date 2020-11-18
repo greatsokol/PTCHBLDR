@@ -11,8 +11,19 @@ import fnmatch
 import sys
 import time
 import datetime
+import threading
+import concurrent.futures
 
+# -------------------------------------------------------------------------------------------------
+python_version = sys.version.split(' ', 1)[0]
+if python_version < '3.6':
+    print('Error: Version of python interpreter should start from 3.6 ({})'.format(python_version))
+    quit(-1)
 
+EXECUTOR = concurrent.futures.ThreadPoolExecutor(max_workers=1, thread_name_prefix='thread')
+LOCK = threading.RLock()
+
+KEY_ALT_STARTEAM_VIEW = "_StarteamView".lower()
 const_instance_BANK = "BANK"
 const_instance_IC = "IC"
 const_instance_CLIENT = "CLIENT"
@@ -158,10 +169,15 @@ get_filename_UPGRADE10_eif = lambda instance: os.path.join(dir_PATCH(instance), 
 
 
 def log(message_text):
-    log_file_name = os.path.join(os.path.abspath(''), 'log.txt')
-    with open(log_file_name, mode='a') as f:
-        print(message_text)
-        f.writelines('\n' + message_text)
+    LOCK.acquire(True)
+    try:
+        log_file_name = os.path.join(os.path.abspath(''), filename('log'))
+        with open(log_file_name, mode='a') as f:
+            message_text = '[{}_{}] {}'.format(threading.get_ident(), threading.current_thread().name, str(message_text))
+            print(message_text)
+            f.writelines('\n' + message_text)
+    finally:
+        LOCK.release()
 
 
 def get_last_element_of_path(path):
@@ -505,6 +521,10 @@ const_excluded_build_for_CLIENT = const_excluded_build_for_BANK + ['bsrdrct.exe'
                                                                    ]
 
 
+def filename(ext):
+    return '{}.{}'.format(os.path.splitext(__file__)[0], ext)
+
+
 # -------------------------------------------------------------------------------------------------
 class GlobalSettings:
     def __init__(self):
@@ -535,7 +555,7 @@ class GlobalSettings:
         return self.__success
 
     def read_config(self):
-        ini_filename = 'settings.ini'
+        ini_filename = filename('ini')
         section_special = 'SPECIAL'
         section_common = 'COMMON'
         section_labels = 'LABELS'
@@ -643,6 +663,11 @@ def copy_tree(src, dest, ignore=None):
                           ignore)
     else:
         shutil.copyfile(src, dest)
+
+
+# -------------------------------------------------------------------------------------------------
+def CurremtTimeAsString():
+    return datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
 
 
 # -------------------------------------------------------------------------------------------------
@@ -764,7 +789,6 @@ def copy_files_from_dir(src_dir, dest_dir, wildcards=None, excluded_files=None):
     #                 log('\tERROR: can\'t copy file "{}" to "{}" ({})'.format(filename_with_path, dest_dir, e))
 
 
-
 # -------------------------------------------------------------------------------------------------
 def copyfiles_of_version(src_dir, dest_dir, exe_version, wildcards=None, excluded_files=None):
     if wildcards is None:
@@ -824,7 +848,7 @@ def clean(path, masks=None):
                     [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in
                      fnmatch.filter(files, mask)]
             else:
-                log('\nCLEANING {}'.format(path))
+                log('CLEANING {}'.format(path))
                 # Сначала чистим все файлы,
                 [os.remove(os.path.join(d, filename)) for d, _, files in os.walk(path) for filename in files]
                 # потом чистим все
@@ -838,11 +862,21 @@ def clean(path, masks=None):
 
 
 # -------------------------------------------------------------------------------------------------
-def starteam_list_directories(settings, label, label_command, excluded_folders=None):
+def starteam_list_directories(settings, labelkey, label, label_command, excluded_folders=None):
     out = None
     counter = 0
     while (out is None) and (counter < 2):
         counter += 1
+        st_view = settings.starteam_view
+        st_view_message = ''
+        try:
+            label_alt_starteam_view = dict(settings.Labels)[labelkey + KEY_ALT_STARTEAM_VIEW]
+            if label_alt_starteam_view is not None:
+                st_view = label_alt_starteam_view
+                st_view_message = ' from "{}"'.format(st_view)
+        except KeyError:
+            pass
+
         launch_string = quote(settings.stcmd)
         launch_string += ' list -nologo -x -cf -p "{}:{}@{}:{}/{}/{}"'.format(
             settings.starteam_login,
@@ -850,11 +884,13 @@ def starteam_list_directories(settings, label, label_command, excluded_folders=N
             settings.starteam_server,
             settings.starteam_port,
             settings.starteam_project,
-            settings.starteam_view)
-        message_text = '\nLoading directories from Starteam'
+            st_view)
+        message_text = 'Loading directories from Starteam'
         if label_command:
             launch_string += label_command
             message_text += ' for label(date) "{}"'.format(label)
+            if st_view_message:
+                message_text += st_view_message
         log(message_text + '. Please wait...')
         process = subprocess.Popen(launch_string, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = process.communicate()
@@ -891,16 +927,73 @@ def starteam_list_directories(settings, label, label_command, excluded_folders=N
                 return None
 
 
+def download_starteam_dir_thread(settings, starteam_dir, key, label, st_path_to_download,
+                                 st_file_to_download, is_download_initial_state,
+                                 path_for_before, path_for_after, label_command):
+    if starteam_dir == '':
+        starteam_dir = st_path_to_download
+    # Если название метки НЕ содержит "_StarteamView", то будем грузить
+    # (а если содержит, то это не метка, а приставка с указанием вида в стартиме)
+    if not label and not st_file_to_download:
+        raise ValueError('No label or file to download specified')
+    message_text = 'DOWNLOADING'
+    if st_file_to_download:
+        message_text += ' files "{}{}"'.format(starteam_dir, st_file_to_download)
+    if label:
+        message_text += ' files for label(date) "{}" from {}'.format(label, starteam_dir)
+
+    if is_download_initial_state:
+        outdir = path_for_before
+    else:
+        outdir = path_for_after
+
+    message_text += ' to "{}"'.format(outdir)
+
+    # Если у метки есть указание для скачивания в альтернативном виде,
+    # например Label22_StarteamView = DBO:Release_17:VIP:GPB:GPB 017.3 107N
+    starteam_view = settings.starteam_view
+    try:
+        label_alt_starteam_view = dict(settings.Labels)[key + KEY_ALT_STARTEAM_VIEW]
+        if label_alt_starteam_view is not None:
+            starteam_view = label_alt_starteam_view
+            message_text += ' from "' + starteam_view + '"'
+    except KeyError:
+        pass
+
+    launch_string = quote(settings.stcmd)
+    launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}'.format(
+        settings.starteam_login,
+        settings.starteam_password,
+        settings.starteam_server,
+        settings.starteam_port,
+        settings.starteam_project,
+        starteam_view)
+    if starteam_dir:
+        launch_string += '/{}'.format(starteam_dir)
+    launch_string += '"'
+    launch_string += ' -rp "{}"'.format(outdir)
+    if label_command:
+        launch_string += label_command
+    if st_file_to_download:
+        launch_string += " " + st_file_to_download
+
+    log(message_text + '. Please wait...')
+    result = subprocess.call(launch_string)
+    return result
+
+
 # -------------------------------------------------------------------------------------------------
-def download_starteam(settings, labels_list, path_for_after, path_for_before, st_path_to_download='',
+def download_starteam(settings, labels_list, path_for_after, path_for_before,
+                      st_path_to_download='',
                       st_file_to_download=''):
     total_result = False
     # Приставка к названию метки, в которой содержится название доп вида стартима
-    key_alt_starteam_view = "_StarteamView".lower()
     try:
         if labels_list is None:
             labels_list = [('any', '')]
         for key, label in labels_list:
+            if key.endswith(KEY_ALT_STARTEAM_VIEW):
+                continue
             is_download_between_dates = (key == 'datebefore' or key == 'dateafter')
             is_download_initial_state = (key == 'labelbefore' or key == 'datebefore')
             label_command_dir = label_command = ''
@@ -912,72 +1005,31 @@ def download_starteam(settings, labels_list, path_for_after, path_for_before, st
                     label_command = ' -vl ' + quote(label)
             starteam_dirs = None
             if st_path_to_download == '':
-                starteam_dirs = starteam_list_directories(settings, label, label_command_dir,
+                starteam_dirs = starteam_list_directories(settings, key, label, label_command_dir,
                                                           ['BLL', 'BLL_Client', 'Doc', '_Personal',
                                                            '_TZ', '_ProjectData', '_ProjectData2',
                                                            'BUILD', 'History', 'Scripts', 'DLL',
-                                                           'Config', 'WWW_react', '### Native ReactUI',
+                                                           'Config', '### Native ReactUI',
                                                            'DBOReports', 'EXTERNAL', 'MIG_UTIL'])
 
             if starteam_dirs is None:
                 starteam_dirs = ['']
+            log('ST DOWNLOAD BEGIN {}'.format(CurremtTimeAsString()))
+            futures = []
             for starteam_dir in starteam_dirs:
-                if starteam_dir == '':
-                    starteam_dir = st_path_to_download
-                # Если название метки НЕ содержит "_StarteamView", то будем грузить
-                # (а если содержит, то это не метка, а приставка с указанием вида в стартиме)
-                if key_alt_starteam_view not in key:
-                    if not label and not st_file_to_download:
-                        raise ValueError('No label or file to download specified')
-                    message_text = 'DOWNLOADING'
-                    if st_file_to_download:
-                        message_text += ' files "{}{}"'.format(starteam_dir, st_file_to_download)
-                    if label:
-                        message_text += ' files for label(date) "{}" from {}'.format(label, starteam_dir)
-
-                    if is_download_initial_state:
-                        outdir = path_for_before
-                    else:
-                        outdir = path_for_after
-
-                    message_text += ' to "{}"'.format(outdir)
-
-                    # Если у метки есть указание для скачивания в альтернативном виде,
-                    # например Label22_StarteamView = DBO:Release_17:VIP:GPB:GPB 017.3 107N
-                    starteam_view = settings.starteam_view
-                    try:
-                        label_alt_starteam_view = dict(labels_list)[key + key_alt_starteam_view]
-                        if label_alt_starteam_view is not None:
-                            starteam_view = label_alt_starteam_view
-                            message_text += ' from "' + starteam_view + '"'
-                    except KeyError:
-                        pass
-
-                    launch_string = quote(settings.stcmd)
-                    launch_string += ' co -nologo -stop -q -x -o -is -p "{}:{}@{}:{}/{}/{}'.format(
-                        settings.starteam_login,
-                        settings.starteam_password,
-                        settings.starteam_server,
-                        settings.starteam_port,
-                        settings.starteam_project,
-                        starteam_view)
-                    if starteam_dir:
-                        launch_string += '/{}'.format(starteam_dir)
-                    launch_string += '"'
-                    launch_string += ' -rp "{}"'.format(outdir)
-                    if label_command:
-                        launch_string += label_command
-                    if st_file_to_download:
-                        launch_string += " " + st_file_to_download
-
-                    log(message_text + '. Please wait...')
-                    result = subprocess.call(launch_string)
-                    if result == 0:
-                        # log('\tFINISHED '+message_text)
-                        total_result += True
-                    else:
-                        log('\tERROR ' + message_text)
-                        total_result += False
+                futures.append(EXECUTOR.submit(download_starteam_dir_thread,
+                                               settings, starteam_dir, key, label, st_path_to_download,
+                                               st_file_to_download, is_download_initial_state,
+                                               path_for_before, path_for_after, label_command))
+            done, not_done = concurrent.futures.wait(futures, return_when=concurrent.futures.FIRST_EXCEPTION)
+            for future in concurrent.futures.as_completed(done):
+                try:
+                    result = future.result()
+                    total_result += result == 0
+                except Exception as exc:
+                    log('Thread generated an exception: {}'.format(exc))
+                    total_result = False
+            log('ST DOWNLOAD FINISHED {}'.format(CurremtTimeAsString()))
 
     except BaseException as e:
         log('\tERROR when downloading from Starteam ({})'.format(e))
@@ -1050,7 +1102,8 @@ def make_upgrade10_eif_string_for_tables(file_name):
     if file_name_lower.endswith('default') or \
             file_name_lower.startswith('root') or \
             file_name_lower == 'customeroldrpl' or \
-            file_name_lower == 'memorydiasoftbuf':
+            file_name_lower == 'memorydiasoftbuf' or \
+            file_name_lower == 'vviewmbscaccounts':
         result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'>"
 
     elif file_name.find(".") > 0:  # Для блобов
@@ -1098,6 +1151,9 @@ def make_upgrade10_eif_string_for_tables(file_name):
     elif file_name_lower == 'smssettings':
         result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'ID,SchemeId'|NULL|NULL|NULL|NULL|'Таблицы'> " \
                  "#TODO обязательно дельту"
+    elif file_name_lower == 'mb2_versionsinfo':
+        result = "<{}|{}|'{}'|TRUE|TRUE|TRUE|TRUE|TRUE|TRUE|'Autokey'|NULL|NULL|NULL|NULL|'Таблицы'> " \
+                 "#TODO: обязательно дельту"
 
     # пересоздание
     elif file_name_lower == 'postclnt':
@@ -1107,7 +1163,6 @@ def make_upgrade10_eif_string_for_tables(file_name):
     elif file_name_lower == 'noticeconfig' or file_name_lower == 'paygrndparam' or \
             file_name_lower == 'mailreport' or file_name_lower == 'wanavtrees' or \
             file_name_lower == 'balaccountsettings' or file_name_lower == 'rkobranches' or \
-            file_name_lower == 'mb2_versionsinfo' or file_name_lower == 'mb_remotecfg' or \
             file_name_lower == 'nocopydocfields' or file_name_lower == 'mbamsgxmlstructure' or \
             file_name_lower == 'mbamsgscheme' or file_name_lower == 'mbamsgdocstatus' or \
             file_name_lower == 'mbadocumentssettings' or file_name_lower == 'azkestimate':
@@ -1120,7 +1175,12 @@ def make_upgrade10_eif_string_for_tables(file_name):
         result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ ВЫЗОВ uaControls или другой ua-шки  >"
     elif file_name_lower == 'remoterolesactions' or \
             file_name_lower == 'remoterolesdocsettings':
-        result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ один ВЫЗОВ ubRoles, в этой data нужно оставить дельту изменений remoterolesactions можно оставить полностью>"
+        result = "<{}|{}|'{}'|  #TODO: ДОЛЖЕН БЫТЬ один ВЫЗОВ ubRoles, в этой data нужно оставить дельту изменений remoterolesactions можно оставить полностью>"
+    elif file_name_lower == 'mb_remotecfg':
+        result = "<{}|{}|'{}'| #TODO: В ПАТЧЕ ДОЛЖНЫ ЛЕЖАТЬ MB_REMOTECFG(10) И ДЕЛЬТА В MB_REMOTECFG(data), в upgrade(10) должен быть вызов ua-шки ubMBCSBranding>"
+    if file_name_lower == 'mb_remoteuser':
+        result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|FALSE|FALSE|NULL|NULL|NULL|NULL|NULL|'Таблицы'> #TODO: должен быть вызов ua-шки ubMBCSBranding"
+
     elif file_name_lower == 'freedoctype':
         result = "<{}|{}|'{}'|  ДОЛЖЕН БЫТЬ ВЫЗОВ ua-шки  >"
     else:  # Если заливается структура полностью
@@ -1152,7 +1212,7 @@ def make_upgrade10_eif_string_by_file_name(counter, file_name):
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|FALSE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Конфигурации'> " \
                      "#TODO проверьте настройку"
         elif structure_type == '16':
-            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Автопроцедуры'>"
+            result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|FALSE|TRUE|NULL|NULL|NULL|NULL|NULL|'Автопроцедуры'>"
         elif structure_type == '18':
             result = "<{}|{}|'{}'|TRUE|TRUE|FALSE|TRUE|TRUE|TRUE|NULL|NULL|NULL|NULL|NULL|'Профили'>"
         elif structure_type == '19':
@@ -1633,24 +1693,32 @@ def download_build(settings):
 
                     for release in ['32', '64']:  # выкладываем билд в LIBFILES32(64).BNK
                         build_path_bank = os.path.join(const_dir_TEMP_BUILD_BK, 'Win{}\\Release'.format(release))
-                        copy_files_from_all_subdirectories(build_path_bank, dir_PATCH_LIBFILES_BNK(release), ['UpdateIc.exe'], [])
-                        copy_files_from_all_subdirectories(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_EXE(release), ['bsiset.exe'], [])
+                        copy_files_from_all_subdirectories(build_path_bank, dir_PATCH_LIBFILES_BNK(release),
+                                                           ['UpdateIc.exe'], [])
+                        copy_files_from_all_subdirectories(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_EXE(release),
+                                                           ['bsiset.exe'], [])
                         mask = ['bsi.dll', 'bsi.jar']
-                        copy_files_from_all_subdirectories(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(release), mask, [])
-                        copy_files_from_all_subdirectories(build_path_bank, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(release), mask, [])
+                        copy_files_from_all_subdirectories(build_path_bank,
+                                                           dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(release), mask,
+                                                           [])
+                        copy_files_from_all_subdirectories(build_path_bank,
+                                                           dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTWa(release), mask,
+                                                           [])
 
                         build_path = os.path.join(const_dir_TEMP_BUILD_IC, 'Win{}\\Release'.format('32'))
                         mask = ['BssPluginSetup.exe', 'BssPluginSetupAdmin.exe', 'BssPluginSetupNoHost.exe',
                                 'BssPluginWebKitSetup.exe', 'BssPluginSetup64.exe', 'BssPluginSetupGPB.exe',
                                 'BssPluginSetupGPBNoHost.exe']
                         copy_files_from_all_subdirectories(build_path,
-                                   dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(build_ic_version,
-                                                                                              release),
-                                   mask, [])
+                                                           dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTIc_CODE_BuildVersion(
+                                                               build_ic_version,
+                                                               release),
+                                                           mask, [])
                         copy_files_from_all_subdirectories(build_path,
-                                   dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(build_ic_version,
-                                                                                              release),
-                                   mask, [])
+                                                           dir_PATCH_LIBFILES_BNK_WWW_BSIsites_RTWa_CODE_BuildVersion(
+                                                               build_ic_version,
+                                                               release),
+                                                           mask, [])
 
                 elif settings.PlaceBuildIntoPatchBK:
                     if instance == const_instance_BANK:
@@ -1658,60 +1726,87 @@ def download_build(settings):
                         # это копируются все файлы, которые будут участвовать в компиляции BLS на следующем шаге
                         # т.к. в результате __copy_build__ весь билд оказывается разделен на Win32 и Win64
                         copy_files_from_all_subdirectories(build_path, const_dir_TEMP_BUILD_BK, ['*.*'], [])
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл CBStart.exe в корень патча
+                        copy_files_from_all_subdirectories(build_path, dir_PATCH(), ['CBStart.exe'],
+                                                           [])  # один файл CBStart.exe в корень патча
                     for release in ['32', '64']:  # выкладываем остальной билд для Б и БК для версий 32 и 64
                         build_path = os.path.join(const_dir_TEMP_BUILD_BK, 'Win{}\\Release'.format(release))
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_EXE(instance, release), mask_for_EXE_dir, excluded_files)
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_SYSTEM(instance, release), ['*.dll'], excluded_for_SYSTEM_dir)
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH_CBSTART(instance, release), ['CBStart.exe'], [])
+                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_EXE(instance, release),
+                                                           mask_for_EXE_dir, excluded_files)
+                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_SYSTEM(instance, release),
+                                                           ['*.dll'], excluded_for_SYSTEM_dir)
+                        copy_files_from_all_subdirectories(build_path, dir_PATCH_CBSTART(instance, release),
+                                                           ['CBStart.exe'], [])
                         if instance == const_instance_BANK:
                             # заполняем TEMPLATE шаблон клиента в банковском патче
-                            copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(release), mask_for_EXE_dir,
-                                       const_excluded_build_for_CLIENT)
-                            copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(release),
-                                       ['*.dll'], excluded_for_SYSTEM_CLIENT_dir)
+                            copy_files_from_all_subdirectories(build_path,
+                                                               dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_EXE(release),
+                                                               mask_for_EXE_dir,
+                                                               const_excluded_build_for_CLIENT)
+                            copy_files_from_all_subdirectories(build_path,
+                                                               dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX_CLIENT_SYSTEM(
+                                                                   release),
+                                                               ['*.dll'], excluded_for_SYSTEM_CLIENT_dir)
                             mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll',
                                     'GetIName.dll']
-                            copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(release), mask, [])
+                            copy_files_from_all_subdirectories(build_path,
+                                                               dir_PATCH_LIBFILES_TEMPLATE_DISTRIBX(release), mask, [])
                             mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll', 'ilCpyDoc.dll']
-                            copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(release), mask, [])
-                            copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask, [])
+                            copy_files_from_all_subdirectories(build_path,
+                                                               dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_EN(release), mask,
+                                                               [])
+                            copy_files_from_all_subdirectories(build_path,
+                                                               dir_PATCH_LIBFILES_TEMPLATE_LANGUAGEX_RU(release), mask,
+                                                               [])
 
             else:  # для билдов 15 и 17
                 build_path = const_dir_TEMP_BUILD_BK
                 if instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA] \
                         and settings.PlaceBuildIntoPatchBK:
                     # выкладываем билд для Б и БК
-                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_EXE(instance), mask_for_EXE_dir, excluded_files)
+                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_EXE(instance), mask_for_EXE_dir,
+                                                       excluded_files)
                     if settings.ClientEverythingInEXE and instance == const_instance_CLIENT:
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'], excluded_for_SYSTEM_dir)
+                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_EXE(instance), ['*.dll'],
+                                                           excluded_for_SYSTEM_dir)
                     else:
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'], excluded_for_SYSTEM_dir)
+                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_SYSTEM(instance), ['*.dll'],
+                                                           excluded_for_SYSTEM_dir)
 
                 if instance == const_instance_BANK and settings.PlaceBuildIntoPatchBK:
-                    copy_files_from_all_subdirectories(build_path, dir_PATCH(), ['CBStart.exe'], [])  # один файл в корень
+                    copy_files_from_all_subdirectories(build_path, dir_PATCH(), ['CBStart.exe'],
+                                                       [])  # один файл в корень
                     # заполняем билдом TEMPLATE шаблон клиента в банковском патче
                     mask = ['*.exe', '*.ex', '*.bpl']
-                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), mask,
-                               const_excluded_build_for_CLIENT)
+                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(),
+                                                       mask,
+                                                       const_excluded_build_for_CLIENT)
                     if settings.ClientEverythingInEXE:
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), ['*.dll'],
-                                                            excluded_for_SYSTEM_CLIENT_dir)
+                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(),
+                                                           ['*.dll'],
+                                                           excluded_for_SYSTEM_CLIENT_dir)
                     else:
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM(), ['*.dll'],
-                                                            excluded_for_SYSTEM_CLIENT_dir)
+                        copy_files_from_all_subdirectories(build_path,
+                                                           dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_SYSTEM(),
+                                                           ['*.dll'],
+                                                           excluded_for_SYSTEM_CLIENT_dir)
                     mask = ['CalcCRC.exe', 'Setup.exe', 'Install.exe', 'eif2base.exe', 'ilKern.dll', 'GetIName.dll']
                     copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB(), mask, [])
                     mask = ['ilGroup.dll', 'iliGroup.dll', 'ilProt.dll', 'ilCpyDoc.dll']
                     copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN(), mask, [])
                     copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU(), mask, [])
-                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN_CLIENT_SYSTEM(), mask, [])
-                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU_CLIENT_SYSTEM(), mask, [])
+                    copy_files_from_all_subdirectories(build_path,
+                                                       dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_EN_CLIENT_SYSTEM(), mask,
+                                                       [])
+                    copy_files_from_all_subdirectories(build_path,
+                                                       dir_PATCH_LIBFILES_TEMPLATE_LANGUAGE_RU_CLIENT_SYSTEM(), mask,
+                                                       [])
                     # заполняем LIBFILES.BNK в банковском патче билдом для БК
                     mask = ['autoupgr.exe', 'bscc.exe', 'compiler.exe', 'operedit.exe', 'testconn.exe', 'treeedit.exe']
                     copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_ADD(), mask, [])
-                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_BSISET_EXE(), ['bsiset.exe'], [])
-                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_LICENSE_EXE(), ['protcore.exe'], [])
+                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_BSISET_EXE(), ['bsiset.exe'],
+                                                       [])
+                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_LICENSE_EXE(),
+                                                       ['protcore.exe'], [])
 
                 if instance == const_instance_IC and settings.PlaceBuildIntoPatchIC:
                     # заполняем LIBFILES.BNK в банковском патче билдом для ИК
@@ -1720,14 +1815,18 @@ def download_build(settings):
                     if settings.BuildRTSZIP:
                         copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_RTS_EXE(), mask, [])
                     else:
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_EXE(const_instance_BANK), mask, [])
+                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_EXE(const_instance_BANK),
+                                                           mask, [])
                     mask = ['llComDat.dll', 'llrtscfg.dll', 'llxmlman.dll', 'msxml2.bpl']
                     if settings.BuildRTSZIP:
                         copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_RTS_SYSTEM(), mask, [])
                     else:
-                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_SYSTEM(const_instance_BANK), mask, [])
-                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(), ['bsi.dll'], [])
-                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTAdmin(), ['bsi.dll'], [])
+                        copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_SYSTEM(const_instance_BANK),
+                                                           mask, [])
+                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTIc(),
+                                                       ['bsi.dll'], [])
+                    copy_files_from_all_subdirectories(build_path, dir_PATCH_LIBFILES_BNK_WWW_BSIscripts_RTAdmin(),
+                                                       ['bsi.dll'], [])
                     # todo INETTEMP
     return True
 
@@ -1777,32 +1876,39 @@ def copy_bll(settings):
     bll_files_all = list(set(bll_files_all) - set(bll_files_only_rts))
 
     # копируем bll для банка по списку bll_files_all
-    copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files_all, [])
+    copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK),
+                                       bll_files_all, [])
     # копируем bll для RTS по списку bll_files_only_rts
     if settings.BuildRTSZIP:
         if settings.Is20Version:
             for release in ['32', '64']:
-                copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(release), bll_files_only_rts, [])
+                copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(release),
+                                                   bll_files_only_rts, [])
         else:
-            copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(), bll_files_only_rts, [])
+            copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_BNK_RTS_USER(),
+                                               bll_files_only_rts, [])
     else:
-        copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK), bll_files_only_rts, [])
+        copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_USER(const_instance_BANK),
+                                           bll_files_only_rts, [])
 
     # копируем bll для клиента по разнице списков  bll_files_all-bll_files_only_bank
     if settings.ClientEverythingInEXE:
-        copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT), bll_files_client, [])
-        copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT_MBA), bll_files_client_mba, [])
-        copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(), bll_files_client, [])
+        copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT),
+                                           bll_files_client, [])
+        copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_EXE(const_instance_CLIENT_MBA),
+                                           bll_files_client_mba, [])
+        copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK, dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_EXE(),
+                                           bll_files_client, [])
     else:
         copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK,
-                   dir_PATCH_LIBFILES_USER(const_instance_CLIENT),
-                   bll_files_client, [])
+                                           dir_PATCH_LIBFILES_USER(const_instance_CLIENT),
+                                           bll_files_client, [])
         copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK,
-                   dir_PATCH_LIBFILES_USER(const_instance_CLIENT_MBA),
-                   bll_files_client_mba, [])
+                                           dir_PATCH_LIBFILES_USER(const_instance_CLIENT_MBA),
+                                           bll_files_client_mba, [])
         copy_files_from_all_subdirectories(const_dir_TEMP_BUILD_BK,
-                   dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_USER(),
-                   bll_files_client, [])
+                                           dir_PATCH_LIBFILES_TEMPLATE_DISTRIB_CLIENT_USER(),
+                                           bll_files_client, [])
     return True
 
 
@@ -1913,7 +2019,7 @@ def download_mba_dll(settings):
 # -------------------------------------------------------------------------------------------------
 def ask_starteam_password(settings):
     if settings.starteam_password == '':
-        settings.starteam_password = get_password('\nMaestro, please, ENTER StarTeam PASSWORD for "{}":'.
+        settings.starteam_password = get_password('Maestro, please, ENTER StarTeam PASSWORD for "{}":'.
                                                   format(settings.starteam_login))
     result = settings.starteam_password.strip() != ''
     if not result:
@@ -1958,11 +2064,9 @@ def patch():
             return
 
     if not continue_compilation:
-        log('\nBUILD BEGIN {}'.
-            format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
+        log('BUILD BEGIN {}'.format(CurremtTimeAsString()))
     else:
-        log('\nCOMPILATION CONTINUED {}'.
-            format(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')))
+        log('COMPILATION CONTINUED {}'.format(CurremtTimeAsString()))
 
     # Если пользователь не выбрал продолжение компиляции, запустим
     # ЭТАП ЗАГРУЗКИ ПО МЕТКАМ И СРАВНЕНИЯ РЕВИЗИЙ:
@@ -1970,7 +2074,7 @@ def patch():
         if ask_starteam_password(global_settings):
             if download_starteam(global_settings, global_settings.Labels, const_dir_AFTER, const_dir_BEFORE):
                 if not compare_directories_before_and_after():
-                    log('\nEXIT -----------------')
+                    log('EXIT -----------------')
                     return
                 for instance in [const_instance_BANK, const_instance_CLIENT, const_instance_CLIENT_MBA]:
                     download_table_10_files_for_data_files(global_settings, instance)
@@ -2037,9 +2141,7 @@ def patch():
                                global_settings.BLLVersion):
                 # копируем готовые BLL в патч
                 copy_bll(global_settings)
-    log('\nDONE -----------------')
-
-
+    log('DONE {}'.format(CurremtTimeAsString()))
 
 
 def compile_only():
@@ -2059,8 +2161,10 @@ def compile_only():
 
 
 if __name__ == "__main__":
-    argument = sys.argv[1]
-    if argument == '/patch' or argument == '-patch':
+    argument = None
+    if len(sys.argv) > 1:
+        argument = sys.argv[1]
+    if not argument or argument == '/patch' or argument == '-patch':
         patch()
     elif argument == '/compile' or argument == '-compile':
         compile_only()
